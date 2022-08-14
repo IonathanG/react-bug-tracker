@@ -1,13 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import { Section } from "../shared/Section";
+import Header from "../components/Header";
+import { Section, SectionContent } from "../shared/Section";
 
 const Home = () => {
   return (
-    <>
+    <Section>
       <Navbar />
-      <Section>Home Page</Section>
-    </>
+      <SectionContent>
+        <Header />
+        <h1>Home Page - Analytics Overview</h1>
+      </SectionContent>
+    </Section>
   );
 };
 

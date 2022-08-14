@@ -16,7 +16,9 @@ html {
 
 body {
   background-color: ${({ theme }) => theme.main_Background};
-  background-color: beige;
+  //background-color: beige;
+  font-family: 'Inter', 'sans-serif';
+  min-height: 100vh;
 }
 
 body,

@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { lightTheme } from "./shared/Theme";
 import { GlobalStyles } from "./shared/globalStyles";
 import Layout from "./components/Layout";
@@ -16,7 +15,9 @@ import TicketsPage from "./pages/TicketsPage";
 import ProfilePage from "./pages/ProfilePage";
 import Missing from "./pages/Missing";
 
-const AppContainer = styled.div``;
+const AppContainer = styled.div`
+  background-color: ${({ theme }) => theme.main_Background};
+`;
 
 function App() {
   return (
