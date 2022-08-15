@@ -51,6 +51,8 @@ export const darkTheme = {
 
   main_Font_Color: "#FFFFFF",
 
+  active_Link: "rgb(143, 52, 254)",
+
   navbar_Background: "rgba(230, 225, 237, 0.17)",
 
   navbar_Shadow: "rgba(0, 0, 0, 0.25)",

@@ -7,7 +7,7 @@ export const Section = styled.section`
   transition: 0.3s ease;
 `;
 
-export const SectionContent = styled.section`
+export const SectionMain = styled.section`
   //background-color: blanchedalmond;
   width: 100%;
   margin: 25px 25px;
@@ -24,3 +24,5 @@ export const SectionContent = styled.section`
     gap: 90px;
   }
 `;
+
+export const SectionContent = styled.div``;
