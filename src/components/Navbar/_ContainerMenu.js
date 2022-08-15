@@ -2,6 +2,23 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
+import useMenuItems from "../../hooks/useMenuItems";
+
+const ContainerMenu = ({ setShowMenu }) => {
+  const dashboardMenu = useMenuItems();
+
+  return (
+    <MenuContainer>
+      {dashboardMenu.map((item, index) => (
+        <MenuItem key={index} onClick={() => setShowMenu(false)}>
+          <NavItem to={`${item.link}`}>
+            <MenuIcon src={item.src} alt="menu-icon" /> <div>{item.name}</div>
+          </NavItem>
+        </MenuItem>
+      ))}
+    </MenuContainer>
+  );
+};
 
 const MenuContainer = styled.ul`
   //background-color: rgba(249, 44, 140, 0.2);
@@ -44,36 +61,5 @@ const MenuIcon = styled.img.attrs((props) => ({
   opacity: 0.8;
   transition: 0.3s ease;
 `;
-
-const ContainerMenu = ({ setShowMenu }) => {
-  const dashboardMenu = [
-    { name: "Dashboard Home", src: "dashboard_Home", link: "/" },
-    {
-      name: "Manage Role Assignment",
-      src: "manage_Role",
-      link: "/manage-role",
-    },
-    {
-      name: "Manage Project Users",
-      src: "manage_Users",
-      link: "/manage-project",
-    },
-    { name: "My Projects", src: "projects", link: "/projects" },
-    { name: "My Tickets", src: "tickets", link: "/tickets" },
-    { name: "User Profile", src: "profile", link: "/profile" },
-  ];
-
-  return (
-    <MenuContainer>
-      {dashboardMenu.map((item, index) => (
-        <MenuItem key={index} onClick={() => setShowMenu(false)}>
-          <NavItem to={`${item.link}`}>
-            <MenuIcon src={item.src} alt="menu-icon" /> <div>{item.name}</div>
-          </NavItem>
-        </MenuItem>
-      ))}
-    </MenuContainer>
-  );
-};
 
 export default ContainerMenu;

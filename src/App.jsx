@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import { lightTheme } from "./shared/Theme";
+import { useTheme } from "./context/ThemeContext";
+import { lightTheme, darkTheme } from "./shared/Theme";
 import { GlobalStyles } from "./shared/globalStyles";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
@@ -20,8 +21,19 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  // ----- initialise and toggle theme -----
+  const { theme } = useTheme();
+  const [themeMode, setThemeMode] = useState(
+    theme === "light" ? lightTheme : darkTheme
+  );
+
+  useEffect(() => {
+    setThemeMode(theme === "light" ? lightTheme : darkTheme);
+  }, [theme]);
+  // ----- -----
+
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={themeMode}>
       <>
         <GlobalStyles />
         <AppContainer>

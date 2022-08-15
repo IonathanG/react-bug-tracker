@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
-import HamburgerMenu from "./HamburgerMenu";
-import LogoMenu from "./LogoMenu";
-import { default as MenuContainer } from "./ContainerMenu";
-import { default as LayerBackgroundDim } from "./LayerDimMenu";
+import HamburgerMenu from "./_HamburgerMenu";
+import LogoMenu from "./_LogoMenu";
+import { default as MenuContainer } from "./_ContainerMenu";
+import { default as LayerBackgroundDim } from "./_LayerDimMenu";
+import { default as ThemeSwitch } from "./_ThemeSwitchMenu";
 
 const NavbarContainer = styled.nav`
   background-color: ${({ theme }) => theme.navbar_Background};
@@ -44,11 +45,12 @@ const NavbarContent = styled.div`
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
+  // ref to avoid closing menu when click inside the Navbar
   const btnRef = useRef();
   const containerRef = useRef();
   const menuRef = useRef();
 
-  // open/close side menu when hamburger is clicked
+  // open/close side menu when hamburger menu is clicked
   const handleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -97,7 +99,7 @@ const Navbar = () => {
             <MenuContainer setShowMenu={setShowMenu} />
           </div>
 
-          <div>Theme Switch</div>
+          <ThemeSwitch />
         </NavbarContent>
       </NavbarContainer>
       {showMenu && <LayerBackgroundDim />}
