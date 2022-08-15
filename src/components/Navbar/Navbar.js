@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useTheme } from "../../context/ThemeContext";
 import { device } from "../../shared/breakpoints";
 import HamburgerMenu from "./_HamburgerMenu";
 import LogoMenu from "./_LogoMenu";
 import { default as MenuContainer } from "./_ContainerMenu";
 import { default as LayerBackgroundDim } from "./_LayerDimMenu";
-import { default as ThemeSwitch } from "./_ThemeSwitchMenu";
+import SwitchTheme from "./_SwitchTheme";
 
 const NavbarContainer = styled.nav`
   background-color: ${({ theme }) => theme.navbar_Background};
@@ -44,6 +45,7 @@ const NavbarContent = styled.div`
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   // ref to avoid closing menu when click inside the Navbar
   const btnRef = useRef();
@@ -99,7 +101,9 @@ const Navbar = () => {
             <MenuContainer setShowMenu={setShowMenu} />
           </div>
 
-          <ThemeSwitch />
+          <div onClick={() => toggleTheme()}>
+            <SwitchTheme checked={theme === "dark" ? true : false} />
+          </div>
         </NavbarContent>
       </NavbarContainer>
       {showMenu && <LayerBackgroundDim />}

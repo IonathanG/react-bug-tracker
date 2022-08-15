@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "./context/ThemeContext";
@@ -23,12 +23,9 @@ const AppContainer = styled.div`
 function App() {
   // ----- initialise and toggle theme -----
   const { theme } = useTheme();
-  const [themeMode, setThemeMode] = useState(
-    theme === "light" ? lightTheme : darkTheme
-  );
 
-  useEffect(() => {
-    setThemeMode(theme === "light" ? lightTheme : darkTheme);
+  const themeMode = useMemo(() => {
+    return theme === "light" ? lightTheme : darkTheme;
   }, [theme]);
   // ----- -----
 
