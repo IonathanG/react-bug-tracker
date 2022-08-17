@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { Section, SectionMain } from "../shared/Section";
-import Navbar from "./Navbar/Navbar";
-import Header from "./Header/Header";
+import Navbar from "../components/Navbar/Navbar";
+import Header from "../components/Header/Header";
 
 const Layout = () => {
   const isLoggedIn = true;

@@ -1,8 +1,6 @@
 export const lightTheme = {
   theme_Name: "light",
 
-  //theme_Switch_Source: "/icons/dark_icon.svg",
-
   main_Background: "#F7F8FB",
 
   main_Font_Color: "#000000",
@@ -11,13 +9,15 @@ export const lightTheme = {
 
   navbar_Background: "rgba(241,241,246, 0.9)",
 
-  navbar_Shadow: "rgba(0, 0, 0, 0.25)",
+  navbar_Shadow: "rgba(0, 0, 0, 0.25) 0px 4px 4px 0px",
 
   form_Background: "#FFFFFF",
 
-  border_Form_Outline: "#858585",
+  border_Form: "#858585",
 
-  border_Form_Shadow: "drop-shadow(1px 1px 1px rgba(224, 199, 255, 0.3))",
+  border_Form_Shadow: "rgba(224, 199, 255, 0.15) 0px 20px 12px 0px",
+
+  notification_Color: "rgba(0, 0, 0, 0.95)",
 
   arrow_Dropdown_style1: "rgb(217, 217, 217)",
 
@@ -25,7 +25,7 @@ export const lightTheme = {
 
   hamburger_Theme: "rgb(0, 0, 0)",
 
-  active_HamburgerColor: "rgb(30, 25, 37)",
+  active_HamburgerColor: "rgb(143, 52, 254)",
 
   Menu_Icon_Source: {
     dashboard_Home: "/icons/dashboard_light.svg",
@@ -35,17 +35,10 @@ export const lightTheme = {
     tickets: "/icons/stats_light.svg",
     profile: "/icons/email_light.svg",
   },
-
-  // SVG_Links: {
-  //   main: "drop-shadow(1px 1px 1px rgba(168, 167, 167, 0.3))",
-  //   hover: "drop-shadow(1px 1px 1px rgba(0, 136, 50, 0.3))",
-  // },
 };
 
 export const darkTheme = {
   theme_Name: "dark",
-
-  //theme_Switch_Source: "/icons/bright_icon.svg",
 
   main_Background: "#323232",
 
@@ -63,13 +56,15 @@ export const darkTheme = {
 
   border_Form_Shadow: "drop-shadow(1px 1px 1px rgba(224, 199, 255, 0.3))",
 
+  notification_Color: "rgba(255, 255, 255, 0.85)",
+
   arrow_Dropdown_style1: "#000000",
 
   arrow_Dropdown_style2: "rgb(143, 52, 254)",
 
   hamburger_Theme: "rgb(0, 0, 0)",
 
-  active_HamburgerColor: "rgb(30, 30, 137)",
+  active_HamburgerColor: "rgb(143, 52, 254)",
 
   Menu_Icon_Source: {
     dashboard_Home: "/icons/dashboard_dark.svg",
@@ -79,9 +74,4 @@ export const darkTheme = {
     tickets: "/icons/stats_dark.svg",
     profile: "/icons/email_dark.svg",
   },
-
-  // SVG_Links: {
-  //   main: "drop-shadow(1px 1px 1px rgba(168, 167, 167, 0.3))",
-  //   hover: "drop-shadow(1px 1px 1px rgba(0, 136, 50, 0.3))",
-  // },
 };

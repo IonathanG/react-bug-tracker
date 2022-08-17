@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "./context/ThemeContext";
 import { lightTheme, darkTheme } from "./shared/Theme";
 import { GlobalStyles } from "./shared/globalStyles";
-import Layout from "./components/Layout";
+import Layout from "./layout/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Unauthorized from "./pages/Unauthorized";

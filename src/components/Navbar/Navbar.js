@@ -11,6 +11,7 @@ import SwitchTheme from "./_SwitchTheme";
 const NavbarContainer = styled.nav`
   background-color: ${({ theme }) => theme.navbar_Background};
   backdrop-filter: blur(10px);
+  box-shadow: ${({ theme }) => theme.navbar_Shadow};
 
   flex: 2;
   max-width: 280px;
