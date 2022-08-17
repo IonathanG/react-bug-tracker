@@ -12,5 +12,6 @@ export const InputField = styled.input`
 
   &::placeholder {
     font-family: sans-serif;
+    color: ${({ theme }) => theme.main_Font_Color};
   }
 `;

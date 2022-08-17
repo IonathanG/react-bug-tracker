@@ -5,6 +5,7 @@ export const Section = styled.section`
   display: flex;
   position: relative;
   transition: 0.3s ease;
+  color: ${({ theme }) => theme.main_Font_Color};
 `;
 
 export const SectionMain = styled.section`

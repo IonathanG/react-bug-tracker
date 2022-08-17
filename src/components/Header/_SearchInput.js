@@ -5,14 +5,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import { InputField } from "../../shared/inputField";
 
 const SearchContainer = styled.form`
-  //flex: 1;
-  //transition: 0.3s ease-out;
   display: flex;
   align-items: center;
   position: relative;
-
-  /* @media ${device.phone} {
-  } */
 `;
 
 const SearchIconWrap = styled.button`
@@ -21,6 +16,8 @@ const SearchIconWrap = styled.button`
   position: absolute;
   left: 2px;
   top: 7px;
+
+  color: ${({ theme }) => theme.main_Font_Color};
 
   border: none;
   background-color: transparent;
@@ -36,11 +33,20 @@ const SearchIconWrap = styled.button`
 `;
 
 const SearchInputField = styled(InputField)`
-  width: 300px;
+  width: 180px;
   padding: 11px 12px 11px 38px;
+  background-color: ${({ theme }) => theme.form_Background};
 
   &::placeholder {
+    color: ${({ theme }) => theme.main_Font_Color};
     font-size: 14px;
+  }
+
+  @media ${device.phone_Small} {
+    width: 240px;
+  }
+  @media ${device.phone} {
+    width: 300px;
   }
 `;
 

@@ -7,7 +7,7 @@ const MenuHamburger = styled.div`
   font-size: 20px;
   cursor: pointer;
   position: absolute;
-  top: 20px;
+  top: 25px;
   left: 10px;
 
   @media ${device.phone} {

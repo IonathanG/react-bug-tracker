@@ -8,6 +8,7 @@ const Logo = styled.div`
   align-items: center;
   gap: 15px;
   font-weight: 600;
+  color: ${({ theme }) => theme.main_Font_Color};
 
   img {
     width: 30px;
