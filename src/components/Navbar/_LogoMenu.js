@@ -7,6 +7,7 @@ const Logo = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
+  margin-top: 3px;
   font-weight: 600;
   color: ${({ theme }) => theme.main_Font_Color};
 

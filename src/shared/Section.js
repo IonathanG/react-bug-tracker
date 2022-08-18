@@ -6,13 +6,15 @@ export const Section = styled.section`
   position: relative;
   transition: 0.3s ease;
   color: ${({ theme }) => theme.main_Font_Color};
+  //background-color: aliceblue;
+  min-height: 100vh;
 `;
 
 export const SectionMain = styled.section`
   //background-color: blanchedalmond;
   width: 100%;
   margin: 25px 25px;
-  margin-left: 65px;
+  margin-left: 55px;
   transition: 0.3s ease;
 
   display: flex;

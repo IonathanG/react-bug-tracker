@@ -22,7 +22,8 @@ const SearchIconWrap = styled.button`
   border: none;
   background-color: transparent;
 
-  opacity: 0.6;
+  //opacity: 0.6;
+  opacity: ${(props) => (props.icon_Opacity === "full" ? "1" : "0.6")};
   cursor: pointer;
   transition: 0.3s ease;
   transform: scale(0.9);
@@ -36,6 +37,7 @@ const SearchInputField = styled(InputField)`
   width: 180px;
   padding: 11px 12px 11px 38px;
   background-color: ${({ theme }) => theme.form_Background};
+  color: ${({ theme }) => theme.main_Font_Color};
 
   &::placeholder {
     color: ${({ theme }) => theme.main_Font_Color};
@@ -60,7 +62,7 @@ const SearchInput = () => {
 
   return (
     <SearchContainer onSubmit={(e) => handleSubmit(e)}>
-      <SearchIconWrap>
+      <SearchIconWrap icon_Opacity={search.length > 0 ? "full" : ""}>
         <SearchIcon />
       </SearchIconWrap>
       <SearchInputField

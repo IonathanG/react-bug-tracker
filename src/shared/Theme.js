@@ -76,7 +76,7 @@ export const darkTheme = {
 
   arrow_Dropdown_style2: "rgb(143, 52, 254)",
 
-  hamburger_Theme: "rgb(0, 0, 0)",
+  hamburger_Theme: "rgba(225, 225, 225, 0.9)",
 
   active_HamburgerColor: "rgb(143, 52, 254)",
 
