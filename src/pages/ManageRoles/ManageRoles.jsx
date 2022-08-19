@@ -4,6 +4,7 @@ import { device } from "../../shared/breakpoints";
 import { SectionContent } from "../../shared/Section";
 import AssignUser from "./_AssignUser";
 import UserList from "./_UserList";
+import { UserList as Data_UserList } from "../../data/Data_UserList";
 
 const Title = styled.h1`
   margin-bottom: 45px;
@@ -13,16 +14,17 @@ const Title = styled.h1`
 `;
 
 const UserRolesContainer = styled.div`
+  //background-color: grey;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  //background-color: grey;
+  gap: 65px;
+  transition: 0.3s ease;
 
-  @media ${device.phone} {
+  @media ${device.tablet} {
     flex-direction: row;
+    gap: 0px;
   }
 `;
 
@@ -31,8 +33,8 @@ const ManageRoles = () => {
     <SectionContent>
       <Title>Manage User Roles</Title>
       <UserRolesContainer>
-        <AssignUser />
-        <UserList />
+        <AssignUser userList={Data_UserList} />
+        <UserList userList={Data_UserList} />
       </UserRolesContainer>
     </SectionContent>
   );

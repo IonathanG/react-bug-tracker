@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { device } from "./breakpoints";
 
 export const Section = styled.section`
-  //background-color: aliceblue;
+  //background-color: grey;
   display: flex;
   position: relative;
   transition: 0.3s ease;
@@ -11,8 +11,9 @@ export const Section = styled.section`
 `;
 
 export const SectionMain = styled.section`
-  //background-color: blanchedalmond;
+  // background-color: blanchedalmond;
   width: 100%;
+  max-width: 1440px;
 
   margin: 25px 25px;
   //margin-left: 55px;
@@ -24,8 +25,8 @@ export const SectionMain = styled.section`
 
   @media ${device.phone} {
     flex: 4;
-    margin: 25px 50px;
-    gap: 75px;
+    margin: 25px 40px;
+    gap: 55px;
   }
 `;
 

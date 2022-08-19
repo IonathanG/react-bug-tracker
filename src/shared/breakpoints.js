@@ -1,6 +1,6 @@
 const size = {
   phone_Small: "480px",
-  phone: "820px",
+  phone: "860px",
   tablet: "1080px",
   desktop: "1440px",
 };

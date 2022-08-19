@@ -3,20 +3,21 @@ import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 
 const AssignUserContainer = styled.form`
-  //background-color: #b08d5e;
+  // background-color: #b08d5e;
   flex: 2;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   gap: 40px;
 `;
 
 const Divider = styled.div`
   background-color: ${({ theme }) => theme.divider_Color};
   height: 1px;
+  width: 100%;
   align-self: left;
 
-  @media ${device.phone} {
+  @media ${device.tablet} {
     width: 85%;
   }
 `;
@@ -35,7 +36,7 @@ const SelectionContainer = styled.ul`
   background-color: ${({ theme }) => theme.navbar_Background};
   box-shadow: ${({ theme }) => theme.navbar_Shadow};
 
-  @media ${device.phone} {
+  @media ${device.tablet} {
     width: 85%;
   }
 
@@ -85,7 +86,7 @@ const SelectRole = styled.select`
     outline: none;
   }
 
-  @media ${device.phone} {
+  @media ${device.tablet} {
     width: 85%;
   }
 `;
@@ -96,7 +97,6 @@ const OptionRole = styled.option`
 `;
 
 const SubmitButton = styled.button`
-  //max-width: 550px;
   text-transform: uppercase;
   letter-spacing: 0.4px;
 
@@ -109,31 +109,14 @@ const SubmitButton = styled.button`
   margin-top: 20px;
   padding: 10px 0;
 
-  @media ${device.phone} {
+  @media ${device.tablet} {
     width: 85%;
-    //max-width: none;
   }
 `;
 
-const AssignUser = () => {
+const AssignUser = ({ userList }) => {
   const [userSelected, setUserSelected] = useState();
   const [roleSelected, setRoleSelected] = useState("none");
-
-  const UserList = [
-    { name: "Tromso One", id: 0 },
-    { name: "Tromso Two", id: 1 },
-    { name: "Tromso Three", id: 2 },
-    { name: "Tromso Four", id: 3 },
-    { name: "Tromso Five", id: 4 },
-    { name: "Tromso Six", id: 5 },
-    { name: "Tromso Seven", id: 6 },
-    { name: "Tromso Height", id: 7 },
-    { name: "Tromso Nine", id: 8 },
-    { name: "Tromso Ten", id: 9 },
-    { name: "Tromso Eleven", id: 10 },
-    { name: "Tromso Twelve", id: 11 },
-    { name: "Tromso Thirteen", id: 12 },
-  ];
 
   const RoleList = [
     { value: "none", label: "Select Role/None" },
@@ -153,13 +136,13 @@ const AssignUser = () => {
       <UserSelection>
         <div>Select 1 or more Users</div>
         <SelectionContainer>
-          {UserList.map((user) => (
+          {userList.map((user) => (
             <SelectUser
               onClick={() => setUserSelected(user.id)}
               isSelected={userSelected === user.id}
               key={user.id}
             >
-              {user.name}
+              {user.user_name}
             </SelectUser>
           ))}
         </SelectionContainer>
@@ -173,8 +156,10 @@ const AssignUser = () => {
           onChange={(e) => setRoleSelected(e.target.value)}
           value={roleSelected}
         >
-          {RoleList.map((role) => (
-            <OptionRole value={role.value}>{role.label}</OptionRole>
+          {RoleList.map((role, index) => (
+            <OptionRole key={index} value={role.value}>
+              {role.label}
+            </OptionRole>
           ))}
         </SelectRole>
         <SubmitButton type="submit">Submit</SubmitButton>

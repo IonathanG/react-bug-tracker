@@ -1,0 +1,80 @@
+export const UserList = [
+  {
+    user_name: "Tromso One",
+    id: 0,
+    email: "tromso_1@tromso.com",
+    role: "Admin",
+  },
+  {
+    user_name: "Tromso Two",
+    id: 1,
+    email: "tromso_2@tromso.com",
+    role: "Project Manager",
+  },
+  {
+    user_name: "Tromso Three",
+    id: 2,
+    email: "tromso_3@tromso.com",
+    role: "Developer",
+  },
+  {
+    user_name: "Tromso Four",
+    id: 3,
+    email: "tromso_4@tromso.com",
+    role: "Developer",
+  },
+  {
+    user_name: "Tromso Five",
+    id: 4,
+    email: "tromso_5@tromso.com",
+    role: "Admin",
+  },
+  {
+    user_name: "Tromso Six",
+    id: 5,
+    email: "tromso_6@tromso.com",
+    role: "Submitter",
+  },
+  {
+    user_name: "Tromso Seven",
+    id: 6,
+    email: "tromso_7@tromso.com",
+    role: "Project Manager",
+  },
+  {
+    user_name: "Tromso Height",
+    id: 7,
+    email: "tromso_8@tromso.com",
+    role: "None",
+  },
+  {
+    user_name: "Tromso Nine",
+    id: 8,
+    email: "tromso_9@tromso.com",
+    role: "Admin",
+  },
+  {
+    user_name: "Tromso Ten",
+    id: 9,
+    email: "tromso_10@tromso.com",
+    role: "Developer",
+  },
+  {
+    user_name: "Tromso Eleven",
+    id: 10,
+    email: "tromso_11@tromso.com",
+    role: "Developer",
+  },
+  {
+    user_name: "Tromso Twelve",
+    id: 11,
+    email: "tromso_12@tromso.com",
+    role: "Subimtter",
+  },
+  {
+    user_name: "Tromso Thirteen",
+    id: 12,
+    email: "tromso_13@tromso.com",
+    role: "Project Manager",
+  },
+];
