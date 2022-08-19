@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Unauthorized from "./pages/Unauthorized";
 import Home from "./pages/Home";
-import ManageRoles from "./pages/ManageRoles";
+import ManageRoles from "./pages/ManageRoles/ManageRoles";
 import ManageProjects from "./pages/ManageProjects";
 import ProjectsPage from "./pages/ProjectsPage";
 import TicketsPage from "./pages/TicketsPage";

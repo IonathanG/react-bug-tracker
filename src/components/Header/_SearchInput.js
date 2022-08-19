@@ -42,6 +42,7 @@ const SearchInputField = styled(InputField)`
   &::placeholder {
     color: ${({ theme }) => theme.main_Font_Color};
     font-size: 14px;
+    opacity: 0.7;
   }
 
   @media ${device.phone_Small} {
@@ -57,7 +58,7 @@ const SearchInput = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted");
+    console.log("search submitted");
   };
 
   return (

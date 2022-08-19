@@ -33,6 +33,12 @@ export const lightTheme = {
 
   active_HamburgerColor: "rgb(143, 52, 254)",
 
+  scrollbar_Color: "#8f54a0",
+
+  button_Color: "rgba(143, 52, 254)",
+
+  button_Text_Color: "rgba(255, 255, 255, 0.9)",
+
   Menu_Icon_Source: {
     dashboard_Home: "/icons/dashboard_light.svg",
     manage_Role: "/icons/adsense_light.svg",
@@ -79,6 +85,12 @@ export const darkTheme = {
   hamburger_Theme: "rgba(225, 225, 225, 0.9)",
 
   active_HamburgerColor: "rgb(143, 52, 254)",
+
+  scrollbar_Color: "#8f54a0",
+
+  button_Color: "rgba(143, 52, 254)",
+
+  button_Text_Color: "rgba(255, 255, 255, 0.9)",
 
   Menu_Icon_Source: {
     dashboard_Home: "/icons/dashboard_dark.svg",

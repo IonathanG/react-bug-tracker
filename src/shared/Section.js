@@ -2,19 +2,20 @@ import styled from "styled-components";
 import { device } from "./breakpoints";
 
 export const Section = styled.section`
+  //background-color: aliceblue;
   display: flex;
   position: relative;
   transition: 0.3s ease;
   color: ${({ theme }) => theme.main_Font_Color};
-  //background-color: aliceblue;
   min-height: 100vh;
 `;
 
 export const SectionMain = styled.section`
   //background-color: blanchedalmond;
   width: 100%;
+
   margin: 25px 25px;
-  margin-left: 55px;
+  //margin-left: 55px;
   transition: 0.3s ease;
 
   display: flex;
@@ -24,8 +25,11 @@ export const SectionMain = styled.section`
   @media ${device.phone} {
     flex: 4;
     margin: 25px 50px;
-    gap: 90px;
+    gap: 75px;
   }
 `;
 
-export const SectionContent = styled.div``;
+export const SectionContent = styled.div`
+  //background-color: blue;
+  // z-index: 100;
+`;
