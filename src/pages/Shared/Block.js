@@ -47,7 +47,7 @@ export const Block_EntriesContainer = styled.div`
   //background-color: beige;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  //justify-content: space-between;
   font-size: 14px;
   width: 100%;
 `;
@@ -56,9 +56,8 @@ export const Block_EntryFlexList = styled.ul`
   //background-color: aqua;
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   width: 100%;
-
-  //border-bottom: 1px solid rgba(25, 25, 25, 0.2);
   font-size: 13px;
 `;
 
@@ -72,5 +71,22 @@ export const Block_EntryTitle = styled.li`
 export const Block_EntryItem = styled.li`
   font-size: 13px;
   border-bottom: 0.5px grey solid;
-  padding: 8px 0;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+
+  .links {
+    //background-color: beige;
+    color: ${({ theme }) => theme.scrollbar_Color};
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    span {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  }
 `;

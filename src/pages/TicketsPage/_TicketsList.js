@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "../../shared/breakpoints";
 import {
   Block,
   Block_Header,
@@ -9,6 +10,7 @@ import {
   Block_EntryTitle,
   Block_EntryItem,
 } from "../Shared/Block";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const TicketsContainer = styled(Block)`
   width: 100%;
@@ -42,13 +44,26 @@ const EntryFlexList = styled(Block_EntryFlexList)`
     flex: 3;
   }
   li:nth-child(8) {
-    flex: 1;
+    flex: 2;
   }
 `;
-const EntryTitle = styled(Block_EntryTitle)``;
+const EntryTitle = styled(Block_EntryTitle)`
+  font-size: 12px;
+
+  @media ${device.phone} {
+    font-size: 13px;
+  }
+  @media ${device.tablet} {
+    font-size: 14px;
+  }
+`;
 const EntryItem = styled(Block_EntryItem)`
-  padding: 12px 0;
-  font-size: 13px;
+  padding: 8px 0;
+  font-size: 12px;
+
+  @media ${device.tablet} {
+    font-size: 13px;
+  }
 `;
 
 const TicketsList = ({ ticketsList }) => {
@@ -56,8 +71,8 @@ const TicketsList = ({ ticketsList }) => {
     <TicketsContainer>
       {/* ----- Header ----- */}
       <Header>
-        <span>Your Personnel</span>
-        <span>All the users in your database</span>
+        <span>Your Tickets</span>
+        <span>All the tickets in your database</span>
       </Header>
 
       {/* ----- Options ----- */}
@@ -76,20 +91,45 @@ const TicketsList = ({ ticketsList }) => {
           <EntryTitle>Ticket Status</EntryTitle>
           <EntryTitle>Ticket Type</EntryTitle>
           <EntryTitle>Created</EntryTitle>
-          <EntryTitle>/</EntryTitle>
+          <EntryTitle>|</EntryTitle>
         </EntryFlexList>
 
         {/* ----- Data ----- */}
         {ticketsList.map((item) => (
           <EntryFlexList key={item.id}>
-            <EntryItem>{item.title}</EntryItem>
-            <EntryItem>{item.project_name}</EntryItem>
-            <EntryItem>{item.developer_assigned}</EntryItem>
-            <EntryItem>{item.priority}</EntryItem>
-            <EntryItem>{item.status}</EntryItem>
-            <EntryItem>{item.type}</EntryItem>
-            <EntryItem>{item.created}</EntryItem>
-            <EntryItem>{item.id}</EntryItem>
+            <EntryItem>
+              <span>{item.title}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.project_name}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.developer_assigned}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.priority}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.status}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.type}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.created}</span>
+            </EntryItem>
+            <EntryItem>
+              <div className="links">
+                <span>
+                  Edit/Assign
+                  <KeyboardArrowRightIcon />
+                </span>
+                <span>
+                  Details
+                  <KeyboardArrowRightIcon />
+                </span>
+              </div>
+            </EntryItem>
           </EntryFlexList>
         ))}
       </EntriesContainer>

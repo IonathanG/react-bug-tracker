@@ -30,7 +30,9 @@ const EntryFlexList = styled(Block_EntryFlexList)`
   }
 `;
 const EntryTitle = styled(Block_EntryTitle)``;
-const EntryItem = styled(Block_EntryItem)``;
+const EntryItem = styled(Block_EntryItem)`
+  padding: 8px 0;
+`;
 
 const UserList = ({ userList }) => {
   return (

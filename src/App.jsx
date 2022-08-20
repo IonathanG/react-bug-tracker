@@ -12,7 +12,9 @@ import Home from "./pages/Home/Home";
 import ManageRoles from "./pages/ManageRoles/ManageRoles";
 import ManageProjects from "./pages/ManageProjects/ManageProjects";
 import ProjectsPage from "./pages/ProjectsPage/ProjectsPage";
+import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
 import TicketsPage from "./pages/TicketsPage/TicketsPage";
+import TicketDetails from "./pages/TicketDetails/TicketDetails";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Missing from "./pages/Missing/Missing";
 
@@ -43,10 +45,17 @@ function App() {
 
               {/* protected routes */}
               <Route path="/" element={<Home />} />
+
               <Route path="/manage-role" element={<ManageRoles />} />
+
               <Route path="/manage-project" element={<ManageProjects />} />
+
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/project/:id" element={<ProjectDetails />} />
+
               <Route path="/tickets" element={<TicketsPage />} />
+              <Route path="/ticket/:id" element={<TicketDetails />} />
+
               <Route path="/profile" element={<ProfilePage />} />
 
               {/* catch all */}

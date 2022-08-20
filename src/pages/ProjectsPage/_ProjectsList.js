@@ -9,6 +9,7 @@ import {
   Block_EntryTitle,
   Block_EntryItem,
 } from "../Shared/Block";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const ProjectsContainer = styled(Block)`
   width: 100%;
@@ -32,7 +33,7 @@ const EntryFlexList = styled(Block_EntryFlexList)`
 `;
 const EntryTitle = styled(Block_EntryTitle)``;
 const EntryItem = styled(Block_EntryItem)`
-  padding: 12px 0;
+  padding: 4px 0;
   font-size: 14px;
 `;
 
@@ -41,7 +42,7 @@ const ProjectsList = ({ projectsList }) => {
     <ProjectsContainer>
       {/* ----- Header ----- */}
       <Header>
-        <span>Your Personnel</span>
+        <span>Your Projects</span>
         <span>All the projects in your database</span>
       </Header>
 
@@ -56,15 +57,30 @@ const ProjectsList = ({ projectsList }) => {
         <EntryFlexList>
           <EntryTitle>Project Name</EntryTitle>
           <EntryTitle>Description</EntryTitle>
-          <EntryTitle>/</EntryTitle>
+          <EntryTitle>|</EntryTitle>
         </EntryFlexList>
 
         {/* ----- Data ----- */}
         {projectsList.map((item) => (
           <EntryFlexList key={item.id}>
-            <EntryItem>{item.project_name}</EntryItem>
-            <EntryItem>{item.description}</EntryItem>
-            <EntryItem>{item.id}</EntryItem>
+            <EntryItem>
+              <span>{item.project_name}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.description}</span>
+            </EntryItem>
+            <EntryItem>
+              <div className="links">
+                <span>
+                  Manage Users
+                  <KeyboardArrowRightIcon />
+                </span>
+                <span>
+                  Details
+                  <KeyboardArrowRightIcon />
+                </span>
+              </div>
+            </EntryItem>
           </EntryFlexList>
         ))}
       </EntriesContainer>
