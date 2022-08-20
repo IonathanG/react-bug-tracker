@@ -13,7 +13,7 @@ export const Block = styled.div`
   border-radius: 6px;
 `;
 
-export const BlockHeader = styled.header`
+export const Block_Header = styled.header`
   //background-color: ${({ theme }) => theme.button_Color};
   background-color: rgba(30, 30, 30, 0.3);
   box-shadow: ${({ theme }) => theme.navbar_Shadow};
@@ -36,32 +36,41 @@ export const BlockHeader = styled.header`
   }
 `;
 
-export const BlockOptions = styled.div`
+export const Block_Options = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
 `;
 
-export const BlockListContainer = styled.div`
+export const Block_EntriesContainer = styled.div`
+  //background-color: beige;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   font-size: 14px;
-  height: 100%;
+  width: 100%;
 `;
 
-export const BlockCategoryTitle = styled.div`
-  font-weight: 600;
-  font-size: 14px;
-  border-bottom: 2px grey solid;
-  padding-bottom: 4px;
-`;
+export const Block_EntryFlexList = styled.ul`
+  //background-color: aqua;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 
-export const BlockCategoryContainer = styled.ul`
+  //border-bottom: 1px solid rgba(25, 25, 25, 0.2);
   font-size: 13px;
 `;
 
-export const BlockCategoryItem = styled.li`
+export const Block_EntryTitle = styled.li`
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 2px grey solid;
+  padding: 4px 0;
+`;
+
+export const Block_EntryItem = styled.li`
+  font-size: 13px;
+  border-bottom: 0.5px grey solid;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(25, 25, 25, 0.2);
 `;
