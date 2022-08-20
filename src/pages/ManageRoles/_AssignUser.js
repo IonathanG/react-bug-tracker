@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
+import { Button_MainStyle } from "../../shared/Buttons";
 
 const AssignUserContainer = styled.form`
   // background-color: #b08d5e;
@@ -96,18 +97,8 @@ const OptionRole = styled.option`
   padding: 5px 0;
 `;
 
-const SubmitButton = styled.button`
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-
-  cursor: pointer;
-  background-color: ${({ theme }) => theme.button_Color};
-  color: ${({ theme }) => theme.button_Text_Color};
-
-  border: none;
-  border-radius: 4px;
+const SubmitButton = styled(Button_MainStyle)`
   margin-top: 20px;
-  padding: 10px 0;
 
   @media ${device.tablet} {
     width: 85%;

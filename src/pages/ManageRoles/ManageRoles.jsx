@@ -2,16 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 import { SectionContent } from "../../shared/Section";
+import { PageTitle } from "../Shared/PageTitle";
 import AssignUser from "./_AssignUser";
 import UserList from "./_UserList";
 import { UserList as Data_UserList } from "../../data/Data_UserList";
 
-const Title = styled.h1`
-  margin-bottom: 45px;
-  font-size: 22px;
-  letter-spacing: 0.4px;
-  //font-weight: 600;
-`;
+const Title = styled(PageTitle)``;
 
 const UserRolesContainer = styled.div`
   //background-color: grey;

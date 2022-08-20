@@ -5,16 +5,16 @@ import { useTheme } from "./context/ThemeContext";
 import { lightTheme, darkTheme } from "./shared/Theme";
 import { GlobalStyles } from "./shared/globalStyles";
 import Layout from "./layout/Layout";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Unauthorized from "./pages/Unauthorized";
-import Home from "./pages/Home";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Unauthorized from "./pages/Unauthorized/Unauthorized";
+import Home from "./pages/Home/Home";
 import ManageRoles from "./pages/ManageRoles/ManageRoles";
-import ManageProjects from "./pages/ManageProjects";
-import ProjectsPage from "./pages/ProjectsPage";
-import TicketsPage from "./pages/TicketsPage";
-import ProfilePage from "./pages/ProfilePage";
-import Missing from "./pages/Missing";
+import ManageProjects from "./pages/ManageProjects/ManageProjects";
+import ProjectsPage from "./pages/ProjectsPage/ProjectsPage";
+import TicketsPage from "./pages/TicketsPage/TicketsPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import Missing from "./pages/Missing/Missing";
 
 const AppContainer = styled.div`
   background-color: ${({ theme }) => theme.main_Background};

@@ -15,7 +15,7 @@ const NavbarContainer = styled.nav`
 
   flex: 2;
   max-width: 280px;
-  height: 100%;
+  min-height: 100%;
   min-height: 100vh;
 
   display: grid;
