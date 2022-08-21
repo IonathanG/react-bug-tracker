@@ -9,12 +9,10 @@ import {
   Block_EntryTitle,
   Block_EntryItem,
 } from "../Shared/Block";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { Link } from "react-router-dom";
 
 const ProjectsContainer = styled(Block)`
   width: 100%;
-  margin-top: 50px;
+  margin-top: 0px;
 `;
 
 const Header = styled(Block_Header)``;
@@ -26,9 +24,18 @@ const EntryFlexList = styled(Block_EntryFlexList)`
     flex: 2;
   }
   li:nth-child(2) {
-    flex: 5;
+    flex: 3;
   }
   li:nth-child(3) {
+    flex: 2;
+  }
+  li:nth-child(4) {
+    flex: 2;
+  }
+  li:nth-child(5) {
+    flex: 2;
+  }
+  li:nth-child(6) {
     flex: 1;
   }
 `;
@@ -38,13 +45,13 @@ const EntryItem = styled(Block_EntryItem)`
   font-size: 14px;
 `;
 
-const ProjectsList = ({ projectsList }) => {
+const TicketsAssigned = ({ tickets }) => {
   return (
     <ProjectsContainer>
       {/* ----- Header ----- */}
       <Header>
-        <span>Your Projects</span>
-        <span>All the projects in your database</span>
+        <span>Tickets for this Project</span>
+        <span>Condensed Ticket Details</span>
       </Header>
 
       {/* ----- Options ----- */}
@@ -56,31 +63,34 @@ const ProjectsList = ({ projectsList }) => {
       <EntriesContainer>
         {/* ----- Titles ----- */}
         <EntryFlexList>
-          <EntryTitle>Project Name</EntryTitle>
-          <EntryTitle>Description</EntryTitle>
+          <EntryTitle>Title</EntryTitle>
+          <EntryTitle>Submitter</EntryTitle>
+          <EntryTitle>Developer</EntryTitle>
+          <EntryTitle>Status</EntryTitle>
+          <EntryTitle>Created</EntryTitle>
           <EntryTitle>|</EntryTitle>
         </EntryFlexList>
 
         {/* ----- Data ----- */}
-        {projectsList.map((item) => (
-          <EntryFlexList key={item.id}>
+        {tickets.map((item, index) => (
+          <EntryFlexList key={index}>
             <EntryItem>
-              <span>{item.project_name}</span>
+              <span>{item.title}</span>
             </EntryItem>
             <EntryItem>
-              <span>{item.description}</span>
+              <span>{item.submitter}</span>
             </EntryItem>
             <EntryItem>
-              <div className="links">
-                <Link to={`/project/${item.id}`}>
-                  Manage Users
-                  <KeyboardArrowRightIcon />
-                </Link>
-                <Link to={`/project/${item.id}`}>
-                  Details
-                  <KeyboardArrowRightIcon />
-                </Link>
-              </div>
+              <span>{item.developer}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.status}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{item.created}</span>
+            </EntryItem>
+            <EntryItem>
+              <span>{index}</span>
             </EntryItem>
           </EntryFlexList>
         ))}
@@ -89,4 +99,4 @@ const ProjectsList = ({ projectsList }) => {
   );
 };
 
-export default ProjectsList;
+export default TicketsAssigned;

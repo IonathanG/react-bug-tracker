@@ -107,7 +107,7 @@ const AssignUser = ({ userList }) => {
   const [roleSelected, setRoleSelected] = useState("none");
 
   const RoleList = [
-    { value: "none", label: "Select Role/None" },
+    { value: "none", label: "None (Awaiting Assignement)" },
     { value: "admin", label: "Admin" },
     { value: "project_manager", label: "Project Manager" },
     { value: "developer", label: "Developer" },
@@ -157,9 +157,15 @@ const AssignUser = ({ userList }) => {
         <div>Select the Role to assign</div>
 
         <SelectRole
-          onChange={(e) => setRoleSelected(e.target.value)}
-          value={roleSelected}
+          onChange={(e) => {
+            setRoleSelected(e.target.value);
+            console.log(roleSelected);
+          }}
+          defaultValue={""}
         >
+          <OptionRole value={""} disabled>
+            - Select Role -
+          </OptionRole>
           {RoleList.map((role, index) => (
             <OptionRole key={index} value={role.value}>
               {role.label}

@@ -11,6 +11,7 @@ import {
   Block_EntryItem,
 } from "../Shared/Block";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { Link } from "react-router-dom";
 
 const TicketsContainer = styled(Block)`
   width: 100%;
@@ -120,14 +121,14 @@ const TicketsList = ({ ticketsList }) => {
             </EntryItem>
             <EntryItem>
               <div className="links">
-                <span>
+                <Link to={`/ticket/${item.id}`}>
                   Edit/Assign
                   <KeyboardArrowRightIcon />
-                </span>
-                <span>
+                </Link>
+                <Link to={`/ticket/${item.id}`}>
                   Details
                   <KeyboardArrowRightIcon />
-                </span>
+                </Link>
               </div>
             </EntryItem>
           </EntryFlexList>

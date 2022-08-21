@@ -9,12 +9,10 @@ import {
   Block_EntryTitle,
   Block_EntryItem,
 } from "../Shared/Block";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { Link } from "react-router-dom";
 
 const ProjectsContainer = styled(Block)`
   width: 100%;
-  margin-top: 50px;
+  margin-top: 0px;
 `;
 
 const Header = styled(Block_Header)``;
@@ -26,10 +24,10 @@ const EntryFlexList = styled(Block_EntryFlexList)`
     flex: 2;
   }
   li:nth-child(2) {
-    flex: 5;
+    flex: 4;
   }
   li:nth-child(3) {
-    flex: 1;
+    flex: 2;
   }
 `;
 const EntryTitle = styled(Block_EntryTitle)``;
@@ -38,13 +36,13 @@ const EntryItem = styled(Block_EntryItem)`
   font-size: 14px;
 `;
 
-const ProjectsList = ({ projectsList }) => {
+const UserAssigned = ({ users }) => {
   return (
     <ProjectsContainer>
       {/* ----- Header ----- */}
       <Header>
-        <span>Your Projects</span>
-        <span>All the projects in your database</span>
+        <span>Assigned Personel</span>
+        <span>Current Users on this Project</span>
       </Header>
 
       {/* ----- Options ----- */}
@@ -56,31 +54,22 @@ const ProjectsList = ({ projectsList }) => {
       <EntriesContainer>
         {/* ----- Titles ----- */}
         <EntryFlexList>
-          <EntryTitle>Project Name</EntryTitle>
-          <EntryTitle>Description</EntryTitle>
-          <EntryTitle>|</EntryTitle>
+          <EntryTitle>User Name</EntryTitle>
+          <EntryTitle>Email</EntryTitle>
+          <EntryTitle>Role</EntryTitle>
         </EntryFlexList>
 
         {/* ----- Data ----- */}
-        {projectsList.map((item) => (
-          <EntryFlexList key={item.id}>
+        {users.map((item, index) => (
+          <EntryFlexList key={index}>
             <EntryItem>
-              <span>{item.project_name}</span>
+              <span>{item.user_name}</span>
             </EntryItem>
             <EntryItem>
-              <span>{item.description}</span>
+              <span>{item.email}</span>
             </EntryItem>
             <EntryItem>
-              <div className="links">
-                <Link to={`/project/${item.id}`}>
-                  Manage Users
-                  <KeyboardArrowRightIcon />
-                </Link>
-                <Link to={`/project/${item.id}`}>
-                  Details
-                  <KeyboardArrowRightIcon />
-                </Link>
-              </div>
+              <span>{item.role}</span>
             </EntryItem>
           </EntryFlexList>
         ))}
@@ -89,4 +78,4 @@ const ProjectsList = ({ projectsList }) => {
   );
 };
 
-export default ProjectsList;
+export default UserAssigned;
