@@ -4,11 +4,9 @@ import { device } from "../../shared/breakpoints";
 import { Button_MainStyle } from "../../shared/Buttons";
 
 const AssignUserContainer = styled.form`
-  // background-color: #b08d5e;
   flex: 2;
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
   gap: 40px;
 `;
 
@@ -93,7 +91,6 @@ const SelectRole = styled.select`
 `;
 
 const OptionRole = styled.option`
-  // background-color: blue;
   padding: 5px 0;
 `;
 
@@ -106,7 +103,7 @@ const SubmitButton = styled(Button_MainStyle)`
 `;
 
 const AssignUser = ({ userList }) => {
-  const [userSelected, setUserSelected] = useState();
+  const [usersSelected, setUsersSelected] = useState({});
   const [roleSelected, setRoleSelected] = useState("none");
 
   const RoleList = [
@@ -117,20 +114,35 @@ const AssignUser = ({ userList }) => {
     { value: "submitter", label: "Submitter" },
   ];
 
+  // Submit Form to assign Users new Roles
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("form submitted");
   };
 
+  // Handle selection of one or multiple users
+  const handleUserSelect = (userID) => {
+    if (userID in usersSelected) {
+      setUsersSelected((current) => {
+        const copy = { ...current };
+        delete copy[userID];
+        return copy;
+      });
+    } else {
+      setUsersSelected((current) => ({ ...current, [userID]: userID }));
+    }
+  };
+
   return (
     <AssignUserContainer onSubmit={(e) => handleSubmit(e)}>
+      {/* ----- Select Users ----- */}
       <UserSelection>
         <div>Select 1 or more Users</div>
         <SelectionContainer>
           {userList.map((user) => (
             <SelectUser
-              onClick={() => setUserSelected(user.id)}
-              isSelected={userSelected === user.id}
+              onClick={() => handleUserSelect(user.id)}
+              isSelected={user.id in usersSelected}
               key={user.id}
             >
               {user.user_name}
@@ -140,6 +152,7 @@ const AssignUser = ({ userList }) => {
       </UserSelection>
       <Divider />
 
+      {/* ----- Assign User Role ----- */}
       <UserAssign>
         <div>Select the Role to assign</div>
 
