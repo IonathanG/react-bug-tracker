@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 import SearchIcon from "@mui/icons-material/Search";
-import { InputField } from "../../shared/inputField";
+import { InputField } from "../Input/inputField";
 
 const SearchContainer = styled.form`
   display: flex;

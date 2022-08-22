@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BlockTypeData from "../Shared/Block_TypeData";
+import BlockTypeData from "../../components/Blocks/Block_TypeData";
 
 const TicketsContainer = styled.div`
   margin-top: 50px;
@@ -28,10 +28,10 @@ const ListCategories = [
   "",
 ];
 
-const Links = {
-  link_1: { title: "Edit/Assign", route: "ticket" },
-  link_2: { title: "Details", route: "ticket" },
-};
+const Links = [
+  { title: "Edit/Assign", route: "ticket" },
+  { title: "Details", route: "ticket" },
+];
 
 const TicketsList = ({ ticketsList }) => {
   return (

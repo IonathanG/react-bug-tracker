@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
-import { Button_MainStyle } from "../../shared/Buttons";
+import { Button_MainStyle } from "../../components/Buttons/Buttons";
 
 const AssignUserContainer = styled.form`
   flex: 2;

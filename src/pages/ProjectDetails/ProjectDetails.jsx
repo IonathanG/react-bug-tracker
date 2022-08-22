@@ -1,9 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-//import styled from "styled-components";
 import UserAssigned from "./_UserAssigned";
 import TicketsAssigned from "./_TicketsAssigned";
-import ProjectHeader from "./_ProjectHeader";
+//import ProjectHeader from "./_ProjectHeader";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -33,14 +32,14 @@ const ProjectDetails = () => {
         submitter: "TromsoSeven",
         developer: "TromsoOne",
         status: "Open",
-        created: "21/08/22 11:11:11 PM",
+        created: "21/08/22 11:11:11PM",
       },
       {
         title: "Ticket title 2",
         submitter: "TromsoSeven",
         developer: "TromsoOne",
         status: "In Progress",
-        created: "21/08/22 11:11:21 PM",
+        created: "21/08/22 11:11:21PM",
       },
     ],
   };
@@ -48,15 +47,15 @@ const ProjectDetails = () => {
   return (
     <>
       {/* ----- Header ----- */}
-      <ProjectHeader
+      {/* <ProjectHeader
         projectID={projectDetail.project_id}
         projectName={projectDetail.project_name}
         projectDesc={projectDetail.description}
         projectCreated={projectDetail.created}
-      />
+      /> */}
       {/* ----- Project Main Details ----- */}
-      <UserAssigned users={projectDetail.users_assigned} />
-      <TicketsAssigned tickets={projectDetail.tickets_assigned} />
+      <UserAssigned userList={projectDetail.users_assigned} />
+      <TicketsAssigned ticketList={projectDetail.tickets_assigned} />
     </>
   );
 };

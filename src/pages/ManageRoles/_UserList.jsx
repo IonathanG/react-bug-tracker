@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BlockTypeData from "../Shared/Block_TypeData";
+import BlockTypeData from "../../components/Blocks/Block_TypeData";
 
 const UserListContainer = styled.div`
   flex: 3;

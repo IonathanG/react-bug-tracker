@@ -1,9 +1,7 @@
 import React from "react";
 import { SectionContent } from "../../shared/Section";
-import styled from "styled-components";
-import { PageTitle } from "../Shared/PageTitle";
-
-const Title = styled(PageTitle)``;
+//import styled from "styled-components";
+import { PageTitle as Title } from "../../components/Titles/PageTitle";
 
 const ManageProjects = () => {
   return (

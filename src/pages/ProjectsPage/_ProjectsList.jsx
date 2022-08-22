@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BlockTypeData from "../Shared/Block_TypeData";
+import BlockTypeData from "../../components/Blocks/Block_TypeData";
 
 const ProjectsContainer = styled.div`
   margin-top: 50px;
@@ -18,10 +18,10 @@ const HeaderText = {
 };
 const ListCategories = ["Project Name", "Description", ""];
 
-const Links = {
-  link_1: { title: "Manage Users", route: "project" },
-  link_2: { title: "Details", route: "project" },
-};
+const Links = [
+  { title: "Manage Users", route: "project" },
+  { title: "Details", route: "project" },
+];
 
 const ProjectsList = ({ projectsList }) => {
   return (

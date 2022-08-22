@@ -200,14 +200,12 @@ const BlockTypeData = ({
                 styleFlex={Styles.EntryFlex[Object.keys(item).length]}
               >
                 <div className="links">
-                  <Link to={`/${Links.link_1.route}/${itemIndex}`}>
-                    {Links.link_1.title}
-                    <ArrowIcon />
-                  </Link>
-                  <Link to={`/${Links.link_2.route}/${itemIndex}`}>
-                    {Links.link_2.title}
-                    <ArrowIcon />
-                  </Link>
+                  {Links.map((item, index) => (
+                    <Link to={`/${item.route}/${itemIndex}`} key={index}>
+                      {item.title}
+                      <ArrowIcon />
+                    </Link>
+                  ))}
                 </div>
               </EntryItem>
             )}

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 import { SectionContent } from "../../shared/Section";
-import { PageTitle as Title } from "../Shared/PageTitle";
+import { PageTitle as Title } from "../../components/Titles/PageTitle";
 import { UserList as Data_UserList } from "../../data/Data_UserList";
 import AssignUser from "./_AssignUser";
 import UserList from "./_UserList";
