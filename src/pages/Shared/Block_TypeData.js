@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+// import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+// import { Link } from "react-router-dom";
 
 const Block = styled.div`
   width: 100%;
@@ -60,27 +62,19 @@ const EntriesContainer = styled.div`
 
   width: 100%;
   font-size: 14px;
-  //background-color: beige;
 `;
 
-const EntryFlexList = styled.ul`
+const EntryFlexContainer = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 
   width: 100%;
   font-size: 13px;
-  //background-color: aqua;
-  li:nth-child(1),
-  li:nth-child(3) {
-    flex: 3;
-  }
-  li:nth-child(2) {
-    flex: 5;
-  }
 `;
 
 const EntryTitle = styled.li`
+  flex: ${(props) => (props.styleFlex ? `${props.styleFlex}` : "1")};
   padding: 4px 0;
   font-weight: 600;
   font-size: 14px;
@@ -90,10 +84,14 @@ const EntryTitle = styled.li`
 const EntryItem = styled.li`
   display: flex;
   align-items: center;
-  padding: ${(props) =>
-    props.style.padding ? `${props.style.padding}` : "4px 0px"};
+  flex: ${(props) => (props.styleFlex ? `${props.styleFlex}` : "1")};
 
-  font-size: 13px;
+  padding: ${(props) =>
+    props.styleItem.padding ? `${props.styleItem.padding}` : "4px 0px"};
+
+  font-size: ${(props) =>
+    props.styleItem.fontSize ? `${props.styleItem.fontSize}` : "13px"};
+
   border-bottom: 0.5px grey solid;
 
   .links {
@@ -107,13 +105,19 @@ const EntryItem = styled.li`
       align-items: center;
 
       margin: 2px 0;
-      cursor: pointer;
       color: ${({ theme }) => theme.scrollbar_Color};
+      cursor: pointer;
     }
   }
 `;
 
-const BlockTypeData = ({ Styles, HeaderText, ListCategories, ListData }) => {
+const BlockTypeData = ({
+  Styles,
+  HeaderText,
+  ListCategories,
+  ListData,
+  Links,
+}) => {
   return (
     <Block>
       {/* ----- Header ----- */}
@@ -133,26 +137,33 @@ const BlockTypeData = ({ Styles, HeaderText, ListCategories, ListData }) => {
       {/* ----- MAIN LIST ----- */}
       <EntriesContainer>
         {/* ----- Category Titles ----- */}
-        <EntryFlexList>
+        <EntryFlexContainer>
           {ListCategories.map((item, index) => (
-            <EntryTitle key={index}>{item}</EntryTitle>
+            <EntryTitle key={index} styleFlex={Styles.EntryFlex[index]}>
+              {item}
+            </EntryTitle>
           ))}
-        </EntryFlexList>
+        </EntryFlexContainer>
 
         {/* ----- Data ----- */}
         {ListData.map((item) => (
           // For each Unique Data Entry
-          <EntryFlexList key={item.email}>
+          <EntryFlexContainer key={item.email}>
             {/* - Display Each Entry (Object) on one line - */}
             {/* - Number of EntryItem per line must match number of EntryTitle - */}
             {Object.values(item).map((entry, index) => {
               return (
-                <EntryItem key={index} style={Styles.EntryItem}>
+                <EntryItem
+                  key={index}
+                  styleItem={Styles.EntryItem}
+                  styleFlex={Styles.EntryFlex[index]}
+                >
                   <span>{entry}</span>
                 </EntryItem>
               );
             })}
-          </EntryFlexList>
+            {Links && <p>hi</p>}
+          </EntryFlexContainer>
         ))}
       </EntriesContainer>
     </Block>

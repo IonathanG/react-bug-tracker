@@ -4,27 +4,18 @@ import BlockTypeData from "../Shared/Block_TypeData";
 
 const UserListContainer = styled.div`
   flex: 3;
-  min-height: 100%;
-  margin-top: 32px;
+  margin-top: 35px;
 `;
 
 const Styles = {
-  EntryFlexList: [
-    // li:nth-child(1),
-    // li:nth-child(3) {
-    //   flex: 3;
-    // }
-    // li:nth-child(2) {
-    //   flex: 5;
-    // }
-  ],
+  EntryFlex: ["3", "5", "3"],
   EntryItem: { padding: "10px 0" },
   ShowOptions: true,
 };
 
 const HeaderText = {
-  mainText: "Your Projects",
-  subText: "All the projects in your database",
+  mainText: "Your Personnel",
+  subText: "All the users in your database",
 };
 const ListCategories = ["User Name", "Email", "Role"];
 
@@ -36,6 +27,7 @@ const UserList = ({ userList }) => {
         HeaderText={HeaderText}
         ListCategories={ListCategories}
         ListData={userList}
+        Links={null}
       />
     </UserListContainer>
   );

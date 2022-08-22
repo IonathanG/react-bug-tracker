@@ -2,15 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 import { SectionContent } from "../../shared/Section";
-import { PageTitle } from "../Shared/PageTitle";
+import { PageTitle as Title } from "../Shared/PageTitle";
+import { UserList as Data_UserList } from "../../data/Data_UserList";
 import AssignUser from "./_AssignUser";
 import UserList from "./_UserList";
-import { UserList as Data_UserList } from "../../data/Data_UserList";
-
-const Title = styled(PageTitle)``;
 
 const UserRolesContainer = styled.div`
-  //background-color: grey;
   width: 100%;
   display: flex;
   flex-direction: column;

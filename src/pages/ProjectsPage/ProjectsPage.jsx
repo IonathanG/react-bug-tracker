@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { SectionContent } from "../../shared/Section";
-import { PageTitle } from "../Shared/PageTitle";
+import { PageTitle as Title } from "../Shared/PageTitle";
 import { Button_MainStyle } from "../../shared/Buttons";
-import ProjectsList from "./_ProjectsList";
 import { ProjectsList as Data_ProjectsList } from "../../data/Data_ProjectsList";
-
-const Title = styled(PageTitle)``;
+import ProjectsList from "./_ProjectsList";
 
 const CreateProjectButton = styled(Button_MainStyle)`
   padding: 10px 20px;

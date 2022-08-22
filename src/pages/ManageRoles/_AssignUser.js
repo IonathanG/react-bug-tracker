@@ -141,9 +141,9 @@ const AssignUser = ({ userList }) => {
         <SelectionContainer>
           {userList.map((user) => (
             <SelectUser
-              onClick={() => handleUserSelect(user.id)}
-              isSelected={user.id in usersSelected}
-              key={user.id}
+              onClick={() => handleUserSelect(user.email)}
+              isSelected={user.email in usersSelected}
+              key={user.email}
             >
               {user.user_name}
             </SelectUser>
