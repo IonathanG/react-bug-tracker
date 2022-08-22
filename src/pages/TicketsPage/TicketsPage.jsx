@@ -1,11 +1,9 @@
 import React from "react";
 import { SectionContent } from "../../shared/Section";
-import styled from "styled-components";
-import { PageTitle } from "../Shared/PageTitle";
-import TicketsList from "./_TicketsList";
+import { PageTitle as Title } from "../Shared/PageTitle";
 import { TicketsList as Data_TicketsList } from "../../data/Data_TicketsList";
-
-const Title = styled(PageTitle)``;
+import TicketsList from "./_TicketsList";
+//import styled from "styled-components";
 
 const TicketsPage = () => {
   return (

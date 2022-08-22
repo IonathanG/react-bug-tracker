@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-// import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-// import { Link } from "react-router-dom";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { Link } from "react-router-dom";
+import { device } from "../../shared/breakpoints";
 
 const Block = styled.div`
   width: 100%;
@@ -74,31 +75,53 @@ const EntryFlexContainer = styled.ul`
 `;
 
 const EntryTitle = styled.li`
+  border-bottom: 2px grey solid;
   flex: ${(props) => (props.styleFlex ? `${props.styleFlex}` : "1")};
   padding: 4px 0;
   font-weight: 600;
+
   font-size: 14px;
-  border-bottom: 2px grey solid;
+
+  /* @media ${device.phone} {
+    font-size: 13px;
+  }
+  @media ${device.tablet} {
+    font-size: 14px;
+  } */
+  /* @media ${device.phone} {
+    font-size: ${(props) =>
+    props.styleTitle?.fontSize ? `${props.styleTitle.fontSize}` : "14px"};
+    } */
 `;
 
 const EntryItem = styled.li`
+  border-bottom: 0.5px grey solid;
   display: flex;
   align-items: center;
   flex: ${(props) => (props.styleFlex ? `${props.styleFlex}` : "1")};
 
   padding: ${(props) =>
-    props.styleItem.padding ? `${props.styleItem.padding}` : "4px 0px"};
+    props.styleItem?.padding ? `${props.styleItem.padding}` : "4px 0px"};
 
   font-size: ${(props) =>
-    props.styleItem.fontSize ? `${props.styleItem.fontSize}` : "13px"};
+    props.styleItem?.fontSize ? `${props.styleItem.fontSize}` : "13px"};
 
-  border-bottom: 0.5px grey solid;
+  /* @media ${device.tablet} {
+    font-size: 13px;
+  } */
 
   .links {
+    width: 100%;
     font-weight: 600;
+    font-size: 12px;
+
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+
+    @media ${device.phone} {
+      font-size: 13px;
+    }
 
     a {
       display: flex;
@@ -109,6 +132,10 @@ const EntryItem = styled.li`
       cursor: pointer;
     }
   }
+`;
+
+const ArrowIcon = styled(KeyboardArrowRightIcon)`
+  transform: scale(0.8);
 `;
 
 const BlockTypeData = ({
@@ -139,30 +166,51 @@ const BlockTypeData = ({
         {/* ----- Category Titles ----- */}
         <EntryFlexContainer>
           {ListCategories.map((item, index) => (
-            <EntryTitle key={index} styleFlex={Styles.EntryFlex[index]}>
+            <EntryTitle
+              key={index}
+              styleTitle={Styles.EntryTitle}
+              styleFlex={Styles.EntryFlex[index]}
+            >
               {item}
             </EntryTitle>
           ))}
         </EntryFlexContainer>
 
         {/* ----- Data ----- */}
-        {ListData.map((item) => (
+        {ListData.map((item, itemIndex) => (
           // For each Unique Data Entry
-          <EntryFlexContainer key={item.email}>
+          <EntryFlexContainer key={itemIndex}>
             {/* - Display Each Entry (Object) on one line - */}
             {/* - Number of EntryItem per line must match number of EntryTitle - */}
-            {Object.values(item).map((entry, index) => {
+            {Object.values(item).map((entry, entryIndex) => {
               return (
                 <EntryItem
-                  key={index}
+                  key={entryIndex}
                   styleItem={Styles.EntryItem}
-                  styleFlex={Styles.EntryFlex[index]}
+                  styleFlex={Styles.EntryFlex[entryIndex]}
                 >
-                  <span>{entry}</span>
+                  {entry}
                 </EntryItem>
               );
             })}
-            {Links && <p>hi</p>}
+            {/* ----- If Links are present in the list ----- */}
+            {Links && (
+              <EntryItem
+                styleItem={Styles.EntryItem}
+                styleFlex={Styles.EntryFlex[Object.keys(item).length]}
+              >
+                <div className="links">
+                  <Link to={`/${Links.link_1.route}/${itemIndex}`}>
+                    {Links.link_1.title}
+                    <ArrowIcon />
+                  </Link>
+                  <Link to={`/${Links.link_2.route}/${itemIndex}`}>
+                    {Links.link_2.title}
+                    <ArrowIcon />
+                  </Link>
+                </div>
+              </EntryItem>
+            )}
           </EntryFlexContainer>
         ))}
       </EntriesContainer>

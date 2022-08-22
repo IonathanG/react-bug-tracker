@@ -7,8 +7,8 @@ const ProjectsContainer = styled.div`
 `;
 
 const Styles = {
-  EntryFlex: ["2", "5", "1"],
-  EntryItem: { padding: "10px 0", fontSize: "14px" },
+  EntryFlex: ["2", "3", "2"],
+  EntryItem: { padding: "4px 0", fontSize: "14px" },
   ShowOptions: true,
 };
 
@@ -16,9 +16,12 @@ const HeaderText = {
   mainText: "Your Projects",
   subText: "All the projects in your database",
 };
-const ListCategories = ["Project Name", "Description", "|"];
+const ListCategories = ["Project Name", "Description", ""];
 
-const Links = {};
+const Links = {
+  link_1: { title: "Manage Users", route: "project" },
+  link_2: { title: "Details", route: "project" },
+};
 
 const ProjectsList = ({ projectsList }) => {
   return (
@@ -28,21 +31,8 @@ const ProjectsList = ({ projectsList }) => {
         HeaderText={HeaderText}
         ListCategories={ListCategories}
         ListData={projectsList}
-        Links={null}
+        Links={Links}
       />
-
-      {/* <EntryItem>
-        <div className="links">
-          <Link to={`/project/${item.id}`}>
-            Manage Users
-            <KeyboardArrowRightIcon />
-          </Link>
-          <Link to={`/project/${item.id}`}>
-            Details
-            <KeyboardArrowRightIcon />
-          </Link>
-        </div>
-      </EntryItem> */}
     </ProjectsContainer>
   );
 };
