@@ -2,13 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 
-const MenuHamburger = styled.div`
-  z-index: 20;
-  font-size: 20px;
+const Container = styled.div`
+  background-color: ${({ theme }) => theme.icon_Background};
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
   cursor: pointer;
   position: absolute;
   top: 25px;
   left: 10px;
+`;
+
+const MenuHamburger = styled.div`
+  z-index: 20;
+  font-size: 20px;
+  cursor: pointer;
 
   @media ${device.phone} {
     display: none;
@@ -60,11 +70,13 @@ const MiddleSlice = styled(Slice)`
 
 const HamburgerMenu = ({ showMenu }) => {
   return (
-    <MenuHamburger showMenu={showMenu}>
-      <TopSlice showMenu={showMenu}></TopSlice>
-      <MiddleSlice showMenu={showMenu}></MiddleSlice>
-      <BottomSlice showMenu={showMenu}></BottomSlice>
-    </MenuHamburger>
+    <Container>
+      <MenuHamburger showMenu={showMenu}>
+        <TopSlice showMenu={showMenu}></TopSlice>
+        <MiddleSlice showMenu={showMenu}></MiddleSlice>
+        <BottomSlice showMenu={showMenu}></BottomSlice>
+      </MenuHamburger>
+    </Container>
   );
 };
 

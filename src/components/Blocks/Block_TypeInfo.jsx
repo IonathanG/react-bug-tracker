@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { Link } from "react-router-dom";
-import { Divider } from "../../components/Divider/Divider";
+import { Divider_Horizontal as Divider } from "../../components/Dividers/Dividers";
 
 const Block = styled.div`
   width: 100%;
@@ -12,6 +12,7 @@ const Block = styled.div`
   gap: 0px;
 
   padding: 12px;
+  margin-top: 24px;
   border-radius: 6px;
 
   background-color: ${({ theme }) => theme.navbar_Background};
@@ -57,7 +58,6 @@ const Header = styled.header`
 const EntryFlexContainer = styled.ul`
   display: flex;
   flex-direction: row;
-  //justify-content: flex-start;
   justify-content: space-between;
   align-items: center;
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
-import { Divider } from "../../components/Divider/Divider";
+import { Divider_Horizontal as Divider } from "../../components/Dividers/Dividers";
 import { Button_MainStyle } from "../../components/Buttons/Buttons";
 
 const AssignUserContainer = styled.form`

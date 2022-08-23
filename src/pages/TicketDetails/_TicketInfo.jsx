@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import BlockTypeInfo from "../../components/Blocks/Block_TypeInfo";
 
-const ProjectContainer = styled.div`
-  margin-top: 50px;
-`;
+const Container = styled.div``;
 
 const Styles = {
   EntryFlex: ["1", "1", "1"],
@@ -45,14 +43,14 @@ const ListItem = [
 
 const TicketInfo = () => {
   return (
-    <ProjectContainer>
+    <Container>
       <BlockTypeInfo
         Styles={Styles}
         HeaderText={HeaderText}
         Links={Links}
         ListItem={ListItem}
       />
-    </ProjectContainer>
+    </Container>
   );
 };
 

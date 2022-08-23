@@ -16,7 +16,6 @@ export const SectionMain = styled.section`
   max-width: 1440px;
 
   margin: 25px 25px;
-  //margin-left: 55px;
   transition: 0.3s ease;
 
   display: flex;
@@ -30,7 +29,4 @@ export const SectionMain = styled.section`
   }
 `;
 
-export const SectionContent = styled.div`
-  //background-color: blue;
-  // z-index: 100;
-`;
+export const SectionContent = styled.div``;

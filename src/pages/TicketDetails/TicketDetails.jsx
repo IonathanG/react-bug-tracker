@@ -5,11 +5,14 @@ import TicketComments from "./_TicketComments";
 import TicketHistory from "./_TicketHistory";
 import TicketAttachments from "./_TicketAttachments";
 import styled from "styled-components";
+import { Divider_Horizontal as DividerLine } from "../../components/Dividers/Dividers";
+import { Divider_Vertical as DividerUp } from "../../components/Dividers/Dividers";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: beige;
+  margin-top: 50px;
+  gap: 25px;
 `;
 
 const BlocksContainer = styled.div`
@@ -18,9 +21,9 @@ const BlocksContainer = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   gap: 15px;
-  //background-color: aqua;
+
   div:nth-child(1),
-  div:nth-child(2) {
+  div:nth-child(3) {
     flex: 1;
   }
 `;
@@ -39,15 +42,19 @@ const TicketDetails = () => {
     ],
     history: [
       {
-        title: "Ticket title 1",
-        submitter: "TromsoSeven",
-        developer: "TromsoOne",
-        status: "Open",
-        created: "21/08/22 11:11:11PM",
+        property: "Assignment Change",
+        old_value: "Tromso Seven",
+        new_value: "Tromso Three",
+        date_changed: "21/08/22 11:11:11PM",
       },
     ],
     attachments: [
-      { user_name: "Tromso One", email: "tromso_1@tromso.com", role: "Admin" },
+      {
+        file: "ScreenshotOne",
+        uploader: "Tromso Six",
+        notes: "Screenshot",
+        created: "21/08/22 11:11:11PM",
+      },
     ],
   };
 
@@ -55,11 +62,15 @@ const TicketDetails = () => {
     <Container>
       <BlocksContainer>
         <TicketInfo />
+        <DividerUp />
         <TicketComments ticketComments={ticketData.comments} />
       </BlocksContainer>
 
+      <DividerLine />
+
       <BlocksContainer>
         <TicketHistory ticketHistory={ticketData.history} />
+        <DividerUp />
         <TicketAttachments ticketAttachments={ticketData.attachments} />
       </BlocksContainer>
     </Container>

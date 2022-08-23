@@ -36,13 +36,9 @@ const SearchIconWrap = styled.button`
 const SearchInputField = styled(InputField)`
   width: 180px;
   padding: 11px 12px 11px 38px;
-  background-color: ${({ theme }) => theme.form_Background};
-  color: ${({ theme }) => theme.main_Font_Color};
 
   &::placeholder {
-    color: ${({ theme }) => theme.main_Font_Color};
     font-size: 14px;
-    opacity: 0.7;
   }
 
   @media ${device.phone_Small} {

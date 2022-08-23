@@ -39,11 +39,11 @@ const NavItem = styled(NavLink)`
   gap: 15px;
 
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   color: ${({ theme }) => theme.main_Font_Color};
 
   @media ${device.phone} {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   &.active {

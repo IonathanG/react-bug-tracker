@@ -11,6 +11,7 @@ const Block = styled.div`
   gap: 20px;
 
   padding: 12px;
+  margin-top: 24px;
   border-radius: 6px;
 
   background-color: ${({ theme }) => theme.navbar_Background};
