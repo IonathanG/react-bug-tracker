@@ -9,7 +9,7 @@ const ProjectsContainer = styled.div`
 
 const Styles = {
   EntryFlex: ["2", "4", "2"],
-  EntryItem: { padding: "4px 0", fontSize: "14px" },
+  EntryItem: { padding: "8px 0", fontSize: "14px" },
   ShowOptions: true,
 };
 

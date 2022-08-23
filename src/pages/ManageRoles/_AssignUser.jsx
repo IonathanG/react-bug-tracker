@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
+import { Divider } from "../../components/Divider/Divider";
 import { Button_MainStyle } from "../../components/Buttons/Buttons";
 
 const AssignUserContainer = styled.form`
@@ -10,10 +11,7 @@ const AssignUserContainer = styled.form`
   gap: 40px;
 `;
 
-const Divider = styled.div`
-  background-color: ${({ theme }) => theme.divider_Color};
-  height: 1px;
-  width: 100%;
+const DividerLine = styled(Divider)`
   align-self: left;
 
   @media ${device.tablet} {
@@ -150,7 +148,7 @@ const AssignUser = ({ userList }) => {
           ))}
         </SelectionContainer>
       </UserSelection>
-      <Divider />
+      <DividerLine />
 
       {/* ----- Assign User Role ----- */}
       <UserAssign>

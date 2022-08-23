@@ -2,11 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
-import useMenuItems from "../../hooks/useMenuItems";
+import { dashboardMenu } from "../../data/Data_Menu";
 
 const ContainerMenu = ({ setShowMenu }) => {
-  const dashboardMenu = useMenuItems();
-
   return (
     <MenuContainer>
       {dashboardMenu.map((item, index) => (

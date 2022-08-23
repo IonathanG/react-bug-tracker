@@ -22,6 +22,7 @@ const Header = styled.header`
   flex-direction: column;
   gap: 8px;
 
+  height: 65px;
   margin-top: -42px;
   padding: 10px;
   border-radius: 6px;

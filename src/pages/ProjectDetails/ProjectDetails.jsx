@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import UserAssigned from "./_UserAssigned";
 import TicketsAssigned from "./_TicketsAssigned";
-//import ProjectHeader from "./_ProjectHeader";
+import ProjectInfo from "./_ProjectInfo";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -47,12 +47,7 @@ const ProjectDetails = () => {
   return (
     <>
       {/* ----- Header ----- */}
-      {/* <ProjectHeader
-        projectID={projectDetail.project_id}
-        projectName={projectDetail.project_name}
-        projectDesc={projectDetail.description}
-        projectCreated={projectDetail.created}
-      /> */}
+      <ProjectInfo />
       {/* ----- Project Main Details ----- */}
       <UserAssigned userList={projectDetail.users_assigned} />
       <TicketsAssigned ticketList={projectDetail.tickets_assigned} />
