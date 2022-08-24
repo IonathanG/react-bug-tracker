@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeData from "../../components/Blocks/Block_TypeData";
-import { InputField } from "../../components/Input/inputField";
+import { InputStyle } from "../../components/Input/InputStyle";
 import { Button_MainStyle } from "../../components/Buttons/Buttons";
 
 const Container = styled.div`
@@ -17,7 +17,6 @@ const AddCommentContainer = styled.div`
   gap: 10px;
 
   margin-left: 15px;
-  //background-color: beige;
 `;
 
 const AddCommentText = styled.div`
@@ -26,8 +25,7 @@ const AddCommentText = styled.div`
 
 const FormInput = styled.form``;
 
-const Input = styled(InputField)`
-  // border-radius: 4px;
+const Input = styled(InputStyle)`
   width: 180px;
   padding: 8px 12px;
 

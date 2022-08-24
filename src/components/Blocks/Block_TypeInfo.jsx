@@ -81,7 +81,7 @@ const EntryItem = styled.li`
     props.styleItem?.fontSize ? `${props.styleItem.fontSize}` : "14px"};
 
   span {
-    padding: 10px 0 0 5px;
+    padding: 10px 0 0 2px;
     font-size: 13px;
     font-weight: normal;
     text-transform: none;

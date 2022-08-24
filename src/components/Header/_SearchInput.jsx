@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 import SearchIcon from "@mui/icons-material/Search";
-import { InputField } from "../Input/inputField";
+import { InputStyle } from "../Input/InputStyle";
 
 const SearchContainer = styled.form`
   display: flex;
@@ -22,7 +22,6 @@ const SearchIconWrap = styled.button`
   border: none;
   background-color: transparent;
 
-  //opacity: 0.6;
   opacity: ${(props) => (props.icon_Opacity === "full" ? "1" : "0.6")};
   cursor: pointer;
   transition: 0.3s ease;
@@ -33,7 +32,7 @@ const SearchIconWrap = styled.button`
   }
 `;
 
-const SearchInputField = styled(InputField)`
+const Input = styled(InputStyle)`
   width: 180px;
   padding: 11px 12px 11px 38px;
 
@@ -62,10 +61,10 @@ const SearchInput = () => {
       <SearchIconWrap icon_Opacity={search.length > 0 ? "full" : ""}>
         <SearchIcon />
       </SearchIconWrap>
-      <SearchInputField
+      <Input
         name="search"
         type="text"
-        placeholder="Search Files..."
+        placeholder="Search..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         required

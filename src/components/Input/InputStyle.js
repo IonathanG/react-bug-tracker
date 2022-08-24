@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputField = styled.input`
+export const InputStyle = styled.input`
   border-radius: 8px;
   border: 0.5px solid ${({ theme }) => theme.border_Form};
   background-color: ${({ theme }) => theme.form_Background};
