@@ -23,6 +23,7 @@ body {
 
 body,
 h1,
+h2,
 p,
 ul {
   margin: 0;
@@ -33,6 +34,12 @@ ul {
 h1{
   margin-bottom: 45px;
   font-size: 22px;
+  letter-spacing: 0.4px;
+}
+
+h2{
+  margin-bottom: 20px;
+  font-size: 18px;
   letter-spacing: 0.4px;
 }
 

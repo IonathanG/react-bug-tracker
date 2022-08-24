@@ -24,6 +24,7 @@ const ListItem = [
   [
     { name: "Project Name", description: "Project 1" },
     { name: "Project Description", description: "This is project 1" },
+    { name: "Project Manager", description: "Tromso Four" },
   ],
 ];
 
