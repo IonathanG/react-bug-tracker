@@ -63,7 +63,9 @@ const TicketComments = ({ ticketComments }) => {
       {/* Add a Comment Input */}
       <AddCommentContainer>
         <AddCommentText>Add a Comment?</AddCommentText>
+
         <FormInput onSubmit={(e) => handleSubmit(e)}>
+          {/* Input */}
           <Input
             name="addComment"
             type="text"
@@ -72,7 +74,12 @@ const TicketComments = ({ ticketComments }) => {
             onChange={(e) => setComment(e.target.value)}
             required
           ></Input>
-          <SubmitButton buttonStyle={ButtonStyle}>ADD COMMENT</SubmitButton>
+          {/* Button */}
+          <SubmitButton
+            buttonStyle={ButtonStyle}
+            text={"ADD COMMENT"}
+            handleSubmit={handleSubmit}
+          />
         </FormInput>
       </AddCommentContainer>
 

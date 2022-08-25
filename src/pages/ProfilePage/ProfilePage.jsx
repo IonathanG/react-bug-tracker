@@ -88,7 +88,11 @@ const ProfilePage = () => {
             onChange={(e) => setSearch(e.target.value)}
             required
           ></Input>
-          <Button buttonStyle={ButtonStyle} text={"SEARCH"} />
+          <Button
+            buttonStyle={ButtonStyle}
+            text={"SEARCH"}
+            handleSubmit={handleSubmit}
+          />
         </FormInput>
       </SearchContainer>
       <BlockTypeInfo

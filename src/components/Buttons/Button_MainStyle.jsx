@@ -19,7 +19,7 @@ const Button = styled.button`
 
 const ButtonMainStyle = ({ buttonStyle, text, handleSubmit }) => {
   return (
-    <Button style={buttonStyle} onClick={handleSubmit}>
+    <Button style={buttonStyle} onClick={handleSubmit} type="submit">
       {text}
     </Button>
   );

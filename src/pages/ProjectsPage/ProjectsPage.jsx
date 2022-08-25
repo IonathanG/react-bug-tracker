@@ -10,6 +10,12 @@ const ButtonStyle = {
 };
 
 const ProjectsPage = () => {
+  // Submit Form to Create a New Project
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("new project");
+  };
+
   return (
     <SectionContent>
       <h1>My Projects</h1>
@@ -17,6 +23,7 @@ const ProjectsPage = () => {
       <CreateProjectButton
         buttonStyle={ButtonStyle}
         text={"Create new Project"}
+        handleSubmit={handleSubmit}
       />
       <ProjectsList projectList={Data_ProjectList} />
     </SectionContent>
