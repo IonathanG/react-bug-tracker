@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { device } from "../../shared/breakpoints";
 import { RoleList as roleList } from "../../data/Data_RoleList";
 
 const Container = styled.div`
@@ -20,10 +19,6 @@ const SelectContainer = styled.select`
   &:focus {
     border: none;
     outline: none;
-  }
-
-  @media ${device.tablet} {
-    width: 85%;
   }
 `;
 

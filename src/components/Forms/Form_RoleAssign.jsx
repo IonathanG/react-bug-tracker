@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { device } from "../../shared/breakpoints";
+import { Divider_Horizontal as Divider } from "../Dividers/Dividers";
+import { default as SubmitButton } from "../Buttons/Button_MainStyle";
 import SelectUser from "../Select/SelectUser";
 import SelectRole from "../Select/SelectRole";
-import { Divider_Horizontal as Divider } from "../Dividers/Dividers";
-import { Button_MainStyle } from "../Buttons/Buttons";
 
 const Container = styled.form`
   flex: 2;
@@ -13,21 +12,10 @@ const Container = styled.form`
   gap: 40px;
 `;
 
-const DividerLine = styled(Divider)`
-  align-self: left;
-
-  @media ${device.tablet} {
-    width: 85%;
-  }
-`;
-
-const SubmitButton = styled(Button_MainStyle)`
-  margin-top: 20px;
-
-  @media ${device.tablet} {
-    width: 85%;
-  }
-`;
+const ButtonStyle = {
+  margin: "0px",
+  padding: "10px",
+};
 
 const FormRoleAssign = () => {
   //const [usersSelected, setUsersSelected] = useState({});
@@ -45,13 +33,17 @@ const FormRoleAssign = () => {
       <SelectUser />
 
       {/* ----- Divider ----- */}
-      <DividerLine />
+      <Divider />
 
       {/* ----- Assign User To Role/Project ----- */}
       <SelectRole />
 
       {/* ----- SUBMIT ----- */}
-      <SubmitButton type="submit">Submit</SubmitButton>
+      <SubmitButton
+        buttonStyle={ButtonStyle}
+        text={"Submit"}
+        handleSubmit={handleSubmit}
+      />
     </Container>
   );
 };

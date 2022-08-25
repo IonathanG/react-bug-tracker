@@ -5,7 +5,8 @@ import { UserList as userList } from "../../data/Data_UserList";
 
 const UserListContainer = styled.div`
   flex: 3;
-  margin-top: 35px;
+  margin-top: 5px;
+  // background-color: aqua;
 `;
 
 const Styles = {

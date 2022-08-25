@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeData from "../../components/Blocks/Block_TypeData";
 import { InputStyle } from "../../components/Input/InputStyle";
-import { Button_MainStyle } from "../../components/Buttons/Buttons";
+import { default as SubmitButton } from "../../components/Buttons/Button_MainStyle";
 
 const Container = styled.div`
   display: flex;
@@ -34,10 +34,10 @@ const Input = styled(InputStyle)`
   }
 `;
 
-const Button = styled(Button_MainStyle)`
-  margin: 0 20px;
-  padding: 8px 12px;
-`;
+const ButtonStyle = {
+  margin: "0 20px",
+  padding: "8px 12px",
+};
 
 const Styles = {
   EntryFlex: ["2", "3", "2"],
@@ -72,7 +72,7 @@ const TicketComments = ({ ticketComments }) => {
             onChange={(e) => setComment(e.target.value)}
             required
           ></Input>
-          <Button>ADD COMMENT</Button>
+          <SubmitButton buttonStyle={ButtonStyle}>ADD COMMENT</SubmitButton>
         </FormInput>
       </AddCommentContainer>
 

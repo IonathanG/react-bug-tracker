@@ -1,20 +1,23 @@
 import React from "react";
-import styled from "styled-components";
 import { SectionContent } from "../../shared/Section";
-import { Button_MainStyle } from "../../components/Buttons/Buttons";
+import { default as CreateProjectButton } from "../../components/Buttons/Button_MainStyle";
 import { ProjectList as Data_ProjectList } from "../../data/Data_ProjectList";
 import ProjectsList from "./_ProjectsList";
 
-const CreateProjectButton = styled(Button_MainStyle)`
-  padding: 10px 20px;
-  margin-top: -20px;
-`;
+const ButtonStyle = {
+  padding: "10px 20px",
+  margin: "-20px 0 0 0",
+};
 
 const ProjectsPage = () => {
   return (
     <SectionContent>
       <h1>My Projects</h1>
-      <CreateProjectButton>Create new project</CreateProjectButton>
+
+      <CreateProjectButton
+        buttonStyle={ButtonStyle}
+        text={"Create new Project"}
+      />
       <ProjectsList projectList={Data_ProjectList} />
     </SectionContent>
   );

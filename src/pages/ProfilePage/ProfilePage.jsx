@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeInfo from "../../components/Blocks/Block_TypeInfo";
 import { InputStyle } from "../../components/Input/InputStyle";
-import { Button_MainStyle } from "../../components/Buttons/Buttons";
+import { default as Button } from "../../components/Buttons/Button_MainStyle";
 
 const Container = styled.div`
   margin-top: 50px;
@@ -33,10 +33,11 @@ const Input = styled(InputStyle)`
   }
 `;
 
-const Button = styled(Button_MainStyle)`
-  margin: 0 20px;
-  padding: 8px 12px;
-`;
+/* ----- Props Data ----- */
+const ButtonStyle = {
+  margin: "0 20px",
+  padding: "8px 12px",
+};
 
 const Styles = {
   EntryFlex: ["1", "1", "1"],
@@ -87,7 +88,7 @@ const ProfilePage = () => {
             onChange={(e) => setSearch(e.target.value)}
             required
           ></Input>
-          <Button>SEARCH</Button>
+          <Button buttonStyle={ButtonStyle} text={"SEARCH"} />
         </FormInput>
       </SearchContainer>
       <BlockTypeInfo

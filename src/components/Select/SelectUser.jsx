@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { device } from "../../shared/breakpoints";
 import { UserList as userList } from "../../data/Data_UserList";
 
 const Container = styled.div`
@@ -9,17 +8,13 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const SelectionContainer = styled.ul`
+const SelectContainer = styled.ul`
   height: 150px;
   padding: 5px;
   overflow: scroll;
   overflow-x: hidden;
   background-color: ${({ theme }) => theme.navbar_Background};
   box-shadow: ${({ theme }) => theme.navbar_Shadow};
-
-  @media ${device.tablet} {
-    width: 85%;
-  }
 
   // ----- Scrollbar CSS -----
   // Firefox
@@ -40,7 +35,7 @@ const SelectionContainer = styled.ul`
   // ----- / -----
 `;
 
-const Selection = styled.li`
+const SelectItem = styled.li`
   margin: 2px 0;
   padding: 1px 0;
   cursor: pointer;
@@ -67,17 +62,18 @@ const SelectUser = () => {
   return (
     <Container>
       <div>Select 1 or more Users</div>
-      <SelectionContainer>
+
+      <SelectContainer>
         {userList.map((user) => (
-          <Selection
+          <SelectItem
             onClick={() => handleUserSelect(user.email)}
             isSelected={user.email in usersSelected}
             key={user.email}
           >
             {user.user_name}
-          </Selection>
+          </SelectItem>
         ))}
-      </SelectionContainer>
+      </SelectContainer>
     </Container>
   );
 };

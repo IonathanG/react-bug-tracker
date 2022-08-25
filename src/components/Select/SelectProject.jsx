@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { device } from "../../shared/breakpoints";
-import { Button_MainStyle } from "../../components/Buttons/Buttons";
 import { ProjectList as projectList } from "../../data/Data_ProjectList";
 
 const Container = styled.div`
@@ -22,22 +20,10 @@ const SelectContainer = styled.select`
     border: none;
     outline: none;
   }
-
-  @media ${device.tablet} {
-    width: 85%;
-  }
 `;
 
 const OptionProject = styled.option`
   padding: 5px 0;
-`;
-
-const SubmitButton = styled(Button_MainStyle)`
-  margin-top: 20px;
-
-  @media ${device.tablet} {
-    width: 85%;
-  }
 `;
 
 const SelectProject = () => {
@@ -63,8 +49,6 @@ const SelectProject = () => {
           </OptionProject>
         ))}
       </SelectContainer>
-
-      <SubmitButton type="submit">Submit</SubmitButton>
     </Container>
   );
 };
