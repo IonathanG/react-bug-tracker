@@ -1,4 +1,4 @@
-export const TicketsList = [
+export const TicketList = [
   {
     title: "ticket_1",
     project_name: "Project number 1",

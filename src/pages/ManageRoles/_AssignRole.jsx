@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 import { Divider_Horizontal as Divider } from "../../components/Dividers/Dividers";
 import { Button_MainStyle } from "../../components/Buttons/Buttons";
+import { UserList as userList } from "../../data/Data_UserList";
 
 const AssignUserContainer = styled.form`
   flex: 2;
@@ -100,17 +101,9 @@ const SubmitButton = styled(Button_MainStyle)`
   }
 `;
 
-const AssignUser = ({ userList }) => {
+const AssignRole = ({ roleList }) => {
   const [usersSelected, setUsersSelected] = useState({});
   const [roleSelected, setRoleSelected] = useState("none");
-
-  const RoleList = [
-    { value: "none", label: "None (Awaiting Assignement)" },
-    { value: "admin", label: "Admin" },
-    { value: "project_manager", label: "Project Manager" },
-    { value: "developer", label: "Developer" },
-    { value: "submitter", label: "Submitter" },
-  ];
 
   // Submit Form to assign Users new Roles
   const handleSubmit = (e) => {
@@ -164,7 +157,7 @@ const AssignUser = ({ userList }) => {
           <OptionRole value={""} disabled>
             - Select Role -
           </OptionRole>
-          {RoleList.map((role, index) => (
+          {roleList.map((role, index) => (
             <OptionRole key={index} value={role.value}>
               {role.label}
             </OptionRole>
@@ -176,4 +169,4 @@ const AssignUser = ({ userList }) => {
   );
 };
 
-export default AssignUser;
+export default AssignRole;

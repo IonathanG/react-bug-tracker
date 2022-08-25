@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
 import { SectionContent } from "../../shared/Section";
-import { UserList as Data_UserList } from "../../data/Data_UserList";
-import AssignUser from "./_AssignUser";
-import UserList from "./_UserList";
+import AssignRole from "./_AssignRole";
+import UserList from "../../components/UserList/UserList";
 
 const UserRolesContainer = styled.div`
   width: 100%;
@@ -20,13 +19,21 @@ const UserRolesContainer = styled.div`
   }
 `;
 
+const RoleList = [
+  { value: "none", label: "None (Awaiting Assignement)" },
+  { value: "admin", label: "Admin" },
+  { value: "project_manager", label: "Project Manager" },
+  { value: "developer", label: "Developer" },
+  { value: "submitter", label: "Submitter" },
+];
+
 const ManageRoles = () => {
   return (
     <SectionContent>
       <h1>Manage User Roles</h1>
       <UserRolesContainer>
-        <AssignUser userList={Data_UserList} />
-        <UserList userList={Data_UserList} />
+        <AssignRole roleList={RoleList} />
+        <UserList />
       </UserRolesContainer>
     </SectionContent>
   );

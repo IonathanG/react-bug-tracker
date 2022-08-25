@@ -33,14 +33,14 @@ const Links = [
   { title: "Details", route: "ticket" },
 ];
 
-const TicketsList = ({ ticketsList }) => {
+const TicketsList = ({ ticketList }) => {
   return (
     <TicketsContainer>
       <BlockTypeData
         Styles={Styles}
         HeaderText={HeaderText}
         ListCategories={ListCategories}
-        ListData={ticketsList}
+        ListData={ticketList}
         Links={Links}
       />
     </TicketsContainer>

@@ -1,4 +1,4 @@
-export const ProjectsList = [
+export const ProjectList = [
   {
     project_name: "project_1",
     description: "This is project number 1",

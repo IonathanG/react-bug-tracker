@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import BlockTypeData from "../../components/Blocks/Block_TypeData";
+import BlockTypeData from "../Blocks/Block_TypeData";
+import { UserList as userList } from "../../data/Data_UserList";
 
 const UserListContainer = styled.div`
   flex: 3;
@@ -19,7 +20,7 @@ const HeaderText = {
 };
 const ListCategories = ["User Name", "Email", "Role"];
 
-const UserList = ({ userList }) => {
+const UserList = () => {
   return (
     <UserListContainer>
       <BlockTypeData

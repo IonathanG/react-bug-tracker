@@ -23,14 +23,14 @@ const Links = [
   { title: "Details", route: "project" },
 ];
 
-const ProjectsList = ({ projectsList }) => {
+const ProjectsList = ({ projectList }) => {
   return (
     <ProjectsContainer>
       <BlockTypeData
         Styles={Styles}
         HeaderText={HeaderText}
         ListCategories={ListCategories}
-        ListData={projectsList}
+        ListData={projectList}
         Links={Links}
       />
     </ProjectsContainer>
