@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { device } from "../../shared/breakpoints";
 import SearchIcon from "@mui/icons-material/Search";
-import { InputStyle } from "../Input/InputStyle";
+import Input from "../Input/Input_Search";
+import { device } from "../../shared/breakpoints";
 
 const SearchContainer = styled.form`
   display: flex;
   align-items: center;
   position: relative;
+  width: 140px;
+
+  @media ${device.phone_Small} {
+    width: 240px;
+  }
+
+  @media ${device.phone} {
+    width: 300px;
+  }
 `;
 
 const SearchIconWrap = styled.button`
@@ -32,23 +41,12 @@ const SearchIconWrap = styled.button`
   }
 `;
 
-const Input = styled(InputStyle)`
-  width: 180px;
-  padding: 11px 12px 11px 38px;
+const InputStyle = {
+  width: "100%",
+  padding: "11px 12px 11px 38px",
+};
 
-  &::placeholder {
-    font-size: 14px;
-  }
-
-  @media ${device.phone_Small} {
-    width: 240px;
-  }
-  @media ${device.phone} {
-    width: 300px;
-  }
-`;
-
-const SearchInput = () => {
+const SearchField = () => {
   const [search, setSearch] = useState("");
 
   const handleSubmit = (e) => {
@@ -61,16 +59,10 @@ const SearchInput = () => {
       <SearchIconWrap icon_Opacity={search.length > 0 ? "full" : ""}>
         <SearchIcon />
       </SearchIconWrap>
-      <Input
-        name="search"
-        type="text"
-        placeholder="Search..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        required
-      />
+
+      <Input style={InputStyle} value={search} setValue={setSearch} />
     </SearchContainer>
   );
 };
 
-export default SearchInput;
+export default SearchField;

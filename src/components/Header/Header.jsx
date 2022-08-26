@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { device } from "../../shared/breakpoints";
-import SearchInput from "./_SearchInput";
+import SearchField from "./_SearchField";
 import Notification from "./_Notification";
 import UserAction from "./_UserAction";
 
 const HeaderContainer = styled.header`
-  //background-color: aquamarine;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -31,8 +30,8 @@ const Divider = styled.div`
 const Header = () => {
   return (
     <HeaderContainer>
-      <SearchInput />
-      <Notification></Notification>
+      <SearchField />
+      <Notification />
       <Divider />
       <UserAction />
     </HeaderContainer>

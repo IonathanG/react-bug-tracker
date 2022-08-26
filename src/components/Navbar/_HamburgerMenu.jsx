@@ -11,7 +11,7 @@ const Container = styled.div`
   place-items: center;
   cursor: pointer;
   position: absolute;
-  top: 25px;
+  top: 20px;
   left: 10px;
 `;
 

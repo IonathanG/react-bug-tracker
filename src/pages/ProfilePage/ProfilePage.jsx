@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeInfo from "../../components/Blocks/Block_TypeInfo";
-import { InputStyle } from "../../components/Input/InputStyle";
 import { default as Button } from "../../components/Buttons/Button_MainStyle";
+import Input from "../../components/Input/Input_Search";
 
 const Container = styled.div`
   margin-top: 50px;
@@ -22,18 +22,14 @@ const SearchContainer = styled.div`
   margin-left: 15px;
 `;
 
-const FormInput = styled.form``;
-
-const Input = styled(InputStyle)`
-  width: 180px;
-  padding: 8px 12px;
-
-  &::placeholder {
-    font-size: 14px;
-  }
-`;
+const Form = styled.form``;
 
 /* ----- Props Data ----- */
+const InputStyle = {
+  width: "180px",
+  padding: "8px 12px",
+};
+
 const ButtonStyle = {
   margin: "0 20px",
   padding: "8px 12px",
@@ -79,21 +75,16 @@ const ProfilePage = () => {
   return (
     <Container>
       <SearchContainer>
-        <FormInput onSubmit={(e) => handleSubmit(e)}>
-          <Input
-            name="addComment"
-            type="text"
-            placeholder="Find a User"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            required
-          ></Input>
+        <Form onSubmit={(e) => handleSubmit(e)}>
+          {/* Input */}
+          <Input style={InputStyle} value={search} setValue={setSearch} />
+          {/* Button */}
           <Button
             buttonStyle={ButtonStyle}
             text={"SEARCH"}
             handleSubmit={handleSubmit}
           />
-        </FormInput>
+        </Form>
       </SearchContainer>
       <BlockTypeInfo
         Styles={Styles}

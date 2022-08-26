@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeData from "../../components/Blocks/Block_TypeData";
-import { InputStyle } from "../../components/Input/InputStyle";
+import Input from "../../components/Input/Input_Search";
 import { default as SubmitButton } from "../../components/Buttons/Button_MainStyle";
 
 const Container = styled.div`
@@ -23,16 +23,13 @@ const AddCommentText = styled.div`
   opacity: 0.9;
 `;
 
-const FormInput = styled.form``;
+const Form = styled.form``;
 
-const Input = styled(InputStyle)`
-  width: 180px;
-  padding: 8px 12px;
-
-  &::placeholder {
-    font-size: 14px;
-  }
-`;
+/* ----- Props Data ----- */
+const InputStyle = {
+  width: "180px",
+  padding: "8px 12px",
+};
 
 const ButtonStyle = {
   margin: "0 20px",
@@ -64,23 +61,16 @@ const TicketComments = ({ ticketComments }) => {
       <AddCommentContainer>
         <AddCommentText>Add a Comment?</AddCommentText>
 
-        <FormInput onSubmit={(e) => handleSubmit(e)}>
+        <Form onSubmit={(e) => handleSubmit(e)}>
           {/* Input */}
-          <Input
-            name="addComment"
-            type="text"
-            placeholder="Type here..."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            required
-          ></Input>
+          <Input style={InputStyle} value={comment} setValue={setComment} />
           {/* Button */}
           <SubmitButton
             buttonStyle={ButtonStyle}
             text={"ADD COMMENT"}
             handleSubmit={handleSubmit}
           />
-        </FormInput>
+        </Form>
       </AddCommentContainer>
 
       {/* Comment List*/}
