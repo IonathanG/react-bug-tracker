@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Section, SectionMain } from "../shared/Section";
+import { SectionPage, SectionMain, SectionContent } from "../shared/Section";
 import Navbar from "../components/Navbar/Navbar";
 import Header from "../components/Header/Header";
 
@@ -10,13 +10,19 @@ const Layout = () => {
   return (
     <>
       {isLoggedIn && (
-        <Section>
-          <Navbar />
+        <SectionPage>
+          {/* Top Header */}
+          <Header />
+          {/* Main Section => Side Navbar + Content */}
           <SectionMain>
-            <Header />
-            <Outlet />
+            {/* Side Navbar */}
+            <Navbar />
+            {/* Main Content */}
+            <SectionContent>
+              <Outlet />
+            </SectionContent>
           </SectionMain>
-        </Section>
+        </SectionPage>
       )}
       {!isLoggedIn && <Outlet />}
     </>

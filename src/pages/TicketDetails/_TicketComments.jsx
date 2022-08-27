@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeData from "../../components/Blocks/Block_TypeData";
 import Input from "../../components/Input/Input_Search";
-import { default as SubmitButton } from "../../components/Buttons/Button_MainStyle";
+import ButtonBasic from "../../components/Buttons/Button_Basic";
 
 const Container = styled.div`
   display: flex;
@@ -65,7 +65,7 @@ const TicketComments = ({ ticketComments }) => {
           {/* Input */}
           <Input style={InputStyle} value={comment} setValue={setComment} />
           {/* Button */}
-          <SubmitButton
+          <ButtonBasic
             buttonStyle={ButtonStyle}
             text={"ADD COMMENT"}
             handleSubmit={handleSubmit}

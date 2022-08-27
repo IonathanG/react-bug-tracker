@@ -17,10 +17,11 @@ const StyledBadge = MUI_Styled(Badge)(({ theme }) => ({
 const BadgeContainer = styled(StyledBadge)`
   cursor: pointer;
   color: ${({ theme }) => theme.notification_Color};
+  opacity: 0.5;
 `;
 
 const Notification = () => {
-  const NotificationIndex = 3;
+  const NotificationIndex = 0;
 
   return (
     <BadgeContainer

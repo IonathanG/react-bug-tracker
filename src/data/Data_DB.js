@@ -31,25 +31,20 @@ export const Projects = {
     status: "",
     attachment: "",
     tickets: {
-      ticket_id: "",
+      ticket_id: {
+        ticket_name: "",
+        created_by: "",
+        developer_assigned: "",
+        description: "",
+        type: "",
+        status: "",
+        priority: "",
+        created_date: "",
+        history: { event_id: { date: "", title: "", author: "", detail: "" } },
+        comments: { comment_id: { author: "", date: "", comment: "" } },
+        attachments: { attachment_id: { description: "", object: "" } },
+      },
     },
-  },
-};
-
-export const Tickets = {
-  ticket_id: {
-    project_id: "",
-    ticket_name: "",
-    created_by: "",
-    developer_assigned: "",
-    description: "",
-    type: "",
-    status: "",
-    priority: "",
-    created_date: "",
-    history: { event_id: { date: "", title: "", author: "", detail: "" } },
-    comments: { comment_id: { author: "", date: "", comment: "" } },
-    attachments: { attachment_id: { description: "", object: "" } },
   },
 };
 
@@ -64,19 +59,24 @@ export const Tickets = {
 //     status: "",
 //     attachment: "",
 //     tickets: {
-//       ticket_id: {
-//         ticket_name: "",
-//         created_by: "",
-//         developer_assigned: "",
-//         description: "",
-//         type: "",
-//         status: "",
-//         priority: "",
-//         created_date: "",
-//         history: { event_id: { date: "", title: "", author: "", detail: "" } },
-//         comments: { comment_id: { author: "", date: "", comment: "" } },
-//         attachments: { attachment_id: { description: "", object: "" } },
-//       },
+//       ticket_id: "",
 //     },
+//   },
+// };
+
+// export const Tickets = {
+//   ticket_id: {
+//     project_id: "",
+//     ticket_name: "",
+//     created_by: "",
+//     developer_assigned: "",
+//     description: "",
+//     type: "",
+//     status: "",
+//     priority: "",
+//     created_date: "",
+//     history: { event_id: { date: "", title: "", author: "", detail: "" } },
+//     comments: { comment_id: { author: "", date: "", comment: "" } },
+//     attachments: { attachment_id: { description: "", object: "" } },
 //   },
 // };

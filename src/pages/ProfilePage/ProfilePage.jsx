@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeInfo from "../../components/Blocks/Block_TypeInfo";
-import { default as Button } from "../../components/Buttons/Button_MainStyle";
+import ButtonBasic from "../../components/Buttons/Button_Basic";
 import Input from "../../components/Input/Input_Search";
 
 const Container = styled.div`
@@ -79,7 +79,7 @@ const ProfilePage = () => {
           {/* Input */}
           <Input style={InputStyle} value={search} setValue={setSearch} />
           {/* Button */}
-          <Button
+          <ButtonBasic
             buttonStyle={ButtonStyle}
             text={"SEARCH"}
             handleSubmit={handleSubmit}

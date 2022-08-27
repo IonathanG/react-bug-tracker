@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Divider_Horizontal as Divider } from "../Dividers/Dividers";
-import { default as SubmitButton } from "../Buttons/Button_MainStyle";
+import ButtonBasic from "../Buttons/Button_Basic";
 import SelectUser from "../Select/SelectUser";
 import SelectRole from "../Select/SelectRole";
 
@@ -39,7 +39,7 @@ const FormRoleAssign = () => {
       <SelectRole />
 
       {/* ----- SUBMIT ----- */}
-      <SubmitButton
+      <ButtonBasic
         buttonStyle={ButtonStyle}
         text={"Submit"}
         handleSubmit={handleSubmit}

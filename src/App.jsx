@@ -20,6 +20,7 @@ import Missing from "./pages/Missing/Missing";
 
 const AppContainer = styled.div`
   background-color: ${({ theme }) => theme.main_Background};
+  background-color: #a98e8e !important;
 `;
 
 function App() {

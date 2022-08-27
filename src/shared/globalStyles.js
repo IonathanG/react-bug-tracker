@@ -3,9 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyles = createGlobalStyle`
 html {
   box-sizing: border-box;
-  font-size: 16px;
   scroll-behavior: smooth;
-  color: ${({ theme }) => theme.main_Color_2};
 }
 
 *,
@@ -15,10 +13,10 @@ html {
 }
 
 body {
-  background-color: ${({ theme }) => theme.main_Background};
-  //background-color: beige;
-  font-family: 'Inter', 'sans-serif';
-  min-height: 100vh;
+  min-height: 100vh;  
+  color: ${({ theme }) => theme.main_Color_2};
+  font-family: 'Ubuntu', 'sans-serif';
+  font-size: 16px;
 }
 
 body,
@@ -32,13 +30,13 @@ ul {
 }
 
 h1{
-  margin-bottom: 45px;
+  //margin-bottom: 45px;
   font-size: 22px;
   letter-spacing: 0.4px;
 }
 
 h2{
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
   font-size: 18px;
   letter-spacing: 0.4px;
 }

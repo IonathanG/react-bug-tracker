@@ -1,6 +1,6 @@
 import React from "react";
 import { SectionContent } from "../../shared/Section";
-import { default as CreateProjectButton } from "../../components/Buttons/Button_MainStyle";
+import ButtonBasic from "../../components/Buttons/Button_Basic";
 import { ProjectList as Data_ProjectList } from "../../data/Data_ProjectList";
 import ProjectsList from "./_ProjectsList";
 
@@ -20,7 +20,7 @@ const ProjectsPage = () => {
     <SectionContent>
       <h1>My Projects</h1>
 
-      <CreateProjectButton
+      <ButtonBasic
         buttonStyle={ButtonStyle}
         text={"Create new Project"}
         handleSubmit={handleSubmit}
