@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeData from "../../components/Blocks/Block_TypeData";
-import Input from "../../components/Input/Input_Search";
+import Input from "../../components/Input/InputSearch";
 import ButtonBasic from "../../components/Buttons/Button_Basic";
 
 const Container = styled.div`

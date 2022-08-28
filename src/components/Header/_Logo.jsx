@@ -9,7 +9,7 @@ const LogoImg = styled.img`
 const Logo = () => {
   return (
     <Link to={"/"}>
-      <LogoImg src="/icons/BugTrackerLogo.svg" alt="logo" />
+      <LogoImg src="/logo/BugTrackerLogo.svg" alt="logo" />
     </Link>
   );
 };

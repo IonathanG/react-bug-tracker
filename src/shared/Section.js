@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "./breakpoints";
 //import { device } from "./breakpoints";
 
 export const SectionPage = styled.section`
@@ -6,7 +7,7 @@ export const SectionPage = styled.section`
   width: 100%;
 
   background-color: ${({ theme }) => theme.background_MainSection};
-  color: ${({ theme }) => theme.main_Font_Color};
+  color: ${({ theme }) => theme.color_Font_Main};
   font-family: "Ubuntu", "sans-serif";
   transition: 0.3s ease;
 `;
@@ -24,6 +25,13 @@ export const SectionMain = styled.section`
 `;
 
 export const SectionContent = styled.section`
-  padding: 15px 20px 20px 20px;
+  // background-color: aqua;
+  // margin for side Navbar
+  margin-left: 260px;
+  padding: 10px;
   transition: 0.3s ease;
+
+  @media ${device.navbarBreakpoint} {
+    margin-left: 0px;
+  }
 `;

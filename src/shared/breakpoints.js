@@ -1,5 +1,5 @@
 // Width References
-const size = {
+export const size = {
   smallScreen: "480px",
   phone: "860px",
   tablet: "990px", //header height shrinks

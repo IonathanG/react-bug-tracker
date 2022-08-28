@@ -14,9 +14,7 @@ html {
 
 body {
   min-height: 100vh;  
-  color: ${({ theme }) => theme.main_Color_2};
   font-family: 'Ubuntu', 'sans-serif';
-  font-size: 16px;
 }
 
 body,
@@ -30,15 +28,13 @@ ul {
 }
 
 h1{
-  //margin-bottom: 45px;
   font-size: 22px;
-  letter-spacing: 0.4px;
+  //letter-spacing: 0.2px;
 }
 
 h2{
-  //margin-bottom: 20px;
   font-size: 18px;
-  letter-spacing: 0.4px;
+  //letter-spacing: 0.2px;
 }
 
 ul {
@@ -50,7 +46,7 @@ a {
 }
 
 img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }
 `;

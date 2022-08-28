@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import BlockTypeInfo from "../../components/Blocks/Block_TypeInfo";
 import ButtonBasic from "../../components/Buttons/Button_Basic";
-import Input from "../../components/Input/Input_Search";
+import Input from "../../components/Input/InputSearch";
 
 const Container = styled.div`
   margin-top: 50px;
