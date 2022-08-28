@@ -23,12 +23,13 @@ export const lightTheme = {
   color_ButtonBasic: "rgb(255,255,255)", //new
 
   // Side Navbar
-  color_NavItem: "rgb(23, 25, 28)",
-  color_active_NavItem: "rgb(90,90,90)",
-  background_active_NavItem: "rgb(241,241,241)",
+  color_NavItem: "rgb(23, 25, 28)", //new
+  color_active_NavItem: "rgb(90,90,90)", //new
+  background_active_NavItem: "rgb(241,241,241)", //new
+  boxShadow_Navbar: "rgba(136, 136, 136, 0.165)", //new
 
   // Modal Divider
-  background_Modal: "rgb(222,226,230)",
+  background_Modal: "rgb(222,226,230)", //new
 
   // Main Section
   background_MainSection: "rgb(244,247,246)", //new
@@ -37,10 +38,6 @@ export const lightTheme = {
 
   // block
   block_Background: "rgba(255, 254, 255, 1)",
-
-  // arrow
-  arrow_Dropdown_style1: "rgb(217, 217, 217)",
-  arrow_Dropdown_style2: "rgb(143, 52, 254)",
 
   // scroll
   scrollbar_Color: "#8f54a0",
@@ -86,6 +83,7 @@ export const darkTheme = {
   color_NavItem: "rgb(23, 25, 28)",
   color_active_NavItem: "rgb(90,90,90)",
   background_active_NavItem: "rgb(241,241,241)",
+  boxShadow_Navbar: "rgba(136, 136, 136, 0.165)",
 
   // Modal Divider
   background_Modal: "rgb(222,226,230)",
@@ -97,10 +95,6 @@ export const darkTheme = {
 
   // block
   block_Background: "rgba(255, 254, 255, 0.17)",
-
-  // arrow
-  arrow_Dropdown_style1: "#000000",
-  arrow_Dropdown_style2: "rgb(143, 52, 254)",
 
   // scroll
   scrollbar_Color: "#8f54a0",

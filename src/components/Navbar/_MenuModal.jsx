@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
 import styled from "styled-components";
 import NavigationMenu from "./_NavigationMenu";
 import SwitchThemeIcon from "./_ThemeSwitchIcon";
 import SettingsSuggestSharpIcon from "@mui/icons-material/SettingsSuggestSharp";
-import { useTheme } from "../../context/ThemeContext";
 
-const SwitchModal = styled.div`
+const ModalHeader = styled.div`
   display: flex;
   margin: 15px 0px;
 `;
 
-const Title = styled.div`
+const Modal = styled.div`
   flex: 2;
-  cursor: pointer;
   padding: 5px 15px;
+  cursor: pointer;
 
   display: grid;
   place-items: center;
@@ -32,7 +32,7 @@ const Title = styled.div`
   }
 `;
 
-const ProjectsModal = styled(Title)`
+const ProjectsModal = styled(Modal)`
   flex: 1;
 
   border: 1px solid
@@ -48,7 +48,7 @@ const ProjectsModal = styled(Title)`
   }
 `;
 
-const SettingsModal = styled(Title)`
+const SettingsModal = styled(Modal)`
   flex: 1;
 
   border: 1px solid
@@ -77,32 +77,35 @@ const SwitchTheme = styled.div`
   font-weight: 500;
 `;
 
-const MenuModal = ({ setShowMenu }) => {
+const MenuModal = () => {
   const [showNavigation, setShowNavigation] = useState(true);
   const { theme, toggleTheme } = useTheme();
 
   return (
     <>
-      <SwitchModal>
-        {/* Modal Title => Projects/Settings */}
+      {/* Modal Header => Projects/Settings */}
+      <ModalHeader>
         <ProjectsModal
           showModal={showNavigation}
           onClick={() => setShowNavigation(true)}
         >
           Projects
         </ProjectsModal>
+
         <SettingsModal
           showModal={!showNavigation}
           onClick={() => setShowNavigation(false)}
         >
           <SettingsIcon />
         </SettingsModal>
-        <Title></Title>
-      </SwitchModal>
+
+        {/* Empty Modal to allow for the bottom-border lenght */}
+        <Modal></Modal>
+      </ModalHeader>
 
       {/* Switch to Navigation or Theme View */}
       {showNavigation ? (
-        <NavigationMenu setShowMenu={setShowMenu} />
+        <NavigationMenu />
       ) : (
         <SwitchTheme onClick={() => toggleTheme()}>
           <span>Choose Mode</span>

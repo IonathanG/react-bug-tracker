@@ -30,12 +30,14 @@ const Left = styled.div`
   display: flex;
   align-items: center;
   gap: 70px;
+  transition: 0.3s ease;
 `;
 
 const Right = styled.div`
   display: flex;
   align-items: center;
   gap: 25px;
+  transition: 0.3s ease;
 `;
 
 const Header = () => {

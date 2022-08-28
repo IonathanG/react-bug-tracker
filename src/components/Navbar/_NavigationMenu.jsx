@@ -2,12 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { SideNavMenu } from "../../data/Data_SideNavMenu";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { closeMenu } from "../../features/menuSlice";
 
-const NavigationMenu = ({ setShowMenu }) => {
+const NavigationMenu = () => {
+  const dispatch = useDispatch();
+
   return (
     <MenuContainer>
       {SideNavMenu.map((item) => (
-        <MenuItem key={item.id} onClick={() => setShowMenu(false)}>
+        <MenuItem key={item.id} onClick={() => dispatch(closeMenu())}>
           <NavContainer to={`${item.link}`}>
             <ItemIcon src={item.src} alt="menu-icon" />{" "}
             <ItemName>{item.name}</ItemName>
@@ -33,7 +37,6 @@ const MenuItem = styled.li`
 `;
 
 const NavContainer = styled(NavLink)`
-  //background-color: #f5f5dca7;
   display: flex;
   padding: 15px 20px;
   gap: 20px;
