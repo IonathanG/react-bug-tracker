@@ -27,7 +27,7 @@ export const SectionMain = styled.section`
 export const SectionContent = styled.section`
   // background-color: aqua;
   // margin for side Navbar
-  margin-left: 260px;
+  margin-left: 250px;
   padding: 10px;
   transition: 0.3s ease;
 

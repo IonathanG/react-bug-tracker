@@ -4,14 +4,14 @@ export const SideNavMenu = [
     id: 1,
     name: "Notification Inbox",
     src: "inbox",
-    link: "/",
+    link: "/unauthorized",
   },
   {
     id: 2,
     name: "Projects",
     src: "projects",
-    link: "/",
+    link: "/projects",
   },
-  { id: 3, name: "Tickets", src: "tickets", link: "/" },
+  { id: 3, name: "Tickets", src: "tickets", link: "/tickets" },
   { id: 4, name: "Admin", src: "admin", link: "/profile" },
 ];

@@ -35,7 +35,7 @@ const MenuItem = styled.li`
 const NavContainer = styled(NavLink)`
   //background-color: #f5f5dca7;
   display: flex;
-  padding: 20px;
+  padding: 15px 20px;
   gap: 20px;
 
   color: ${({ theme }) => theme.color_NavItem};
@@ -53,8 +53,8 @@ const NavContainer = styled(NavLink)`
 const ItemIcon = styled.img.attrs((props) => ({
   src: props.theme.SideNav_Icon[props.src],
 }))`
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   opacity: 0.8;
 `;
 

@@ -27,6 +27,9 @@ export const lightTheme = {
   color_active_NavItem: "rgb(90,90,90)",
   background_active_NavItem: "rgb(241,241,241)",
 
+  // Modal Divider
+  background_Modal: "rgb(222,226,230)",
+
   // Main Section
   background_MainSection: "rgb(244,247,246)", //new
   main_Background: "#F7F8FB",
@@ -80,7 +83,12 @@ export const darkTheme = {
   color_ButtonBasic: "rgb(255,255,255)", //new
 
   // Side Navbar
-  active_Link: "rgb(143, 52, 254)",
+  color_NavItem: "rgb(23, 25, 28)",
+  color_active_NavItem: "rgb(90,90,90)",
+  background_active_NavItem: "rgb(241,241,241)",
+
+  // Modal Divider
+  background_Modal: "rgb(222,226,230)",
 
   // Main Section
   background_MainSection: "rgb(244,247,246)", //new

@@ -4,7 +4,7 @@ import TagInfo from "../Tags/Tag_Info";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 
 const Header = styled.div`
-  background-color: #e3f5dcb4;
+  // background-color: #e3f5dcb4;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -25,7 +25,6 @@ const UserDetails = styled.div`
   gap: 1px;
 
   padding: 5px;
-  //background-color: #00ffff9e;
 `;
 
 const UserName = styled.div`

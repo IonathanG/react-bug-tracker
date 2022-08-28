@@ -1,33 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useTheme } from "../../context/ThemeContext";
-import { device } from "../../shared/breakpoints";
-import NavbarHeader from "./_NavbarHeader";
 import NavigationMenu from "./_NavigationMenu";
 import SwitchThemeIcon from "./_ThemeSwitchIcon";
 import SettingsSuggestSharpIcon from "@mui/icons-material/SettingsSuggestSharp";
-
-const NavbarContainer = styled.nav`
-  width: 250px;
-  height: 100%;
-
-  position: fixed;
-  top: 70px;
-  left: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  transition: 0.6s ease;
-  z-index: 10;
-
-  @media ${device.navbarBreakpoint} {
-    left: ${(props) => (props.showMenu ? "0" : "-500px")};
-  }
-`;
-
-const MenuModal = styled.div``;
+import { useTheme } from "../../context/ThemeContext";
 
 const SwitchModal = styled.div`
   display: flex;
@@ -101,47 +77,40 @@ const SwitchTheme = styled.div`
   font-weight: 500;
 `;
 
-const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false);
+const MenuModal = ({ setShowMenu }) => {
   const [showNavigation, setShowNavigation] = useState(true);
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <NavbarContainer showMenu={showMenu}>
-      {/* Navbar Header + User Options */}
-      <NavbarHeader />
+    <>
+      <SwitchModal>
+        {/* Modal Title => Projects/Settings */}
+        <ProjectsModal
+          showModal={showNavigation}
+          onClick={() => setShowNavigation(true)}
+        >
+          Projects
+        </ProjectsModal>
+        <SettingsModal
+          showModal={!showNavigation}
+          onClick={() => setShowNavigation(false)}
+        >
+          <SettingsIcon />
+        </SettingsModal>
+        <Title></Title>
+      </SwitchModal>
 
-      {/* Menu Model => Switch view between Navigation and Theme Settings */}
-      <MenuModal>
-        <SwitchModal>
-          {/* Modal Title => Projects/Settings */}
-          <ProjectsModal
-            showModal={showNavigation}
-            onClick={() => setShowNavigation(true)}
-          >
-            Projects
-          </ProjectsModal>
-          <SettingsModal
-            showModal={!showNavigation}
-            onClick={() => setShowNavigation(false)}
-          >
-            <SettingsIcon />
-          </SettingsModal>
-          <Title></Title>
-        </SwitchModal>
-
-        {/* Switch to Navigation or Theme View */}
-        {showNavigation ? (
-          <NavigationMenu setShowMenu={setShowMenu} />
-        ) : (
-          <SwitchTheme onClick={() => toggleTheme()}>
-            <span>Choose Mode</span>
-            <SwitchThemeIcon theme={theme} />
-          </SwitchTheme>
-        )}
-      </MenuModal>
-    </NavbarContainer>
+      {/* Switch to Navigation or Theme View */}
+      {showNavigation ? (
+        <NavigationMenu setShowMenu={setShowMenu} />
+      ) : (
+        <SwitchTheme onClick={() => toggleTheme()}>
+          <span>Choose Mode</span>
+          <SwitchThemeIcon theme={theme} />
+        </SwitchTheme>
+      )}
+    </>
   );
 };
 
-export default Navbar;
+export default MenuModal;

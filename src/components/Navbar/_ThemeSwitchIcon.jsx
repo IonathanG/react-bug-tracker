@@ -51,11 +51,11 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const SwitchThemeIcon = ({ checked }) => {
+const SwitchThemeIcon = ({ theme }) => {
   return (
     <FormGroup>
       <FormControlLabel
-        checked={checked}
+        checked={theme === "dark" ? true : false}
         control={<MaterialUISwitch sx={{ m: 1 }} />}
         label=""
       />
