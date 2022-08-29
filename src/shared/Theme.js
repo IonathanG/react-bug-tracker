@@ -26,6 +26,7 @@ export const lightTheme = {
   color_NavItem: "rgb(23, 25, 28)", //new
   color_active_NavItem: "rgb(90,90,90)", //new
   background_active_NavItem: "rgb(241,241,241)", //new
+  color_SubNavItem: "rgb(119,119,119)", //new
   boxShadow_Navbar: "rgba(136, 136, 136, 0.165)", //new
 
   // Modal Divider
@@ -71,6 +72,7 @@ export const darkTheme = {
   color_NavItem: "rgb(23, 25, 28)", //new
   color_active_NavItem: "rgb(90,90,90)", //new
   background_active_NavItem: "rgb(241,241,241)", //new
+  color_SubNavItem: "rgb(119,119,119)", //new
   boxShadow_Navbar: "rgba(136, 136, 136, 0.165)", //new
 
   // Modal Divider

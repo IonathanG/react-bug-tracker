@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const NavbarContainer = styled.nav`
   width: 250px;
-  height: 100%;
+  height: calc(100% - 70px);
 
   position: fixed;
   top: 70px;
@@ -21,10 +21,21 @@ const NavbarContainer = styled.nav`
   background-color: ${({ theme }) => theme.background_MainSection};
   z-index: 10;
 
+  // Navbar automatically slides out on Breakpoint
   @media ${device.navbarBreakpoint} {
     left: ${(props) => (props.showMenu ? "0" : "-500px")};
     box-shadow: 10px 0 5px -5px ${({ theme }) => theme.boxShadow_Navbar};
   }
+
+  /* ----- Hiding Scrollbar on Side Navbar ----- */
+  overflow-y: scroll;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `;
 
 const Navbar = () => {

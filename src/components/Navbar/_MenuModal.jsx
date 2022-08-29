@@ -7,7 +7,7 @@ import SettingsSuggestSharpIcon from "@mui/icons-material/SettingsSuggestSharp";
 
 const ModalHeader = styled.div`
   display: flex;
-  margin: 15px 0px;
+  margin: 0px;
 `;
 
 const Modal = styled.div`
