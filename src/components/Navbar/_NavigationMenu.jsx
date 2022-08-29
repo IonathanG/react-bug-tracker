@@ -1,28 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { SideNavMenu } from "../../data/Data_SideNavMenu";
+import { MenuNav } from "../../data/Data_MenuNav";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../features/menuSlice";
-
-const NavigationMenu = () => {
-  const dispatch = useDispatch();
-
-  return (
-    <MenuContainer>
-      {SideNavMenu.map((item) => (
-        <MenuItem key={item.id} onClick={() => dispatch(closeMenu())}>
-          <NavContainer to={`${item.link}`}>
-            <ItemIcon src={item.src} alt="menu-icon" />{" "}
-            <ItemName>{item.name}</ItemName>
-          </NavContainer>
-        </MenuItem>
-      ))}
-    </MenuContainer>
-  );
-};
-
-export default NavigationMenu;
 
 const MenuContainer = styled.ul`
   width: 100%;
@@ -38,6 +19,7 @@ const MenuItem = styled.li`
 
 const NavContainer = styled(NavLink)`
   display: flex;
+  align-items: center;
   padding: 15px 20px;
   gap: 20px;
 
@@ -53,14 +35,36 @@ const NavContainer = styled(NavLink)`
   }
 `;
 
-const ItemIcon = styled.img.attrs((props) => ({
-  src: props.theme.SideNav_Icon[props.src],
-}))`
+const Icon = styled.svg`
   width: 16px;
   height: 16px;
+
+  display: grid;
+  place-items: center;
+
   opacity: 0.8;
+  color: ${({ theme }) => theme.color_Cyan};
 `;
 
 const ItemName = styled.span`
   font-size: 15px;
 `;
+
+const NavigationMenu = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <MenuContainer>
+      {MenuNav.map((item) => (
+        <MenuItem key={item.id} onClick={() => dispatch(closeMenu())}>
+          <NavContainer to={`${item.link}`}>
+            <Icon as={item.src} />
+            <ItemName>{item.name}</ItemName>
+          </NavContainer>
+        </MenuItem>
+      ))}
+    </MenuContainer>
+  );
+};
+
+export default NavigationMenu;
