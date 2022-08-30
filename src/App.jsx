@@ -4,23 +4,41 @@ import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "./context/ThemeContext";
 import { lightTheme, darkTheme } from "./shared/Theme";
 import { GlobalStyles } from "./shared/globalStyles";
+
 import Layout from "./layout/Layout";
+
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+
+import HomeDashboard from "./pages/Home_Dashboard/HomeDashboard";
+
+import Inbox from "./pages/Inbox/Inbox";
+
+import Projects from "./pages/Projects/Projects";
+import AllProjects from "./pages/Projects/_AllProjects";
+import MyProjects from "./pages/Projects/_MyProjects";
+import AddProject from "./pages/Projects/_AddProject";
+import ManageProjects from "./pages/Projects/_ManageProjects";
+import ArchivedProjects from "./pages/Projects/_ArchivedProjects";
+import ProjectDetails from "./pages/Projects/_ProjectDetails";
+
+import Tickets from "./pages/Tickets/Tickets";
+import AllTickets from "./pages/Tickets/_AllTickets";
+import MyTickets from "./pages/Tickets/_MyTickets";
+import AddTicket from "./pages/Tickets/_AddTicket";
+import ManageTickets from "./pages/Tickets/_ManageTickets";
+import UnassignedTickets from "./pages/Tickets/_UnassignedTickets";
+import TicketDetails from "./pages/Tickets/_TicketDetails";
+
+import Admin from "./pages/Admin/Admin";
+import Invite from "./pages/Admin/_Invite";
+import ManageRoles from "./pages/Admin/_ManageRoles";
+
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
-import Home from "./pages/Home/Home";
-import ManageRoles from "./pages/ManageRoles/ManageRoles";
-import ManageProjects from "./pages/ManageProjects/ManageProjects";
-import ProjectsPage from "./pages/ProjectsPage/ProjectsPage";
-import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
-import TicketsPage from "./pages/TicketsPage/TicketsPage";
-import TicketDetails from "./pages/TicketDetails/TicketDetails";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
+
 import Missing from "./pages/Missing/Missing";
 
 const AppContainer = styled.div`
   background-color: ${({ theme }) => theme.main_Background};
-  background-color: #a98e8e !important;
 `;
 
 function App() {
@@ -39,27 +57,63 @@ function App() {
         <AppContainer>
           <Routes>
             <Route path="/" element={<Layout />}>
-              {/* public routes */}
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="unauthorized" element={<Unauthorized />} />
+              {/* ----- PUBLIC ROUTES ----- */}
+              <Route path="Login" element={<Login />} />
+              <Route path="Unauthorized" element={<Unauthorized />} />
+              {/* ----- END PUBLIC ROUTES ----- */}
 
-              {/* protected routes */}
-              <Route path="/" element={<Home />} />
+              {/* ----- PROTECTED ROUTES ----- */}
+              <Route path="/" element={<HomeDashboard />} />
 
-              <Route path="/manage-role" element={<ManageRoles />} />
+              <Route path="/Inbox" element={<Inbox />} />
 
-              <Route path="/manage-project" element={<ManageProjects />} />
+              {/* Projects */}
+              <Route path="/Projects" element={<Projects />} />
+              <Route path="/Projects/AllProjects" element={<AllProjects />} />
+              <Route path="/Projects/MyProjects" element={<MyProjects />} />
+              <Route path="/Projects/AddProject" element={<AddProject />} />
+              <Route
+                path="/Projects/ManageProjects"
+                element={<ManageProjects />}
+              />
+              <Route
+                path="/Projects/ArchivedProjects"
+                element={<ArchivedProjects />}
+              />
+              <Route
+                path="/Projects/ProjectDetails"
+                element={<ProjectDetails />}
+              />
 
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/project/:id" element={<ProjectDetails />} />
+              {/* Tickets */}
+              <Route path="/Tickets" element={<Tickets />} />
+              <Route path="/Tickets/AllTickets" element={<AllTickets />} />
+              <Route path="/Tickets/MyTickets" element={<MyTickets />} />
+              <Route path="/Tickets/AddTicket" element={<AddTicket />} />
+              <Route
+                path="/Tickets/ManageTickets"
+                element={<ManageTickets />}
+              />
+              <Route
+                path="/Tickets/UnassignedTickets"
+                element={<UnassignedTickets />}
+              />
+              <Route
+                path="/Tickets/TicketDetails"
+                element={<TicketDetails />}
+              />
 
-              <Route path="/tickets" element={<TicketsPage />} />
-              <Route path="/ticket/:id" element={<TicketDetails />} />
+              {/* Admin */}
+              <Route path="/Admin" element={<Admin />} />
+              <Route path="/Admin/Invite" element={<Invite />} />
+              <Route path="/Admin/ManageRoles" element={<ManageRoles />} />
 
-              <Route path="/profile" element={<ProfilePage />} />
+              {/* ----- END PROTECTED ROUTES ----- */}
 
-              {/* catch all */}
+              {/* <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/project/:id" element={<ProjectDetails />} /> */}
+
+              {/* Catch All */}
               <Route path="*" element={<Missing />} />
             </Route>
           </Routes>

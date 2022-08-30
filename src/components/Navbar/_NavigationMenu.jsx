@@ -14,18 +14,21 @@ const MenuContainer = styled.ul`
 `;
 
 const MenuItem = styled.li`
-  width: 100%;
   cursor: pointer;
 `;
 
-const NavContainer = styled(NavLink)`
+const LinkContainer = styled(NavLink)`
   display: flex;
   align-items: center;
   padding: 12px 20px;
   gap: 20px;
 
+  height: 49px;
   color: ${({ theme }) => theme.color_NavItem};
   transition: 0.4s ease;
+
+  border-left: ${(props) =>
+    props.selected && `5px solid ${props.theme.color_Cyan}`};
 
   &:hover {
     background-color: ${({ theme }) => theme.background_active_NavItem};
@@ -33,6 +36,7 @@ const NavContainer = styled(NavLink)`
 
   &.active {
     background-color: ${({ theme }) => theme.background_active_NavItem};
+    border-left: 5px solid ${({ theme }) => theme.color_Cyan};
   }
 `;
 
@@ -47,30 +51,36 @@ const Icon = styled.svg`
   color: ${({ theme }) => theme.color_Cyan};
 `;
 
-const ItemName = styled.span`
+const Name = styled.span`
   font-size: 15px;
+`;
+
+const ExpandContainer = styled.div`
+  height: ${(props) => (props.selected ? "100%" : "49px")};
+  transition: 0.7s ease;
 `;
 
 const ExpandIcon = styled(NavigateBeforeIcon)`
   margin-left: auto;
   opacity: 0.3;
-  transition: all 1s ease;
 
   transform: ${(props) =>
     props.selected ? "rotate(-90deg) scale(0.8)" : "rotate(0deg) scale(0.8)"};
 `;
 
-const SubNavContainer = styled.div`
+const SubLinkContainer = styled.div`
   overflow: hidden;
-  transition: 0.3s ease-out;
   height: ${(props) => (props.selected ? "100%" : "0")};
+  // transition: 0.5s ease;
+  // position: ${(props) => (props.selected ? "relative" : "absolute")};
+  // opacity: ${(props) => (props.selected ? "1" : "0")};
 
   a {
     padding: 12px 20px;
   }
 `;
 
-const SubItemName = styled.span`
+const SubName = styled.span`
   font-size: 14px;
   letter-spacing: 0.2px;
   color: ${({ theme }) => theme.color_SubNavItem};
@@ -81,10 +91,12 @@ const NavigationMenu = () => {
   const [subNavActive, setSubNavActive] = useState(null);
 
   const handleClick = (id) => {
+    // Close Navbar on Link 0 and 1
     if (id === 0 || id === 1) {
       dispatch(closeMenu());
     }
 
+    // Switch => Only one sub menu opens at a time
     if (subNavActive === id) {
       setSubNavActive(null);
     } else {
@@ -98,37 +110,38 @@ const NavigationMenu = () => {
         <MenuItem key={item.id} onClick={() => handleClick(item.id)}>
           {/* Simple Navigation Links */}
           {item.link && (
-            <NavContainer to={`${item.link}`}>
+            <LinkContainer to={`${item.link}`}>
               <Icon as={item.src} />
-              <ItemName>{item.name}</ItemName>
-            </NavContainer>
+              <Name>{item.name}</Name>
+            </LinkContainer>
           )}
 
           {/* Dropdown Navigation */}
           {item.sub_menu && (
-            <>
-              <NavContainer as="div">
+            <ExpandContainer selected={subNavActive === item.id}>
+              <LinkContainer as="div" selected={subNavActive === item.id}>
                 <Icon as={item.src} />
-                <ItemName>{item.name}</ItemName>
+                <Name>{item.name}</Name>
                 <ExpandIcon selected={subNavActive === item.id} />
-              </NavContainer>
+              </LinkContainer>
 
               {/* Sub Navigation Links */}
-              <SubNavContainer selected={subNavActive === item.id}>
+              <SubLinkContainer selected={subNavActive === item.id}>
                 {item.sub_menu.map((subItem) => (
-                  <div key={subItem.id}>
-                    <NavContainer to={`${subItem.link}`}>
+                  // Close Menu on SubLink Click
+                  <div key={subItem.id} onClick={() => dispatch(closeMenu())}>
+                    <LinkContainer to={`${subItem.link}`}>
                       <Icon
                         as={subItem.src}
                         color="disabled"
                         fontSize="Small"
                       />
-                      <SubItemName>{subItem.name}</SubItemName>
-                    </NavContainer>
+                      <SubName>{subItem.name}</SubName>
+                    </LinkContainer>
                   </div>
                 ))}
-              </SubNavContainer>
-            </>
+              </SubLinkContainer>
+            </ExpandContainer>
           )}
         </MenuItem>
       ))}

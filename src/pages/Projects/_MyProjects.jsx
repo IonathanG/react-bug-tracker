@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const Container = styled.div``;
 
-const Login = () => {
-  return <Container>Login Page</Container>;
+const MyProjects = () => {
+  return <Container>My Projects</Container>;
 };
 
-export default Login;
+export default MyProjects;

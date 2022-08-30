@@ -4,12 +4,21 @@ import styled from "styled-components";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const Container = styled.div`
-  margin-top: 30px;
+  margin: 20px;
+
+  h1 {
+    padding: 20px 0px;
+  }
+
+  h2 {
+    padding: 5px 0px;
+  }
 
   a {
     display: flex;
     align-items: center;
-    color: ${({ theme }) => theme.scrollbar_Color};
+    padding: 20px 0px;
+    color: ${({ theme }) => theme.color_Font_Light};
   }
 `;
 
