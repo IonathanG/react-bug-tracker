@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { MenuNav } from "../../data/Data_MenuNav";
+import { MenuNav } from "../../data/MenuNav";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../features/menuSlice";

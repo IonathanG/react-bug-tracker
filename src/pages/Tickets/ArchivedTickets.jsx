@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 const Container = styled.div``;
 
-const ManageTickets = () => {
-  return <Container>Manage Tickets</Container>;
+const ArchivedTickets = () => {
+  return <Container>Archived Tickets</Container>;
 };
 
-export default ManageTickets;
+export default ArchivedTickets;
