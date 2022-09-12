@@ -25,10 +25,11 @@ export const SectionMain = styled.section`
 `;
 
 export const SectionContent = styled.section`
-  // background-color: aqua;
+  //background-color: beige;
+  min-height: 100vh;
   // margin for side Navbar
   margin-left: 250px;
-  padding: 10px;
+  padding: 15px;
   transition: 0.3s ease;
 
   @media ${device.navbarBreakpoint} {

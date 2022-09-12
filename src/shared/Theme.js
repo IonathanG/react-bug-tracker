@@ -34,6 +34,10 @@ export const lightTheme = {
 
   // Main Section
   background_MainSection: "rgb(244,247,246)",
+
+  // Tables
+  background_Table: "rgb(255,255,255)",
+  boxShadow_Table: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
 };
 
 export const darkTheme = {
@@ -72,4 +76,8 @@ export const darkTheme = {
 
   // Main Section
   background_MainSection: "rgb(244,247,246)",
+
+  // Tables
+  background_Table: "rgb(255,255,255)",
+  boxShadow_Table: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
 };
