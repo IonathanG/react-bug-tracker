@@ -70,6 +70,72 @@ const initialState = {
         },
       },
     },
+    project_02: {
+      project_name: "Project One",
+      description: "This is project one",
+      start_date: "27/08/22",
+      end_date: "01/10/22",
+      priority: "Normal",
+      progress: 0,
+      status: "Open",
+      attachment: {},
+      tickets: {
+        ticket_01: {
+          project_id: "project_01",
+          ticket_name: "Ticket One",
+          created_by: "Tromso Two",
+          developer_assigned: "Tromso Three",
+          description: "This is ticket one",
+          type: "Bug/Errors",
+          status: "Open",
+          priority: "High",
+          created_date: "27/08/22",
+          history: {
+            event_01: {
+              date: "27/08/22",
+              title: "Ticket Created",
+              author: "Tromso Two",
+              detail: "Ticket was submitted by Tromso Two",
+            },
+          },
+          comments: {
+            comment_01: {
+              author: "Tromso Two",
+              date: "27/08/22",
+              comment: "Good luck on this first ticket",
+            },
+          },
+          attachments: {},
+        },
+        ticket_02: {
+          project_id: "project_01",
+          ticket_name: "Ticket Two",
+          created_by: "Tromso One",
+          developer_assigned: "Tromso Three",
+          description: "This is ticket two",
+          type: "Design Flaw",
+          status: "Open",
+          priority: "Low",
+          created_date: "27/08/22",
+          history: {
+            event_01: {
+              date: "27/08/22",
+              title: "Ticket Created",
+              author: "Tromso One",
+              detail: "Ticket was submitted by Tromso One",
+            },
+          },
+          comments: {
+            comment_01: {
+              author: "Tromso One",
+              date: "27/08/22",
+              comment: "Good luck on this second ticket",
+            },
+          },
+          attachments: {},
+        },
+      },
+    },
   },
 };
 

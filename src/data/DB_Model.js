@@ -14,9 +14,7 @@ export const Users = {
 export const Projects_Users = {
   project_id: {
     project_manager_id: "",
-    team: {
-      team_id: "",
-    },
+    project_team_id: ["user_02", "user_03"],
   },
 };
 
