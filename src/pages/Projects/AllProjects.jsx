@@ -11,6 +11,7 @@ const Header = styled.header`
 `;
 
 const AllProjects = () => {
+  // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
   const projectsUsers = useSelector(
@@ -19,12 +20,14 @@ const AllProjects = () => {
 
   const [tableData, setTableData] = useState([]);
 
+  // Pushing Specific Formatted Data from all State into an Array
+  // Array to be displayed into the BasicTable component
   useEffect(() => {
     const projectsArray = Object.values(projects);
-    const dataArray = [];
+    const formattedData = [];
 
     projectsArray.map((project) =>
-      dataArray.push({
+      formattedData.push({
         project_id: project.project_id,
         project_name: project.project_name,
         end_date: project.end_date,
@@ -33,14 +36,14 @@ const AllProjects = () => {
         project_manager:
           users[projectsUsers[project.project_id].project_manager_id].user_name,
         team: projectsUsers[project.project_id].project_team.map(
-          (user) => users[user].user_name + " "
+          (user) => users[user].user_name
         ),
         links: "link link link",
       })
     );
 
-    console.log(dataArray);
-    setTableData(dataArray);
+    console.log(formattedData);
+    setTableData(formattedData);
   }, [users, projects, projectsUsers]);
 
   return (
