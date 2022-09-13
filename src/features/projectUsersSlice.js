@@ -6,11 +6,11 @@ const initialState = {
   ProjectsUsers: {
     project_01: {
       project_manager_id: "user_01",
-      project_team_id: ["user_02", "user_03"],
+      project_team: ["user_02", "user_03"],
     },
     project_02: {
       project_manager_id: "user_01",
-      project_team_id: ["user_02", "user_03"],
+      project_team: ["user_02", "user_03"],
     },
   },
 };

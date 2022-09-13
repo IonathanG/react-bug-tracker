@@ -44,9 +44,9 @@ const TableRow = styled.tr`
   //color: blue;
 `;
 
-const BasicTable = ({ COLUMNS, MOCK_DATA }) => {
+const BasicTable = ({ COLUMNS, DATA }) => {
   const columns = useMemo(() => COLUMNS, [COLUMNS]);
-  const data = useMemo(() => MOCK_DATA, [MOCK_DATA]);
+  const data = useMemo(() => DATA, [DATA]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({

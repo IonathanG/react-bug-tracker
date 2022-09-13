@@ -5,6 +5,7 @@ const initialState = {
   // isLoading: false,
   Projects: {
     project_01: {
+      project_id: "project_01",
       project_name: "Project One",
       description: "This is project one",
       start_date: "27/08/22",
@@ -71,6 +72,7 @@ const initialState = {
       },
     },
     project_02: {
+      project_id: "project_02",
       project_name: "Project One",
       description: "This is project one",
       start_date: "27/08/22",

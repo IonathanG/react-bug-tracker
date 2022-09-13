@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import BasicTable from "../../components/Tables/BasicTable";
 import { AllProjects_Columns } from "../../data/TableColumns";
-import MOCK_DATA from "../../data/MOCK_DATA.json";
 
 const Container = styled.div``;
 
@@ -20,26 +19,34 @@ const AllProjects = () => {
 
   const [tableData, setTableData] = useState([]);
 
-  const formatTableData = () => {
-    console.log("Table Data Formatted");
-  };
-
   useEffect(() => {
-    const usersArray = Object.values(users);
     const projectsArray = Object.values(projects);
-    const projectsUsersArray = Object.values(projectsUsers);
+    const dataArray = [];
 
-    console.log(usersArray);
-    console.log(projectsArray);
-    console.log(projectsUsersArray);
+    projectsArray.map((project) =>
+      dataArray.push({
+        project_id: project.project_id,
+        project_name: project.project_name,
+        end_date: project.end_date,
+        progress: project.progress,
+        status: project.status,
+        project_manager:
+          users[projectsUsers[project.project_id].project_manager_id].user_name,
+        team: projectsUsers[project.project_id].project_team.map(
+          (user) => users[user].user_name + " "
+        ),
+        links: "link link link",
+      })
+    );
 
-    formatTableData();
+    console.log(dataArray);
+    setTableData(dataArray);
   }, [users, projects, projectsUsers]);
 
   return (
     <Container>
       <Header>All Projects</Header>
-      <BasicTable COLUMNS={AllProjects_Columns} MOCK_DATA={MOCK_DATA} />
+      <BasicTable COLUMNS={AllProjects_Columns} DATA={tableData} />
     </Container>
   );
 };
