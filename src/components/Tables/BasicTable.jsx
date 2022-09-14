@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
-import { usePagination, useTable } from "react-table";
+import { useTable, useGlobalFilter, usePagination } from "react-table";
 import styled from "styled-components";
+import GlobalFilter from "./_GlobalFilter";
 
 const TableContainer = styled.div`
   width: 100%;
@@ -45,6 +46,7 @@ const TableRow = styled.tr``;
 const TableTools = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 10px 0px 15px 0px;
 `;
 
@@ -62,7 +64,8 @@ const SelectContainer = styled.div`
 const Pagination = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 15px 0px 10px 0px;
+  align-items: center;
+  margin: 20px 0px 0px 0px;
 `;
 
 const ChangePage = styled.span`
@@ -74,19 +77,12 @@ const ChangePage = styled.span`
     padding: 8px 12px;
   }
 
-  button {
-    border: 1px solid ${({ theme }) => theme.border_Input};
-    background-color: ${({ theme }) => theme.color_ButtonBasic};
-  }
-
   button:nth-child(1) {
-    cursor: ${(props) => (props.disabled ? "default" : "pointer")};
     border-right: none;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }
   button:nth-child(3) {
-    cursor: ${(props) => (props.disabled ? "default" : "pointer")};
     border-left: none;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
@@ -99,6 +95,13 @@ const ChangePage = styled.span`
   }
 `;
 
+const Button = styled.button`
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  border: 1px solid ${({ theme }) => theme.border_Input};
+  background-color: ${({ theme }) => theme.color_ButtonBasic};
+  color: ${(props) => !props.disabled && props.theme.color_Font_Main};
+`;
+
 const BasicTable = ({ COLUMNS, DATA }) => {
   const columns = useMemo(() => COLUMNS, [COLUMNS]);
   const data = useMemo(() => DATA, [DATA]);
@@ -107,7 +110,6 @@ const BasicTable = ({ COLUMNS, DATA }) => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    //rows,
     page,
     nextPage,
     previousPage,
@@ -115,16 +117,18 @@ const BasicTable = ({ COLUMNS, DATA }) => {
     canPreviousPage,
     setPageSize,
     state,
+    setGlobalFilter,
     prepareRow,
   } = useTable(
     {
       columns,
       data,
     },
+    useGlobalFilter,
     usePagination
   );
 
-  const { pageIndex, pageSize } = state;
+  const { pageIndex, pageSize, globalFilter } = state;
 
   return (
     <TableContainer>
@@ -144,10 +148,10 @@ const BasicTable = ({ COLUMNS, DATA }) => {
           </select>{" "}
           entries
         </SelectContainer>
-        <p>Input Here</p>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       </TableTools>
 
-      {/* Table Data */}
+      {/* Table Data => Head + Data */}
       <Table {...getTableProps()}>
         <TableHead>
           {headerGroups.map((headerGroup) => (
@@ -183,13 +187,13 @@ const BasicTable = ({ COLUMNS, DATA }) => {
         </span>
 
         <ChangePage>
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
             Previous
-          </button>
+          </Button>
           <span>{pageIndex + 1}</span>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
+          <Button onClick={() => nextPage()} disabled={!canNextPage}>
             Next
-          </button>
+          </Button>
         </ChangePage>
       </Pagination>
     </TableContainer>
