@@ -12,7 +12,7 @@ const Container = styled.span`
   gap: 5px;
 `;
 
-export const GlobalFilter = ({ filter, setFilter }) => {
+export const SearchFilter = ({ filter, setFilter }) => {
   return (
     <Container>
       Search:{" "}
@@ -25,4 +25,4 @@ export const GlobalFilter = ({ filter, setFilter }) => {
   );
 };
 
-export default GlobalFilter;
+export default SearchFilter;
