@@ -19,6 +19,24 @@ const TableContainer = styled.div`
   font-size: 14px;
 `;
 
+const TableTools = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px 15px 0px;
+`;
+
+const SelectContainer = styled.div`
+  select {
+    border: 1px solid ${({ theme }) => theme.border_Input};
+    padding: 8px 12px;
+    border-radius: 4px;
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -49,27 +67,23 @@ const TableBody = styled.tbody`
 
 const TableHeadRow = styled.tr``;
 
+const ArrowsContainer = styled.span`
+  font-size: 13px;
+  margin: 0px 15px;
+`;
+
+const Arrow = styled.span`
+  color: ${(props) =>
+    props.isSorted
+      ? props.isSortedDesc
+        ? props.theme.color_Font_Main
+        : props.theme.color_Font_Arrow
+      : props.theme.color_Font_Arrow};
+`;
+
 const TableBodyRow = styled.tr`
   &:hover {
-    background-color: ${({ theme }) => theme.background_MainSection};
-  }
-`;
-
-const TableTools = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 0px 15px 0px;
-`;
-
-const SelectContainer = styled.div`
-  select {
-    border: 1px solid ${({ theme }) => theme.border_Input};
-    padding: 8px 12px;
-    border-radius: 4px;
-    &:focus {
-      outline: none;
-    }
+    background-color: ${({ theme }) => theme.hover_Table};
   }
 `;
 
@@ -101,15 +115,15 @@ const ChangePage = styled.span`
   }
 
   span {
-    background-color: ${({ theme }) => theme.background_ButtonBasic};
-    color: ${({ theme }) => theme.color_ButtonBasic};
-    border: 0.5px solid ${({ theme }) => theme.background_ButtonBasic};
+    border: 0.5px solid ${({ theme }) => theme.background_PageIndex};
+    background-color: ${({ theme }) => theme.background_PageIndex};
+    color: ${({ theme }) => theme.color_PageIndex};
   }
 `;
 
 const Button = styled.button`
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  border: 1px solid ${({ theme }) => theme.border_Input};
+  border: 1px solid ${({ theme }) => theme.border_Button};
   background-color: ${({ theme }) => theme.color_ButtonBasic};
   color: ${(props) => !props.disabled && props.theme.color_Font_Main};
 `;
@@ -187,8 +201,21 @@ const BasicTable = ({ COLUMNS, DATA }) => {
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
-                  <span>{column.isSortedDesc ? " 🔽" : " 🔼"}</span>
-                  {/* column.isSorted ? */}
+
+                  <ArrowsContainer>
+                    <Arrow
+                      isSorted={column.isSorted}
+                      isSortedDesc={!column.isSortedDesc}
+                    >
+                      ↑
+                    </Arrow>
+                    <Arrow
+                      isSorted={column.isSorted}
+                      isSortedDesc={column.isSortedDesc}
+                    >
+                      ↓
+                    </Arrow>
+                  </ArrowsContainer>
                 </th>
               ))}
             </TableHeadRow>

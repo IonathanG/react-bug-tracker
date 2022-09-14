@@ -21,6 +21,7 @@ export const lightTheme = {
   background_ButtonBasic: "rgb(0,123,254)",
   background_ButtonBasic_Hover: "rgb(1,105,217)",
   color_ButtonBasic: "rgb(255,255,255)",
+  border_Button: "rgb(212,212,217)",
 
   // Side Navbar
   color_NavItem: "rgb(23, 25, 28)",
@@ -39,6 +40,14 @@ export const lightTheme = {
   background_Table: "rgb(255,255,255)",
   boxShadow_Table: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
   borderColor_Table: "rgb(222,226,230)",
+  hover_Table: "rgb(244,247,246)",
+
+  // Tables Arrow
+  color_Font_Arrow: "rgb(200,200,200)",
+
+  //Tables Pagination
+  background_PageIndex: "rgb(0,123,254)",
+  color_PageIndex: "rgb(255,255,255)",
 };
 
 export const darkTheme = {
@@ -64,6 +73,7 @@ export const darkTheme = {
   background_ButtonBasic: "rgb(0,123,254)",
   background_ButtonBasic_Hover: "rgb(1,105,217)",
   color_ButtonBasic: "rgb(255,255,255)",
+  border_Button: "rgb(212,212,217)",
 
   // Side Navbar
   color_NavItem: "rgb(23, 25, 28)",
@@ -82,4 +92,12 @@ export const darkTheme = {
   background_Table: "rgb(255,255,255)",
   boxShadow_Table: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
   borderColor_Table: "rgb(222,226,230)",
+  hover_Table: "rgb(244,247,246)",
+
+  // Tables Arrow
+  color_Font_Arrow: "rgb(200,200,200)",
+
+  //Tables Pagination
+  background_PageIndex: "rgb(0,123,254)",
+  color_PageIndex: "rgb(255,255,255)",
 };
