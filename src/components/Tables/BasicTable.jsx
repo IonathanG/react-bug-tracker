@@ -1,5 +1,10 @@
 import React, { useMemo } from "react";
-import { useTable, useGlobalFilter, usePagination } from "react-table";
+import {
+  useTable,
+  useGlobalFilter,
+  useSortBy,
+  usePagination,
+} from "react-table";
 import styled from "styled-components";
 import GlobalFilter from "./_GlobalFilter";
 
@@ -21,11 +26,12 @@ const Table = styled.table`
 
   td,
   th {
-    padding: 15px 5px;
+    padding: 20px 5px;
   }
 
   th {
     border-bottom: 2px solid ${({ theme }) => theme.borderColor_Table};
+    cursor: pointer;
   }
 
   td {
@@ -41,7 +47,13 @@ const TableBody = styled.tbody`
   font-weight: 400;
 `;
 
-const TableRow = styled.tr``;
+const TableHeadRow = styled.tr``;
+
+const TableBodyRow = styled.tr`
+  &:hover {
+    background-color: ${({ theme }) => theme.background_MainSection};
+  }
+`;
 
 const TableTools = styled.div`
   display: flex;
@@ -106,6 +118,16 @@ const BasicTable = ({ COLUMNS, DATA }) => {
   const columns = useMemo(() => COLUMNS, [COLUMNS]);
   const data = useMemo(() => DATA, [DATA]);
 
+  const defaultSortBy = useMemo(
+    () => [
+      {
+        id: "project_name",
+        desc: false,
+      },
+    ],
+    []
+  );
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -123,8 +145,14 @@ const BasicTable = ({ COLUMNS, DATA }) => {
     {
       columns,
       data,
+      disableSortRemove: true,
+      defaultCanSort: true,
+      initialState: {
+        sortBy: defaultSortBy,
+      },
     },
     useGlobalFilter,
+    useSortBy,
     usePagination
   );
 
@@ -155,11 +183,15 @@ const BasicTable = ({ COLUMNS, DATA }) => {
       <Table {...getTableProps()}>
         <TableHead>
           {headerGroups.map((headerGroup) => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
+            <TableHeadRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}
+                  <span>{column.isSortedDesc ? " 🔽" : " 🔼"}</span>
+                  {/* column.isSorted ? */}
+                </th>
               ))}
-            </TableRow>
+            </TableHeadRow>
           ))}
         </TableHead>
 
@@ -167,13 +199,13 @@ const BasicTable = ({ COLUMNS, DATA }) => {
           {page.map((row) => {
             prepareRow(row);
             return (
-              <TableRow {...row.getRowProps()}>
+              <TableBodyRow {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
-              </TableRow>
+              </TableBodyRow>
             );
           })}
         </TableBody>

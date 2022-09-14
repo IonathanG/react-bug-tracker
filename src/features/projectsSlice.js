@@ -73,7 +73,7 @@ const initialState = {
     },
     project_02: {
       project_id: "project_02",
-      project_name: "Project One",
+      project_name: "Project Two",
       description: "This is project one",
       start_date: "27/08/22",
       end_date: "01/10/22",
@@ -145,7 +145,7 @@ const initialState = {
     },
     project_08: {
       project_id: "project_08",
-      project_name: "Project eigth",
+      project_name: "Project Eigth",
       description: "This is project one",
       start_date: "27/08/22",
       end_date: "01/10/22",
