@@ -23,6 +23,7 @@ const HeaderContainer = styled.header`
 
   color: ${({ theme }) => theme.color_Font_Light};
   background-color: ${({ theme }) => theme.background_Header};
+  border-bottom: 1px solid ${({ theme }) => theme.boxShadow_Navbar};
   transition: 0.3s ease;
 `;
 

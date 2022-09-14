@@ -98,34 +98,59 @@ const ChangePage = styled.span`
   display: flex;
   align-items: center;
 
-  button,
-  span {
-    padding: 8px 12px;
+  button {
+    padding: 8.3px 12px;
+    cursor: pointer;
+
+    /* &:hover {
+      background-color: ${({ theme }) => theme.pale_Blue};
+    } */
   }
 
-  button:nth-child(1) {
+  button:first-child {
     border-right: none;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }
-  button:nth-child(3) {
+  button:last-child {
     border-left: none;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
   }
-
-  span {
-    border: 0.5px solid ${({ theme }) => theme.background_PageIndex};
-    background-color: ${({ theme }) => theme.background_PageIndex};
-    color: ${({ theme }) => theme.color_PageIndex};
-  }
 `;
 
 const Button = styled.button`
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")} !important;
   border: 1px solid ${({ theme }) => theme.border_Button};
   background-color: ${({ theme }) => theme.color_ButtonBasic};
   color: ${(props) => !props.disabled && props.theme.color_Font_Main};
+
+  &:hover {
+    border: ${(props) =>
+      !props.disabled && `1px solid ${props.theme.pale_Blue}`};
+    background-color: ${(props) => !props.disabled && props.theme.pale_Blue};
+    color: ${(props) => !props.disabled && props.theme.color_PageIndex};
+  }
+`;
+
+const PageButton = styled.button`
+  border: 1px solid
+    ${(props) =>
+      props.currentPage
+        ? props.theme.background_PageIndex
+        : props.theme.border_Button};
+  background-color: ${(props) =>
+    props.currentPage
+      ? props.theme.background_PageIndex
+      : props.theme.color_ButtonBasic};
+  color: ${(props) => props.currentPage && props.theme.color_PageIndex};
+
+  &:hover {
+    border: ${(props) =>
+      !props.currentPage && `1px solid ${props.theme.pale_Blue}`};
+    background-color: ${(props) => !props.currentPage && props.theme.pale_Blue};
+    color: ${(props) => !props.currentPage && props.theme.color_PageIndex};
+  }
 `;
 
 const BasicTable = ({ COLUMNS, DATA }) => {
@@ -151,6 +176,7 @@ const BasicTable = ({ COLUMNS, DATA }) => {
     previousPage,
     canNextPage,
     canPreviousPage,
+    gotoPage,
     setPageSize,
     state,
     setGlobalFilter,
@@ -249,7 +275,17 @@ const BasicTable = ({ COLUMNS, DATA }) => {
           <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
             Previous
           </Button>
-          <span>{pageIndex + 1}</span>
+          {canPreviousPage && (
+            <PageButton onClick={() => gotoPage(pageIndex - 1)}>
+              {pageIndex}
+            </PageButton>
+          )}
+          <PageButton currentPage={true}>{pageIndex + 1}</PageButton>
+          {canNextPage && (
+            <PageButton onClick={() => gotoPage(pageIndex + 1)}>
+              {pageIndex + 2}
+            </PageButton>
+          )}
           <Button onClick={() => nextPage()} disabled={!canNextPage}>
             Next
           </Button>
