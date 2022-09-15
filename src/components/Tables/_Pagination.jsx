@@ -16,17 +16,6 @@ const ChangePage = styled.span`
     padding: 8.3px 12px;
     cursor: pointer;
   }
-
-  button:first-child {
-    border-right: none;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-  }
-  button:last-child {
-    border-left: none;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
 `;
 
 const Button = styled.button`
@@ -41,6 +30,19 @@ const Button = styled.button`
     background-color: ${(props) => !props.disabled && props.theme.pale_Blue};
     color: ${(props) => !props.disabled && props.theme.color_PageIndex};
   }
+`;
+
+const PreviousButton = styled(Button)`
+  border-right: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+`;
+
+const NextButton = styled(Button)`
+  border-left: ${(props) =>
+    props.showBorder ? `1px solid ${props.theme.border_Button}` : "none"};
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 `;
 
 const PageButton = styled.button`
@@ -83,40 +85,43 @@ const Pagination = ({
   return (
     <PaginationContainer>
       <span>
-        Showing {pageIndex * pageSize + 1} to{" "}
+        Showing {pageIndex * pageSize + (data.length > 0 && 1)} to{" "}
         {pageIndex * pageSize + page.length} of {data.length} entries
       </span>
 
       <ChangePage>
-        <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <PreviousButton
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+        >
           Previous
-        </Button>
+        </PreviousButton>
 
-        {/* {pageList.map((page) => (
-          <PageButton
-            currentPage={page.pageIndex === page.gotoPage}
-            onClick={() => gotoPage(page.gotoPage)}
-          >
-            {page.pageIndex}
-          </PageButton>
-        ))} */}
+        {data.length > 0 && (
+          <div>
+            {canPreviousPage && (
+              <PageButton onClick={() => gotoPage(pageIndex - 1)}>
+                {pageIndex}
+              </PageButton>
+            )}
 
-        {canPreviousPage && (
-          <PageButton onClick={() => gotoPage(pageIndex - 1)}>
-            {pageIndex}
-          </PageButton>
-        )}
-        <PageButton currentPage={true}>{pageIndex + 1}</PageButton>
+            <PageButton currentPage={true}>{pageIndex + 1}</PageButton>
 
-        {canNextPage && (
-          <PageButton onClick={() => gotoPage(pageIndex + 1)}>
-            {pageIndex + 2}
-          </PageButton>
+            {canNextPage && (
+              <PageButton onClick={() => gotoPage(pageIndex + 1)}>
+                {pageIndex + 2}
+              </PageButton>
+            )}
+          </div>
         )}
 
-        <Button onClick={() => nextPage()} disabled={!canNextPage}>
+        <NextButton
+          showBorder={!data.length > 0}
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+        >
           Next
-        </Button>
+        </NextButton>
       </ChangePage>
     </PaginationContainer>
   );

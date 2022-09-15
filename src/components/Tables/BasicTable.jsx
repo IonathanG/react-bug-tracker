@@ -75,6 +75,11 @@ const TableBodyRow = styled.tr`
   }
 `;
 
+const NoDataMessage = styled.div`
+  text-align: center;
+  padding: 20px 0px;
+`;
+
 const BasicTable = ({ COLUMNS, DATA }) => {
   const columns = useMemo(() => COLUMNS, [COLUMNS]);
   const data = useMemo(() => DATA, [DATA]);
@@ -181,6 +186,11 @@ const BasicTable = ({ COLUMNS, DATA }) => {
           })}
         </TableBody>
       </Table>
+
+      {/* Case Table is empty of data */}
+      {data.length === 0 && (
+        <NoDataMessage>No data available in table</NoDataMessage>
+      )}
 
       {/* Table Pagination Infos + Change page */}
       <Pagination
