@@ -1,6 +1,6 @@
 //import { format } from "date-fns";
 
-export const AllProjects_Columns = [
+export const Projects_Columns = [
   {
     Header: "Project",
     accessor: "project_name",
@@ -26,7 +26,38 @@ export const AllProjects_Columns = [
     accessor: "status",
   },
   {
-    Header: "Links",
+    Header: "Action",
+    accessor: "links",
+  },
+];
+
+export const Tickets_Columns = [
+  {
+    Header: "Title",
+    accessor: "title",
+  },
+  {
+    Header: "Assigned by",
+    accessor: "assigned_by",
+  },
+  {
+    Header: "Assigned to",
+    accessor: "assigned_to",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Priority",
+    accessor: "priority",
+  },
+  {
+    Header: "Date",
+    accessor: "date",
+  },
+  {
+    Header: "Action",
     accessor: "links",
   },
 ];

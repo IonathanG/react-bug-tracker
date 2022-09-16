@@ -17,9 +17,11 @@ const initialState = {
       tickets: {
         ticket_01: {
           project_id: "project_01",
+          ticket_id: "project_01_ticket_01",
           ticket_name: "Ticket One",
           created_by: "Tromso Two",
-          developer_assigned: "Tromso Three",
+          assigned_by: "Tromso One",
+          assigned_to: "Tromso Three",
           description: "This is ticket one",
           type: "Bug/Errors",
           status: "Open",
@@ -44,9 +46,11 @@ const initialState = {
         },
         ticket_02: {
           project_id: "project_01",
+          ticket_id: "project_01_ticket_02",
           ticket_name: "Ticket Two",
-          created_by: "Tromso One",
-          developer_assigned: "Tromso Three",
+          created_by: "Tromso Two",
+          assigned_by: "Tromso One",
+          assigned_to: "Tromso Three",
           description: "This is ticket two",
           type: "Design Flaw",
           status: "Open",
@@ -81,7 +85,37 @@ const initialState = {
       progress: 0,
       status: "Open",
       attachment: {},
-      tickets: {},
+      tickets: {
+        ticket_01: {
+          project_id: "project_01",
+          ticket_id: "project_01_ticket_01",
+          ticket_name: "Ticket One",
+          created_by: "Tromso Two",
+          assigned_by: "Tromso One",
+          assigned_to: "Tromso Three",
+          description: "This is ticket one",
+          type: "Bug/Errors",
+          status: "Open",
+          priority: "High",
+          created_date: "27/08/22",
+          history: {
+            event_01: {
+              date: "27/08/22",
+              title: "Ticket Created",
+              author: "Tromso Two",
+              detail: "Ticket was submitted by Tromso Two",
+            },
+          },
+          comments: {
+            comment_01: {
+              author: "Tromso Two",
+              date: "27/08/22",
+              comment: "Good luck on this first ticket",
+            },
+          },
+          attachments: {},
+        },
+      },
     },
     project_03: {
       project_id: "project_03",
@@ -93,7 +127,37 @@ const initialState = {
       progress: 0,
       status: "Open",
       attachment: {},
-      tickets: {},
+      tickets: {
+        ticket_01: {
+          project_id: "project_01",
+          ticket_id: "project_01_ticket_01",
+          ticket_name: "Ticket One",
+          created_by: "Tromso Two",
+          assigned_by: "Tromso One",
+          assigned_to: "Tromso Three",
+          description: "This is ticket one",
+          type: "Bug/Errors",
+          status: "Open",
+          priority: "High",
+          created_date: "27/08/22",
+          history: {
+            event_01: {
+              date: "27/08/22",
+              title: "Ticket Created",
+              author: "Tromso Two",
+              detail: "Ticket was submitted by Tromso Two",
+            },
+          },
+          comments: {
+            comment_01: {
+              author: "Tromso Two",
+              date: "27/08/22",
+              comment: "Good luck on this first ticket",
+            },
+          },
+          attachments: {},
+        },
+      },
     },
     project_04: {
       project_id: "project_04",
@@ -201,7 +265,37 @@ const initialState = {
       progress: 0,
       status: "Close",
       attachment: {},
-      tickets: {},
+      tickets: {
+        ticket_01: {
+          project_id: "project_01",
+          ticket_id: "project_01_ticket_01",
+          ticket_name: "Ticket One",
+          created_by: "Tromso Two",
+          assigned_by: "Tromso One",
+          assigned_to: "Tromso Three",
+          description: "This is ticket one",
+          type: "Bug/Errors",
+          status: "Open",
+          priority: "High",
+          created_date: "27/08/22",
+          history: {
+            event_01: {
+              date: "27/08/22",
+              title: "Ticket Created",
+              author: "Tromso Two",
+              detail: "Ticket was submitted by Tromso Two",
+            },
+          },
+          comments: {
+            comment_01: {
+              author: "Tromso Two",
+              date: "27/08/22",
+              comment: "Good luck on this first ticket",
+            },
+          },
+          attachments: {},
+        },
+      },
     },
   },
 };

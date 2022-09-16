@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import BasicTable from "../../components/Tables/BasicTable";
-import { AllProjects_Columns } from "../../data/TableColumns";
+import { Projects_Columns } from "../../data/TableColumns";
 
 const Container = styled.div``;
 
@@ -19,6 +19,16 @@ const AllProjects = () => {
   );
 
   const [tableData, setTableData] = useState([]);
+
+  const defaultSortBy = useMemo(
+    () => [
+      {
+        id: "project_name",
+        desc: false,
+      },
+    ],
+    []
+  );
 
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
@@ -49,7 +59,11 @@ const AllProjects = () => {
   return (
     <Container>
       <Header>All Projects</Header>
-      <BasicTable COLUMNS={AllProjects_Columns} DATA={tableData} />
+      <BasicTable
+        COLUMNS={Projects_Columns}
+        DATA={tableData}
+        defaultSortBy={defaultSortBy}
+      />
     </Container>
   );
 };

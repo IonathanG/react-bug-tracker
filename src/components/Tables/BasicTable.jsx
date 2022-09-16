@@ -80,19 +80,9 @@ const NoDataMessage = styled.div`
   padding: 20px 0px;
 `;
 
-const BasicTable = ({ COLUMNS, DATA }) => {
+const BasicTable = ({ COLUMNS, DATA, defaultSortBy }) => {
   const columns = useMemo(() => COLUMNS, [COLUMNS]);
   const data = useMemo(() => DATA, [DATA]);
-
-  const defaultSortBy = useMemo(
-    () => [
-      {
-        id: "project_name",
-        desc: false,
-      },
-    ],
-    []
-  );
 
   const {
     getTableProps,
@@ -150,20 +140,22 @@ const BasicTable = ({ COLUMNS, DATA }) => {
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
 
-                  <ArrowsContainer>
-                    <Arrow
-                      isSorted={column.isSorted}
-                      isSortedDesc={!column.isSortedDesc}
-                    >
-                      ↑
-                    </Arrow>
-                    <Arrow
-                      isSorted={column.isSorted}
-                      isSortedDesc={column.isSortedDesc}
-                    >
-                      ↓
-                    </Arrow>
-                  </ArrowsContainer>
+                  {column.Header !== "Action" && (
+                    <ArrowsContainer>
+                      <Arrow
+                        isSorted={column.isSorted}
+                        isSortedDesc={!column.isSortedDesc}
+                      >
+                        ↑
+                      </Arrow>
+                      <Arrow
+                        isSorted={column.isSorted}
+                        isSortedDesc={column.isSortedDesc}
+                      >
+                        ↓
+                      </Arrow>
+                    </ArrowsContainer>
+                  )}
                 </th>
               ))}
             </tr>
