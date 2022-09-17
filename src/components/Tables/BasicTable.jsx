@@ -12,12 +12,19 @@ import PageSize from "./_PageSize";
 
 const TableContainer = styled.div`
   width: 100%;
+  overflow-x: scroll;
   padding: 15px;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.background_Table};
   box-shadow: ${({ theme }) => theme.boxShadow_Table};
   font-weight: 400;
   font-size: 14px;
+`;
+
+const TableTitle = styled.div`
+  font-size: 15px;
+  font-weight: 700;
+  padding: 5px 0px 20px 0px;
 `;
 
 const TableTools = styled.div`
@@ -80,7 +87,7 @@ const NoDataMessage = styled.div`
   padding: 20px 0px;
 `;
 
-const BasicTable = ({ COLUMNS, DATA, defaultSortBy }) => {
+const BasicTable = ({ COLUMNS, DATA, defaultSortBy, tableTitle }) => {
   const columns = useMemo(() => COLUMNS, [COLUMNS]);
   const data = useMemo(() => DATA, [DATA]);
 
@@ -118,6 +125,9 @@ const BasicTable = ({ COLUMNS, DATA, defaultSortBy }) => {
 
   return (
     <TableContainer>
+      {/* Customized Table Title for Dashboard tables */}
+      {tableTitle && <TableTitle>{tableTitle}</TableTitle>}
+
       {/* Rows per page + Search Input */}
       <TableTools>
         {/* Set Page Size */}
