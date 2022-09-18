@@ -9,10 +9,6 @@ const Container = styled.div`
   overflow-x: scroll;
 `;
 
-// const Header = styled.header`
-//   margin-bottom: 20px;
-// `;
-
 const MembersDashboard = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
@@ -25,7 +21,7 @@ const MembersDashboard = () => {
   const defaultSortBy = useMemo(
     () => [
       {
-        id: "project_name",
+        id: "name",
         desc: false,
       },
     ],
@@ -47,7 +43,7 @@ const MembersDashboard = () => {
         if (projectUser.project_manager_id === id) {
           count++;
         } else {
-          if (projectUser.project_team.includes(id)) {
+          if (projectUser.project_team_id.includes(id)) {
             count++;
           }
         }

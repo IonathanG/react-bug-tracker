@@ -9,10 +9,6 @@ const Container = styled.div`
   overflow-x: scroll;
 `;
 
-// const Header = styled.header`
-//   margin-bottom: 20px;
-// `;
-
 const ProjectsDashboard = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
@@ -22,7 +18,6 @@ const ProjectsDashboard = () => {
   );
 
   const [tableData, setTableData] = useState([]);
-  console.log(tableData);
 
   const defaultSortBy = useMemo(
     () => [
@@ -40,23 +35,31 @@ const ProjectsDashboard = () => {
     const projectsArray = Object.values(projects);
     const formattedData = [];
 
+    // Fetching all user avatars info from the project
+    const fetchTeam = (project_id) => {
+      let team = [];
+
+      team.push(
+        users[projectsUsers[project_id].project_manager_id].user_avatar
+      );
+
+      projectsUsers[project_id].project_team_id.map((user) =>
+        team.push(users[user].user_avatar)
+      );
+      return team;
+    };
+
     projectsArray.map((project) =>
       formattedData.push({
         project_id: project.project_id,
         project_name: project.project_name,
+        start_date: project.start_date,
         end_date: project.end_date,
-        progress: project.progress,
-        status: project.status,
-        project_manager:
-          users[projectsUsers[project.project_id].project_manager_id].user_name,
-        team: projectsUsers[project.project_id].project_team.map(
-          (user) => users[user].user_name
-        ),
-        links: "link link link",
+        ticket_count: Object.keys(project.tickets).length,
+        team: fetchTeam(project.project_id),
       })
     );
 
-    // console.log(formattedData);
     setTableData(formattedData);
   }, [users, projects, projectsUsers]);
 
@@ -64,7 +67,7 @@ const ProjectsDashboard = () => {
     <Container>
       <BasicTable
         COLUMNS={ProjectsDashboard_Columns}
-        DATA={[]}
+        DATA={tableData}
         defaultSortBy={defaultSortBy}
         tableTitle={"Projects"}
       />

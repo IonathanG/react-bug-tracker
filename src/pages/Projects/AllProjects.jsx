@@ -45,7 +45,7 @@ const AllProjects = () => {
         status: project.status,
         project_manager:
           users[projectsUsers[project.project_id].project_manager_id].user_name,
-        team: projectsUsers[project.project_id].project_team.map(
+        team: projectsUsers[project.project_id].project_team_id.map(
           (user) => users[user].user_name
         ),
         links: "link link link",

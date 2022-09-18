@@ -8,10 +8,6 @@ const Container = styled.div`
   overflow-x: scroll;
 `;
 
-// const Header = styled.header`
-//   margin-bottom: 20px;
-// `;
-
 const TicketsDashboard = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
@@ -21,12 +17,11 @@ const TicketsDashboard = () => {
   );
 
   const [tableData, setTableData] = useState([]);
-  console.log(tableData);
 
   const defaultSortBy = useMemo(
     () => [
       {
-        id: "project_name",
+        id: "ticket_title",
         desc: false,
       },
     ],
@@ -40,22 +35,19 @@ const TicketsDashboard = () => {
     const formattedData = [];
 
     projectsArray.map((project) =>
-      formattedData.push({
-        project_id: project.project_id,
-        project_name: project.project_name,
-        end_date: project.end_date,
-        progress: project.progress,
-        status: project.status,
-        project_manager:
-          users[projectsUsers[project.project_id].project_manager_id].user_name,
-        team: projectsUsers[project.project_id].project_team.map(
-          (user) => users[user].user_name
-        ),
-        links: "link link link",
-      })
+      Object.values(project.tickets).map((ticket) =>
+        formattedData.push({
+          ticket_id: ticket.ticket_id,
+          ticket_title: ticket.ticket_name,
+          developer: ticket.assigned_to,
+          status: ticket.status,
+          priority: ticket.priority,
+          date: ticket.created_date,
+          links: "link link link",
+        })
+      )
     );
 
-    //console.log(formattedData);
     setTableData(formattedData);
   }, [users, projects, projectsUsers]);
 
@@ -63,7 +55,7 @@ const TicketsDashboard = () => {
     <Container>
       <BasicTable
         COLUMNS={TicketsDashboard_Columns}
-        DATA={[]}
+        DATA={tableData}
         defaultSortBy={defaultSortBy}
         tableTitle={"Tickets"}
       />

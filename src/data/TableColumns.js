@@ -100,7 +100,7 @@ export const ProjectsDashboard_Columns = [
   },
   {
     Header: "Ticket Count",
-    accessor: "tickets_count",
+    accessor: "ticket_count",
   },
 ];
 
