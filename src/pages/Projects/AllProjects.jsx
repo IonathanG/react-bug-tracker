@@ -52,7 +52,7 @@ const AllProjects = () => {
       })
     );
 
-    console.log(formattedData);
+    // console.log(formattedData);
     setTableData(formattedData);
   }, [users, projects, projectsUsers]);
 

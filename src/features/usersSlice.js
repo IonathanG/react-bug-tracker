@@ -5,6 +5,7 @@ const initialState = {
   // isLoading: {},
   Users: {
     user_01: {
+      user_id: "user_01",
       user_name: "Tromso One",
       user_email: "tromso1@tromso.com",
       user_password: "tromso123",
@@ -15,6 +16,7 @@ const initialState = {
       user_notifications: {},
     },
     user_02: {
+      user_id: "user_02",
       user_name: "Tromso Two",
       user_email: "tromso2@tromso.com",
       user_password: "tromso456",
@@ -25,6 +27,7 @@ const initialState = {
       user_notifications: {},
     },
     user_03: {
+      user_id: "user_03",
       user_name: "Tromso Three",
       user_email: "tromso3@tromso.com",
       user_password: "tromso789",

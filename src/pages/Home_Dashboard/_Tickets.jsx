@@ -55,7 +55,7 @@ const TicketsDashboard = () => {
       })
     );
 
-    console.log(formattedData);
+    //console.log(formattedData);
     setTableData(formattedData);
   }, [users, projects, projectsUsers]);
 

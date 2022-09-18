@@ -42,7 +42,7 @@ const initialState = {
     },
     project_10: {
       project_manager_id: "user_01",
-      project_team: ["user_02", "user_03"],
+      project_team: ["user_03"],
     },
     project_11: {
       project_manager_id: "user_01",
@@ -50,7 +50,7 @@ const initialState = {
     },
     project_12: {
       project_manager_id: "user_01",
-      project_team: ["user_02", "user_03"],
+      project_team: ["user_02"],
     },
   },
 };

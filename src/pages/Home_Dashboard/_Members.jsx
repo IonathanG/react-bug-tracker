@@ -16,13 +16,11 @@ const Container = styled.div`
 const MembersDashboard = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
-  const projects = useSelector((state) => state.projects.Projects);
   const projectsUsers = useSelector(
     (state) => state.projectsUsers.ProjectsUsers
   );
 
   const [tableData, setTableData] = useState([]);
-  console.log(tableData);
 
   const defaultSortBy = useMemo(
     () => [
@@ -37,27 +35,44 @@ const MembersDashboard = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    const projectsArray = Object.values(projects);
+    const usersArray = Object.values(users);
+    const projectsUsersArray = Object.values(projectsUsers);
     const formattedData = [];
 
-    projectsArray.map((project) =>
+    // Counting the number of projects per User
+    const CountProjects = (id) => {
+      let count = 0;
+
+      projectsUsersArray.forEach((projectUser) => {
+        if (projectUser.project_manager_id === id) {
+          count++;
+        } else {
+          if (projectUser.project_team.includes(id)) {
+            count++;
+          }
+        }
+      });
+      return count;
+    };
+
+    usersArray.map((user) =>
       formattedData.push({
-        avatar: project.project_id,
-        name: project.project_name,
-        projects_count: project.end_date,
-        role: project.progress,
+        user_id: user.user_id,
+        avatar: user.user_avatar,
+        name: user.user_name,
+        role: user.user_role,
+        projects_count: CountProjects(user.user_id),
       })
     );
 
-    console.log(formattedData);
     setTableData(formattedData);
-  }, [users, projects, projectsUsers]);
+  }, [users, projectsUsers]);
 
   return (
     <Container>
       <BasicTable
         COLUMNS={MembersDashboard_Columns}
-        DATA={[]}
+        DATA={tableData}
         defaultSortBy={defaultSortBy}
         tableTitle={"Members"}
       />
