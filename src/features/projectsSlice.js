@@ -1,19 +1,17 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../utils/firebase.config";
+import { createSlice } from "@reduxjs/toolkit";
 
 // initialise data from firestore
-export const getProjects = createAsyncThunk("data/getProjects", async () => {
-  const docRef = doc(db, "projects", "projectsID");
-  const docSnap = await getDoc(docRef);
+// export const getProjects = createAsyncThunk("data/getProjects", async () => {
+//   const docRef = doc(db, "projects", "projectsID");
+//   const docSnap = await getDoc(docRef);
 
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    return { data: docSnap.data() };
-  } else {
-    console.log("No such document");
-  }
-});
+//   if (docSnap.exists()) {
+//     console.log("Document data:", docSnap.data());
+//     return { data: docSnap.data() };
+//   } else {
+//     console.log("No such document");
+//   }
+// });
 
 const initialState = {
   // Projects: {},
@@ -320,20 +318,20 @@ export const projectsSlice = createSlice({
   initialState,
   reducers: {},
   // initialise data from firestore
-  extraReducers: {
-    [getProjects.pending]: (state) => {
-      state.isLoading = true;
-      console.log("pending");
-    },
-    [getProjects.fulfilled]: (state, { payload }) => {
-      console.log("test");
-      //state.Projects = payload.data.Projects;
-      state.isLoading = false;
-    },
-    [getProjects.rejected]: (state) => {
-      state.isLoading = false;
-    },
-  },
+  // extraReducers: {
+  //   [getProjects.pending]: (state) => {
+  //     state.isLoading = true;
+  //     console.log("pending");
+  //   },
+  //   [getProjects.fulfilled]: (state, { payload }) => {
+  //     console.log("test");
+  //     //state.Projects = payload.data.Projects;
+  //     state.isLoading = false;
+  //   },
+  //   [getProjects.rejected]: (state) => {
+  //     state.isLoading = false;
+  //   },
+  // },
 });
 
 //export const { addItem } = usersSlice.actions;
