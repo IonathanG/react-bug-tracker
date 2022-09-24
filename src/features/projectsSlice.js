@@ -1,8 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../utils/firebase.config";
+
+// initialise data from firestore
+export const getProjects = createAsyncThunk("data/getProjects", async () => {
+  const docRef = doc(db, "projects", "projectsID");
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    return { data: docSnap.data() };
+  } else {
+    console.log("No such document");
+  }
+});
 
 const initialState = {
   // Projects: {},
-  // isLoading: false,
+  isLoading: false,
   Projects: {
     project_01: {
       project_id: "project_01",
@@ -304,6 +319,21 @@ export const projectsSlice = createSlice({
   name: "projects",
   initialState,
   reducers: {},
+  // initialise data from firestore
+  extraReducers: {
+    [getProjects.pending]: (state) => {
+      state.isLoading = true;
+      console.log("pending");
+    },
+    [getProjects.fulfilled]: (state, { payload }) => {
+      console.log("test");
+      //state.Projects = payload.data.Projects;
+      state.isLoading = false;
+    },
+    [getProjects.rejected]: (state) => {
+      state.isLoading = false;
+    },
+  },
 });
 
 //export const { addItem } = usersSlice.actions;

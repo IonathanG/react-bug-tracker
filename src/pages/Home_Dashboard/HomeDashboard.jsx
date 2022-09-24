@@ -19,7 +19,7 @@ const TablesContainer = styled.div`
 const TopTablesContainer = styled.div`
   display: flex;
   gap: 25px;
-  overflow-x: hidden;
+  //overflow-x: hidden;
 `;
 
 const HomeDashboard = () => {

@@ -1,9 +1,10 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "./context/ThemeContext";
 import { lightTheme, darkTheme } from "./shared/Theme";
 import { GlobalStyles } from "./shared/globalStyles";
+import { db } from "./utils/firebase.config";
 
 // Single Pages
 import Layout from "./layout/Layout";
@@ -32,6 +33,8 @@ import TicketDetails from "./pages/Tickets/TicketDetails";
 // Admin
 import Invite from "./pages/Admin/Invite";
 import ManageRoles from "./pages/Admin/ManageRoles";
+import { collection, onSnapshot } from "firebase/firestore";
+import { useState } from "react";
 
 const AppContainer = styled.div`
   background-color: ${({ theme }) => theme.main_Background};
@@ -46,6 +49,18 @@ function App() {
   }, [theme]);
   // ----- -----
 
+  // Initialize DB Listeners
+  const [projects, setProjects] = useState();
+  useEffect(
+    () =>
+      onSnapshot(collection(db, "projects"), (snapshot) => {
+        // console.log(snapshot.docs.map((doc) => doc.data()));
+        snapshot.docs.map((doc) => setProjects({ ...projects, ...doc.data() }));
+      }),
+    [projects]
+  );
+
+  console.log("projects: ", projects);
   return (
     <ThemeProvider theme={themeMode}>
       <>
