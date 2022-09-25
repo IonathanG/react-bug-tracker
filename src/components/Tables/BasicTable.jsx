@@ -15,8 +15,8 @@ const TableContainer = styled.div`
   overflow-x: scroll;
   padding: 15px;
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.background_Table};
-  box-shadow: ${({ theme }) => theme.boxShadow_Table};
+  background-color: ${({ theme }) => theme.background_Block};
+  box-shadow: ${({ theme }) => theme.boxShadow_Block};
   font-weight: 400;
   font-size: 14px;
 `;
@@ -45,12 +45,12 @@ const Table = styled.table`
   }
 
   th {
-    border-bottom: 2px solid ${({ theme }) => theme.borderColor_Table};
+    border-bottom: 2px solid ${({ theme }) => theme.borderColor_Block};
     cursor: pointer;
   }
 
   td {
-    border-top: 1px solid ${({ theme }) => theme.borderColor_Table};
+    border-top: 1px solid ${({ theme }) => theme.borderColor_Block};
   }
 `;
 

@@ -37,13 +37,13 @@ export const lightTheme = {
   // Main Section
   background_MainSection: "rgb(244,247,246)",
 
-  // Tables
-  background_Table: "rgb(255,255,255)",
-  boxShadow_Table: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-  borderColor_Table: "rgb(222,226,230)",
-  hover_Table: "rgb(244,247,246)",
+  // Block
+  background_Block: "rgb(255,255,255)",
+  boxShadow_Block: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+  borderColor_Block: "rgb(222,226,230)",
 
-  // Tables Arrow
+  // Tables
+  hover_Table: "rgb(244,247,246)",
   color_Font_Arrow: "rgb(200,200,200)",
 
   //Tables Pagination
@@ -90,13 +90,13 @@ export const darkTheme = {
   // Main Section
   background_MainSection: "rgb(244,247,246)",
 
-  // Tables
-  background_Table: "rgb(255,255,255)",
-  boxShadow_Table: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-  borderColor_Table: "rgb(222,226,230)",
-  hover_Table: "rgb(244,247,246)",
+  // Block
+  background_Block: "rgb(255,255,255)",
+  boxShadow_Block: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+  borderColor_Block: "rgb(222,226,230)",
 
-  // Tables Arrow
+  // Tables
+  hover_Table: "rgb(244,247,246)",
   color_Font_Arrow: "rgb(200,200,200)",
 
   //Tables Pagination

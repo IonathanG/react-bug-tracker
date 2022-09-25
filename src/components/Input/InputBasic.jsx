@@ -28,9 +28,12 @@ const Input = styled.input`
 const InputBasic = ({ style, value, setValue }) => {
   return (
     <Input
+      type="text"
+      placeholder=""
       style={style}
       value={value}
       onChange={(e) => setValue(e.target.value)}
+      required
     />
   );
 };
