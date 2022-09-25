@@ -1,23 +1,30 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { db } from "../utils/firebase.config";
+import { dbUpdateProjects } from "../features/projectsSlice";
 
 const useProjectsListener = () => {
-  const [projects, setProjects] = useState();
+  const [projects, setProjects] = useState(null);
+  const dispatch = useDispatch();
 
-  useEffect(
-    () =>
-      onSnapshot(collection(db, "projects"), (snapshot) =>
-        // console.log(snapshot.docs.map((doc) => doc.data()));
-        snapshot.docs.forEach((doc) =>
-          setProjects({ ...projects, ...doc.data() })
-        )
-      ),
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "projects"), (snapshot) => {
+      snapshot.docs.forEach((doc) =>
+        setProjects({ ...projects, ...doc.data() })
+      );
+    });
+    return unsub;
     // eslint-disable-next-line
-    []
-  );
+  }, []);
 
-  console.log("projects: ", projects);
+  useEffect(() => {
+    if (projects !== null) {
+      console.log("dispatch");
+      dispatch(dbUpdateProjects(projects));
+    }
+  }, [projects, dispatch]);
+
+  // console.log("projects: ", projects);
 };
-
 export default useProjectsListener;

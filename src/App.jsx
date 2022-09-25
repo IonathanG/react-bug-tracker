@@ -41,7 +41,7 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  // ----- initialise and toggle theme -----
+  // ----- Initialise theme and toggle theme -----
   const { theme } = useTheme();
 
   const themeMode = useMemo(() => {
@@ -49,7 +49,7 @@ function App() {
   }, [theme]);
   // ----- -----
 
-  // Initialise DataBase Listeners
+  // ----- Initialise DataBase Listeners -----
   useProjectsListener();
   useUsersListener();
   useProjectUsersListener();

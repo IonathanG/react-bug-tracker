@@ -12,9 +12,7 @@ const Container = styled.div`
 const MembersDashboard = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
-  const projectsUsers = useSelector(
-    (state) => state.projectsUsers.ProjectsUsers
-  );
+  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
 
@@ -31,15 +29,15 @@ const MembersDashboard = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    const usersArray = Object.values(users);
-    const projectsUsersArray = Object.values(projectsUsers);
+    const usersArray = users ? Object.values(users) : [];
+    const projectUsersArray = projectUsers ? Object.values(projectUsers) : [];
     const formattedData = [];
 
     // Counting the number of projects per User
     const CountProjects = (id) => {
       let count = 0;
 
-      projectsUsersArray.forEach((projectUser) => {
+      projectUsersArray.forEach((projectUser) => {
         if (projectUser.project_manager_id === id) {
           count++;
         } else {
@@ -62,7 +60,7 @@ const MembersDashboard = () => {
     );
 
     setTableData(formattedData);
-  }, [users, projectsUsers]);
+  }, [users, projectUsers]);
 
   return (
     <Container>

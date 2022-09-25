@@ -13,9 +13,7 @@ const ProjectsDashboard = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
-  const projectsUsers = useSelector(
-    (state) => state.projectsUsers.ProjectsUsers
-  );
+  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
 
@@ -32,18 +30,16 @@ const ProjectsDashboard = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    const projectsArray = Object.values(projects);
+    const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
     // Fetching all user avatars info from the project
     const fetchTeam = (project_id) => {
       let team = [];
 
-      team.push(
-        users[projectsUsers[project_id].project_manager_id].user_avatar
-      );
+      team.push(users[projectUsers[project_id].project_manager_id].user_avatar);
 
-      projectsUsers[project_id].project_team_id.map((user) =>
+      projectUsers[project_id].project_team_id.map((user) =>
         team.push(users[user].user_avatar)
       );
       return team;
@@ -61,7 +57,7 @@ const ProjectsDashboard = () => {
     );
 
     setTableData(formattedData);
-  }, [users, projects, projectsUsers]);
+  }, [users, projects, projectUsers]);
 
   return (
     <Container>

@@ -12,9 +12,7 @@ const TicketsDashboard = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
-  const projectsUsers = useSelector(
-    (state) => state.projectsUsers.ProjectsUsers
-  );
+  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
 
@@ -31,7 +29,7 @@ const TicketsDashboard = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    const projectsArray = Object.values(projects);
+    const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
     projectsArray.map((project) =>
@@ -49,7 +47,7 @@ const TicketsDashboard = () => {
     );
 
     setTableData(formattedData);
-  }, [users, projects, projectsUsers]);
+  }, [users, projects, projectUsers]);
 
   return (
     <Container>

@@ -14,9 +14,7 @@ const ArchivedProjects = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
-  const projectsUsers = useSelector(
-    (state) => state.projectsUsers.ProjectsUsers
-  );
+  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
   console.log(tableData);
@@ -45,8 +43,8 @@ const ArchivedProjects = () => {
         progress: project.progress,
         status: project.status,
         project_manager:
-          users[projectsUsers[project.project_id].project_manager_id].user_name,
-        team: projectsUsers[project.project_id].project_team.map(
+          users[projectUsers[project.project_id].project_manager_id].user_name,
+        team: projectUsers[project.project_id].project_team.map(
           (user) => users[user].user_name
         ),
         links: "link link link",
@@ -55,7 +53,7 @@ const ArchivedProjects = () => {
 
     console.log(formattedData);
     setTableData(formattedData);
-  }, [users, projects, projectsUsers]);
+  }, [users, projects, projectUsers]);
 
   return (
     <Container>

@@ -14,9 +14,7 @@ const UnassignedTickets = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
-  const projectsUsers = useSelector(
-    (state) => state.projectsUsers.ProjectsUsers
-  );
+  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
   console.log(tableData);
@@ -54,7 +52,7 @@ const UnassignedTickets = () => {
 
     console.log(formattedData);
     setTableData(formattedData);
-  }, [users, projects, projectsUsers]);
+  }, [users, projects, projectUsers]);
 
   return (
     <Container>
