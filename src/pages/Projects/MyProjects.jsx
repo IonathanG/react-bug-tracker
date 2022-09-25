@@ -32,7 +32,7 @@ const MyProjects = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    const projectsArray = Object.values(projects);
+    const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
     projectsArray.map((project) =>
@@ -44,14 +44,14 @@ const MyProjects = () => {
         status: project.status,
         project_manager:
           users[projectUsers[project.project_id].project_manager_id].user_name,
-        team: projectUsers[project.project_id].project_team.map(
+        team: projectUsers[project.project_id].project_team_id.map(
           (user) => users[user].user_name
         ),
         links: "link link link",
       })
     );
 
-    console.log(formattedData);
+    // console.log(formattedData);
     setTableData(formattedData);
   }, [users, projects, projectUsers]);
 
