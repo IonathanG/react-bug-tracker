@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
-import ButtonBasic from "../../components/Buttons/Button_Basic";
 import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import MenuItem from "@mui/material/MenuItem";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import ButtonBasic from "../../components/Buttons/Button_Basic";
 
 const Header = styled.header`
   margin-bottom: 20px;
@@ -69,21 +70,8 @@ const InputDescription = styled(Input)`
   min-height: 100px;
 `;
 
-const Select = styled.select``;
-const MenuItem = styled.option``;
-
 const AddProject = () => {
-  // const [reqDate, setreqDate] = useState(new Date());
-  const [startDate, setStarDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [value, setValue] = useState(null);
-
-  const {
-    control,
-    // register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       projectName: "",
       projectDescription: "",
@@ -99,17 +87,27 @@ const AddProject = () => {
       <Header>Add Project</Header>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
+        {/* Project Name Input */}
         <InputContainer>
           <Label htmlFor="projectName">Project Name</Label>
           <Controller
             name="projectName"
             control={control}
-            rules={{ required: true }}
-            render={({ field }) => <Input {...field} />}
+            rules={{ required: "This field is required" }}
+            render={({ field: { onChange, value, ref }, fieldState }) => (
+              <TextField
+                size="small"
+                value={value ? value : ""}
+                onChange={onChange}
+                ref={ref}
+                error={Boolean(fieldState.error)}
+                helperText={fieldState?.error?.message}
+              ></TextField>
+            )}
           />
-          {errors.projectName && <p>Project Needs a name</p>}
         </InputContainer>
 
+        {/* Project Description Input */}
         <InputContainer>
           <Label htmlFor="projectDescription">Project Description</Label>
           <Controller
@@ -119,80 +117,119 @@ const AddProject = () => {
           />
         </InputContainer>
 
+        {/* Start Date Picker */}
         <DateContainer>
           <InputContainer>
             <Label htmlFor="startDate">Start Date</Label>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <Controller
-                name="startDate"
-                rules={{ required: "This field is required" }}
-                defaultValue={""}
-                control={control}
-                render={({ field }) => (
+            <Controller
+              name="startDate"
+              control={control}
+              defaultValue={null}
+              rules={{ required: "This field is required" }}
+              render={({ field: { onChange, value, ref }, fieldState }) => (
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
+                    onChange={onChange}
                     value={value}
-                    onChange={(newValue) => {
-                      setStarDate(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                    {...field}
+                    ref={ref}
+                    renderInput={(params) => (
+                      <TextField
+                        size="small"
+                        sx={{ width: "100%" }}
+                        {...params}
+                        error={Boolean(fieldState.error)}
+                        helperText={fieldState?.error?.message}
+                      />
+                    )}
                   />
-                )}
-              />
-            </LocalizationProvider>
+                </LocalizationProvider>
+              )}
+            />
           </InputContainer>
 
+          {/* End Date Picker */}
           <InputContainer>
             <Label htmlFor="endDate">End Date</Label>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <Controller
-                name="endDate"
-                defaultValue={""}
-                control={control}
-                render={({ field }) => (
+            <Controller
+              name="endDate"
+              control={control}
+              defaultValue={null}
+              rules={{ required: "This field is required" }}
+              render={({ field: { onChange, value, ref }, fieldState }) => (
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
-                    value={endDate}
-                    onChange={(newValue) => {
-                      setEndDate(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                    {...field}
+                    onChange={onChange}
+                    value={value}
+                    ref={ref}
+                    renderInput={(params) => (
+                      <TextField
+                        size="small"
+                        sx={{ width: "100%" }}
+                        {...params}
+                        error={Boolean(fieldState.error)}
+                        helperText={fieldState?.error?.message}
+                      />
+                    )}
                   />
-                )}
-              />
-            </LocalizationProvider>
+                </LocalizationProvider>
+              )}
+            />
           </InputContainer>
         </DateContainer>
 
+        {/* Priority Select */}
         <InputContainer>
           <Label htmlFor="priority">Choose a priority</Label>
           <Controller
             name="priority"
             control={control}
-            render={({ field: { onChange, value } }) => (
-              <Select value={value} onChange={onChange}>
-                <MenuItem value="urgent">Urgent</MenuItem>
-                <MenuItem value="high">High</MenuItem>
-                <MenuItem value="medium">Medium</MenuItem>
-                <MenuItem value="low">Low</MenuItem>
-              </Select>
+            rules={{ required: "This field is required" }}
+            render={({ field: { onChange, value, ref }, fieldState }) => (
+              <TextField
+                select
+                size="small"
+                defaultValue={""}
+                value={value ? value : ""}
+                onChange={onChange}
+                ref={ref}
+                error={Boolean(fieldState.error)}
+                helperText={fieldState?.error?.message}
+              >
+                <MenuItem value="Urgent">Urgent</MenuItem>
+                <MenuItem value="High">High</MenuItem>
+                <MenuItem value="Medium">Medium</MenuItem>
+                <MenuItem value="Low">Low</MenuItem>
+              </TextField>
             )}
-            defaultValue="Urgent" // make sure to set up defaultValue
+          />
+        </InputContainer>
+
+        {/* Project Manager Select */}
+        <InputContainer>
+          <Label htmlFor="projectManager">Project Manager</Label>
+          <Controller
+            name="projetManager"
+            control={control}
+            rules={{ required: "This field is required" }}
+            render={({ field: { onChange, value, ref }, fieldState }) => (
+              <TextField
+                select
+                size="small"
+                defaultValue={""}
+                value={value ? value : ""}
+                onChange={onChange}
+                ref={ref}
+                error={Boolean(fieldState.error)}
+                helperText={fieldState?.error?.message}
+              >
+                <MenuItem value="Tromso Two">Tromso Two</MenuItem>
+              </TextField>
+            )}
           />
         </InputContainer>
 
         <ButtonBasic text={"Create"} />
       </Form>
-      {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          label="Basic example"
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider> */}
     </>
   );
 };
