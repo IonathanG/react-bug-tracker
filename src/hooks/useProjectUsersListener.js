@@ -20,7 +20,7 @@ const useProjectUsersListener = () => {
 
   useEffect(() => {
     if (projectUsers !== null) {
-      console.log("dispatch");
+      // console.log("dispatch");
       dispatch(dbUpdateProjectUsers(projectUsers));
     }
   }, [projectUsers, dispatch]);

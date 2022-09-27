@@ -7,6 +7,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import ButtonBasic from "../../components/Buttons/Button_Basic";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../utils/firebase.config";
 
 const Header = styled.header`
   margin-bottom: 20px;
@@ -80,6 +82,19 @@ const AddProject = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+
+    setDoc(doc(db, "projects", `projectID-${data.projectName}`), {
+      project_id: `projectID-${data.projectName}`,
+      project_name: data.projectName,
+      description: data.projectDescription,
+      start_date: data.startDate,
+      end_date: data.endDate,
+      priority: data.priority,
+      progress: 0,
+      status: "Open",
+      attachment: {},
+      tickets: {},
+    });
   };
 
   return (

@@ -19,7 +19,7 @@ const useUsersListener = () => {
 
   useEffect(() => {
     if (users !== null) {
-      console.log("dispatch");
+      // console.log("dispatch");
       dispatch(dbUpdateUsers(users));
     }
   }, [users, dispatch]);
