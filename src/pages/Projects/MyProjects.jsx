@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Navigation from "../../components/Navigation/Navigation";
 import BasicTable from "../../components/Tables/BasicTable";
 import { Projects_Columns } from "../../data/TableColumns";
 
 const Container = styled.div``;
 
-const Header = styled.header`
-  margin-bottom: 20px;
-`;
-
 const MyProjects = () => {
+  const userID = "user_02";
+
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
@@ -32,10 +31,16 @@ const MyProjects = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    const projectsArray = projects ? Object.values(projects) : [];
+    const projectUsersArray = projectUsers ? Object.values(projectUsers) : [];
     const formattedData = [];
 
-    projectsArray.map((project) =>
+    projectUsersArray.filter(
+      (project) =>
+        project.project_manager_id !== userID ||
+        project.project_team_id.some((user) => user !== userID)
+    );
+
+    projectUsersArray.map((project) =>
       formattedData.push({
         project_id: project.project_id,
         project_name: project.project_name,
@@ -57,7 +62,7 @@ const MyProjects = () => {
 
   return (
     <Container>
-      <Header>My Projects</Header>
+      <Navigation headerText={"My Projects"} />
       <BasicTable
         COLUMNS={Projects_Columns}
         DATA={[]}

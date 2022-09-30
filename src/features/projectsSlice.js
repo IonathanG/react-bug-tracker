@@ -10,6 +10,7 @@ export const projectsSlice = createSlice({
   initialState,
   reducers: {
     dbUpdateProjects: (state, { payload }) => {
+      console.log("updated");
       state.Projects = payload;
     },
   },

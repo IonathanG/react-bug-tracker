@@ -25,6 +25,7 @@ const HeaderContainer = styled.header`
   background-color: ${({ theme }) => theme.background_Header};
   border-bottom: 1px solid ${({ theme }) => theme.boxShadow_Navbar};
   transition: 0.3s ease;
+  z-index: 20;
 `;
 
 const Left = styled.div`

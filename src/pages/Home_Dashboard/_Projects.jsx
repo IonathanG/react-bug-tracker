@@ -37,9 +37,11 @@ const ProjectsDashboard = () => {
     const fetchTeam = (project_id) => {
       let team = [];
 
-      team.push(users[projectUsers[project_id].project_manager_id].user_avatar);
+      team.push(
+        users[projectUsers[project_id]?.project_manager_id]?.user_avatar
+      );
 
-      projectUsers[project_id].project_team_id.map((user) =>
+      projectUsers[project_id]?.project_team_id.map((user) =>
         team.push(users[user].user_avatar)
       );
       return team;

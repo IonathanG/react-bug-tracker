@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import Navigation from "../../components/Navigation/Navigation";
 import MembersDashboard from "./_Members";
 import ProjectsDashboard from "./_Projects";
 import TicketsDashboard from "./_Tickets";
 
 const Container = styled.div``;
-
-const Header = styled.header`
-  margin-bottom: 20px;
-`;
 
 const TablesContainer = styled.div`
   display: flex;
@@ -26,7 +23,7 @@ const HomeDashboard = () => {
   return (
     <Container>
       {" "}
-      <Header>Dashboard</Header>
+      <Navigation headerText={"Dashboard"} />
       <TablesContainer>
         <TopTablesContainer>
           <MembersDashboard />

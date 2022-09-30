@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Navigation from "../../components/Navigation/Navigation";
 import BasicTable from "../../components/Tables/BasicTable";
 import { Tickets_Columns } from "../../data/TableColumns";
 
 const Container = styled.div``;
-
-const Header = styled.header`
-  margin-bottom: 20px;
-`;
 
 const AllTickets = () => {
   // Retrieving State
@@ -55,7 +52,7 @@ const AllTickets = () => {
 
   return (
     <Container>
-      <Header>All Tickets</Header>
+      <Navigation headerText={"All Tickets"} />
       <BasicTable
         COLUMNS={Tickets_Columns}
         DATA={tableData}

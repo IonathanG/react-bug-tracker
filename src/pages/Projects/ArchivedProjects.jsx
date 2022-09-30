@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Navigation from "../../components/Navigation/Navigation";
 import BasicTable from "../../components/Tables/BasicTable";
 import { Projects_Columns } from "../../data/TableColumns";
 
 const Container = styled.div``;
-
-const Header = styled.header`
-  margin-bottom: 20px;
-`;
 
 const ArchivedProjects = () => {
   // Retrieving State
@@ -57,7 +54,7 @@ const ArchivedProjects = () => {
 
   return (
     <Container>
-      <Header>Archived Projects</Header>
+      <Navigation headerText={"Archived Projects"} />
       <BasicTable
         COLUMNS={Projects_Columns}
         DATA={[]}
