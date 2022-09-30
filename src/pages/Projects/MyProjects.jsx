@@ -16,47 +16,42 @@ const MyProjects = () => {
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
-  console.log(tableData);
 
   const defaultSortBy = useMemo(
     () => [
       {
-        id: "assigned_by",
+        id: "project_name",
         desc: false,
       },
     ],
     []
   );
 
-  // Pushing Specific Formatted Data from all State into an Array
+  // Assigning Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
     const projectUsersArray = projectUsers ? Object.values(projectUsers) : [];
-    const formattedData = [];
+    let formattedData = [];
 
-    projectUsersArray.filter(
-      (project) =>
-        project.project_manager_id !== userID ||
-        project.project_team_id.some((user) => user !== userID)
-    );
-
-    projectUsersArray.map((project) =>
-      formattedData.push({
+    //Filter and map all Projects where current User is not a part of
+    formattedData = projectUsersArray
+      .filter(
+        (project) =>
+          project.project_manager_id === userID ||
+          project.project_team_id.some((user) => user === userID)
+      )
+      .map((project) => ({
         project_id: project.project_id,
-        project_name: project.project_name,
-        end_date: project.end_date,
-        progress: project.progress,
-        status: project.status,
-        project_manager:
-          users[projectUsers[project.project_id].project_manager_id].user_name,
-        team: projectUsers[project.project_id].project_team_id.map(
-          (user) => users[user].user_name
-        ),
+        project_name: projects[project.project_id]?.project_name,
+        end_date: projects[project.project_id]?.end_date,
+        progress: projects[project.project_id]?.progress,
+        status: projects[project.project_id]?.status,
+        project_manager: users[project.project_manager_id]?.user_name,
+        team: project.project_team_id.map((user) => users[user]?.user_name),
         links: "link link link",
-      })
-    );
+      }));
 
-    // console.log(formattedData);
+    // console.log("formattedData: ", formattedData);
     setTableData(formattedData);
   }, [users, projects, projectUsers]);
 
@@ -65,7 +60,7 @@ const MyProjects = () => {
       <Navigation headerText={"My Projects"} />
       <BasicTable
         COLUMNS={Projects_Columns}
-        DATA={[]}
+        DATA={tableData}
         defaultSortBy={defaultSortBy}
       />
     </Container>

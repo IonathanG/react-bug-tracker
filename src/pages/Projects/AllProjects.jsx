@@ -25,28 +25,25 @@ const AllProjects = () => {
     []
   );
 
-  // Pushing Specific Formatted Data from all State into an Array
+  // Assigning Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
     const projectsArray = projects ? Object.values(projects) : [];
-    const formattedData = [];
+    let formattedData = [];
 
-    projectsArray.map((project) =>
-      formattedData.push({
-        project_id: project.project_id,
-        project_name: project.project_name,
-        end_date: project.end_date,
-        progress: project.progress,
-        status: project.status,
-        project_manager:
-          users[projectUsers[project.project_id]?.project_manager_id]
-            ?.user_name,
-        team: projectUsers[project.project_id]?.project_team_id.map(
-          (user) => users[user].user_name
-        ),
-        links: "link link link",
-      })
-    );
+    formattedData = projectsArray.map((project) => ({
+      project_id: project.project_id,
+      project_name: project.project_name,
+      end_date: project.end_date,
+      progress: project.progress,
+      status: project.status,
+      project_manager:
+        users[projectUsers[project.project_id]?.project_manager_id]?.user_name,
+      team: projectUsers[project.project_id]?.project_team_id.map(
+        (user) => users[user].user_name
+      ),
+      links: "link link link",
+    }));
 
     // console.log(formattedData);
     setTableData(formattedData);
