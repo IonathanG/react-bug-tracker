@@ -42,7 +42,8 @@ const AllProjects = () => {
         progress: project.progress,
         status: project.status,
         project_manager:
-          users[projectUsers[project.project_id].project_manager_id].user_name,
+          users[projectUsers[project.project_id]?.project_manager_id]
+            ?.user_name,
         team: projectUsers[project.project_id]?.project_team_id.map(
           (user) => users[user].user_name
         ),

@@ -41,34 +41,6 @@ const Label = styled.label`
   padding-bottom: 10px;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 8px 10px;
-
-  border: 1px solid ${({ theme }) => theme.border_Input};
-  border-radius: 4px;
-  transition: 0.3s ease-out;
-
-  font-family: "Ubuntu", "sans-serif";
-  letter-spacing: 0.1px;
-
-  &:focus {
-    outline: none;
-  }
-
-  &::placeholder {
-    font-family: "Ubuntu", "sans-serif";
-    letter-spacing: 0.1px;
-    font-size: 14px;
-    opacity: 0.9;
-    padding-left: 0px;
-  }
-`;
-
-const InputDescription = styled(Input)`
-  min-height: 100px;
-`;
-
 const AddProjectForm = () => {
   const [errorName, setErrorName] = useState(false);
 
@@ -137,7 +109,15 @@ const AddProjectForm = () => {
         <Controller
           name="projectDescription"
           control={control}
-          render={({ field }) => <InputDescription {...field} />}
+          render={({ field: { onChange, value, ref } }) => (
+            <TextField
+              multiline={true}
+              rows={4}
+              value={value ? value : ""}
+              onChange={onChange}
+              ref={ref}
+            ></TextField>
+          )}
         />
       </InputContainer>
 

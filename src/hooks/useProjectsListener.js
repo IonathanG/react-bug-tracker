@@ -5,13 +5,11 @@ import { useDispatch } from "react-redux";
 import { dbUpdateProjects } from "../features/projectsSlice";
 
 const useProjectsListener = () => {
-  //const [projects, setProjects] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const dataObj = {};
-
     const unsub = onSnapshot(collection(db, "projects"), (snapshot) => {
+      let dataObj = {};
       snapshot.docs.forEach((doc) => {
         dataObj[doc.data().project_id] = doc.data();
       });
@@ -21,7 +19,5 @@ const useProjectsListener = () => {
     return unsub;
     // eslint-disable-next-line
   }, []);
-
-  //console.log("projects: ", projects);
 };
 export default useProjectsListener;

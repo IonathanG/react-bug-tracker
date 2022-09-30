@@ -4,7 +4,7 @@ import ButtonBasic from "../Buttons/Button_Basic";
 
 const NewTicket = () => {
   return (
-    <Link to={"/"}>
+    <Link to={"Tickets/AddTicket"}>
       <ButtonBasic text={"New Ticket"} />
     </Link>
   );
