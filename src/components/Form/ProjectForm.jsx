@@ -232,7 +232,7 @@ const AddProjectForm = () => {
               error={Boolean(fieldState.error)}
               helperText={fieldState?.error?.message}
             >
-              <MenuItem value="Tromso Two">Tromso Two</MenuItem>
+              <MenuItem value="user_02">Tromso Two</MenuItem>
             </TextField>
           )}
         />

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import ButtonBasic from "../../components/Buttons/Button_Basic";
+import { useSelector } from "react-redux";
 //import { doc, getDoc, setDoc } from "firebase/firestore";
 //import { db } from "../../utils/firebase.config";
 //import moment from "moment/moment";
@@ -33,8 +34,17 @@ const Label = styled.label`
 `;
 
 const TicketForm = () => {
+  const projects = useSelector((state) => state.projects.Projects);
+
   const { control, handleSubmit } = useForm();
   // {defaultValues: {projectName: "", projectDescription: "",},}
+
+  const ProjectsList = useMemo(() => {
+    return Object.values(projects).map((project) => ({
+      project_name: project.project_name,
+      project_id: project.project_id,
+    }));
+  }, [projects]);
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -115,7 +125,11 @@ const TicketForm = () => {
               error={Boolean(fieldState.error)}
               helperText={fieldState?.error?.message}
             >
-              <MenuItem value="project_01">Project One</MenuItem>
+              {ProjectsList.map((project) => (
+                <MenuItem key={project.project_id} value={project.project_id}>
+                  {project.project_name}
+                </MenuItem>
+              ))}
             </TextField>
           )}
         />
