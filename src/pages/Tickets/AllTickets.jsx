@@ -36,7 +36,7 @@ const AllTickets = () => {
         formattedData.push({
           ticket_id: ticket.ticket_id,
           title: ticket.ticket_name,
-          assigned_by: ticket.assigned_by,
+          assigned_by: users[ticket.assigned_by].user_name,
           assigned_to: ticket.assigned_to,
           status: ticket.status,
           priority: ticket.priority,

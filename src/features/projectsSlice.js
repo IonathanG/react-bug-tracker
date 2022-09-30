@@ -10,7 +10,6 @@ export const projectsSlice = createSlice({
   initialState,
   reducers: {
     dbUpdateProjects: (state, { payload }) => {
-      console.log("updated");
       state.Projects = payload;
     },
   },
@@ -43,22 +42,22 @@ export default projectsSlice.reducer;
 //         status: "Open",
 //         priority: "High",
 //         created_date: "27/08/22",
-//         history: {
-//           event_01: {
+//         history: [{
+//             event_id: "event_01"
 //             date: "27/08/22",
 //             title: "Ticket Created",
 //             author: "Tromso Two",
 //             detail: "Ticket was submitted by Tromso Two",
-//           },
+//           }],
 //         },
-//         comments: {
-//           comment_01: {
+//         comments: [{
+//             comment_id: "comment_01",
 //             author: "Tromso Two",
 //             date: "27/08/22",
 //             comment: "Good luck on this first ticket",
-//           },
+//           }],
 //         },
-//         attachments: {},
+//         attachments: [],
 //       },
 //       ticket_02: {
 //         project_id: "project_01",

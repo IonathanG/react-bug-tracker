@@ -7,6 +7,7 @@ import ButtonBasic from "../../components/Buttons/Button_Basic";
 import { useSelector } from "react-redux";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase.config";
+import moment from "moment/moment";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -33,10 +34,10 @@ const Label = styled.label`
 `;
 
 const TicketForm = () => {
+  const userID = "user_02";
   const projects = useSelector((state) => state.projects.Projects);
 
   const { control, handleSubmit } = useForm();
-  // {defaultValues: {projectName: "", projectDescription: "",},}
 
   const ProjectsList = useMemo(() => {
     return Object.values(projects).map((project) => ({
@@ -46,39 +47,30 @@ const TicketForm = () => {
   }, [projects]);
 
   const onSubmit = async (data) => {
-    console.log(data);
-
-    // const frankDocRef = doc(db, "users", "frank");
-
-    // await setDoc(frankDocRef, {
-    //   name: "Frank",
-    //   favorites: { food: "Pizza", color: "Blue", subject: "recess" },
-    //   age: 12
-    // });
-
-    const projectsRef = doc(db, "projects", `projectID-${data.projectName}`);
+    console.log("data: ", data);
+    const projectsRef = doc(db, "projects", data.projectID);
 
     await updateDoc(projectsRef, {
-      [`tickets.${"ticketID-" + data.projectName + "_" + data.ticketTitle}`]:
-        {},
-    });
-
-    //   const projectsRef = doc(db, "projects", `projectID-${data.projectName}`);
-    //   const docSnap = await getDoc(projectsRef);
-
-    //   setDoc(doc(db, "projects", `projectID-${data.projectName}`), {
-    //     project_id: `projectID-${data.projectName}`,
-    //     project_name: data.projectName,
-    //     description: data.projectDescription,
-    //     start_date: moment(data.startDate).format("DD-MM-YYYY"),
-    //     end_date: moment(data.endDate).format("DD-MM-YYYY"),
-    //     priority: data.priority,
-    //     progress: 0,
-    //     status: "Open",
-    //     attachment: {},
-    //     tickets: {},
-    //   });
-    // }
+      //  [`tickets.${data.projectID + "-" + data.ticketTitle}`]: {
+      [`tickets.ticketID-${data.ticketTitle}`]: {
+        project_id: data.projectID,
+        ticket_id: `${data.projectID}-${data.ticketTitle}`,
+        ticket_name: data.ticketTitle,
+        //created_by: userID,
+        assigned_by: userID,
+        assigned_to: "",
+        description: data.ticketDescription,
+        type: data.type,
+        status: "Open",
+        priority: data.priority,
+        created_date: moment().format("DD/MM/yyyy"),
+        history: [],
+        comments: [],
+        attachments: [],
+      },
+    })
+      .then(() => console.log("Ticket added"))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -123,9 +115,9 @@ const TicketForm = () => {
 
       {/* Project Select */}
       <InputContainer>
-        <Label htmlFor="project">Project</Label>
+        <Label htmlFor="projectID">Project</Label>
         <Controller
-          name="projet"
+          name="projectID"
           control={control}
           rules={{ required: "This field is required" }}
           render={({ field: { onChange, value, ref }, fieldState }) => (

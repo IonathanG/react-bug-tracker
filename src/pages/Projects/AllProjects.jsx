@@ -28,9 +28,6 @@ const AllProjects = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    console.log("Projects: ", projects);
-    console.log("ProjectUsers: ", projectUsers);
-    console.log("Users: ", users);
     const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
