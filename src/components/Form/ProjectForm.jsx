@@ -74,6 +74,14 @@ const AddProjectForm = () => {
       })
         .then(() => console.log("Project added"))
         .catch((error) => console.log(error));
+
+      setDoc(doc(db, "projectUsers", `projectID-${data.projectName}`), {
+        project_id: `projectID-${data.projectName}`,
+        project_manager_id: data.projectManager,
+        project_team_id: [],
+      })
+        .then(() => console.log("ProjectUsers added"))
+        .catch((error) => console.log(error));
     }
   };
 
@@ -211,7 +219,7 @@ const AddProjectForm = () => {
       <InputContainer>
         <Label htmlFor="projectManager">Project Manager</Label>
         <Controller
-          name="projetManager"
+          name="projectManager"
           control={control}
           rules={{ required: "This field is required" }}
           render={({ field: { onChange, value, ref }, fieldState }) => (
