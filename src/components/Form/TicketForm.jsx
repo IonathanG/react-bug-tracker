@@ -5,9 +5,8 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import ButtonBasic from "../../components/Buttons/Button_Basic";
 import { useSelector } from "react-redux";
-//import { doc, getDoc, setDoc } from "firebase/firestore";
-//import { db } from "../../utils/firebase.config";
-//import moment from "moment/moment";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../utils/firebase.config";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -48,6 +47,21 @@ const TicketForm = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
+
+    // const frankDocRef = doc(db, "users", "frank");
+
+    // await setDoc(frankDocRef, {
+    //   name: "Frank",
+    //   favorites: { food: "Pizza", color: "Blue", subject: "recess" },
+    //   age: 12
+    // });
+
+    const projectsRef = doc(db, "projects", `projectID-${data.projectName}`);
+
+    await updateDoc(projectsRef, {
+      [`tickets.${"ticketID-" + data.projectName + "_" + data.ticketTitle}`]:
+        {},
+    });
 
     //   const projectsRef = doc(db, "projects", `projectID-${data.projectName}`);
     //   const docSnap = await getDoc(projectsRef);
