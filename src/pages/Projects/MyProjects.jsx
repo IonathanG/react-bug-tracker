@@ -9,6 +9,7 @@ const Container = styled.div``;
 
 const MyProjects = () => {
   const userID = "user_02";
+  const userRole = "Admin";
 
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
@@ -33,13 +34,17 @@ const MyProjects = () => {
     const projectUsersArray = projectUsers ? Object.values(projectUsers) : [];
     let formattedData = [];
 
-    //Filter and map all Projects where current User is not a part of
+    // Filter and map all Projects where current User is involved
+    // Admin can see all Projects
     formattedData = projectUsersArray
-      .filter(
-        (project) =>
-          project.project_manager_id === userID ||
-          project.project_team_id.some((user) => user === userID)
-      )
+      .filter((project) => {
+        if (userRole !== "Admin") {
+          return (
+            project.project_manager_id === userID ||
+            project.project_team_id.some((user) => user === userID)
+          );
+        } else return project;
+      })
       .map((project) => ({
         project_id: project.project_id,
         project_name: projects[project.project_id]?.project_name,

@@ -8,13 +8,15 @@ import { Tickets_Columns } from "../../data/TableColumns";
 const Container = styled.div``;
 
 const MyTickets = () => {
+  const userID = "user_03";
+  const userRole = "Developer";
+
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
-  console.log(tableData);
 
   const defaultSortBy = useMemo(
     () => [
@@ -29,25 +31,53 @@ const MyTickets = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    const projectsArray = Object.values(projects);
-    const formattedData = [];
+    const projectUsersArray = projectUsers ? Object.values(projectUsers) : [];
+    let formattedData = [];
 
-    projectsArray.map((project) =>
-      Object.values(project.tickets).map((ticket) =>
-        formattedData.push({
-          ticket_id: ticket.ticket_id,
-          title: ticket.ticket_name,
-          assigned_by: ticket.assigned_by,
-          assigned_to: ticket.assigned_to,
-          status: ticket.status,
-          priority: ticket.priority,
-          date: ticket.created_date,
-          links: "link link link",
+    // Filter and map all Tickets:
+    // => Admin can see all Tickets
+    // => Project Manager can see all Tickets from his Projects
+    // => Developer can see all Tickets he/she is assigned to
+
+    // Filter the Projects where Project Manager and Developer are assigned to
+    const myProjects = projectUsersArray.filter((project) => {
+      switch (userRole) {
+        case "Project Manager":
+          return project.project_manager_id === userID;
+
+        case "Developer":
+          return project.project_team_id.some((user) => user === userID);
+
+        default:
+          return project;
+      }
+    });
+
+    myProjects.map((project) =>
+      Object.values(projects[project.project_id].tickets)
+        // Filter Tickets where Developer is not assigned to
+        .filter((ticket) => {
+          if (userRole === "Developer") {
+            return ticket.assigned_to === userID;
+          } else return ticket;
         })
-      )
+        .map((ticket) =>
+          formattedData.push({
+            ticket_id: ticket.ticket_id,
+            title: ticket.ticket_name,
+            assigned_by: users[ticket.assigned_by]?.user_name,
+            assigned_to: ticket.assigned_to,
+            status: ticket.status,
+            priority: ticket.priority,
+            date: ticket.created_date,
+            links: "link link link",
+          })
+        )
     );
 
-    console.log(formattedData);
+    console.log("myProjects: ", myProjects);
+
+    console.log("formattedData: ", formattedData);
     setTableData(formattedData);
   }, [users, projects, projectUsers]);
 
@@ -56,7 +86,7 @@ const MyTickets = () => {
       <Navigation headerText={"My Tickets"} />
       <BasicTable
         COLUMNS={Tickets_Columns}
-        DATA={[]}
+        DATA={tableData}
         defaultSortBy={defaultSortBy}
       />
     </Container>

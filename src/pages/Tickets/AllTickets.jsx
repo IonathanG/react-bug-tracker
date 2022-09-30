@@ -29,7 +29,7 @@ const AllTickets = () => {
   // Array to be displayed into the BasicTable component
   useEffect(() => {
     const projectsArray = Object.values(projects);
-    const formattedData = [];
+    let formattedData = [];
 
     projectsArray.map((project) =>
       Object.values(project.tickets).map((ticket) =>
