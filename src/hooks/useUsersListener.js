@@ -13,7 +13,7 @@ const useUsersListener = () => {
 
     const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
       snapshot.docs.forEach((doc) => {
-        dataObj[doc.data().project_id] = doc.data();
+        dataObj[doc.data().user_id] = doc.data();
       });
       dispatch(dbUpdateUsers(dataObj));
     });

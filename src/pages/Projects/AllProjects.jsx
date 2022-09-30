@@ -28,7 +28,9 @@ const AllProjects = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    console.log("AllProjects: ", projects);
+    console.log("Projects: ", projects);
+    console.log("ProjectUsers: ", projectUsers);
+    console.log("Users: ", users);
     const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
@@ -39,8 +41,8 @@ const AllProjects = () => {
         end_date: project.end_date,
         progress: project.progress,
         status: project.status,
-        // project_manager:
-        //   users[projectUsers[project.project_id].project_manager_id].user_name,
+        project_manager:
+          users[projectUsers[project.project_id].project_manager_id].user_name,
         team: projectUsers[project.project_id]?.project_team_id.map(
           (user) => users[user].user_name
         ),
