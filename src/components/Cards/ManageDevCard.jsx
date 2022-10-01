@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import ButtonBasic from "../Buttons/Button_Basic";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
   padding: 20px;
 
   border-radius: 5px;
@@ -12,8 +17,121 @@ const CardContainer = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow_Block};
 `;
 
-const ManageDevCard = ({ projectMembers }) => {
-  return <CardContainer></CardContainer>;
+const Title = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+`;
+
+const ButtonContainer = styled.span`
+  width: 50%;
+`;
+
+const DevContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const CompanyDev = styled.div`
+  width: 45%;
+  font-size: 14px;
+  font-weight: 400;
+
+  p {
+    text-align: center;
+    padding: 4px;
+  }
+`;
+const OnProjectDev = styled(CompanyDev)``;
+
+const DevList = styled.div`
+  border: 1px solid ${({ theme }) => theme.background_Modal};
+  height: 180px;
+`;
+
+const DevMember = styled.div`
+  cursor: pointer;
+  padding: 5px 10px;
+  border-bottom: 0.5px solid ${({ theme }) => theme.background_Modal};
+
+  &:hover {
+    color: ${({ theme }) => theme.color_ButtonBasic};
+    background-color: ${({ theme }) => theme.background_ButtonBasic};
+  }
+`;
+
+const SwapIcon = styled(SwapHorizIcon)``;
+
+const ManageDevCard = ({ teamMembers }) => {
+  const users = useSelector((state) => state.users.Users);
+
+  const [projectDevList, setProjectDevList] = useState([]);
+  const [companyDevList, setCompanyDevList] = useState([]);
+
+  useEffect(() => {
+    setProjectDevList(teamMembers);
+
+    // Filter Users who are not Developers
+    setCompanyDevList(
+      Object.values(users)
+        .filter((user) => user.user_role === "Developer")
+        .map((user) => user.user_id)
+    );
+    console.log("test");
+  }, [teamMembers, users]);
+
+  // Adds Developer to the current project
+  const addDev = (user) => {
+    console.log("Add Dev: ", user);
+    setProjectDevList((list) => [...list, user]);
+    setCompanyDevList((list) => list.filter((dev) => dev === user));
+  };
+
+  // Removes Developer from the current project
+  const removeDev = (user) => {
+    console.log("Remove Dev: ", user);
+    setCompanyDevList((list) => [...list, user]);
+    setProjectDevList((list) => list.filter((dev) => dev === user));
+  };
+
+  return (
+    <CardContainer>
+      <Title>Manage Developers</Title>
+
+      <DevContainer>
+        <CompanyDev>
+          <p>Company Developers</p>
+          <DevList>
+            {/* Filter Users who are already on the Project Team */}
+            {companyDevList
+              ?.filter((user) => !projectDevList?.includes(user))
+              .map((user) => (
+                <DevMember key={user} onClick={() => addDev(user)}>
+                  {users[user]?.user_name}
+                </DevMember>
+              ))}
+          </DevList>
+        </CompanyDev>
+
+        <SwapIcon />
+
+        <OnProjectDev>
+          <p>On Project</p>
+          <DevList>
+            {projectDevList?.map((user) => (
+              <DevMember key={user} onClick={() => removeDev(user)}>
+                {users[user]?.user_name}
+              </DevMember>
+            ))}
+          </DevList>
+        </OnProjectDev>
+      </DevContainer>
+
+      <ButtonContainer>
+        <ButtonBasic text={"Assign Members"} />
+      </ButtonContainer>
+    </CardContainer>
+  );
 };
 
 export default ManageDevCard;

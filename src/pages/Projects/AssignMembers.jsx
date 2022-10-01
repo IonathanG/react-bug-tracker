@@ -33,7 +33,7 @@ const AssignMembers = () => {
 
       <ManageTeamContainer>
         <ProjectTeamCard projectMembers={projectMembers} />
-        <ManageDevCard projectMembers={projectMembers} />
+        <ManageDevCard teamMembers={projectMembers?.project_team_id} />
       </ManageTeamContainer>
     </>
   );
