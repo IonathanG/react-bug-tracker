@@ -23,6 +23,7 @@ import AddProject from "./pages/Projects/AddProject";
 import ManageProjects from "./pages/Projects/ManageProjects";
 import ArchivedProjects from "./pages/Projects/ArchivedProjects";
 import ProjectDetails from "./pages/Projects/ProjectDetails";
+import AssignMembers from "./pages/Projects/AssignMembers";
 
 // Tickets
 import AllTickets from "./pages/Tickets/AllTickets";
@@ -87,6 +88,10 @@ function App() {
                 <Route
                   path="/Projects/ProjectDetails/:id"
                   element={<ProjectDetails />}
+                />
+                <Route
+                  path="/Projects/AssignMembers/:id"
+                  element={<AssignMembers />}
                 />
               </Route>
 

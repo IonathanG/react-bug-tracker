@@ -23,6 +23,8 @@ export const lightTheme = {
   background_ButtonBasic_Hover: "rgb(1,105,217)",
   color_ButtonBasic: "rgb(255,255,255)",
   border_Button: "rgb(212,212,217)",
+  background_ButtonManage: "rgb(19,163,184)",
+  hover_ButtonManage: "rgba(19,132,150,255)",
 
   // Side Navbar
   color_NavItem: "rgb(23, 25, 28)",
@@ -49,6 +51,9 @@ export const lightTheme = {
   //Tables Pagination
   background_PageIndex: "rgb(0,123,254)",
   color_PageIndex: "rgb(255,255,255)",
+
+  //Card
+  card_subTitle: "rgb(153, 153, 153)",
 };
 
 export const darkTheme = {
@@ -76,6 +81,8 @@ export const darkTheme = {
   background_ButtonBasic_Hover: "rgb(1,105,217)",
   color_ButtonBasic: "rgb(255,255,255)",
   border_Button: "rgb(212,212,217)",
+  background_ButtonManage: "rgb(19,163,184)",
+  hover_ButtonManage: "rgba(19,132,150,255)",
 
   // Side Navbar
   color_NavItem: "rgb(23, 25, 28)",
@@ -102,4 +109,7 @@ export const darkTheme = {
   //Tables Pagination
   background_PageIndex: "rgb(0,123,254)",
   color_PageIndex: "rgb(255,255,255)",
+
+  //Card
+  card_subTitle: "rgb(153, 153, 153)",
 };

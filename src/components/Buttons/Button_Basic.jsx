@@ -7,7 +7,10 @@ const Button = styled.button`
   transition: 0.25s ease;
 
   cursor: pointer;
-  background-color: ${({ theme }) => theme.background_ButtonBasic};
+  background-color: ${(props) =>
+    props.buttonStyle?.background
+      ? `${props.buttonStyle.background}`
+      : props.theme.background_ButtonBasic};
   color: ${({ theme }) => theme.color_ButtonBasic};
   font-size: 14px;
 
@@ -15,17 +18,21 @@ const Button = styled.button`
   border-radius: 4px;
 
   padding: ${(props) =>
-    props.style?.padding ? `${props.style.padding}` : "10px 14px"};
-  margin: ${(props) => (props.style?.margin ? `${props.style.margin}` : "0px")};
+    props.buttonStyle?.padding ? `${props.buttonStyle.padding}` : "10px 14px"};
+  margin: ${(props) =>
+    props.buttonStyle?.margin ? `${props.buttonStyle.margin}` : "0px"};
 
   &:hover {
-    background-color: ${({ theme }) => theme.background_ButtonBasic_Hover};
+    background-color: ${(props) =>
+      props.buttonStyle?.hover.background
+        ? `${props.buttonStyle.hover.background}`
+        : props.theme.background_ButtonBasic_Hover};
   }
 `;
 
 const ButtonBasic = ({ buttonStyle, text, callback = null }) => {
   return (
-    <Button style={buttonStyle} onClick={callback} type="submit">
+    <Button buttonStyle={buttonStyle} onClick={callback} type="submit">
       {text}
     </Button>
   );
