@@ -8,8 +8,8 @@ import { Tickets_Columns } from "../../data/TableColumns";
 const Container = styled.div``;
 
 const MyTickets = () => {
-  const userID = "user_03";
-  const userRole = "Developer";
+  const userID = "user_01";
+  const userRole = "Admin";
 
   // Retrieving State
   const users = useSelector((state) => state.users.Users);

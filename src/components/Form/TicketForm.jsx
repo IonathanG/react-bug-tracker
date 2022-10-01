@@ -36,9 +36,9 @@ const Label = styled.label`
 const TicketForm = () => {
   const userID = "user_02";
   const projects = useSelector((state) => state.projects.Projects);
-
   const { control, handleSubmit } = useForm();
 
+  // Keep up to date List of Projects to assign a ticket to
   const ProjectsList = useMemo(() => {
     return Object.values(projects).map((project) => ({
       project_name: project.project_name,

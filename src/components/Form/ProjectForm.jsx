@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
@@ -10,6 +10,7 @@ import ButtonBasic from "../Buttons/Button_Basic";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase.config";
 import moment from "moment/moment";
+import { useSelector } from "react-redux";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -42,10 +43,22 @@ const Label = styled.label`
 `;
 
 const AddProjectForm = () => {
+  const users = useSelector((state) => state.users.Users);
   const [errorName, setErrorName] = useState(false);
-
   const { control, handleSubmit } = useForm();
   // {defaultValues: {projectName: "", projectDescription: "",},}
+
+  // Keep up to date List of Managers to assign a project to
+  const ManagersList = useMemo(() => {
+    return Object.values(users)
+      .filter((user) => user.user_role === "Project Manager")
+      .map((manager) => ({
+        manager_id: manager.user_id,
+        manager_name: manager.user_name,
+      }));
+  }, [users]);
+
+  console.log("ManagersList: ", ManagersList);
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -232,7 +245,11 @@ const AddProjectForm = () => {
               error={Boolean(fieldState.error)}
               helperText={fieldState?.error?.message}
             >
-              <MenuItem value="user_02">Tromso Two</MenuItem>
+              {ManagersList.map((manager) => (
+                <MenuItem key={manager.manager_id} value={manager.manager_id}>
+                  {manager.manager_name}
+                </MenuItem>
+              ))}
             </TextField>
           )}
         />
