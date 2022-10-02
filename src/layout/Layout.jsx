@@ -13,7 +13,7 @@ const Layout = () => {
         <SectionPage>
           {/* Top Header */}
           <Header />
-          {/* Main Section => Side Navbar + Content */}
+          {/* Main Section => Side Navbar + Main Content */}
           <SectionMain>
             {/* Side Navbar */}
             <Navbar />

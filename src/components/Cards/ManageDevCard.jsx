@@ -13,6 +13,7 @@ const CardContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  height: fit-content;
 
   border-radius: 5px;
   background-color: ${({ theme }) => theme.background_Block};
@@ -96,7 +97,7 @@ const ManageDevCard = ({ teamMembers, projectID }) => {
   };
 
   const assignMembers = async (list) => {
-    console.log("final list: ", list);
+    // console.log("final list: ", list);
     const projectUsersRef = doc(db, "projectUsers", projectID);
 
     await updateDoc(projectUsersRef, {

@@ -25,8 +25,8 @@ export const SectionMain = styled.section`
 `;
 
 export const SectionContent = styled.section`
-  //background-color: beige;
   min-height: 100vh;
+
   // margin for side Navbar
   margin-left: 250px;
   padding: 15px;

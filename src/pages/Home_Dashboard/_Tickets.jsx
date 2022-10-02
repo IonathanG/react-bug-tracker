@@ -28,6 +28,7 @@ const TicketsDashboard = () => {
 
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
+
   useEffect(() => {
     const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];

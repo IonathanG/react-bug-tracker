@@ -1,4 +1,4 @@
-//import { format } from "date-fns";
+// DATA for Column Display of all Tables in react-tables
 
 export const Projects_Columns = [
   {

@@ -90,7 +90,7 @@ const MemberInfo = styled.div`
   }
 `;
 
-const ProjectTeamCard = ({ projectMembers }) => {
+const ProjectTeamCard = ({ projectMembers, projectID }) => {
   const users = useSelector((state) => state.users.Users);
   // console.log("projectMembers: ", projectMembers);
 
@@ -124,7 +124,7 @@ const ProjectTeamCard = ({ projectMembers }) => {
           <span>{users[projectMembers?.project_manager_id]?.user_email}</span>
           <span>{users[projectMembers?.project_manager_id]?.user_role}</span>
 
-          <Link to={``}>
+          <Link to={`/Projects/AssignManager/${projectID}`}>
             <ButtonBasic buttonStyle={buttonStyle} text={"Manage PM"} />
           </Link>
         </ManagerInfo>

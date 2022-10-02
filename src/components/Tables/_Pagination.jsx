@@ -68,7 +68,7 @@ const PageButton = styled.button`
 const Pagination = ({
   pageIndex,
   pageSize,
-  pageSizeOptions,
+  //pageSizeOptions,
   page,
   previousPage,
   nextPage,
