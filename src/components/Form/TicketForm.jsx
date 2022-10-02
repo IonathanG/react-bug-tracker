@@ -51,7 +51,6 @@ const TicketForm = () => {
     const projectsRef = doc(db, "projects", data.projectID);
 
     await updateDoc(projectsRef, {
-      //  [`tickets.${data.projectID + "-" + data.ticketTitle}`]: {
       [`tickets.ticketID-${data.ticketTitle}`]: {
         project_id: data.projectID,
         ticket_id: `${data.projectID}-${data.ticketTitle}`,

@@ -16,7 +16,7 @@ const ManageTeamContainer = styled.div`
 
 const AssignMembers = () => {
   const { id } = useParams();
-  //   console.log("project ID: ", id);
+  console.log("project ID: ", id);
 
   // Retrieving State
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
@@ -33,7 +33,10 @@ const AssignMembers = () => {
 
       <ManageTeamContainer>
         <ProjectTeamCard projectMembers={projectMembers} />
-        <ManageDevCard teamMembers={projectMembers?.project_team_id} />
+        <ManageDevCard
+          teamMembers={projectMembers?.project_team_id}
+          projectID={id}
+        />
       </ManageTeamContainer>
     </>
   );

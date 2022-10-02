@@ -58,7 +58,7 @@ const AddProjectForm = () => {
       }));
   }, [users]);
 
-  console.log("ManagersList: ", ManagersList);
+  // console.log("ManagersList: ", ManagersList);
 
   const onSubmit = async (data) => {
     console.log(data);

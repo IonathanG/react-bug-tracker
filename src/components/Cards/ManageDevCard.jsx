@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import ButtonBasic from "../Buttons/Button_Basic";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../utils/firebase.config";
 
 const CardContainer = styled.div`
   display: flex;
@@ -62,43 +64,46 @@ const DevMember = styled.div`
 
 const SwapIcon = styled(SwapHorizIcon)``;
 
-const ManageDevCard = ({ teamMembers }) => {
+const ManageDevCard = ({ teamMembers, projectID }) => {
+  // const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
   const users = useSelector((state) => state.users.Users);
 
   const [projectDevList, setProjectDevList] = useState([]);
-  const [companyDevList, setCompanyDevList] = useState([]);
 
   useEffect(() => {
     setProjectDevList(teamMembers);
   }, [teamMembers]);
 
-  useEffect(() => {
-    // Filter Users who are not Developers and not already on the current Project
-    setCompanyDevList(
-      Object.values(users)
-        .filter(
-          (user) =>
-            user.user_role === "Developer" &&
-            !projectDevList?.includes(user.user_id)
-        )
-        .map((user) => user.user_id)
-    );
-  }, [teamMembers, users, projectDevList]);
+  // Filter Users who are not Developers and not already on the current Project
+  const companyDevList = useMemo(() => {
+    return Object.values(users)
+      .filter(
+        (user) =>
+          user.user_role === "Developer" &&
+          !projectDevList?.includes(user.user_id)
+      )
+      .map((user) => user.user_id);
+  }, [users, projectDevList]);
 
   // Adds Developer to the current project
   const addDev = (user) => {
     setProjectDevList((list) => [...list, user]);
-    setCompanyDevList((list) => list.filter((dev) => dev === user));
   };
 
   // Removes Developer from the current project
   const removeDev = (user) => {
-    setCompanyDevList((list) => [...list, user]);
     setProjectDevList((list) => list.filter((dev) => dev !== user));
   };
 
-  const assignMembers = (list) => {
+  const assignMembers = async (list) => {
     console.log("final list: ", list);
+    const projectUsersRef = doc(db, "projectUsers", projectID);
+
+    await updateDoc(projectUsersRef, {
+      project_team_id: list,
+    })
+      .then(() => console.log("Team Updated!"))
+      .catch((error) => console.log(error));
   };
 
   return (
