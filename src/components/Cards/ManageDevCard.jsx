@@ -70,28 +70,35 @@ const ManageDevCard = ({ teamMembers }) => {
 
   useEffect(() => {
     setProjectDevList(teamMembers);
+  }, [teamMembers]);
 
-    // Filter Users who are not Developers
+  useEffect(() => {
+    // Filter Users who are not Developers and not already on the current Project
     setCompanyDevList(
       Object.values(users)
-        .filter((user) => user.user_role === "Developer")
+        .filter(
+          (user) =>
+            user.user_role === "Developer" &&
+            !projectDevList?.includes(user.user_id)
+        )
         .map((user) => user.user_id)
     );
-    console.log("test");
-  }, [teamMembers, users]);
+  }, [teamMembers, users, projectDevList]);
 
   // Adds Developer to the current project
   const addDev = (user) => {
-    console.log("Add Dev: ", user);
     setProjectDevList((list) => [...list, user]);
     setCompanyDevList((list) => list.filter((dev) => dev === user));
   };
 
   // Removes Developer from the current project
   const removeDev = (user) => {
-    console.log("Remove Dev: ", user);
     setCompanyDevList((list) => [...list, user]);
-    setProjectDevList((list) => list.filter((dev) => dev === user));
+    setProjectDevList((list) => list.filter((dev) => dev !== user));
+  };
+
+  const assignMembers = (list) => {
+    console.log("final list: ", list);
   };
 
   return (
@@ -102,14 +109,12 @@ const ManageDevCard = ({ teamMembers }) => {
         <CompanyDev>
           <p>Company Developers</p>
           <DevList>
-            {/* Filter Users who are already on the Project Team */}
-            {companyDevList
-              ?.filter((user) => !projectDevList?.includes(user))
-              .map((user) => (
-                <DevMember key={user} onClick={() => addDev(user)}>
-                  {users[user]?.user_name}
-                </DevMember>
-              ))}
+            {/* Dev who are not on the Project Team */}
+            {companyDevList?.map((user) => (
+              <DevMember key={user} onClick={() => addDev(user)}>
+                {users[user]?.user_name}
+              </DevMember>
+            ))}
           </DevList>
         </CompanyDev>
 
@@ -118,6 +123,7 @@ const ManageDevCard = ({ teamMembers }) => {
         <OnProjectDev>
           <p>On Project</p>
           <DevList>
+            {/* Users who are already on the Project Team */}
             {projectDevList?.map((user) => (
               <DevMember key={user} onClick={() => removeDev(user)}>
                 {users[user]?.user_name}
@@ -127,7 +133,7 @@ const ManageDevCard = ({ teamMembers }) => {
         </OnProjectDev>
       </DevContainer>
 
-      <ButtonContainer>
+      <ButtonContainer onClick={() => assignMembers(projectDevList)}>
         <ButtonBasic text={"Assign Members"} />
       </ButtonContainer>
     </CardContainer>
