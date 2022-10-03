@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
@@ -42,11 +42,33 @@ const Label = styled.label`
   padding-bottom: 10px;
 `;
 
-const ProjectForm = () => {
+const ProjectForm = ({ projectID }) => {
+  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
+  const projects = useSelector((state) => state.projects.Projects);
   const users = useSelector((state) => state.users.Users);
+
   const [errorName, setErrorName] = useState(false);
-  const { control, handleSubmit } = useForm();
-  // {defaultValues: {projectName: "", projectDescription: "",},}
+  const { control, reset, handleSubmit } = useForm({});
+
+  // Format Date in Edit Mode from dd/mm/yyyy to mm/dd/yyyy for DatePicker
+  const DateFormat = useCallback((date) => {
+    let dateArray = date.split("-");
+    return `${dateArray[1]}-${dateArray[0]}-${dateArray[2]}`;
+  }, []);
+
+  // Default Values in case the Form is in Edit mode
+  useEffect(() => {
+    if (projects[projectID]) {
+      reset({
+        projectName: projects[projectID].project_name,
+        projectDescription: projects[projectID].description,
+        startDate: DateFormat(projects[projectID].start_date),
+        endDate: DateFormat(projects[projectID].end_date),
+        priority: projects[projectID].priority,
+        projectManager: projectUsers[projectID]?.project_manager_id,
+      });
+    }
+  }, [projects, projectUsers, users, projectID, reset, DateFormat]);
 
   // Keep up to date List of Managers to assign a project to
   const ManagersList = useMemo(() => {
