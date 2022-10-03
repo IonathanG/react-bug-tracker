@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import ManageDevCard from "../../components/Cards/ManageDevCard";
-import ProjectTeamCard from "../../components/Cards/ProjectTeamCard";
+import ManageDevCard from "../../components/Cards/AssignMembers/ManageDevCard";
+import ProjectTeamCard from "../../components/Cards/AssignMembers/ProjectTeamCard";
 import Navigation from "../../components/Navigation/Navigation";
 
 const ManageTeamContainer = styled.div`

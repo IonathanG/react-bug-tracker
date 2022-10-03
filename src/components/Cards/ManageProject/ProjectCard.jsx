@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ButtonBasic from "../Buttons/Button_Basic";
+import ButtonBasic from "../../Buttons/Button_Basic";
 import { Link } from "react-router-dom";
-import ProjectCardPopUp from "../PopUp/ProjectCardPopUp";
+import ProjectCardPopUp from "../../PopUp/ProjectCardPopUp";
 
 const CardContainer = styled.div`
   display: flex;

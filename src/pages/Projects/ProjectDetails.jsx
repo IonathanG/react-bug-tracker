@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/Navigation";
-import ProjectDetailsTagCard from "../../components/Cards/ProjectDetails_TagCard";
-import ProjectDetailsInfoCard from "../../components/Cards/ProjectDetails_InfoCard";
-import ProjectDetailsTeamCard from "../../components/Cards/ProjectDetails_TeamCard";
+import ProjectDetailsTagCard from "../../components/Cards/ProjectDetails/ProjectDetails_TagCard";
+import ProjectDetailsInfoCard from "../../components/Cards/ProjectDetails/ProjectDetails_InfoCard";
+import ProjectDetailsTeamCard from "../../components/Cards/ProjectDetails/ProjectDetails_TeamCard";
 import BasicTable from "../../components/Tables/BasicTable";
 import { TicketsDashboard_Columns } from "../../data/TableColumns";
 

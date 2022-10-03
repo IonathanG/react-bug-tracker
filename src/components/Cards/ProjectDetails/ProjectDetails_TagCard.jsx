@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import TagInfo from "../Tags/Tag_Info";
+import TagInfo from "../../Tags/Tag_Info";
 
 const CardContainer = styled.div`
   display: flex;

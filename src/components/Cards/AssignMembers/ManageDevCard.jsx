@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import ButtonBasic from "../Buttons/Button_Basic";
+import ButtonBasic from "../../Buttons/Button_Basic";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../utils/firebase.config";
+import { db } from "../../../utils/firebase.config";
 
 const CardContainer = styled.div`
   display: flex;

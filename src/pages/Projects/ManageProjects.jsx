@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import ProjectCard from "../../components/Cards/ProjectCard";
+import ProjectCard from "../../components/Cards/ManageProject/ProjectCard";
 import Navigation from "../../components/Navigation/Navigation";
 //import { device } from "../../shared/breakpoints";
 

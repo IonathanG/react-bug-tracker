@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ButtonActions from "../Buttons/Button_Actions";
+import ButtonActions from "../../Buttons/Button_Actions";
 
 const CardContainer = styled.div`
   flex: 2;

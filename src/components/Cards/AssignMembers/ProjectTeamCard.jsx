@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ButtonBasic from "../Buttons/Button_Basic";
+import ButtonBasic from "../../Buttons/Button_Basic";
 
 const CardContainer = styled.div`
   display: flex;
@@ -13,10 +13,6 @@ const CardContainer = styled.div`
   border-radius: 5px;
   background-color: ${({ theme }) => theme.background_Block};
   box-shadow: ${({ theme }) => theme.boxShadow_Block};
-
-  button {
-    margin-top: 15px;
-  }
 `;
 
 const CardHeader = styled.div`
@@ -94,8 +90,9 @@ const MemberInfo = styled.div`
   }
 `;
 
-const ProjectDetailsTeamCard = ({ projectMembers, projectID }) => {
+const ProjectTeamCard = ({ projectMembers, projectID }) => {
   const users = useSelector((state) => state.users.Users);
+  // console.log("projectMembers: ", projectMembers);
 
   const buttonStyle = {
     background: "rgb(19,163,184)",
@@ -126,6 +123,10 @@ const ProjectDetailsTeamCard = ({ projectMembers, projectID }) => {
 
           <span>{users[projectMembers?.project_manager_id]?.user_email}</span>
           <span>{users[projectMembers?.project_manager_id]?.user_role}</span>
+
+          <Link to={`/Projects/AssignManager/${projectID}`}>
+            <ButtonBasic buttonStyle={buttonStyle} text={"Manage PM"} />
+          </Link>
         </ManagerInfo>
       </ManagerContainer>
 
@@ -142,12 +143,8 @@ const ProjectDetailsTeamCard = ({ projectMembers, projectID }) => {
           </TeamMember>
         ))}
       </TeamContainer>
-
-      <Link to={`/Projects/AssignMembers/${projectID}`}>
-        <ButtonBasic buttonStyle={buttonStyle} text={"Manage Team"} />
-      </Link>
     </CardContainer>
   );
 };
 
-export default ProjectDetailsTeamCard;
+export default ProjectTeamCard;
