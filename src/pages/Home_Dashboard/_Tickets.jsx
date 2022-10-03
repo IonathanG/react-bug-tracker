@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import BasicTable from "../../components/Tables/BasicTable";
@@ -12,9 +12,6 @@ const TicketsDashboard = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
-  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
-
-  const [tableData, setTableData] = useState([]);
 
   const defaultSortBy = useMemo(
     () => [
@@ -28,8 +25,7 @@ const TicketsDashboard = () => {
 
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
-
-  useEffect(() => {
+  const tableData = useMemo(() => {
     const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
@@ -38,7 +34,7 @@ const TicketsDashboard = () => {
         formattedData.push({
           ticket_id: ticket.ticket_id,
           ticket_title: ticket.ticket_name,
-          developer: ticket.assigned_to,
+          developer: users[ticket.assigned_to]?.user_name,
           status: ticket.status,
           priority: ticket.priority,
           date: ticket.created_date,
@@ -46,9 +42,8 @@ const TicketsDashboard = () => {
         })
       )
     );
-
-    setTableData(formattedData);
-  }, [users, projects, projectUsers]);
+    return formattedData;
+  }, [users, projects]);
 
   return (
     <Container>

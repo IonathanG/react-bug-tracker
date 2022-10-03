@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ButtonBasic from "../Buttons/Button_Basic";
 import { Link } from "react-router-dom";
+import ProjectCardPopUp from "../PopUp/ProjectCardPopUp";
 
 const CardContainer = styled.div`
   display: flex;
@@ -39,7 +40,9 @@ const Priority = styled.span`
   color: ${({ theme }) => theme.card_subTitle};
 `;
 
-const RightHeader = styled.div``;
+const RightHeader = styled.div`
+  position: relative;
+`;
 
 const DropDownArrow = styled(ArrowDropDownIcon)`
   margin-top: -5px;
@@ -96,6 +99,8 @@ const ProjectCard = ({ project }) => {
     },
   };
 
+  const [showPopUp, setShowPopUp] = useState(false);
+
   return (
     <CardContainer>
       <CardHeader>
@@ -105,7 +110,13 @@ const ProjectCard = ({ project }) => {
         </LeftHeader>
 
         <RightHeader>
-          <DropDownArrow></DropDownArrow>
+          <DropDownArrow
+            onClick={() => setShowPopUp(!showPopUp)}
+          ></DropDownArrow>
+          <ProjectCardPopUp
+            showPopUp={showPopUp}
+            projectID={project.project_id}
+          />
         </RightHeader>
       </CardHeader>
 

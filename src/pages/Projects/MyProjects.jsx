@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/Navigation";
@@ -9,14 +9,12 @@ const Container = styled.div``;
 
 const MyProjects = () => {
   const userID = "user_02";
-  const userRole = "Admin";
+  const userRole = "Project Manager";
 
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
-
-  const [tableData, setTableData] = useState([]);
 
   const defaultSortBy = useMemo(
     () => [
@@ -30,7 +28,7 @@ const MyProjects = () => {
 
   // Assigning Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
-  useEffect(() => {
+  const tableData = useMemo(() => {
     const projectUsersArray = projectUsers ? Object.values(projectUsers) : [];
     let formattedData = [];
 
@@ -55,9 +53,7 @@ const MyProjects = () => {
         team: project.project_team_id.map((user) => users[user]?.user_name),
         links: "link link link",
       }));
-
-    // console.log("formattedData: ", formattedData);
-    setTableData(formattedData);
+    return formattedData;
   }, [users, projects, projectUsers]);
 
   return (

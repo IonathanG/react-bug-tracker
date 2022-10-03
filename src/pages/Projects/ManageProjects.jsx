@@ -50,8 +50,6 @@ const ManageProjects = () => {
     }));
   }, [projects, projectUsers, users]);
 
-  // console.log(ProjectsList);
-
   return (
     <Container>
       <Navigation headerText={"Manage Projects"} />

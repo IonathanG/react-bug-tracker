@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/Navigation";
@@ -11,9 +11,6 @@ const AllTickets = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
-  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
-
-  const [tableData, setTableData] = useState([]);
 
   const defaultSortBy = useMemo(
     () => [
@@ -27,7 +24,7 @@ const AllTickets = () => {
 
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
-  useEffect(() => {
+  const tableData = useMemo(() => {
     const projectsArray = Object.values(projects);
     let formattedData = [];
 
@@ -36,8 +33,8 @@ const AllTickets = () => {
         formattedData.push({
           ticket_id: ticket.ticket_id,
           title: ticket.ticket_name,
-          assigned_by: users[ticket.assigned_by].user_name,
-          assigned_to: ticket.assigned_to,
+          assigned_by: users[ticket.assigned_by]?.user_name,
+          assigned_to: users[ticket.assigned_to]?.user_name,
           status: ticket.status,
           priority: ticket.priority,
           date: ticket.created_date,
@@ -45,10 +42,8 @@ const AllTickets = () => {
         })
       )
     );
-
-    console.log(formattedData);
-    setTableData(formattedData);
-  }, [users, projects, projectUsers]);
+    return formattedData;
+  }, [users, projects]);
 
   return (
     <Container>

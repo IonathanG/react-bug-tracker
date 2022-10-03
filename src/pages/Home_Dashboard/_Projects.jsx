@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import BasicTable from "../../components/Tables/BasicTable";
@@ -15,7 +15,7 @@ const ProjectsDashboard = () => {
   const projects = useSelector((state) => state.projects.Projects);
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
-  const [tableData, setTableData] = useState([]);
+  // const [tableData, setTableData] = useState([]);
 
   const defaultSortBy = useMemo(
     () => [
@@ -29,18 +29,16 @@ const ProjectsDashboard = () => {
 
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
-  useEffect(() => {
+  const tableData = useMemo(() => {
     const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
-    // Fetching all user avatars info from the project
+    // Fetching all user avatars info from the project => Manager + Devs
     const fetchTeam = (project_id) => {
       let team = [];
-
       team.push(
         users[projectUsers[project_id]?.project_manager_id]?.user_avatar
       );
-
       projectUsers[project_id]?.project_team_id.map((user) =>
         team.push(users[user].user_avatar)
       );
@@ -57,8 +55,7 @@ const ProjectsDashboard = () => {
         team: fetchTeam(project.project_id),
       })
     );
-
-    setTableData(formattedData);
+    return formattedData;
   }, [users, projects, projectUsers]);
 
   return (

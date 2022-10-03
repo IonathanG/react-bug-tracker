@@ -48,12 +48,15 @@ export const lightTheme = {
   hover_Table: "rgb(244,247,246)",
   color_Font_Arrow: "rgb(200,200,200)",
 
-  //Tables Pagination
+  // Tables Pagination
   background_PageIndex: "rgb(0,123,254)",
   color_PageIndex: "rgb(255,255,255)",
 
-  //Card
+  // Card
   card_subTitle: "rgb(153, 153, 153)",
+
+  // Pop Up
+  background_PopUp: "rgb(23,25,28)",
 };
 
 export const darkTheme = {
@@ -106,10 +109,13 @@ export const darkTheme = {
   hover_Table: "rgb(244,247,246)",
   color_Font_Arrow: "rgb(200,200,200)",
 
-  //Tables Pagination
+  // Tables Pagination
   background_PageIndex: "rgb(0,123,254)",
   color_PageIndex: "rgb(255,255,255)",
 
-  //Card
+  // Card
   card_subTitle: "rgb(153, 153, 153)",
+
+  // Pop Up
+  background_PopUp: "rgb(23,25,28)",
 };

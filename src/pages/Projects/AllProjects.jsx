@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/Navigation";
@@ -13,8 +13,6 @@ const AllProjects = () => {
   const projects = useSelector((state) => state.projects.Projects);
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
-  const [tableData, setTableData] = useState([]);
-
   const defaultSortBy = useMemo(
     () => [
       {
@@ -27,7 +25,7 @@ const AllProjects = () => {
 
   // Assigning Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
-  useEffect(() => {
+  const tableData = useMemo(() => {
     const projectsArray = projects ? Object.values(projects) : [];
     let formattedData = [];
 
@@ -44,9 +42,7 @@ const AllProjects = () => {
       ),
       links: "link link link",
     }));
-
-    // console.log(formattedData);
-    setTableData(formattedData);
+    return formattedData;
   }, [users, projects, projectUsers]);
 
   return (
