@@ -9,7 +9,7 @@ const Tag = styled.div`
   padding: 4px 8px;
 
   color: ${(props) => props.color && props.color};
-  font-size: 10.5px;
+  font-size: 11px;
   text-transform: uppercase;
   text-align: center;
 `;

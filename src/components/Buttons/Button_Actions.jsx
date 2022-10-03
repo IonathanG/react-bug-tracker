@@ -7,26 +7,29 @@ const Button = styled.button`
   transition: 0.25s ease;
 
   cursor: pointer;
-  background-color: ${(props) =>
-    props.buttonStyle?.background
-      ? `${props.buttonStyle.background}`
-      : props.theme.background_ButtonBasic};
-  color: ${({ theme }) => theme.color_ButtonBasic};
+  background-color: transparent;
+  border: 1px solid
+    ${(props) =>
+      props.buttonStyle?.theme
+        ? `${props.buttonStyle.theme}`
+        : props.theme.background_ButtonBasic};
+
+  color: ${(props) =>
+    props.buttonStyle?.theme
+      ? `${props.buttonStyle.theme}`
+      : props.theme.color_ButtonBasic};
   font-size: 14px;
 
-  border: none;
   border-radius: 4px;
 
   padding: ${(props) =>
-    props.buttonStyle?.padding ? `${props.buttonStyle.padding}` : "10px 14px"};
+    props.buttonStyle?.padding ? `${props.buttonStyle.padding}` : "8px 12px"};
   margin: ${(props) =>
     props.buttonStyle?.margin ? `${props.buttonStyle.margin}` : "0px"};
 
   &:hover {
     background-color: ${(props) =>
-      props.buttonStyle?.hover.background
-        ? `${props.buttonStyle.hover.background}`
-        : props.theme.background_ButtonBasic_Hover};
+      props.buttonStyle?.theme && `${props.buttonStyle.theme}`};
 
     color: ${(props) =>
       props.buttonStyle?.hover.color && `${props.buttonStyle.hover.color}`};

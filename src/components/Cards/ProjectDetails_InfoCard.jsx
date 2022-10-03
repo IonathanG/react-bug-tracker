@@ -36,27 +36,35 @@ const ButtonContainer = styled.div`
 
 const ProjectDetailsInfoCard = ({ project = null }) => {
   const EditButtonStyle = {
-    color: "red",
-    background: "black",
+    theme: "rgb(255,193,6)",
     hover: {
-      color: "blue",
-      background: "white",
+      color: "black",
+    },
+  };
+
+  const ArchiveButtonStyle = {
+    theme: "rgb(220,52,68)",
+    hover: {
+      color: "white",
     },
   };
 
   return (
     <CardContainer>
-      <Title>{project.project_name}</Title>
-      <Description>{project.description}</Description>
+      <Title>{project?.project_name}</Title>
+      <Description>{project?.description}</Description>
 
       <Progress>
         <span>Project Progress: </span>
-        {project.progress}
+        {project?.progress}
       </Progress>
 
       <ButtonContainer>
         <ButtonActions buttonStyle={EditButtonStyle} text={"Edit Project"} />
-        <ButtonActions text={"Archive Project"} />
+        <ButtonActions
+          buttonStyle={ArchiveButtonStyle}
+          text={"Archive Project"}
+        />
       </ButtonContainer>
     </CardContainer>
   );

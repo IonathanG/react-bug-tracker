@@ -2,12 +2,12 @@ import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import ProjectDetailsCard from "../../components/Cards/ProjectDetails_TagCard";
-import ProjectInfoCard from "../../components/Cards/ProjectDetails_InfoCard";
 import Navigation from "../../components/Navigation/Navigation";
+import ProjectDetailsTagCard from "../../components/Cards/ProjectDetails_TagCard";
+import ProjectDetailsInfoCard from "../../components/Cards/ProjectDetails_InfoCard";
+import ProjectDetailsTeamCard from "../../components/Cards/ProjectDetails_TeamCard";
 import BasicTable from "../../components/Tables/BasicTable";
 import { TicketsDashboard_Columns } from "../../data/TableColumns";
-import ProjectDetailsTagCard from "../../components/Cards/ProjectDetails_TagCard";
 
 const Container = styled.div``;
 
@@ -21,7 +21,7 @@ const LeftPannel = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 `;
 
 const TableContainer = styled.div`
@@ -31,11 +31,13 @@ const TableContainer = styled.div`
 
 const ProjectDetails = () => {
   const { id } = useParams();
-  console.log(id);
 
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
+  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
+
+  console.log(projectUsers[id]);
 
   const defaultSortBy = useMemo(
     () => [
@@ -76,9 +78,12 @@ const ProjectDetails = () => {
 
       <ProjectDetailsContainer>
         <LeftPannel>
-          <ProjectInfoCard project={projects[id]} />
-          <ProjectDetailsCard project={projects[id]} />
-          <ProjectDetailsTagCard projectID={id} />
+          <ProjectDetailsInfoCard project={projects[id]} />
+          <ProjectDetailsTagCard project={projects[id]} />
+          <ProjectDetailsTeamCard
+            projectMembers={projectUsers[id]}
+            projectID={id}
+          />
         </LeftPannel>
 
         <TableContainer>
