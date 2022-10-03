@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ButtonActions from "../../Buttons/Button_Actions";
 
@@ -60,11 +61,15 @@ const ProjectDetailsInfoCard = ({ project = null }) => {
       </Progress>
 
       <ButtonContainer>
-        <ButtonActions buttonStyle={EditButtonStyle} text={"Edit Project"} />
-        <ButtonActions
-          buttonStyle={ArchiveButtonStyle}
-          text={"Archive Project"}
-        />
+        <Link to={`/Projects/EditProject/${project?.project_id}`}>
+          <ButtonActions buttonStyle={EditButtonStyle} text={"Edit Project"} />
+        </Link>
+        <Link to={`/`}>
+          <ButtonActions
+            buttonStyle={ArchiveButtonStyle}
+            text={"Archive Project"}
+          />
+        </Link>
       </ButtonContainer>
     </CardContainer>
   );

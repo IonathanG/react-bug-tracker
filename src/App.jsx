@@ -20,6 +20,7 @@ import Missing from "./pages/Missing/Missing";
 import AllProjects from "./pages/Projects/AllProjects";
 import MyProjects from "./pages/Projects/MyProjects";
 import AddProject from "./pages/Projects/AddProject";
+import EditProject from "./pages/Projects/EditProject";
 import ManageProjects from "./pages/Projects/ManageProjects";
 import ArchivedProjects from "./pages/Projects/ArchivedProjects";
 import ProjectDetails from "./pages/Projects/ProjectDetails";
@@ -78,6 +79,10 @@ function App() {
                 <Route path="/Projects/AllProjects" element={<AllProjects />} />
                 <Route path="/Projects/MyProjects" element={<MyProjects />} />
                 <Route path="/Projects/AddProject" element={<AddProject />} />
+                <Route
+                  path="/Projects/EditProject/:id"
+                  element={<EditProject />}
+                />
                 <Route
                   path="/Projects/ManageProjects"
                   element={<ManageProjects />}

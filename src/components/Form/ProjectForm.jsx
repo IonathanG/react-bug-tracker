@@ -42,7 +42,7 @@ const Label = styled.label`
   padding-bottom: 10px;
 `;
 
-const AddProjectForm = () => {
+const ProjectForm = () => {
   const users = useSelector((state) => state.users.Users);
   const [errorName, setErrorName] = useState(false);
   const { control, handleSubmit } = useForm();
@@ -260,4 +260,4 @@ const AddProjectForm = () => {
   );
 };
 
-export default AddProjectForm;
+export default ProjectForm;
