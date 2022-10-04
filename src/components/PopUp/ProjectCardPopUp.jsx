@@ -46,7 +46,7 @@ const ItemLink = styled(Link)`
 const ProjectCardPopUp = ({ projectID, showPopUp }) => {
   const menuPopUp = [
     { id: 1, name: "View", link: `/Projects/ProjectDetails/${projectID}` },
-    { id: 2, name: "Edit", link: "/" },
+    { id: 2, name: "Edit", link: `/Projects/EditProject/${projectID}` },
     { id: 3, name: "Archive", link: "/" },
   ];
   return (

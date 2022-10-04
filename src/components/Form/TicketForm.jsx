@@ -53,7 +53,7 @@ const TicketForm = () => {
     await updateDoc(projectsRef, {
       [`tickets.ticketID-${data.ticketTitle}`]: {
         project_id: data.projectID,
-        ticket_id: `${data.projectID}-${data.ticketTitle}`,
+        ticket_id: `ticketID-${data.ticketTitle}`,
         ticket_name: data.ticketTitle,
         //created_by: userID,
         assigned_by: userID,
@@ -158,12 +158,12 @@ const TicketForm = () => {
               error={Boolean(fieldState.error)}
               helperText={fieldState?.error?.message}
             >
-              <MenuItem value="enhancement">Enhancement</MenuItem>
-              <MenuItem value="changeRequest">Change Request</MenuItem>
-              <MenuItem value="defect">Defect</MenuItem>
-              <MenuItem value="workTask">Work Task</MenuItem>
-              <MenuItem value="newDevleopment">New Development</MenuItem>
-              <MenuItem value="generalTask">General Task</MenuItem>
+              <MenuItem value="Enhancement">Enhancement</MenuItem>
+              <MenuItem value="Change Request">Change Request</MenuItem>
+              <MenuItem value="Defect">Defect</MenuItem>
+              <MenuItem value="Work Task">Work Task</MenuItem>
+              <MenuItem value="New Devleopment">New Development</MenuItem>
+              <MenuItem value="General Task">General Task</MenuItem>
             </TextField>
           )}
         />

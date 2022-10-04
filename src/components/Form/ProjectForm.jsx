@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
@@ -7,10 +7,12 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import ButtonBasic from "../Buttons/Button_Basic";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase.config";
 import moment from "moment/moment";
 import { useSelector } from "react-redux";
+import FormatDate from "../../utils/FormatDate";
+// import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -42,7 +44,7 @@ const Label = styled.label`
   padding-bottom: 10px;
 `;
 
-const ProjectForm = ({ projectID }) => {
+const ProjectForm = ({ projectID = null, editMode = false }) => {
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
   const projects = useSelector((state) => state.projects.Projects);
   const users = useSelector((state) => state.users.Users);
@@ -50,11 +52,10 @@ const ProjectForm = ({ projectID }) => {
   const [errorName, setErrorName] = useState(false);
   const { control, reset, handleSubmit } = useForm({});
 
-  // Format Date in Edit Mode from dd/mm/yyyy to mm/dd/yyyy for DatePicker
-  const DateFormat = useCallback((date) => {
-    let dateArray = date.split("-");
-    return `${dateArray[1]}-${dateArray[0]}-${dateArray[2]}`;
-  }, []);
+  // // Redirect once confirmed the form is submitted
+  // const navigate = useNavigate();
+
+  console.log("modeEdit: ", editMode);
 
   // Default Values in case the Form is in Edit mode
   useEffect(() => {
@@ -62,13 +63,13 @@ const ProjectForm = ({ projectID }) => {
       reset({
         projectName: projects[projectID].project_name,
         projectDescription: projects[projectID].description,
-        startDate: DateFormat(projects[projectID].start_date),
-        endDate: DateFormat(projects[projectID].end_date),
+        startDate: FormatDate(projects[projectID].start_date),
+        endDate: FormatDate(projects[projectID].end_date),
         priority: projects[projectID].priority,
         projectManager: projectUsers[projectID]?.project_manager_id,
       });
     }
-  }, [projects, projectUsers, users, projectID, reset, DateFormat]);
+  }, [projects, projectUsers, users, projectID, reset]);
 
   // Keep up to date List of Managers to assign a project to
   const ManagersList = useMemo(() => {
@@ -80,43 +81,73 @@ const ProjectForm = ({ projectID }) => {
       }));
   }, [users]);
 
-  // console.log("ManagersList: ", ManagersList);
-
   const onSubmit = async (data) => {
     console.log(data);
 
-    // Checking if Project Name is already taken in the database before creating it
+    // DB Collection References to set up and update
     const projectsRef = doc(db, "projects", `projectID-${data.projectName}`);
-    const docSnap = await getDoc(projectsRef);
+    const projectUsersRef = doc(
+      db,
+      "projectUsers",
+      `projectID-${data.projectName}`
+    );
 
-    if (docSnap.exists()) {
-      console.log("This name is taken");
-      setErrorName(true);
-    } else {
-      console.log("No such document!");
-
-      setDoc(doc(db, "projects", `projectID-${data.projectName}`), {
-        project_id: `projectID-${data.projectName}`,
+    // Editing Mode Updates Firestore
+    if (editMode) {
+      await updateDoc(projectsRef, {
         project_name: data.projectName,
         description: data.projectDescription,
         start_date: moment(data.startDate).format("DD-MM-YYYY"),
         end_date: moment(data.endDate).format("DD-MM-YYYY"),
         priority: data.priority,
-        progress: 0,
-        status: "Open",
-        attachment: {},
-        tickets: {},
       })
-        .then(() => console.log("Project added"))
-        .catch((error) => console.log(error));
+        .then(() => {
+          console.log("Project Updated!");
 
-      setDoc(doc(db, "projectUsers", `projectID-${data.projectName}`), {
-        project_id: `projectID-${data.projectName}`,
-        project_manager_id: data.projectManager,
-        project_team_id: [],
-      })
-        .then(() => console.log("ProjectUsers added"))
+          updateDoc(projectUsersRef, {
+            project_manager_id: data.projectManager,
+          })
+            .then(() => console.log("ProjectUsers Updated"))
+            .catch((error) => console.log(error));
+        })
         .catch((error) => console.log(error));
+    }
+
+    // If not editing => Creates new project
+    else if (!editMode) {
+      // Checking if Project Name is already taken in the database before creating it
+      const docSnap = await getDoc(projectsRef);
+
+      if (docSnap.exists()) {
+        console.log("This name is taken");
+        setErrorName(true);
+      } else {
+        console.log("No such document!");
+
+        await setDoc(projectsRef, {
+          project_id: `projectID-${data.projectName}`,
+          project_name: data.projectName,
+          description: data.projectDescription,
+          start_date: moment(data.startDate).format("DD-MM-YYYY"),
+          end_date: moment(data.endDate).format("DD-MM-YYYY"),
+          priority: data.priority,
+          progress: 0,
+          status: "Open",
+          attachment: {},
+          tickets: {},
+        })
+          .then(() => {
+            console.log("Project added");
+            setDoc(doc(db, "projectUsers", `projectID-${data.projectName}`), {
+              project_id: `projectID-${data.projectName}`,
+              project_manager_id: data.projectManager,
+              project_team_id: [],
+            })
+              .then(() => console.log("ProjectUsers added"))
+              .catch((error) => console.log(error));
+          })
+          .catch((error) => console.log(error));
+      }
     }
   };
 

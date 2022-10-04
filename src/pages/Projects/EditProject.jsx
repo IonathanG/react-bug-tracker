@@ -10,7 +10,7 @@ const EditProject = () => {
   return (
     <>
       <Navigation headerText={"Edit Project"} />
-      <ProjectForm projectID={id} />
+      <ProjectForm projectID={id} editMode={true} />
     </>
   );
 };

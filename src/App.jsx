@@ -120,7 +120,7 @@ function App() {
                   element={<ArchivedTickets />}
                 />
                 <Route
-                  path="/Tickets/TicketDetails/:id"
+                  path="/Tickets/TicketDetails/:ProjectID/:TicketID"
                   element={<TicketDetails />}
                 />
               </Route>
