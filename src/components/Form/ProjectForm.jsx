@@ -52,7 +52,7 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
   const [errorName, setErrorName] = useState(false);
   const { control, reset, handleSubmit } = useForm({});
 
-  // // Redirect once confirmed the form is submitted
+  // Redirect once confirmed the form is submitted
   // const navigate = useNavigate();
 
   console.log("modeEdit: ", editMode);

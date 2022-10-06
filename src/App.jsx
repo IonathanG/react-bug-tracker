@@ -31,6 +31,7 @@ import AssignMembers from "./pages/Projects/AssignMembers";
 import AllTickets from "./pages/Tickets/AllTickets";
 import MyTickets from "./pages/Tickets/MyTickets";
 import AddTicket from "./pages/Tickets/AddTicket";
+import EditTicket from "./pages/Tickets/EditTicket";
 import UnassignedTickets from "./pages/Tickets/UnassignedTickets";
 import ArchivedTickets from "./pages/Tickets/ArchivedTickets";
 import TicketDetails from "./pages/Tickets/TicketDetails";
@@ -111,6 +112,10 @@ function App() {
                 <Route path="/Tickets/AllTickets" element={<AllTickets />} />
                 <Route path="/Tickets/MyTickets" element={<MyTickets />} />
                 <Route path="/Tickets/AddTicket" element={<AddTicket />} />
+                <Route
+                  path="/Tickets/EditTicket/:ProjectID/:TicketID"
+                  element={<EditTicket />}
+                />
                 <Route
                   path="/Tickets/UnassignedTickets"
                   element={<UnassignedTickets />}

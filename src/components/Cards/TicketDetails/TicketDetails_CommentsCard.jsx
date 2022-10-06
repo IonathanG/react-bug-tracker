@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   padding: 20px;
 
   border-radius: 5px;
@@ -37,7 +37,7 @@ const CommentsContainer = styled.div``;
 
 const CommentItem = styled.div`
   border-top: 1px solid ${({ theme }) => theme.background_Modal};
-  padding: 20px 0px;
+  padding: 15px 0px;
 `;
 
 const CommentHeader = styled.div`
@@ -69,7 +69,7 @@ const CommentText = styled.div`
 const TicketDetailsCommentsCard = ({ ticket = null }) => {
   const users = useSelector((state) => state.users.Users);
 
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
   const userID = "user_02";
 
   const onSubmit = (data) => {
@@ -94,6 +94,7 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
       [`tickets.${ticket.ticket_id}`]: newTicket,
     })
       .then(() => console.log("Comment Added"))
+      .then(() => reset())
       .catch((error) => console.log(error));
   };
 
@@ -111,7 +112,7 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
               <TextField
                 placeholder="Add a comment..."
                 multiline={true}
-                rows={4}
+                rows={2}
                 value={value ? value : ""}
                 onChange={onChange}
                 ref={ref}

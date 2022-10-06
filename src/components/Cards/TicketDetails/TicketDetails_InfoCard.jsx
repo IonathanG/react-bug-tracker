@@ -90,7 +90,7 @@ const TicketDetailsInfoCard = ({ project = null, ticket }) => {
           />
         </Link>
         <Link
-          to={`/Tickets/EditProject/${ticket?.project_id}/${ticket?.ticket_id}`}
+          to={`/Tickets/EditTicket/${ticket?.project_id}/${ticket?.ticket_id}`}
         >
           <ButtonActions buttonStyle={EditButtonStyle} text={"Edit Ticket"} />
         </Link>

@@ -30,11 +30,9 @@ const RightPannel = styled(LeftPannel)`
 const TicketDetails = () => {
   const { ProjectID, TicketID } = useParams();
   // Retrieving State
-  // const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
 
   const ticket = useMemo(() => {
-    console.log("ticket: ", projects[ProjectID]?.tickets[TicketID]);
     return projects[ProjectID]?.tickets[TicketID];
   }, [projects, ProjectID, TicketID]);
 
