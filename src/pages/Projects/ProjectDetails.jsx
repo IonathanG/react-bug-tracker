@@ -64,7 +64,11 @@ const ProjectDetails = () => {
           status: ticket.status,
           priority: ticket.priority,
           date: ticket.created_date,
-          links: "link link link",
+          links: {
+            view: `/Tickets/TicketDetails/${projects[id].project_id}/${ticket.ticket_id}`,
+            edit: `/Tickets/EditTicket/${projects[id].project_id}/${ticket.ticket_id}`,
+            archive: `/`,
+          },
         })
       );
     }

@@ -206,7 +206,7 @@ const TicketForm = ({
               <MenuItem value="Change Request">Change Request</MenuItem>
               <MenuItem value="Defect">Defect</MenuItem>
               <MenuItem value="Work Task">Work Task</MenuItem>
-              <MenuItem value="New Devleopment">New Development</MenuItem>
+              <MenuItem value="New Development">New Development</MenuItem>
               <MenuItem value="General Task">General Task</MenuItem>
             </TextField>
           )}

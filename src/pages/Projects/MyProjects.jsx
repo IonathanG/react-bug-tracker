@@ -51,7 +51,11 @@ const MyProjects = () => {
         status: projects[project.project_id]?.status,
         project_manager: users[project.project_manager_id]?.user_name,
         team: project.project_team_id.map((user) => users[user]?.user_name),
-        links: "link link link",
+        links: {
+          view: `/Projects/ProjectDetails/${project.project_id}`,
+          edit: `/Projects/EditProject/${project.project_id}`,
+          archive: `/`,
+        },
       }));
     return formattedData;
   }, [users, projects, projectUsers]);

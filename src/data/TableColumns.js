@@ -63,6 +63,9 @@ export const Tickets_Columns = [
   {
     Header: "Action",
     accessor: "links",
+    Cell: ({ value }) => {
+      return <ActionIcons links={value} />;
+    },
   },
 ];
 
@@ -132,5 +135,8 @@ export const TicketsDashboard_Columns = [
   {
     Header: "Action",
     accessor: "links",
+    Cell: ({ value }) => {
+      return <ActionIcons links={value} />;
+    },
   },
 ];

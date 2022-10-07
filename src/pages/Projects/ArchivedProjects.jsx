@@ -44,7 +44,11 @@ const ArchivedProjects = () => {
         team: projectUsers[project.project_id].project_team_id.map(
           (user) => users[user].user_name
         ),
-        links: "link link link",
+        links: {
+          view: `/Projects/ProjectDetails/${project.project_id}`,
+          edit: `/Projects/EditProject/${project.project_id}`,
+          archive: `/`,
+        },
       })
     );
 
