@@ -11,8 +11,9 @@ import useProjectUsersListener from "./hooks/useProjectUsersListener";
 // Single Pages
 import Layout from "./layout/Layout";
 import Login from "./pages/Login/Login";
-import HomeDashboard from "./pages/Home_Dashboard/HomeDashboard";
+import HomeDashboard from "./pages/Home/HomeDashboard";
 import Inbox from "./pages/Inbox/Inbox";
+import MemberProfile from "./pages/MemberProfile/MemberProfile";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import Missing from "./pages/Missing/Missing";
 
@@ -74,6 +75,10 @@ function App() {
               {/* ----- PROTECTED ROUTES ----- */}
               <Route path="/" element={<HomeDashboard />} />
               <Route path="/Inbox" element={<Inbox />} />
+              <Route
+                path="/MemberProfile/:userID"
+                element={<MemberProfile />}
+              />
 
               {/* -- Projects -- */}
               <Route path="/Projects">

@@ -73,10 +73,27 @@ const Team = styled.div`
     font-size: 12px;
     font-weight: 400;
     color: ${({ theme }) => theme.card_subTitle};
+    display: flex;
+    align-items: center;
 
     span {
-      padding-right: 10px;
+      padding-right: 20px;
     }
+  }
+`;
+
+const UserAvatar = styled.img`
+  cursor: pointer;
+  width: 32px;
+  height: auto;
+  margin-left: -6px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  transition: 0.2s ease-out;
+
+  &:hover {
+    transform: translateY(-5px);
   }
 `;
 
@@ -125,7 +142,11 @@ const ProjectCard = ({ project }) => {
       <Team>
         <span>
           <span>Team</span>
-          {project.project_team.map((user) => user.user_avatar)}
+          {project.project_team.map((user) => (
+            <Link to={`/MemberProfile/${user.user_id}`}>
+              <UserAvatar src={"/avatar/" + user.user_id} alt="user_picture" />
+            </Link>
+          ))}
         </span>
         <Link to={`/Projects/AssignMembers/${project.project_id}`}>
           <ButtonBasic buttonStyle={buttonStyle} text={"Manage Team"} />

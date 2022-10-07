@@ -81,6 +81,15 @@ export const MembersDashboard_Columns = [
   {
     Header: "Projects",
     accessor: "projects_count",
+    Cell: ({ value }) => (
+      <div
+        style={{
+          textAlign: "center",
+        }}
+      >
+        {value}
+      </div>
+    ),
   },
   {
     Header: "Role",
@@ -108,6 +117,15 @@ export const ProjectsDashboard_Columns = [
   {
     Header: "Ticket Count",
     accessor: "ticket_count",
+    Cell: ({ value }) => (
+      <div
+        style={{
+          textAlign: "center",
+        }}
+      >
+        {value}
+      </div>
+    ),
   },
 ];
 
