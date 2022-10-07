@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase.config";
 import moment from "moment/moment";
+import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -45,9 +46,7 @@ const TicketForm = ({
   const { control, reset, handleSubmit } = useForm();
 
   // Redirect once confirmed the form is submitted
-  // const navigate = useNavigate();
-
-  console.log("modeEdit: ", editMode);
+  const navigate = useNavigate();
 
   // Default Values in case the Form is in Edit mode
   useEffect(() => {
@@ -71,40 +70,28 @@ const TicketForm = ({
   }, [projects]);
 
   const onSubmit = async (data) => {
-    console.log("data: ", data);
-
     const documentRef = data.projectID ? data.projectID : projectID;
-    console.log(documentRef);
 
     // DB Collection References to set up and update
-    const projectsRef = doc(db, "projects", documentRef);
+    const projectRef = doc(db, "projects", documentRef);
 
     // Editing Mode Updates Firestore
     if (editMode) {
-      await updateDoc(projectsRef, {
-        [`tickets.${ticketID}`]: {
-          project_id: projectID,
-          ticket_id: ticketID,
-          ticket_name: data.ticketTitle,
-          description: data.ticketDescription,
-          type: data.type,
-          priority: data.priority,
-          status: data.status,
-          assigned_by: projects[projectID].tickets[ticketID].assigned_by,
-          assigned_to: projects[projectID].tickets[ticketID].assigned_to,
-          created_date: projects[projectID].tickets[ticketID].created_date,
-          history: projects[projectID].tickets[ticketID].history,
-          comments: projects[projectID].tickets[ticketID].comments,
-          attachments: projects[projectID].tickets[ticketID].attachments,
-        },
+      await updateDoc(projectRef, {
+        [`tickets.${ticketID}.ticket_name`]: data.ticketTitle,
+        [`tickets.${ticketID}.description`]: data.ticketDescription,
+        [`tickets.${ticketID}.type`]: data.type,
+        [`tickets.${ticketID}.priority`]: data.priority,
+        [`tickets.${ticketID}.status`]: data.status,
       })
         .then(() => console.log("Ticket Updated!"))
+        .then(() => navigate(-1))
         .catch((error) => console.log(error));
     }
 
     // If not editing => Creates new ticket
     else if (!editMode) {
-      await updateDoc(projectsRef, {
+      await updateDoc(projectRef, {
         [`tickets.ticketID-${data.ticketTitle}`]: {
           project_id: data.projectID,
           ticket_id: `ticketID-${data.ticketTitle}`,
@@ -122,6 +109,7 @@ const TicketForm = ({
         },
       })
         .then(() => console.log("Ticket added"))
+        .then(() => navigate(-1))
         .catch((error) => console.log(error));
     }
   };

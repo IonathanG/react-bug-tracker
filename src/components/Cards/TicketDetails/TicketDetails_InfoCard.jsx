@@ -34,7 +34,11 @@ const Project = styled.div`
   }
 `;
 
-const Developer = styled(Project)``;
+const Developer = styled(Project)`
+  div {
+    padding-top: 10px;
+  }
+`;
 
 const ButtonContainer = styled.div`
   margin-top: 20px;
@@ -78,12 +82,18 @@ const TicketDetailsInfoCard = ({ project = null, ticket }) => {
 
       <Developer>
         <span>Developer: </span>
-        {users[ticket?.assigned_to]?.user_avatar}
-        {users[ticket?.assigned_to]?.user_name}
+        <div>
+          {users[ticket?.assigned_to]?.user_avatar}
+          {users[ticket?.assigned_to]?.user_name}
+        </div>
+
+        {ticket?.assigned_to === "" && <>No developer assigned</>}
       </Developer>
 
       <ButtonContainer>
-        <Link to={`/`}>
+        <Link
+          to={`/Tickets/AssignDeveloper/${ticket?.project_id}/${ticket?.ticket_id}`}
+        >
           <ButtonActions
             buttonStyle={AssignButtonStyle}
             text={"Assign Developer"}

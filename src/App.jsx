@@ -35,6 +35,7 @@ import EditTicket from "./pages/Tickets/EditTicket";
 import UnassignedTickets from "./pages/Tickets/UnassignedTickets";
 import ArchivedTickets from "./pages/Tickets/ArchivedTickets";
 import TicketDetails from "./pages/Tickets/TicketDetails";
+import AssignDeveloper from "./pages/Tickets/AssignDeveloper";
 
 // Admin
 import Invite from "./pages/Admin/Invite";
@@ -127,6 +128,10 @@ function App() {
                 <Route
                   path="/Tickets/TicketDetails/:ProjectID/:TicketID"
                   element={<TicketDetails />}
+                />
+                <Route
+                  path="/Tickets/AssignDeveloper/:ProjectID/:TicketID"
+                  element={<AssignDeveloper />}
                 />
               </Route>
 

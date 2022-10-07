@@ -8,6 +8,8 @@ export const lightTheme = {
 
   // Generic Themes
   color_Cyan: "rgb(73,197,182)" /* Cyan */,
+  color_Greyish: "rgb(108,117,125)",
+  color_Red: "rgb(220,52,68)",
   pale_Blue: "rgb(92,142,212)" /* Pale Blue */,
 
   //Top Header
@@ -69,6 +71,8 @@ export const darkTheme = {
 
   // Generic Themes
   color_Cyan: "rgb(73,197,182)" /* Cyan */,
+  color_Greyish: "rgb(108,117,125)",
+  color_Red: "rgb(220,52,68)",
   pale_Blue: "rgb(92,142,212)" /* Pale Blue */,
 
   //Top Header

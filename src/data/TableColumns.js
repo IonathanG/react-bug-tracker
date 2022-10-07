@@ -1,5 +1,6 @@
-// DATA for Column Display of all Tables in react-tables
+import ActionIcons from "../components/Tables/_ActionIcons";
 
+// DATA for Column Display of all Tables in react-tables
 export const Projects_Columns = [
   {
     Header: "Project",
@@ -28,6 +29,9 @@ export const Projects_Columns = [
   {
     Header: "Action",
     accessor: "links",
+    Cell: ({ value }) => {
+      return <ActionIcons links={value} />;
+    },
   },
 ];
 

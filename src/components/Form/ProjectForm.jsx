@@ -12,7 +12,7 @@ import { db } from "../../utils/firebase.config";
 import moment from "moment/moment";
 import { useSelector } from "react-redux";
 import FormatDate from "../../utils/FormatDate";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -53,7 +53,7 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
   const { control, reset, handleSubmit } = useForm({});
 
   // Redirect once confirmed the form is submitted
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   console.log("modeEdit: ", editMode);
 
@@ -108,6 +108,7 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
             project_manager_id: data.projectManager,
           })
             .then(() => console.log("ProjectUsers Updated"))
+            .then(() => navigate(-1))
             .catch((error) => console.log(error));
         })
         .catch((error) => console.log(error));

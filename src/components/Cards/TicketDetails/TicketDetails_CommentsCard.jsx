@@ -73,25 +73,19 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
   const userID = "user_02";
 
   const onSubmit = (data) => {
-    // Copy and Update the existing ticket's comments array with the new comment
-    let CommentsList = [
-      ...ticket.comments,
-      {
-        id: ticket?.comments.length,
-        author: userID,
-        created_at: moment().format("LLL"),
-        comment: data.ticketComment,
-      },
-    ];
-
-    // => update the comments array in the ticket then DB update
-    let newTicket = { ...ticket };
-    newTicket["comments"] = CommentsList;
-
     // DB Collection References to update comments array
     const projectsRef = doc(db, "projects", ticket.project_id);
     updateDoc(projectsRef, {
-      [`tickets.${ticket.ticket_id}`]: newTicket,
+      // Update the comment list by adding the new comment to the array
+      [`tickets.${ticket.ticket_id}.comments`]: [
+        ...ticket.comments,
+        {
+          id: ticket?.comments.length,
+          author: userID,
+          created_at: moment().format("LLL"),
+          comment: data.ticketComment,
+        },
+      ],
     })
       .then(() => console.log("Comment Added"))
       .then(() => reset())
