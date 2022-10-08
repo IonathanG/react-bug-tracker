@@ -34,11 +34,6 @@ const ManageRoles = () => {
       currentRole: user.user_role,
       manageRole: "",
       action: user.user_id,
-      // {
-      //   view: `/Projects/ProjectDetails/${project.project_id}`,
-      //   edit: `/Projects/EditProject/${project.project_id}`,
-      //   archive: `/`,
-      // },
     }));
     return formattedData;
   }, [users]);

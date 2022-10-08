@@ -201,15 +201,15 @@ export const Manage_Roles = [
   {
     Header: "Manage Role",
     accessor: "manageRrole",
-    Cell: ({ value }) => {
-      return <SelectRole />;
+    Cell: ({ row: { original } }) => {
+      return <SelectRole userRow={original} />;
     },
   },
   {
     Header: "Action",
     accessor: "action",
-    Cell: ({ cell: { value }, row: { original } }) => {
-      return <AssignRole value={value} row={original} />;
+    Cell: ({ row: { original } }) => {
+      return <AssignRole userRow={original} />;
     },
   },
 ];

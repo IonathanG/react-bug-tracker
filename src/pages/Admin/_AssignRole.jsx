@@ -1,9 +1,8 @@
 import React from "react";
 import ButtonActions from "../../components/Buttons/Button_Actions";
 
-const AssignRole = ({ value, row }) => {
-  console.log(value);
-  console.log(row);
+const AssignRole = ({ userRow }) => {
+  console.log(userRow.currentRole);
 
   const EditButtonStyle = {
     theme: "rgb(39,167,68)",
@@ -12,12 +11,13 @@ const AssignRole = ({ value, row }) => {
     },
   };
 
-  const handleAssign = (value) => {
-    console.log("user :" + value + " assigned");
+  const handleAssign = () => {
+    console.log(userRow.currentRole);
+    console.log("user assigned");
   };
 
   return (
-    <div onClick={() => handleAssign(value)}>
+    <div onClick={() => handleAssign()}>
       <ButtonActions buttonStyle={EditButtonStyle} text={"Assign Role"} />
     </div>
   );

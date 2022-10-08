@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const SelectRole = () => {
-  const [role, setRole] = useState("");
+const SelectRole = ({ userRow }) => {
+  const [role, setRole] = useState(userRow.currentRole);
 
   const handleChange = (event) => {
     setRole(event.target.value);
+    console.log(role);
+    console.log(userRow);
   };
+
   return (
     <div>
       <FormControl sx={{ minWidth: 170 }}>
