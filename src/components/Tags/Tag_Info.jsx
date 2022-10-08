@@ -24,6 +24,8 @@ const TagInfo = ({ tagText, tagColor }) => {
         return "rgb(156,156,156)";
       case "Red":
         return "rgb(220,52,68)";
+      case "Blue":
+        return "rgb(92,142,212)";
       default:
         return "";
     }

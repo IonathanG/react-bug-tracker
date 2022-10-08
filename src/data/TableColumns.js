@@ -1,4 +1,9 @@
+import SingleAvatar from "../components/Avatar/SingleAvatar";
+import UserAvatars from "../components/Avatar/UserAvatars";
 import ActionIcons from "../components/Tables/_ActionIcons";
+import TagInfo from "../components/Tags/Tag_Info";
+import AssignRole from "../pages/Admin/_AssignRole";
+import SelectRole from "../pages/Admin/_SelectRole";
 
 // DATA for Column Display of all Tables in react-tables
 export const Projects_Columns = [
@@ -73,6 +78,7 @@ export const MembersDashboard_Columns = [
   {
     Header: "Avatar",
     accessor: "avatar",
+    // Cell: ({ value }) => ({ value }),
   },
   {
     Header: "Name",
@@ -155,6 +161,55 @@ export const TicketsDashboard_Columns = [
     accessor: "links",
     Cell: ({ value }) => {
       return <ActionIcons links={value} />;
+    },
+  },
+];
+
+export const Manage_Roles = [
+  {
+    Header: "",
+    accessor: "avatar",
+    Cell: ({ value }) => {
+      return <SingleAvatar avatar={value} />;
+    },
+  },
+  {
+    Header: "Name",
+    accessor: "name_contact",
+    Cell: ({ value }) => {
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+          <span
+            style={{
+              fontWeight: "700",
+            }}
+          >
+            {value.name}
+          </span>
+          <span>{value.email}</span>
+        </div>
+      );
+    },
+  },
+  {
+    Header: "Current Role",
+    accessor: "currentRole",
+    Cell: ({ value }) => {
+      return <TagInfo tagText={value} tagColor={"Blue"} />;
+    },
+  },
+  {
+    Header: "Manage Role",
+    accessor: "manageRrole",
+    Cell: ({ value }) => {
+      return <SelectRole />;
+    },
+  },
+  {
+    Header: "Action",
+    accessor: "action",
+    Cell: ({ cell: { value }, row: { original } }) => {
+      return <AssignRole value={value} row={original} />;
     },
   },
 ];
