@@ -309,7 +309,7 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
         />
       </InputContainer>
 
-      <ButtonBasic text={"Create"} />
+      <ButtonBasic text={editMode ? "Edit" : "Create"} />
     </Form>
   );
 };

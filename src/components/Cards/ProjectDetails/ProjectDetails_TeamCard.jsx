@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import SingleAvatar from "../../Avatar/SingleAvatar";
 import ButtonBasic from "../../Buttons/Button_Basic";
 
 const CardContainer = styled.div`
@@ -40,8 +41,6 @@ const ManagerContainer = styled.div`
   display: flex;
   gap: 120px;
 `;
-
-const ManagerAvatar = styled.div``;
 
 const ManagerInfo = styled.div`
   display: flex;
@@ -115,9 +114,10 @@ const ProjectDetailsTeamCard = ({ projectMembers, projectID }) => {
       </CardHeader>
 
       <ManagerContainer>
-        <ManagerAvatar>
-          {users[projectMembers?.project_manager_id]?.user_avatar}
-        </ManagerAvatar>
+        <SingleAvatar
+          avatar={users[projectMembers?.project_manager_id]?.user_avatar}
+          size={"70px"}
+        />
 
         <ManagerInfo>
           <ManagerName>
@@ -134,7 +134,7 @@ const ProjectDetailsTeamCard = ({ projectMembers, projectID }) => {
       <TeamContainer>
         {projectMembers?.project_team_id?.map((member) => (
           <TeamMember key={member}>
-            {users[member].user_avatar}
+            <SingleAvatar avatar={users[member].user_avatar} size={"40px"} />
             <MemberInfo>
               {users[member].user_name}
               <span>{users[member].user_role}</span>

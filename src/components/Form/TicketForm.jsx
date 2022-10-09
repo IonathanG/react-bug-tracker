@@ -269,7 +269,7 @@ const TicketForm = ({
         </InputContainer>
       )}
 
-      <ButtonBasic text={"Create"} />
+      <ButtonBasic text={editMode ? "Edit" : "Create"} />
     </Form>
   );
 };
