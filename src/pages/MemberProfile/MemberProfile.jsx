@@ -79,21 +79,14 @@ const MemberProfile = () => {
 
   // Retrieves and memoize all current projects the user is part of
   const userProjects = useMemo(() => {
-    // Function to List of all members of a single project => Manager + Developers
+    // Function to List of all member avatars of a single project => Manager + Developers
     const getTeam = (project) => {
       let team = [];
-      team.push({
-        user_id:
-          users[projectUsers[project.project_id]?.project_manager_id]?.user_id,
-        user_avatar:
-          users[projectUsers[project.project_id]?.project_manager_id]
-            ?.user_avatar,
-      });
+      team.push(
+        users[projectUsers[project.project_id]?.project_manager_id]?.user_avatar
+      );
       projectUsers[project.project_id]?.project_team_id.map((user) =>
-        team.push({
-          user_id: users[user].user_id,
-          user_avatar: users[user].user_avatar,
-        })
+        team.push(users[user].user_avatar)
       );
       return team;
     };

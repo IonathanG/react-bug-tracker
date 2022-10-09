@@ -224,7 +224,7 @@ export const Manage_Roles = [
     Header: "",
     accessor: "avatar",
     Cell: ({ value }) => {
-      return <SingleAvatar avatar={value} />; // User Avatar display
+      return <SingleAvatar avatar={value} size={"60px"} />; // User Avatar display
     },
   },
   {
