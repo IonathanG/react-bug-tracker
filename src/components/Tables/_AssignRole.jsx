@@ -1,9 +1,9 @@
 import React from "react";
 import ButtonActions from "../Buttons/Button_Actions";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../utils/firebase.config";
 
 const AssignRole = ({ userRow }) => {
-  // console.log(userRow.currentRole);
-
   const EditButtonStyle = {
     theme: "rgb(39,167,68)",
     hover: {
@@ -11,9 +11,16 @@ const AssignRole = ({ userRow }) => {
     },
   };
 
-  const handleAssign = () => {
-    console.log(userRow);
-    // console.log("user assigned");
+  const handleAssign = async () => {
+    // DB Collection References to set up and update
+    const userRef = doc(db, "users", userRow.user_id);
+
+    await updateDoc(userRef, {
+      user_role: userRow.manageRole,
+    })
+      .then(() => console.log("User Assigned!"))
+      // .then(() => navigate(-1))
+      .catch((error) => console.log(error));
   };
 
   return (
