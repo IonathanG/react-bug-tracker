@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Avatar = styled.img`
-  margin: -8px -20px -8px 15px;
-  width: 60px;
+  margin: -10px -20px -10px 15px;
+  width: 30px;
   height: auto;
   border-radius: 50%;
   box-shadow: rgba(99, 99, 99, 0.437) 0px 2px 8px 0px;
@@ -16,7 +16,6 @@ const Avatar = styled.img`
 `;
 
 const SingleAvatar = ({ avatar }) => {
-  // console.log(avatar);
   return (
     <Link to={`/MemberProfile/${avatar}`}>
       <Avatar src={"/avatar/" + avatar} alt="user_picture" />

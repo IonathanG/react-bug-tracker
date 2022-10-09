@@ -4,6 +4,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ButtonBasic from "../../Buttons/Button_Basic";
 import { Link } from "react-router-dom";
 import ProjectCardPopUp from "../../PopUp/ProjectCardPopUp";
+import UserAvatars from "../../Avatar/UserAvatars";
 
 const CardContainer = styled.div`
   display: flex;
@@ -82,21 +83,6 @@ const Team = styled.div`
   }
 `;
 
-const UserAvatar = styled.img`
-  cursor: pointer;
-  width: 32px;
-  height: auto;
-  margin-left: -6px;
-  border-radius: 50%;
-  border: 2px solid rgb(255, 255, 255);
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  transition: 0.2s ease-out;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-`;
-
 // const Progress = styled.div``;
 
 const TicketCount = styled.span`
@@ -108,6 +94,8 @@ const TicketCount = styled.span`
 `;
 
 const ProjectCard = ({ project }) => {
+  console.log(project);
+
   const buttonStyle = {
     background: "rgb(19,163,184)",
     padding: "8px 10px",
@@ -142,11 +130,7 @@ const ProjectCard = ({ project }) => {
       <Team>
         <span>
           <span>Team</span>
-          {project.project_team.map((user) => (
-            <Link to={`/MemberProfile/${user.user_id}`}>
-              <UserAvatar src={"/avatar/" + user.user_id} alt="user_picture" />
-            </Link>
-          ))}
+          <UserAvatars team={project.project_team} />
         </span>
         <Link to={`/Projects/AssignMembers/${project.project_id}`}>
           <ButtonBasic buttonStyle={buttonStyle} text={"Manage Team"} />

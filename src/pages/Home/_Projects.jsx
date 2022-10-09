@@ -48,7 +48,12 @@ const ProjectsDashboard = () => {
     projectsArray.map((project) =>
       formattedData.push({
         project_id: project.project_id,
-        project_name: project.project_name,
+        project_info: {
+          project_name: project.project_name,
+          project_manager_name:
+            users[projectUsers[project.project_id]?.project_manager_id]
+              ?.user_name,
+        },
         start_date: project.start_date,
         end_date: project.end_date,
         ticket_count: Object.keys(project.tickets).length,

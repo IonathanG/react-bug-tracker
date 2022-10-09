@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const UserAvatar = styled.img`
+const Avatar = styled.img`
+  margin: -10px 0px -10px -10px;
   cursor: pointer;
-  width: 32px;
+  width: 30px;
   height: auto;
-  margin-left: -6px;
   border-radius: 50%;
   border: 2px solid rgb(255, 255, 255);
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
@@ -20,9 +20,9 @@ const UserAvatar = styled.img`
 const UserAvatars = ({ team }) => {
   return (
     <div>
-      {team.map((user) => (
-        <Link to={`/MemberProfile/${user.user_id}`}>
-          <UserAvatar src={"/avatar/" + user.user_id} alt="user_picture" />
+      {team.map((avatar, index) => (
+        <Link to={`/MemberProfile/${avatar}`} key={index}>
+          <Avatar src={"/avatar/" + avatar} alt="user_picture" />
         </Link>
       ))}
     </div>
