@@ -32,7 +32,7 @@ const ManageRoles = () => {
       avatar: user.user_avatar,
       name_contact: { name: user.user_name, email: user.user_email },
       currentRole: user.user_role,
-      manageRole: "",
+      manageRole: user.user_role,
       action: user.user_id,
     }));
     return formattedData;

@@ -16,7 +16,7 @@ const Avatar = styled.img`
 `;
 
 const SingleAvatar = ({ avatar }) => {
-  console.log(avatar);
+  // console.log(avatar);
   return (
     <Link to={`/MemberProfile/${avatar}`}>
       <Avatar src={"/avatar/" + avatar} alt="user_picture" />

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   useTable,
   useGlobalFilter,
@@ -89,7 +89,34 @@ const NoDataMessage = styled.div`
 
 const BasicTable = ({ COLUMNS, DATA, defaultSortBy, tableTitle }) => {
   const columns = useMemo(() => COLUMNS, [COLUMNS]);
-  const data = useMemo(() => DATA, [DATA]);
+  // const data = useMemo(() => DATA, [DATA]);
+  const [data, setData] = useState([]); // useState instead of useMemo to update Select Cell initialValue
+
+  const [skipPageReset, setSkipPageReset] = useState(false);
+
+  useEffect(() => {
+    setData(DATA);
+  }, [DATA]);
+
+  useEffect(() => {
+    setSkipPageReset(false);
+  }, [data]);
+
+  const updateMyData = (rowIndex, columnID, value) => {
+    setSkipPageReset(true); // To not reset the page
+    // Update value of Cell
+    setData((old) =>
+      old.map((row, index) => {
+        if (index === rowIndex) {
+          return {
+            ...old[rowIndex],
+            [columnID]: value,
+          };
+        }
+        return row;
+      })
+    );
+  };
 
   const {
     getTableProps,
@@ -114,6 +141,8 @@ const BasicTable = ({ COLUMNS, DATA, defaultSortBy, tableTitle }) => {
       initialState: {
         sortBy: defaultSortBy,
       },
+      autoResetPage: !skipPageReset,
+      updateMyData,
     },
     useGlobalFilter,
     useSortBy,

@@ -1,9 +1,9 @@
 import SingleAvatar from "../components/Avatar/SingleAvatar";
-import UserAvatars from "../components/Avatar/UserAvatars";
+// import UserAvatars from "../components/Avatar/UserAvatars";
 import ActionIcons from "../components/Tables/_ActionIcons";
+import EditableSelectCell from "../components/Tables/_EditableSelectCell";
 import TagInfo from "../components/Tags/Tag_Info";
-import AssignRole from "../pages/Admin/_AssignRole";
-import SelectRole from "../pages/Admin/_SelectRole";
+import AssignRole from "../components/Tables/_AssignRole";
 
 // DATA for Column Display of all Tables in react-tables
 export const Projects_Columns = [
@@ -35,7 +35,7 @@ export const Projects_Columns = [
     Header: "Action",
     accessor: "links",
     Cell: ({ value }) => {
-      return <ActionIcons links={value} />;
+      return <ActionIcons links={value} />; // View, Edit and Archive Icons
     },
   },
 ];
@@ -69,7 +69,7 @@ export const Tickets_Columns = [
     Header: "Action",
     accessor: "links",
     Cell: ({ value }) => {
-      return <ActionIcons links={value} />;
+      return <ActionIcons links={value} />; // View, Edit and Archive Icons
     },
   },
 ];
@@ -123,7 +123,9 @@ export const ProjectsDashboard_Columns = [
   {
     Header: "Ticket Count",
     accessor: "ticket_count",
-    Cell: ({ value }) => (
+    Cell: (
+      { value } // Centers Number in Cell
+    ) => (
       <div
         style={{
           textAlign: "center",
@@ -160,7 +162,7 @@ export const TicketsDashboard_Columns = [
     Header: "Action",
     accessor: "links",
     Cell: ({ value }) => {
-      return <ActionIcons links={value} />;
+      return <ActionIcons links={value} />; // View, Edit and Archive Icons
     },
   },
 ];
@@ -170,13 +172,14 @@ export const Manage_Roles = [
     Header: "",
     accessor: "avatar",
     Cell: ({ value }) => {
-      return <SingleAvatar avatar={value} />;
+      return <SingleAvatar avatar={value} />; // User Avatar display
     },
   },
   {
     Header: "Name",
     accessor: "name_contact",
     Cell: ({ value }) => {
+      // Name + Email displayed in single Cell
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <span
@@ -195,21 +198,21 @@ export const Manage_Roles = [
     Header: "Current Role",
     accessor: "currentRole",
     Cell: ({ value }) => {
-      return <TagInfo tagText={value} tagColor={"Blue"} />;
+      return <TagInfo tagText={value} tagColor={"Blue"} />; // Role of the User
     },
   },
   {
     Header: "Manage Role",
-    accessor: "manageRrole",
-    Cell: ({ row: { original } }) => {
-      return <SelectRole userRow={original} />;
-    },
+    accessor: "manageRole",
+    Cell: EditableSelectCell,
+    // Select dropdown Menu - update initial value of userRole Cell to the option selected
   },
   {
     Header: "Action",
     accessor: "action",
     Cell: ({ row: { original } }) => {
       return <AssignRole userRow={original} />;
+      // Action Button to Update the User Role into DB
     },
   },
 ];

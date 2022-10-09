@@ -1,8 +1,8 @@
 import React from "react";
-import ButtonActions from "../../components/Buttons/Button_Actions";
+import ButtonActions from "../Buttons/Button_Actions";
 
 const AssignRole = ({ userRow }) => {
-  console.log(userRow.currentRole);
+  // console.log(userRow.currentRole);
 
   const EditButtonStyle = {
     theme: "rgb(39,167,68)",
@@ -12,8 +12,8 @@ const AssignRole = ({ userRow }) => {
   };
 
   const handleAssign = () => {
-    console.log(userRow.currentRole);
-    console.log("user assigned");
+    console.log(userRow);
+    // console.log("user assigned");
   };
 
   return (
