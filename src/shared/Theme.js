@@ -2,6 +2,9 @@ export const lightTheme = {
   // Theme Name Reference
   theme_Name: "light",
 
+  // Welcome-Login
+  background_Login: "rgb(25,31,40)",
+
   // Font Color
   color_Font_Main: "rgb(68,68,68)",
   color_Font_Light: "rgb(90,90,90)",
@@ -64,6 +67,9 @@ export const lightTheme = {
 export const darkTheme = {
   // Theme Name Reference
   theme_Name: "dark",
+
+  // Welcome-Login
+  background_Login: "rgb(25,31,40)",
 
   // Font Color
   color_Font_Main: "rgb(68,68,68)",
