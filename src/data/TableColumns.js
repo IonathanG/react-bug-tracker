@@ -83,7 +83,7 @@ export const Tickets_Columns = [
     Header: "Priority",
     accessor: "priority",
     Cell: ({ value }) => {
-      return <TagInfo tagText={value} tagColor={"Red"} />; // Priority display tag
+      return <TagInfo tagText={value} />; // Priority display tag
     },
   },
   {
@@ -230,7 +230,7 @@ export const TicketsDashboard_Columns = [
     Header: "Priority",
     accessor: "priority",
     Cell: ({ value }) => {
-      return <TagInfo tagText={value} tagColor={"Grey"} />; // Priority display tag
+      return <TagInfo tagText={value} />; // Priority display tag
     },
   },
   {

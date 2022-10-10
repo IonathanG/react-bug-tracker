@@ -14,26 +14,49 @@ const Tag = styled.div`
   text-align: center;
 `;
 
-const TagInfo = ({ tagText, tagColor }) => {
+const TagInfo = ({ tagText, tagColor = null }) => {
   // Pick the Tag Color
-  const handleTagColor = (color) => {
-    switch (color) {
-      case "Cyan":
-        return "rgb(73,197,182)";
-      case "Grey":
-        return "rgb(156,156,156)";
-      case "Red":
-        return "rgb(220,52,68)";
-      case "Blue":
-        return "rgb(92,142,212)";
-      case "Green":
-        return "rgb(39,167,68)";
-      default:
-        return "";
+  const handleTagColor = () => {
+    if (tagColor) {
+      switch (tagColor) {
+        case "Cyan":
+          return "rgb(73,197,182)";
+        case "Grey":
+          return "rgb(156,156,156)";
+        case "Red":
+          return "rgb(220,52,68)";
+        case "Blue":
+          return "rgb(92,142,212)";
+        case "Green":
+          return "rgb(39,167,68)";
+        default:
+          return "";
+      }
+    } else {
+      switch (tagText.toUpperCase()) {
+        case "Cyan":
+          return "rgb(73,197,182)";
+        case "LOW":
+          return "rgb(156,156,156)";
+        case "URGENT":
+          return "rgb(220,52,68)";
+        case "HIGH":
+          return "rgb(244,173,2)";
+        case "MEDIUM":
+          return "rgb(92,142,212)";
+        case "DEVELOPMENT":
+          return "rgb(92,142,212)";
+        case "NEW":
+          return "rgb(39,167,68)";
+        case "RESOLVED":
+          return "rgb(39,167,68)";
+        default:
+          return "";
+      }
     }
   };
 
-  return <Tag color={handleTagColor(tagColor)}>{tagText}</Tag>;
+  return <Tag color={handleTagColor()}>{tagText}</Tag>;
 };
 
 export default TagInfo;

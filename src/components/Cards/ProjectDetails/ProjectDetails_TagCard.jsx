@@ -37,7 +37,7 @@ const ProjectDetailsTagCard = ({ project = null }) => {
       </InfoItem>
       <InfoItem>
         <span>Priority</span>
-        <TagInfo tagText={project?.priority} tagColor={"Cyan"} />
+        <TagInfo tagText={project?.priority} />
       </InfoItem>
       <InfoItem>
         <span>Status</span>
