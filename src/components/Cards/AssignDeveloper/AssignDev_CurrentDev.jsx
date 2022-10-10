@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import PersonIcon from "@mui/icons-material/Person";
 import ButtonBasic from "../../Buttons/Button_Basic";
+import SingleAvatar from "../../Avatar/SingleAvatar";
 
 const Container = styled.form`
   display: flex;
@@ -34,8 +35,6 @@ const DevWrap = styled.div`
   gap: 20px;
 `;
 
-const DevAvatar = styled.div``;
-
 const DevName = styled.div`
   font-size: 24px;
   font-weight: 500;
@@ -53,7 +52,6 @@ const DevIcon = styled(PersonIcon)`
 `;
 
 const AssignDevCurrentDev = ({ currentDev }) => {
-  console.log(currentDev);
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
 
@@ -64,7 +62,10 @@ const AssignDevCurrentDev = ({ currentDev }) => {
       <DevInfo>
         {currentDev !== "" && (
           <DevWrap>
-            <DevAvatar>{users[currentDev]?.user_avatar}</DevAvatar>
+            <SingleAvatar
+              avatar={users[currentDev]?.user_avatar}
+              size={"100px"}
+            />
             <DevName>{users[currentDev]?.user_name}</DevName>
             <DevEmail>{users[currentDev]?.user_email}</DevEmail>
             <ButtonBasic text={"Profile"} />

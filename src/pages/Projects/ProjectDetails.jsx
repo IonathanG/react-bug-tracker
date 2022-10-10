@@ -58,6 +58,7 @@ const ProjectDetails = () => {
     if (projectTicketList) {
       Object.values(projectTicketList)?.map((ticket) =>
         formattedData.push({
+          project_id: ticket.project_id,
           ticket_id: ticket.ticket_id,
           ticket_title: ticket.ticket_name,
           developer: users[ticket.assigned_to]?.user_name,

@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
+import { Link } from "react-router-dom";
 
 const CardContainer = styled.div`
   display: flex;
@@ -82,14 +83,17 @@ const TicketDetailsHistoryCard = ({ ticket = null }) => {
         <HistoryContainer>
           <Divider />
           <div>
-            {ticket.history.map((item) => (
-              <ItemWrap key={item.id}>
+            {ticket.history.map((item, index) => (
+              <ItemWrap key={index}>
                 <HistoryItem>
                   <BulletTime />
                   <div>{item.date}</div>
                   <div>{item.title}</div>
                   <div>
-                    By: <span>{users[item.author]?.user_name}</span>
+                    By:{" "}
+                    <Link to={`/MemberProfile/${users[item.author]?.user_id}`}>
+                      <span>{users[item.author]?.user_name}</span>
+                    </Link>
                   </div>
                   <div>{item.detail}</div>
                 </HistoryItem>

@@ -8,6 +8,7 @@ import ButtonBasic from "../../../components/Buttons/Button_Basic";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../utils/firebase.config";
 import { useNavigate } from "react-router-dom";
+import moment from "moment/moment";
 
 const Form = styled.form`
   display: flex;
@@ -44,8 +45,10 @@ const Label = styled.label`
 `;
 
 const AssignDevSelectCard = ({ projectID, ticketID }) => {
+  const userID = "user_02";
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
+  const projects = useSelector((state) => state.projects.Projects);
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   // Redirect once confirmed that new Manager is assigned
@@ -69,13 +72,28 @@ const AssignDevSelectCard = ({ projectID, ticketID }) => {
   }, [projectUsers, projectID, users]);
 
   const onSubmit = async (data) => {
-    console.log(data);
     const projectRef = doc(db, "projects", projectID);
+    const ticket = projects[projectID]?.tickets[ticketID];
 
     await updateDoc(projectRef, {
       [`tickets.${ticketID}.assigned_to`]: data.assignedTo,
     })
-      .then(() => console.log("Developer Updated!"))
+      // Update History => "Developer Assigned to the ticket"
+      .then(() => {
+        updateDoc(projectRef, {
+          [`tickets.${ticketID}.history`]: [
+            ...ticket.history,
+            {
+              date: moment().format("DD/MM/yyyy"),
+              title: `${
+                users[data.assignedTo]?.user_name
+              } was assigned to ticket: ${ticket.ticket_name}`,
+              author: userID,
+              detail: "The ticket was assigned to a developer.",
+            },
+          ],
+        });
+      })
       .then(() => navigate(`/Tickets/TicketDetails/${projectID}/${ticketID}`))
       .catch((error) => console.log(error));
   };

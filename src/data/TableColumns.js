@@ -24,14 +24,31 @@ export const Projects_Columns = [
   {
     Header: "Project Manager",
     accessor: "project_manager",
+    Cell: ({ value }) => {
+      // Project Name + Manager displayed in single Cell
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: "25px" }}>
+          <span style={{ marginLeft: "-20px" }}>
+            <SingleAvatar avatar={value.project_manager_avatar} size={"40px"} />
+          </span>
+          <span>{value.project_manager_name}</span>
+        </div>
+      );
+    },
   },
   {
     Header: "Team",
     accessor: "team",
+    Cell: ({ value }) => {
+      return <UserAvatars team={value} />; // User Avatars array link to their profiles
+    },
   },
   {
     Header: "Status",
     accessor: "status",
+    Cell: ({ value }) => {
+      return <TagInfo tagText={value} tagColor={"Green"} />; // Priority display tag
+    },
   },
   {
     Header: "Action",
@@ -58,10 +75,16 @@ export const Tickets_Columns = [
   {
     Header: "Status",
     accessor: "status",
+    Cell: ({ value }) => {
+      return <TagInfo tagText={value} tagColor={"Blue"} />; // Priority display tag
+    },
   },
   {
     Header: "Priority",
     accessor: "priority",
+    Cell: ({ value }) => {
+      return <TagInfo tagText={value} tagColor={"Red"} />; // Priority display tag
+    },
   },
   {
     Header: "Date",
@@ -183,13 +206,17 @@ export const TicketsDashboard_Columns = [
     Header: "Developer",
     accessor: "developer",
     Cell: ({ row: { original } }) => {
-      return (
-        <Link
-          to={`/Tickets/AssignDeveloper/${original.project_id}/${original.ticket_id}`}
-        >
-          <ButtonBasic text={"Assign Dev"} />
-        </Link>
-      ); // If ticket is not assigned, shows Assign Dev Option
+      if (!original.developer) {
+        return (
+          <Link
+            to={`/Tickets/AssignDeveloper/${original.project_id}/${original.ticket_id}`}
+          >
+            <ButtonBasic text={"Assign Dev"} />
+          </Link>
+        ); // If ticket is not assigned, shows Assign Dev Option
+      } else {
+        return original.developer;
+      }
     },
   },
   {

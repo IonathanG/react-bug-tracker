@@ -34,8 +34,9 @@ const TeamCount = styled.span`
 `;
 
 const ManagerContainer = styled.div`
+  margin-top: 10px;
   display: flex;
-  gap: 120px;
+  gap: 50px;
 `;
 
 const ManagerInfo = styled.div`
@@ -114,7 +115,7 @@ const ProjectTeamCard = ({ projectMembers, projectID }) => {
       <ManagerContainer>
         <SingleAvatar
           avatar={users[projectMembers?.project_manager_id]?.user_avatar}
-          size={"70px"}
+          size={"80px"}
         />
 
         <ManagerInfo>

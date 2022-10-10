@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 const Form = styled.form`
   margin-top: 30px;
   width: 50%;
-  /* min-height: 100vh; */
   padding: 20px;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.background_Block};
@@ -84,7 +83,6 @@ const TicketForm = ({
         [`tickets.${ticketID}.priority`]: data.priority,
         [`tickets.${ticketID}.status`]: data.status,
       })
-        .then(() => console.log("Ticket Updated!"))
         .then(() => navigate(-1))
         .catch((error) => console.log(error));
     }
@@ -108,7 +106,19 @@ const TicketForm = ({
           attachments: [],
         },
       })
-        .then(() => console.log("Ticket added"))
+        // Update History => "New Ticket Created"
+        .then(() => {
+          updateDoc(projectRef, {
+            [`tickets.ticketID-${data.ticketTitle}.history`]: [
+              {
+                date: moment().format("DD/MM/yyyy"),
+                title: "New Ticket Created",
+                author: userID,
+                detail: "A new ticket was added.",
+              },
+            ],
+          });
+        })
         .then(() => navigate(-1))
         .catch((error) => console.log(error));
     }

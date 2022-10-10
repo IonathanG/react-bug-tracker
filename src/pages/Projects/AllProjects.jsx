@@ -35,10 +35,16 @@ const AllProjects = () => {
       end_date: project.end_date,
       progress: project.progress,
       status: project.status,
-      project_manager:
-        users[projectUsers[project.project_id]?.project_manager_id]?.user_name,
+      project_manager: {
+        project_manager_name:
+          users[projectUsers[project.project_id]?.project_manager_id]
+            ?.user_name,
+        project_manager_avatar:
+          users[projectUsers[project.project_id]?.project_manager_id]
+            ?.user_avatar,
+      },
       team: projectUsers[project.project_id]?.project_team_id.map(
-        (user) => users[user].user_name
+        (user) => users[user].user_avatar
       ),
       links: {
         view: `/Projects/ProjectDetails/${project.project_id}`,

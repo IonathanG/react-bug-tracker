@@ -7,6 +7,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../utils/firebase.config";
 import moment from "moment/moment";
 import { useSelector } from "react-redux";
+import SingleAvatar from "../../Avatar/SingleAvatar";
 
 const CardContainer = styled.div`
   display: flex;
@@ -64,6 +65,7 @@ const CommentText = styled.div`
   font-size: 14px;
   font-weight: 400;
   padding-top: 15px;
+  padding-left: 15px;
 `;
 
 const TicketDetailsCommentsCard = ({ ticket = null }) => {
@@ -74,8 +76,8 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
 
   const onSubmit = (data) => {
     // DB Collection References to update comments array
-    const projectsRef = doc(db, "projects", ticket.project_id);
-    updateDoc(projectsRef, {
+    const projectRef = doc(db, "projects", ticket.project_id);
+    updateDoc(projectRef, {
       // Update the comment list by adding the new comment to the array
       [`tickets.${ticket.ticket_id}.comments`]: [
         ...ticket.comments,
@@ -87,7 +89,20 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
         },
       ],
     })
-      .then(() => console.log("Comment Added"))
+      // Update History => "New Comment Added"
+      .then(() => {
+        updateDoc(projectRef, {
+          [`tickets.${ticket.ticket_id}.history`]: [
+            ...ticket.history,
+            {
+              date: moment().format("DD/MM/yyyy"),
+              title: `New comment added to ticket: ${ticket.ticket_name}`,
+              author: userID,
+              detail: "The ticket comment was added.",
+            },
+          ],
+        });
+      })
       .then(() => reset())
       .catch((error) => console.log(error));
   };
@@ -122,7 +137,10 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
           {ticket.comments.map((item) => (
             <CommentItem key={item.id}>
               <CommentHeader>
-                {users[item.author]?.user_avatar}
+                <SingleAvatar
+                  avatar={users[item.author]?.user_avatar}
+                  size={"40px"}
+                />
                 <div>
                   {users[item.author]?.user_name}
                   <span>{item.created_at}</span>

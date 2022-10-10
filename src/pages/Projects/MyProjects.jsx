@@ -49,8 +49,15 @@ const MyProjects = () => {
         end_date: projects[project.project_id]?.end_date,
         progress: projects[project.project_id]?.progress,
         status: projects[project.project_id]?.status,
-        project_manager: users[project.project_manager_id]?.user_name,
-        team: project.project_team_id.map((user) => users[user]?.user_name),
+        project_manager: {
+          project_manager_name:
+            users[projectUsers[project.project_id]?.project_manager_id]
+              ?.user_name,
+          project_manager_avatar:
+            users[projectUsers[project.project_id]?.project_manager_id]
+              ?.user_avatar,
+        },
+        team: project.project_team_id.map((user) => users[user]?.user_avatar),
         links: {
           view: `/Projects/ProjectDetails/${project.project_id}`,
           edit: `/Projects/EditProject/${project.project_id}`,

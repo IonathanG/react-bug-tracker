@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Avatar = styled.img`
-  margin: -10px -20px -10px 15px;
-  /* width: 30px; */
+  margin: -10px 0px -10px 0px;
   width: ${(props) => (props.size ? props.size : "30px")};
   height: auto;
   border-radius: 50%;

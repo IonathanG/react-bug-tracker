@@ -94,8 +94,6 @@ const TicketCount = styled.span`
 `;
 
 const ProjectCard = ({ project }) => {
-  console.log(project);
-
   const buttonStyle = {
     background: "rgb(19,163,184)",
     padding: "8px 10px",

@@ -17,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 const Form = styled.form`
   margin-top: 30px;
   width: 50%;
-  /* min-height: 100vh; */
   padding: 20px;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.background_Block};
