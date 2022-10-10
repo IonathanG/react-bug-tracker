@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import SingleAvatar from "../../Avatar/SingleAvatar";
 import ButtonActions from "../../Buttons/Button_Actions";
 
 const CardContainer = styled.div`
@@ -36,7 +37,11 @@ const Project = styled.div`
 
 const Developer = styled(Project)`
   div {
-    padding-top: 10px;
+    padding-top: 20px;
+    span {
+      padding-left: 10px;
+      font-weight: 400;
+    }
   }
 `;
 
@@ -82,10 +87,15 @@ const TicketDetailsInfoCard = ({ project = null, ticket }) => {
 
       <Developer>
         <span>Developer: </span>
-        <div>
-          {users[ticket?.assigned_to]?.user_avatar}
-          {users[ticket?.assigned_to]?.user_name}
-        </div>
+        {ticket?.assigned_to !== "" && (
+          <div>
+            <SingleAvatar
+              avatar={users[ticket?.assigned_to]?.user_avatar}
+              size={"35px"}
+            />
+            <span>{users[ticket?.assigned_to]?.user_name}</span>
+          </div>
+        )}
 
         {ticket?.assigned_to === "" && <>No developer assigned</>}
       </Developer>

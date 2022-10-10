@@ -70,6 +70,7 @@ const TicketForm = ({
 
   const onSubmit = async (data) => {
     const documentRef = data.projectID ? data.projectID : projectID;
+    const ticket = projects[projectID]?.tickets[ticketID];
 
     // DB Collection References to set up and update
     const projectRef = doc(db, "projects", documentRef);
@@ -83,6 +84,20 @@ const TicketForm = ({
         [`tickets.${ticketID}.priority`]: data.priority,
         [`tickets.${ticketID}.status`]: data.status,
       })
+        // Update History => "Ticket Edited"
+        .then(() => {
+          updateDoc(projectRef, {
+            [`tickets.ticketID-${data.ticketTitle}.history`]: [
+              ...ticket.history,
+              {
+                date: moment().format("DD/MM/yyyy"),
+                title: `Ticket ${data.ticketTitle} was Edited`,
+                author: userID,
+                detail: "The ticket was edited",
+              },
+            ],
+          });
+        })
         .then(() => navigate(-1))
         .catch((error) => console.log(error));
     }
