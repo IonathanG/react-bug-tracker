@@ -5,7 +5,8 @@ import Navbar from "../components/Navbar/Navbar";
 import Header from "../components/Header/Header";
 
 const Layout = () => {
-  const isLoggedIn = false;
+  // const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return (
     <>
