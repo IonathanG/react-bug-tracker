@@ -3,14 +3,17 @@ import { Outlet } from "react-router-dom";
 import { SectionPage, SectionMain, SectionContent } from "../shared/Section";
 import Navbar from "../components/Navbar/Navbar";
 import Header from "../components/Header/Header";
+import useAuth from "../hooks/useAuth";
 
 const Layout = () => {
   // const isLoggedIn = false;
-  const isLoggedIn = true;
+  // const isLoggedIn = true;
+
+  const { auth } = useAuth();
 
   return (
     <>
-      {isLoggedIn && (
+      {auth && (
         <SectionPage>
           {/* Top Header */}
           <Header />
@@ -25,7 +28,7 @@ const Layout = () => {
           </SectionMain>
         </SectionPage>
       )}
-      {!isLoggedIn && <Outlet />}
+      {!auth && <Outlet />}
     </>
   );
 };

@@ -38,7 +38,7 @@ const Button = styled.button`
 
 const ButtonActions = ({ buttonStyle, text, callback = null }) => {
   return (
-    <Button buttonStyle={buttonStyle} onClick={callback} type="submit">
+    <Button buttonStyle={buttonStyle} type="submit">
       {text}
     </Button>
   );

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useForm, Controller } from "react-hook-form";
-import TextField from "@mui/material/TextField";
 import ButtonBasic from "../../components/Buttons/Button_Basic";
-import ButtonActions from "../../components/Buttons/Button_Actions";
+import LoginForm from "../../components/Form/LoginForm";
+import DemoLoginForm from "../../components/Form/DemoLoginForm";
 
 const Container = styled.div`
   width: 100vw;
@@ -39,29 +38,11 @@ const FormContainer = styled.div`
   color: ${({ theme }) => theme.color_NavItem};
 `;
 
-const Form = styled.form``;
-
-const Title = styled.div`
-  font-weight: 300;
-  font-size: 18px;
-`;
-
-const InputsContainer = styled.div`
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;
-
 const ButtonContainer = styled.div`
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 30px;
-`;
-
-const DemoButtonContainer = styled(ButtonContainer)`
-  gap: 20px;
 `;
 
 const Divider = styled.div`
@@ -82,18 +63,13 @@ const Img = styled.img`
 `;
 
 const Login = () => {
-  const { control, handleSubmit } = useForm({});
   const [showLogin, setShowLogin] = useState(true);
 
-  const ButtonStyle = {
-    theme: "rgb(0,123,254)",
+  const DemoButtonStyle = {
+    background: "rgb(39,167,68)",
     hover: {
-      color: "white",
+      background: "#22943d",
     },
-  };
-
-  const onSubmit = (data) => {
-    console.log(data);
   };
 
   return (
@@ -102,74 +78,14 @@ const Login = () => {
         <Logo src={"/logo/BugTrackerWelcome.svg"} alt="logo" />
 
         <FormContainer>
-          {showLogin && (
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              <Title>Log in to your account</Title>
-
-              {/* Email Input */}
-              <InputsContainer>
-                <Controller
-                  name="Email"
-                  control={control}
-                  rules={{ required: "This field is required" }}
-                  render={({ field: { onChange, value, ref }, fieldState }) => (
-                    <TextField
-                      size="small"
-                      placeholder="Email"
-                      value={value ? value : ""}
-                      onChange={onChange}
-                      ref={ref}
-                      error={Boolean(fieldState.error)}
-                      helperText={fieldState?.error?.message}
-                    ></TextField>
-                  )}
-                />
-
-                {/* Password Input */}
-                <Controller
-                  name="Password"
-                  control={control}
-                  rules={{ required: "This field is required" }}
-                  render={({ field: { onChange, value, ref }, fieldState }) => (
-                    <TextField
-                      size="small"
-                      placeholder="Password"
-                      value={value ? value : ""}
-                      onChange={onChange}
-                      ref={ref}
-                      error={Boolean(fieldState.error)}
-                      helperText={fieldState?.error?.message}
-                    ></TextField>
-                  )}
-                />
-
-                <ButtonContainer>
-                  <ButtonBasic text={"LOGIN"} />
-                  {/* <Divider /> */}
-                </ButtonContainer>
-              </InputsContainer>
-            </Form>
-          )}
-
-          {!showLogin && (
-            <>
-              <Title>Select Demo Role to Login as:</Title>
-              <DemoButtonContainer>
-                <ButtonActions buttonStyle={ButtonStyle} text={"ADMIN"} />
-                <ButtonActions
-                  buttonStyle={ButtonStyle}
-                  text={"PROJECT MANAGER"}
-                />
-                <ButtonActions buttonStyle={ButtonStyle} text={"DEVELOPER"} />
-                <ButtonActions buttonStyle={ButtonStyle} text={"SUBMITTER"} />
-              </DemoButtonContainer>
-            </>
-          )}
+          {/* Switch Login with Credentials / Login as Demo User */}
+          {showLogin ? <LoginForm /> : <DemoLoginForm />}
 
           <ButtonContainer onClick={() => setShowLogin(!showLogin)}>
             <Divider />
             <ButtonBasic
               text={showLogin ? "DEMO APPLICATION" : "BACK TO LOGIN"}
+              buttonStyle={DemoButtonStyle}
             />
           </ButtonContainer>
         </FormContainer>

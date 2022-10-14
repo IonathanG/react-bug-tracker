@@ -7,6 +7,7 @@ import { GlobalStyles } from "./shared/globalStyles";
 import useProjectsListener from "./hooks/useProjectsListener";
 import useUsersListener from "./hooks/useUsersListener";
 import useProjectUsersListener from "./hooks/useProjectUsersListener";
+import RequireAuth from "./utils/RequireAuth";
 
 // Single Pages
 import Layout from "./layout/Layout";
@@ -56,6 +57,15 @@ function App() {
   }, [theme]);
   // ----- -----
 
+  // ----- Defines Roles for Private Protected Routes -----
+  const ROLES = {
+    Admin: 100,
+    Manager: 200,
+    Developer: 300,
+    Submitter: 400,
+    User: 500,
+  };
+
   // ----- Initialise DataBase Listeners -----
   useProjectsListener();
   useUsersListener();
@@ -74,12 +84,14 @@ function App() {
               {/* ----- END PUBLIC ROUTES ----- */}
 
               {/* ----- PROTECTED ROUTES ----- */}
-              <Route path="/" element={<HomeDashboard />} />
-              <Route path="/Inbox" element={<Inbox />} />
-              <Route
-                path="/MemberProfile/:userID"
-                element={<MemberProfile />}
-              />
+              <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+                <Route path="/" element={<HomeDashboard />} />
+                <Route path="/Inbox" element={<Inbox />} />
+                <Route
+                  path="/MemberProfile/:userID"
+                  element={<MemberProfile />}
+                />
+              </Route>
 
               {/* -- Projects -- */}
               <Route path="/Projects">
