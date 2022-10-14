@@ -83,83 +83,134 @@ function App() {
               <Route path="Unauthorized" element={<Unauthorized />} />
               {/* ----- END PUBLIC ROUTES ----- */}
 
-              {/* ----- PROTECTED ROUTES ----- */}
+              {/* ----- PROTECTED ROUTES -  LOGGED IN USERS ONLY ----- */}
               <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+                {/* All logged in Users can access these routes */}
                 <Route path="/" element={<HomeDashboard />} />
                 <Route path="/Inbox" element={<Inbox />} />
                 <Route
                   path="/MemberProfile/:userID"
                   element={<MemberProfile />}
                 />
-              </Route>
 
-              {/* -- Projects -- */}
-              <Route path="/Projects">
-                <Route index element={<AllProjects />} />
-                <Route path="/Projects/AllProjects" element={<AllProjects />} />
-                <Route path="/Projects/MyProjects" element={<MyProjects />} />
-                <Route path="/Projects/AddProject" element={<AddProject />} />
-                <Route
-                  path="/Projects/EditProject/:id"
-                  element={<EditProject />}
-                />
-                <Route
-                  path="/Projects/ManageProjects"
-                  element={<ManageProjects />}
-                />
-                <Route
-                  path="/Projects/ArchivedProjects"
-                  element={<ArchivedProjects />}
-                />
-                <Route
-                  path="/Projects/ProjectDetails/:id"
-                  element={<ProjectDetails />}
-                />
-                <Route
-                  path="/Projects/AssignMembers/:id"
-                  element={<AssignMembers />}
-                />
-                <Route
-                  path="/Projects/AssignManager/:id"
-                  element={<AssignManager />}
-                />
-              </Route>
+                {/* -- PROJECTS -- */}
+                <Route path="/Projects">
+                  <Route index element={<AllProjects />} />
 
-              {/* -- Tickets -- */}
-              <Route path="/Tickets">
-                <Route index element={<AllTickets />} />
-                <Route path="/Tickets/AllTickets" element={<AllTickets />} />
-                <Route path="/Tickets/MyTickets" element={<MyTickets />} />
-                <Route path="/Tickets/AddTicket" element={<AddTicket />} />
-                <Route
-                  path="/Tickets/EditTicket/:ProjectID/:TicketID"
-                  element={<EditTicket />}
-                />
-                <Route
-                  path="/Tickets/UnassignedTickets"
-                  element={<UnassignedTickets />}
-                />
-                <Route
-                  path="/Tickets/ArchivedTickets"
-                  element={<ArchivedTickets />}
-                />
-                <Route
-                  path="/Tickets/TicketDetails/:ProjectID/:TicketID"
-                  element={<TicketDetails />}
-                />
-                <Route
-                  path="/Tickets/AssignDeveloper/:ProjectID/:TicketID"
-                  element={<AssignDeveloper />}
-                />
-              </Route>
+                  <Route
+                    path="/Projects/AllProjects"
+                    element={<AllProjects />}
+                  />
+                  <Route path="/Projects/MyProjects" element={<MyProjects />} />
+                  <Route
+                    path="/Projects/ArchivedProjects"
+                    element={<ArchivedProjects />}
+                  />
+                  <Route
+                    path="/Projects/ProjectDetails/:id"
+                    element={<ProjectDetails />}
+                  />
 
-              {/* -- Admin -- */}
-              <Route path="/Admin">
-                <Route index element={<ManageRoles />} />
-                <Route path="/Admin/ManageRoles" element={<ManageRoles />} />
-                <Route path="/Admin/Invite" element={<Invite />} />
-              </Route>
+                  <Route
+                    element={
+                      <RequireAuth
+                        allowedRoles={[ROLES.Admin, ROLES.Manager]}
+                      />
+                    }
+                  >
+                    {/* Only ADMIN and PROJECT MANAGER can access these routes */}
+                    <Route
+                      path="/Projects/EditProject/:id"
+                      element={<EditProject />}
+                    />
+                    <Route
+                      path="/Projects/ManageProjects"
+                      element={<ManageProjects />}
+                    />
+                    <Route
+                      path="/Projects/AssignMembers/:id"
+                      element={<AssignMembers />}
+                    />
+                  </Route>
 
+                  {/* Only ADMIN can access these routes */}
+                  <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                    <Route
+                      path="/Projects/AddProject"
+                      element={<AddProject />}
+                    />
+                    <Route
+                      path="/Projects/AssignManager/:id"
+                      element={<AssignManager />}
+                    />
+                  </Route>
+                </Route>
+
+                {/* -- TICKETS -- */}
+                <Route path="/Tickets">
+                  <Route index element={<AllTickets />} />
+                  <Route path="/Tickets/AllTickets" element={<AllTickets />} />
+                  <Route path="/Tickets/MyTickets" element={<MyTickets />} />
+                  <Route
+                    path="/Tickets/ArchivedTickets"
+                    element={<ArchivedTickets />}
+                  />
+                  <Route path="/Tickets/AddTicket" element={<AddTicket />} />
+                  <Route
+                    path="/Tickets/TicketDetails/:ProjectID/:TicketID"
+                    element={<TicketDetails />}
+                  />
+
+                  {/* Only ADMIN, PROJECT MANAGER and DEVELOPER can access these routes */}
+                  <Route
+                    element={
+                      <RequireAuth
+                        allowedRoles={[
+                          ROLES.Admin,
+                          ROLES.Manager,
+                          ROLES.Developer,
+                        ]}
+                      />
+                    }
+                  >
+                    <Route
+                      path="/Tickets/EditTicket/:ProjectID/:TicketID"
+                      element={<EditTicket />}
+                    />
+                  </Route>
+
+                  <Route
+                    element={
+                      <RequireAuth
+                        allowedRoles={[ROLES.Admin, ROLES.Manager]}
+                      />
+                    }
+                  >
+                    {/* Only ADMIN and PROJECT MANAGER can access these routes */}
+                    <Route
+                      path="/Tickets/UnassignedTickets"
+                      element={<UnassignedTickets />}
+                    />
+                    <Route
+                      path="/Tickets/AssignDeveloper/:ProjectID/:TicketID"
+                      element={<AssignDeveloper />}
+                    />
+                  </Route>
+                </Route>
+
+                {/* -- ADMIN -- */}
+                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                  {/* Only ADMIN can access these routes */}
+                  <Route path="/Admin">
+                    <Route index element={<ManageRoles />} />
+                    <Route
+                      path="/Admin/ManageRoles"
+                      element={<ManageRoles />}
+                    />
+                    <Route path="/Admin/Invite" element={<Invite />} />
+                  </Route>
+                </Route>
+              </Route>
               {/* ----- END PROTECTED ROUTES ----- */}
 
               {/* -- Catches All -- */}

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ButtonBasic from "../../components/Buttons/Button_Basic";
 import LoginForm from "../../components/Form/LoginForm";
 import DemoLoginForm from "../../components/Form/DemoLoginForm";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -63,7 +65,16 @@ const Img = styled.img`
 `;
 
 const Login = () => {
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+
   const [showLogin, setShowLogin] = useState(true);
+
+  useEffect(() => {
+    if (auth) {
+      navigate("/");
+    }
+  }, [auth, navigate]);
 
   const DemoButtonStyle = {
     background: "rgb(39,167,68)",
