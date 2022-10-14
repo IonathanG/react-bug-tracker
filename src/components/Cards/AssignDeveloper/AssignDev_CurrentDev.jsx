@@ -4,6 +4,7 @@ import styled from "styled-components";
 import PersonIcon from "@mui/icons-material/Person";
 import ButtonBasic from "../../Buttons/Button_Basic";
 import SingleAvatar from "../../Avatar/SingleAvatar";
+import { Link } from "react-router-dom";
 
 const Container = styled.form`
   display: flex;
@@ -68,7 +69,10 @@ const AssignDevCurrentDev = ({ currentDev }) => {
             />
             <DevName>{users[currentDev]?.user_name}</DevName>
             <DevEmail>{users[currentDev]?.user_email}</DevEmail>
-            <ButtonBasic text={"Profile"} />
+
+            <Link to={`/MemberProfile/${users[currentDev]?.user_id}`}>
+              <ButtonBasic text={"Profile"} />
+            </Link>
           </DevWrap>
         )}
 

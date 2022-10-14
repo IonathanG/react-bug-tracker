@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
-import ButtonActions from "../../components/Buttons/Button_Actions";
+// import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 
-const Form = styled.form``;
+// const Form = styled.form``;
+const Form = styled.div``;
 
 const Title = styled.div`
   font-weight: 300;
@@ -23,6 +23,28 @@ const DemoButtonContainer = styled(ButtonContainer)`
   gap: 20px;
 `;
 
+const DemoButton = styled.button`
+  font-family: "Ubuntu", "sans-serif";
+  letter-spacing: 0.1px;
+  transition: 0.25s ease;
+
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid ${({ theme }) => theme.background_ButtonBasic};
+  border-radius: 4px;
+
+  color: ${({ theme }) => theme.background_ButtonBasic};
+  font-size: 14px;
+
+  height: 34px;
+  margin: 0px;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.background_ButtonBasic};
+    color: white;
+  }
+`;
+
 const DemoLoginForm = () => {
   const { setAuth } = useAuth();
 
@@ -30,16 +52,11 @@ const DemoLoginForm = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const { handleSubmit } = useForm({});
+  // const { handleSubmit } = useForm({});
 
-  const ButtonStyle = {
-    theme: "rgb(0,123,254)",
-    hover: {
-      color: "white",
-    },
-  };
+  const onSubmit = (selectedRole) => {
+    console.log(selectedRole);
 
-  const onSubmit = () => {
     const ROLES = {
       Admin: 100,
       Manager: 200,
@@ -59,9 +76,9 @@ const DemoLoginForm = () => {
       // const roles = response?.data?.roles;
       // setAuth({ user, pwd, roles, accessToken });
       setAuth({
-        user: DEMO_USERS.DemoAdmin.user,
-        pwd: DEMO_USERS.DemoAdmin.pwd,
-        roles: [ROLES.Admin, ROLES.User],
+        user: DEMO_USERS[`Demo${selectedRole}`.user],
+        pwd: DEMO_USERS[`Demo${selectedRole}`.pwd],
+        roles: [ROLES[`${selectedRole}`], ROLES.User],
       });
       navigate(from, { replace: true });
     } catch (err) {
@@ -70,13 +87,23 @@ const DemoLoginForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    // <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form>
       <Title>Select Demo Role to Login as:</Title>
+
       <DemoButtonContainer>
-        <ButtonActions buttonStyle={ButtonStyle} text={"ADMIN"} />
-        <ButtonActions buttonStyle={ButtonStyle} text={"PROJECT MANAGER"} />
-        <ButtonActions buttonStyle={ButtonStyle} text={"DEVELOPER"} />
-        <ButtonActions buttonStyle={ButtonStyle} text={"SUBMITTER"} />
+        <DemoButton onClick={() => onSubmit("Admin")} type="submit">
+          ADMIN
+        </DemoButton>
+        <DemoButton onClick={() => onSubmit("Manager")} type="submit">
+          PROJECT MANAGER
+        </DemoButton>
+        <DemoButton onClick={() => onSubmit("Developer")} type="submit">
+          DEVELOPER
+        </DemoButton>
+        <DemoButton onClick={() => onSubmit("Submitter")} type="submit">
+          SUBMITTER
+        </DemoButton>
       </DemoButtonContainer>
     </Form>
   );
