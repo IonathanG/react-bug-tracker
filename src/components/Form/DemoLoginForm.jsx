@@ -1,10 +1,9 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-// import { useForm } from "react-hook-form";
+import { ROLES } from "../../data/Roles";
 import useAuth from "../../hooks/useAuth";
 
-// const Form = styled.form``;
 const Form = styled.div``;
 
 const Title = styled.div`
@@ -53,18 +52,7 @@ const DemoLoginForm = () => {
   const from = location.state?.from?.pathname || "/";
 
   // const { handleSubmit } = useForm({});
-
   const onSubmit = (selectedRole) => {
-    console.log(selectedRole);
-
-    const ROLES = {
-      Admin: 100,
-      Manager: 200,
-      Developer: 300,
-      Submitter: 400,
-      User: 500,
-    };
-
     const DEMO_USERS = {
       DemoAdmin: { user: "DemoAdmin", pwd: "AdminPwd" },
       DemoManager: { user: "DemoManager", pwd: "ManagerPwd" },
@@ -76,8 +64,8 @@ const DemoLoginForm = () => {
       // const roles = response?.data?.roles;
       // setAuth({ user, pwd, roles, accessToken });
       setAuth({
-        user: DEMO_USERS[`Demo${selectedRole}`.user],
-        pwd: DEMO_USERS[`Demo${selectedRole}`.pwd],
+        user: DEMO_USERS[`Demo${selectedRole}`].user,
+        pwd: DEMO_USERS[`Demo${selectedRole}`].pwd,
         roles: [ROLES[`${selectedRole}`], ROLES.User],
       });
       navigate(from, { replace: true });

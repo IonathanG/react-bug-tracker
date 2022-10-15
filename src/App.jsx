@@ -8,6 +8,7 @@ import useProjectsListener from "./hooks/useProjectsListener";
 import useUsersListener from "./hooks/useUsersListener";
 import useProjectUsersListener from "./hooks/useProjectUsersListener";
 import RequireAuth from "./utils/RequireAuth";
+import { ROLES } from "./data/Roles";
 
 // Single Pages
 import Layout from "./layout/Layout";
@@ -56,15 +57,6 @@ function App() {
     return theme === "light" ? lightTheme : darkTheme;
   }, [theme]);
   // ----- -----
-
-  // ----- Defines Roles for Private Protected Routes -----
-  const ROLES = {
-    Admin: 100,
-    Manager: 200,
-    Developer: 300,
-    Submitter: 400,
-    User: 500,
-  };
 
   // ----- Initialise DataBase Listeners -----
   useProjectsListener();

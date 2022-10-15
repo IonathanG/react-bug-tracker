@@ -6,9 +6,6 @@ import Header from "../components/Header/Header";
 import useAuth from "../hooks/useAuth";
 
 const Layout = () => {
-  // const isLoggedIn = false;
-  // const isLoggedIn = true;
-
   const { auth } = useAuth();
 
   return (

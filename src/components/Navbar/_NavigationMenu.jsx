@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { MenuNav } from "../../data/MenuNav";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../features/menuSlice";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import useMenuNav from "../../hooks/useMenuNav";
 
 const MenuContainer = styled.ul`
   width: 100%;
@@ -87,6 +87,8 @@ const SubName = styled.span`
 `;
 
 const NavigationMenu = () => {
+  const MenuNav = useMenuNav();
+
   const dispatch = useDispatch();
   const [subNavActive, setSubNavActive] = useState(null);
 
