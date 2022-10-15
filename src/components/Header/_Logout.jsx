@@ -16,6 +16,7 @@ const Logout = () => {
 
   const logout = () => {
     setAuth(null);
+    localStorage.removeItem("auth");
     navigate("/login");
   };
   return <LogoutIcon onClick={() => logout()}></LogoutIcon>;
