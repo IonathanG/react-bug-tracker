@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ROLES } from "../../data/Roles";
+import useAuth from "../../hooks/useAuth";
 
 const ContainerPopUp = styled.div`
   display: ${(props) => (props.showPopUp ? "block" : "none")};
@@ -10,7 +12,7 @@ const ContainerPopUp = styled.div`
   top: 15px;
 
   width: 125px;
-  height: 125px;
+  height: fit-content;
   padding: 15px;
 
   border-radius: 8px;
@@ -44,6 +46,8 @@ const ItemLink = styled(Link)`
 `;
 
 const ProjectCardPopUp = ({ projectID, showPopUp }) => {
+  const { auth } = useAuth();
+
   const menuPopUp = [
     { id: 1, name: "View", link: `/Projects/ProjectDetails/${projectID}` },
     { id: 2, name: "Edit", link: `/Projects/EditProject/${projectID}` },
@@ -51,12 +55,24 @@ const ProjectCardPopUp = ({ projectID, showPopUp }) => {
   ];
   return (
     <ContainerPopUp showPopUp={showPopUp}>
+      {/* Only showing Edit and Archive Options to Admin and Manager */}
       <ListPopUp>
-        {menuPopUp.map((item) => (
-          <ItemPopUp key={item.id}>
-            <ItemLink to={item.link}>{item.name}</ItemLink>
-          </ItemPopUp>
-        ))}
+        {menuPopUp
+          .filter((item) => {
+            if (
+              !(
+                auth?.roles?.includes(ROLES.Admin) ||
+                auth?.roles?.includes(ROLES.Manager)
+              )
+            ) {
+              return item.id === 1;
+            } else return item;
+          })
+          .map((item) => (
+            <ItemPopUp key={item.id}>
+              <ItemLink to={item.link}>{item.name}</ItemLink>
+            </ItemPopUp>
+          ))}
       </ListPopUp>
     </ContainerPopUp>
   );

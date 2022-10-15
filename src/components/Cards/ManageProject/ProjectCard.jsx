@@ -5,6 +5,8 @@ import ButtonBasic from "../../Buttons/Button_Basic";
 import { Link } from "react-router-dom";
 import ProjectCardPopUp from "../../PopUp/ProjectCardPopUp";
 import UserAvatars from "../../Avatar/UserAvatars";
+import useAuth from "../../../hooks/useAuth";
+import { ROLES } from "../../../data/Roles";
 
 const CardContainer = styled.div`
   display: flex;
@@ -94,6 +96,8 @@ const TicketCount = styled.span`
 `;
 
 const ProjectCard = ({ project }) => {
+  const { auth } = useAuth();
+
   const buttonStyle = {
     background: "rgb(19,163,184)",
     padding: "8px 10px",
@@ -130,9 +134,14 @@ const ProjectCard = ({ project }) => {
           <span>Team</span>
           <UserAvatars team={project.project_team} />
         </span>
-        <Link to={`/Projects/AssignMembers/${project.project_id}`}>
-          <ButtonBasic buttonStyle={buttonStyle} text={"Manage Team"} />
-        </Link>
+
+        {/* Only showing Manage Team to Admin and Manager */}
+        {(auth?.roles?.includes(ROLES.Admin) ||
+          auth?.roles?.includes(ROLES.Manager)) && (
+          <Link to={`/Projects/AssignMembers/${project.project_id}`}>
+            <ButtonBasic buttonStyle={buttonStyle} text={"Manage Team"} />
+          </Link>
+        )}
       </Team>
 
       {/* <Progress>{project.project_progress}</Progress> */}

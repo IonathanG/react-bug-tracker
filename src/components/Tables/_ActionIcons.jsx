@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import ClassOutlinedIcon from "@mui/icons-material/ClassOutlined";
+import useAuth from "../../hooks/useAuth";
+import { ROLES } from "../../data/Roles";
 
 const Container = styled.div`
   display: flex;
@@ -54,18 +56,33 @@ const ArchiveIcon = styled(ClassOutlinedIcon)`
   }
 `;
 
-const ActionIcons = ({ links }) => {
+const ActionIcons = ({ links, typeProject }) => {
+  const { auth } = useAuth();
+
   return (
     <Container>
       <Link to={links.view}>
         <ViewIcon />
       </Link>
-      <Link to={links.edit}>
-        <EditIcon />
-      </Link>
-      <Link to={links.archive}>
-        <ArchiveIcon />
-      </Link>
+
+      {/* Only showing Edit and Archive Options to Admin and Manager */}
+      {/* Only showing Edit Option to Developer ONLY for TICKETS */}
+      {(auth?.roles?.includes(ROLES.Admin) ||
+        auth?.roles?.includes(ROLES.Manager) ||
+        (auth?.roles?.includes(ROLES.Developer) && !typeProject)) && (
+        <>
+          <Link to={links.edit}>
+            <EditIcon />
+          </Link>
+
+          {(auth?.roles?.includes(ROLES.Admin) ||
+            auth?.roles?.includes(ROLES.Manager)) && (
+            <Link to={links.archive}>
+              <ArchiveIcon />
+            </Link>
+          )}
+        </>
+      )}
     </Container>
   );
 };

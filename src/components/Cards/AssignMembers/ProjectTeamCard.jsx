@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import useAuth from "../../../hooks/useAuth";
+import { ROLES } from "../../../data/Roles";
 import SingleAvatar from "../../Avatar/SingleAvatar";
 import ButtonBasic from "../../Buttons/Button_Basic";
 
@@ -36,7 +38,7 @@ const TeamCount = styled.span`
 const ManagerContainer = styled.div`
   margin-top: 10px;
   display: flex;
-  gap: 50px;
+  gap: 20px;
 `;
 
 const ManagerInfo = styled.div`
@@ -93,7 +95,7 @@ const MemberInfo = styled.div`
 
 const ProjectTeamCard = ({ projectMembers, projectID }) => {
   const users = useSelector((state) => state.users.Users);
-  // console.log("projectMembers: ", projectMembers);
+  const { auth } = useAuth();
 
   const buttonStyle = {
     background: "rgb(19,163,184)",
@@ -126,9 +128,11 @@ const ProjectTeamCard = ({ projectMembers, projectID }) => {
           <span>{users[projectMembers?.project_manager_id]?.user_email}</span>
           <span>{users[projectMembers?.project_manager_id]?.user_role}</span>
 
-          <Link to={`/Projects/AssignManager/${projectID}`}>
-            <ButtonBasic buttonStyle={buttonStyle} text={"Manage PM"} />
-          </Link>
+          {auth?.roles?.includes(ROLES.Admin) && (
+            <Link to={`/Projects/AssignManager/${projectID}`}>
+              <ButtonBasic buttonStyle={buttonStyle} text={"Manage PM"} />
+            </Link>
+          )}
         </ManagerInfo>
       </ManagerContainer>
 

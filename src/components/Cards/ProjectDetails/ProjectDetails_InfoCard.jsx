@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ROLES } from "../../../data/Roles";
+import useAuth from "../../../hooks/useAuth";
 import ButtonActions from "../../Buttons/Button_Actions";
 
 const CardContainer = styled.div`
@@ -36,6 +38,8 @@ const ButtonContainer = styled.div`
 `;
 
 const ProjectDetailsInfoCard = ({ project = null }) => {
+  const { auth } = useAuth();
+
   const EditButtonStyle = {
     theme: "rgb(255,193,6)",
     hover: {
@@ -60,17 +64,24 @@ const ProjectDetailsInfoCard = ({ project = null }) => {
         {project?.progress}
       </Progress>
 
-      <ButtonContainer>
-        <Link to={`/Projects/EditProject/${project?.project_id}`}>
-          <ButtonActions buttonStyle={EditButtonStyle} text={"Edit Project"} />
-        </Link>
-        <Link to={`/`}>
-          <ButtonActions
-            buttonStyle={ArchiveButtonStyle}
-            text={"Archive Project"}
-          />
-        </Link>
-      </ButtonContainer>
+      {/* Only showing Edit and Archive Project to Admin and Manager */}
+      {(auth?.roles?.includes(ROLES.Admin) ||
+        auth?.roles?.includes(ROLES.Manager)) && (
+        <ButtonContainer>
+          <Link to={`/Projects/EditProject/${project?.project_id}`}>
+            <ButtonActions
+              buttonStyle={EditButtonStyle}
+              text={"Edit Project"}
+            />
+          </Link>
+          <Link to={`/`}>
+            <ButtonActions
+              buttonStyle={ArchiveButtonStyle}
+              text={"Archive Project"}
+            />
+          </Link>
+        </ButtonContainer>
+      )}
     </CardContainer>
   );
 };

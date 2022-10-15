@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ROLES } from "../../../data/Roles";
+import useAuth from "../../../hooks/useAuth";
 import SingleAvatar from "../../Avatar/SingleAvatar";
 import ButtonActions from "../../Buttons/Button_Actions";
 
@@ -53,6 +55,7 @@ const ButtonContainer = styled.div`
 
 const TicketDetailsInfoCard = ({ project = null, ticket }) => {
   const users = useSelector((state) => state.users.Users);
+  const { auth } = useAuth();
 
   const AssignButtonStyle = {
     theme: "rgb(0,123,254)",
@@ -100,26 +103,38 @@ const TicketDetailsInfoCard = ({ project = null, ticket }) => {
         {ticket?.assigned_to === "" && <>No developer assigned</>}
       </Developer>
 
+      {/* Only showing Assign Dev, Edit and Archive to Admin and Manager */}
+      {/* Only showing Edit to Developer */}
       <ButtonContainer>
-        <Link
-          to={`/Tickets/AssignDeveloper/${ticket?.project_id}/${ticket?.ticket_id}`}
-        >
-          <ButtonActions
-            buttonStyle={AssignButtonStyle}
-            text={"Assign Developer"}
-          />
-        </Link>
-        <Link
-          to={`/Tickets/EditTicket/${ticket?.project_id}/${ticket?.ticket_id}`}
-        >
-          <ButtonActions buttonStyle={EditButtonStyle} text={"Edit Ticket"} />
-        </Link>
-        <Link to={`/`}>
-          <ButtonActions
-            buttonStyle={ArchiveButtonStyle}
-            text={"Archive Project"}
-          />
-        </Link>
+        {(auth?.roles?.includes(ROLES.Admin) ||
+          auth?.roles?.includes(ROLES.Manager)) && (
+          <Link
+            to={`/Tickets/AssignDeveloper/${ticket?.project_id}/${ticket?.ticket_id}`}
+          >
+            <ButtonActions
+              buttonStyle={AssignButtonStyle}
+              text={"Assign Developer"}
+            />
+          </Link>
+        )}
+
+        {!auth?.roles?.includes(ROLES.Submitter) && (
+          <Link
+            to={`/Tickets/EditTicket/${ticket?.project_id}/${ticket?.ticket_id}`}
+          >
+            <ButtonActions buttonStyle={EditButtonStyle} text={"Edit Ticket"} />
+          </Link>
+        )}
+
+        {(auth?.roles?.includes(ROLES.Admin) ||
+          auth?.roles?.includes(ROLES.Manager)) && (
+          <Link to={`/`}>
+            <ButtonActions
+              buttonStyle={ArchiveButtonStyle}
+              text={"Archive Ticket"}
+            />
+          </Link>
+        )}
       </ButtonContainer>
     </CardContainer>
   );

@@ -5,7 +5,7 @@ import EditableSelectCell from "../components/Tables/_EditableSelectCell";
 import TagInfo from "../components/Tags/Tag_Info";
 import AssignRole from "../components/Tables/_AssignRole";
 import { Link } from "react-router-dom";
-import ButtonBasic from "../components/Buttons/Button_Basic";
+import AssignDev from "../components/Tables/_AssignDev";
 
 // DATA for Column Display of all Tables in react-tables
 export const Projects_Columns = [
@@ -54,7 +54,7 @@ export const Projects_Columns = [
     Header: "Action",
     accessor: "links",
     Cell: ({ value }) => {
-      return <ActionIcons links={value} />; // View, Edit and Archive Icons
+      return <ActionIcons links={value} typeProject={true} />; // View, Edit and Archive Icons
     },
   },
 ];
@@ -71,6 +71,13 @@ export const Tickets_Columns = [
   {
     Header: "Assigned to",
     accessor: "assigned_to",
+    Cell: ({ row: { original } }) => {
+      if (!original.assigned_to) {
+        return <AssignDev original={original} />; // If ticket is not assigned, shows Assign Dev Option to Admin and Manager
+      } else {
+        return original.assigned_to;
+      }
+    },
   },
   {
     Header: "Status",
@@ -94,7 +101,7 @@ export const Tickets_Columns = [
     Header: "Action",
     accessor: "links",
     Cell: ({ value }) => {
-      return <ActionIcons links={value} />; // View, Edit and Archive Icons
+      return <ActionIcons links={value} typeProject={false} />; // View, Edit and Archive Icons
     },
   },
 ];
@@ -207,13 +214,7 @@ export const TicketsDashboard_Columns = [
     accessor: "developer",
     Cell: ({ row: { original } }) => {
       if (!original.developer) {
-        return (
-          <Link
-            to={`/Tickets/AssignDeveloper/${original.project_id}/${original.ticket_id}`}
-          >
-            <ButtonBasic text={"Assign Dev"} />
-          </Link>
-        ); // If ticket is not assigned, shows Assign Dev Option
+        return <AssignDev original={original} />; // If ticket is not assigned, shows Assign Dev Option to Admin and Manager
       } else {
         return original.developer;
       }
@@ -241,7 +242,7 @@ export const TicketsDashboard_Columns = [
     Header: "Action",
     accessor: "links",
     Cell: ({ value }) => {
-      return <ActionIcons links={value} />; // View, Edit and Archive Icons
+      return <ActionIcons links={value} typeProject={false} />; // View, Edit and Archive Icons
     },
   },
 ];

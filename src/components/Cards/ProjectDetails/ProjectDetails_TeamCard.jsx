@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ROLES } from "../../../data/Roles";
+import useAuth from "../../../hooks/useAuth";
 import SingleAvatar from "../../Avatar/SingleAvatar";
 import ButtonBasic from "../../Buttons/Button_Basic";
 
@@ -39,7 +41,7 @@ const TeamCount = styled.span`
 
 const ManagerContainer = styled.div`
   display: flex;
-  gap: 120px;
+  gap: 20px;
 `;
 
 const ManagerInfo = styled.div`
@@ -95,6 +97,7 @@ const MemberInfo = styled.div`
 
 const ProjectDetailsTeamCard = ({ projectMembers, projectID }) => {
   const users = useSelector((state) => state.users.Users);
+  const { auth } = useAuth();
 
   const buttonStyle = {
     background: "rgb(19,163,184)",
@@ -143,9 +146,13 @@ const ProjectDetailsTeamCard = ({ projectMembers, projectID }) => {
         ))}
       </TeamContainer>
 
-      <Link to={`/Projects/AssignMembers/${projectID}`}>
-        <ButtonBasic buttonStyle={buttonStyle} text={"Manage Team"} />
-      </Link>
+      {/* Only showing Manage Team to Admin and Manager */}
+      {(auth?.roles?.includes(ROLES.Admin) ||
+        auth?.roles?.includes(ROLES.Manager)) && (
+        <Link to={`/Projects/AssignMembers/${projectID}`}>
+          <ButtonBasic buttonStyle={buttonStyle} text={"Manage Team"} />
+        </Link>
+      )}
     </CardContainer>
   );
 };

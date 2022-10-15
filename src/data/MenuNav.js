@@ -192,7 +192,7 @@ export const MenuManager = [
   },
   {
     id: 4,
-    name: "Manager",
+    name: "Project Manager",
     src: AdminPanelSettingsOutlinedIcon,
     sub_menu: [
       {
