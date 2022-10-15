@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import TagInfo from "../Tags/Tag_Info";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
+import useAuth from "../../hooks/useAuth";
+import { useSelector } from "react-redux";
 
 const Header = styled.div`
   // background-color: #e3f5dcb4;
@@ -39,16 +41,19 @@ const ArrowDropDown = styled(ArrowDropDownOutlinedIcon)`
 `;
 
 const NavbarHeader = () => {
+  const { auth } = useAuth();
+  const users = useSelector((state) => state.users.Users);
+
   return (
     <Header>
-      <UserAvatar src="/avatar/admin_01" alt="user_picture" />
+      <UserAvatar src={`/avatar/${auth?.id}`} alt="user_picture" />
       <UserDetails>
         <div>Welcome,</div>
         <UserName>
-          Demo Admin <ArrowDropDown />
+          {auth?.user} <ArrowDropDown />
         </UserName>
         {/* User Role Info */}
-        <TagInfo tagColor={"Cyan"} tagText={"admin"} />
+        <TagInfo tagColor={"Cyan"} tagText={users[auth?.id]?.user_role} />
       </UserDetails>
     </Header>
   );

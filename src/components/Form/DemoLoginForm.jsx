@@ -54,10 +54,22 @@ const DemoLoginForm = () => {
   // const { handleSubmit } = useForm({});
   const onSubmit = (selectedRole) => {
     const DEMO_USERS = {
-      DemoAdmin: { user: "DemoAdmin", pwd: "AdminPwd" },
-      DemoManager: { user: "DemoManager", pwd: "ManagerPwd" },
-      DemoDeveloper: { user: "DemoDeveloper", pwd: "DeveloperPwd" },
-      DemoSubmitter: { user: "DemoSubmitter", pwd: "SubmitterPwd" },
+      DemoAdmin: { user: "Demo Admin", id: "DemoAdmin", pwd: "AdminPwd" },
+      DemoManager: {
+        user: "Demo Manager",
+        id: "DemoManager",
+        pwd: "ManagerPwd",
+      },
+      DemoDeveloper: {
+        user: "Demo Developer",
+        id: "DemoDeveloper",
+        pwd: "DeveloperPwd",
+      },
+      DemoSubmitter: {
+        user: "Demo Submitter",
+        id: "DemoSubmitter",
+        pwd: "SubmitterPwd",
+      },
     };
 
     try {
@@ -65,6 +77,7 @@ const DemoLoginForm = () => {
       // setAuth({ user, pwd, roles, accessToken });
       setAuth({
         user: DEMO_USERS[`Demo${selectedRole}`].user,
+        id: DEMO_USERS[`Demo${selectedRole}`].id,
         pwd: DEMO_USERS[`Demo${selectedRole}`].pwd,
         roles: [ROLES[`${selectedRole}`], ROLES.User],
       });
