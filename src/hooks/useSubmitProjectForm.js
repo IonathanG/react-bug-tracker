@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase.config";
 
+// Custom Hook to handle form validation for Add/Edit Project
 const useSubmitProjectForm = () => {
   const [status, setStatus] = useState("idle");
   const [errorName, setErrorName] = useState(false);
@@ -42,7 +43,7 @@ const useSubmitProjectForm = () => {
             .then(() => {
               console.log("ProjectUsers Updated");
               setStatus("fetched");
-              navigate(`/Projects/AllProjects`);
+              navigate("/Projects/AllProjects");
             })
             .catch((error) => {
               console.log(error);
@@ -89,6 +90,7 @@ const useSubmitProjectForm = () => {
               .then(() => {
                 console.log("ProjectUsers added");
                 setStatus("fetched");
+                navigate("/Projects/AllProjects");
               })
               .catch((error) => {
                 console.log(error);

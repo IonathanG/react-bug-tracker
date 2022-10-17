@@ -51,6 +51,9 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
   // Custom Hook to handle form validation
   const [onSubmit, errorName] = useSubmitProjectForm();
 
+  // Custom Hook to keep up to date the List of Managers
+  const ManagerList = useManagerList();
+
   // Default Values added to TextFields in case the Form is in Edit mode
   useEffect(() => {
     if (projects[projectID]) {
@@ -64,9 +67,6 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
       });
     }
   }, [projects, projectUsers, users, projectID, reset]);
-
-  // Custom Hook to keep up to date the List of Managers
-  const ManagerList = useManagerList();
 
   // Calling in the custom hook to submit the project form
   const onFormSubmit = (data) => {
