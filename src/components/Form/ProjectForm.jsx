@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
@@ -7,12 +7,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import ButtonBasic from "../Buttons/Button_Basic";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../utils/firebase.config";
-import moment from "moment/moment";
 import { useSelector } from "react-redux";
 import FormatDate from "../../utils/FormatDate";
-import { useNavigate } from "react-router-dom";
+import useManagerList from "../../hooks/useManagerList";
+import useSubmitProjectForm from "../../hooks/useSubmitProjectForm";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -48,15 +46,12 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
   const projects = useSelector((state) => state.projects.Projects);
   const users = useSelector((state) => state.users.Users);
 
-  const [errorName, setErrorName] = useState(false);
   const { control, reset, handleSubmit } = useForm({});
 
-  // Redirect once confirmed the form is submitted
-  const navigate = useNavigate();
+  // Custom Hook to handle form validation
+  const [onSubmit, errorName] = useSubmitProjectForm();
 
-  console.log("modeEdit: ", editMode);
-
-  // Default Values in case the Form is in Edit mode
+  // Default Values added to TextFields in case the Form is in Edit mode
   useEffect(() => {
     if (projects[projectID]) {
       reset({
@@ -70,89 +65,16 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
     }
   }, [projects, projectUsers, users, projectID, reset]);
 
-  // Keep up to date List of Managers to assign a project to
-  const ManagersList = useMemo(() => {
-    return Object.values(users)
-      .filter((user) => user.user_role === "Project Manager")
-      .map((manager) => ({
-        manager_id: manager.user_id,
-        manager_name: manager.user_name,
-      }));
-  }, [users]);
+  // Custom Hook to keep up to date the List of Managers
+  const ManagerList = useManagerList();
 
-  const onSubmit = async (data) => {
-    console.log(data);
-
-    // DB Collection References to set up and update
-    const projectsRef = doc(db, "projects", `projectID-${data.projectName}`);
-    const projectUsersRef = doc(
-      db,
-      "projectUsers",
-      `projectID-${data.projectName}`
-    );
-
-    // Editing Mode Updates Firestore
-    if (editMode) {
-      await updateDoc(projectsRef, {
-        project_name: data.projectName,
-        description: data.projectDescription,
-        start_date: moment(data.startDate).format("DD-MM-YYYY"),
-        end_date: moment(data.endDate).format("DD-MM-YYYY"),
-        priority: data.priority,
-      })
-        .then(() => {
-          console.log("Project Updated!");
-
-          updateDoc(projectUsersRef, {
-            project_manager_id: data.projectManager,
-          })
-            .then(() => console.log("ProjectUsers Updated"))
-            .then(() => navigate(-1))
-            .catch((error) => console.log(error));
-        })
-        .catch((error) => console.log(error));
-    }
-
-    // If not editing => Creates new project
-    else if (!editMode) {
-      // Checking if Project Name is already taken in the database before creating it
-      const docSnap = await getDoc(projectsRef);
-
-      if (docSnap.exists()) {
-        console.log("This name is taken");
-        setErrorName(true);
-      } else {
-        console.log("No such document!");
-
-        await setDoc(projectsRef, {
-          project_id: `projectID-${data.projectName}`,
-          project_name: data.projectName,
-          description: data.projectDescription,
-          start_date: moment(data.startDate).format("DD-MM-YYYY"),
-          end_date: moment(data.endDate).format("DD-MM-YYYY"),
-          priority: data.priority,
-          progress: 0,
-          status: "Open",
-          attachment: {},
-          tickets: {},
-        })
-          .then(() => {
-            console.log("Project added");
-            setDoc(doc(db, "projectUsers", `projectID-${data.projectName}`), {
-              project_id: `projectID-${data.projectName}`,
-              project_manager_id: data.projectManager,
-              project_team_id: [],
-            })
-              .then(() => console.log("ProjectUsers added"))
-              .catch((error) => console.log(error));
-          })
-          .catch((error) => console.log(error));
-      }
-    }
+  // Calling in the custom hook to submit the project form
+  const onFormSubmit = (data) => {
+    onSubmit(data, editMode);
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onFormSubmit)}>
       {/* Project Name Input */}
       <InputContainer>
         <Label htmlFor="projectName">Project Name</Label>
@@ -298,7 +220,7 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
               error={Boolean(fieldState.error)}
               helperText={fieldState?.error?.message}
             >
-              {ManagersList.map((manager) => (
+              {ManagerList.map((manager) => (
                 <MenuItem key={manager.manager_id} value={manager.manager_id}>
                   {manager.manager_name}
                 </MenuItem>
