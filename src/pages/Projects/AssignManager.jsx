@@ -1,14 +1,13 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation/Navigation";
 import { useForm, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import ButtonBasic from "../../components/Buttons/Button_Basic";
-import { useNavigate, useParams } from "react-router-dom";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../utils/firebase.config";
+import { useParams } from "react-router-dom";
+import useManagerList from "../../hooks/useManagerList";
+import useAssignManager from "../../hooks/useAssignManager";
 
 const Form = styled.form`
   display: flex;
@@ -35,37 +34,21 @@ const Label = styled.label`
 `;
 
 const AssignManager = () => {
-  // Retrieving State
-  const users = useSelector((state) => state.users.Users);
+  // Custom Hook to Update the Manager to the Project
+  const [AssignManager] = useAssignManager();
 
   // Retrieving project ID to allocate the Manager to the correct Project
-  const { id } = useParams();
-
-  // Redirect once confirmed that new Manager is assigned
-  const navigate = useNavigate();
+  const { projectID } = useParams();
+  console.log(projectID);
 
   const { control, handleSubmit } = useForm();
 
-  // Keep up to date List of Managers to assign a project to
-  const ManagersList = useMemo(() => {
-    return Object.values(users)
-      .filter((user) => user.user_role === "Project Manager")
-      .map((manager) => ({
-        manager_id: manager.user_id,
-        manager_name: manager.user_name,
-      }));
-  }, [users]);
+  // Custom Hook to keep up to date the List of Managers
+  const ManagerList = useManagerList();
 
-  const onSubmit = async (data) => {
-    console.log(data);
-    const projectUsersRef = doc(db, "projectUsers", id);
-
-    await updateDoc(projectUsersRef, {
-      project_manager_id: data.projectManager,
-    })
-      .then(() => console.log("Manager Updated!"))
-      .then(() => navigate(`../AssignMembers/${id}`))
-      .catch((error) => console.log(error));
+  // Calling hook to update Manager
+  const onSubmit = (data) => {
+    AssignManager(data, projectID);
   };
 
   return (
@@ -90,7 +73,7 @@ const AssignManager = () => {
                 error={Boolean(fieldState.error)}
                 helperText={fieldState?.error?.message}
               >
-                {ManagersList.map((manager) => (
+                {ManagerList.map((manager) => (
                   <MenuItem key={manager.manager_id} value={manager.manager_id}>
                     {manager.manager_name}
                   </MenuItem>

@@ -123,7 +123,7 @@ function App() {
                       element={<ManageProjects />}
                     />
                     <Route
-                      path="/Projects/AssignMembers/:id"
+                      path="/Projects/AssignMembers/:projectID"
                       element={<AssignMembers />}
                     />
                   </Route>
@@ -135,7 +135,7 @@ function App() {
                       element={<AddProject />}
                     />
                     <Route
-                      path="/Projects/AssignManager/:id"
+                      path="/Projects/AssignManager/:projectID"
                       element={<AssignManager />}
                     />
                   </Route>

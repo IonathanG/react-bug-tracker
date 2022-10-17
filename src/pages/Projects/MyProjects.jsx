@@ -4,12 +4,12 @@ import styled from "styled-components";
 import Navigation from "../../components/Navigation/Navigation";
 import BasicTable from "../../components/Tables/BasicTable";
 import { Projects_Columns } from "../../data/TableColumns";
+import useAuth from "../../hooks/useAuth";
 
 const Container = styled.div``;
 
 const MyProjects = () => {
-  const userID = "user_02";
-  const userRole = "Project Manager";
+  const { auth } = useAuth();
 
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
@@ -36,10 +36,10 @@ const MyProjects = () => {
     // Admin can see all Projects
     formattedData = projectUsersArray
       .filter((project) => {
-        if (userRole !== "Admin") {
+        if (users[auth?.id].user_role !== "Admin") {
           return (
-            project.project_manager_id === userID ||
-            project.project_team_id.some((user) => user === userID)
+            project.project_manager_id === auth?.id ||
+            project.project_team_id.some((user) => user === auth?.id)
           );
         } else return project;
       })
@@ -65,7 +65,7 @@ const MyProjects = () => {
         },
       }));
     return formattedData;
-  }, [users, projects, projectUsers]);
+  }, [users, projects, projectUsers, auth.id]);
 
   return (
     <Container>

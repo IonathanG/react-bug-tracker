@@ -5,8 +5,7 @@ import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../utils/firebase.config";
+import useAssignUsers from "../../../hooks/useAssignUsers";
 
 const CardContainer = styled.div`
   display: flex;
@@ -66,10 +65,11 @@ const DevMember = styled.div`
 const SwapIcon = styled(SwapHorizIcon)``;
 
 const ManageDevCard = ({ teamMembers, projectID }) => {
-  // const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
   const users = useSelector((state) => state.users.Users);
-
   const [projectDevList, setProjectDevList] = useState([]);
+
+  // Custom Hook to Update the Userlist to the Project
+  const [AssignUsers] = useAssignUsers();
 
   useEffect(() => {
     setProjectDevList(teamMembers);
@@ -96,16 +96,15 @@ const ManageDevCard = ({ teamMembers, projectID }) => {
     setProjectDevList((list) => list.filter((dev) => dev !== user));
   };
 
-  const assignMembers = async (list) => {
-    // console.log("final list: ", list);
-    const projectUsersRef = doc(db, "projectUsers", projectID);
+  // const assignMembers = async (list) => {
+  //   const projectUsersRef = doc(db, "projectUsers", projectID);
 
-    await updateDoc(projectUsersRef, {
-      project_team_id: list,
-    })
-      .then(() => console.log("Team Updated!"))
-      .catch((error) => console.log(error));
-  };
+  //   await updateDoc(projectUsersRef, {
+  //     project_team_id: list,
+  //   })
+  //     .then(() => console.log("Team Updated!"))
+  //     .catch((error) => console.log(error));
+  // };
 
   return (
     <CardContainer>
@@ -139,7 +138,7 @@ const ManageDevCard = ({ teamMembers, projectID }) => {
         </OnProjectDev>
       </DevContainer>
 
-      <ButtonContainer onClick={() => assignMembers(projectDevList)}>
+      <ButtonContainer onClick={() => AssignUsers(projectDevList, projectID)}>
         <ButtonBasic text={"Assign Members"} />
       </ButtonContainer>
     </CardContainer>

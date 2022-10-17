@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase.config";
+import useAuth from "./useAuth";
 
 const useSubmitTicketForm = () => {
-  const userID = "user_02";
+  const { auth } = useAuth();
+
   const [status, setStatus] = useState("idle");
 
   const projects = useSelector((state) => state.projects.Projects);
@@ -41,7 +43,7 @@ const useSubmitTicketForm = () => {
               {
                 date: moment().format("DD/MM/yyyy"),
                 title: `Ticket ${data.ticketTitle} was Edited`,
-                author: userID,
+                author: auth?.id,
                 detail: "The ticket was edited",
               },
             ],
@@ -65,7 +67,7 @@ const useSubmitTicketForm = () => {
           project_id: data.projectID,
           ticket_id: `ticketID-${data.ticketTitle}`,
           ticket_name: data.ticketTitle,
-          assigned_by: userID,
+          assigned_by: auth?.id,
           assigned_to: "",
           description: data.ticketDescription,
           type: data.type,
@@ -84,7 +86,7 @@ const useSubmitTicketForm = () => {
               {
                 date: moment().format("DD/MM/yyyy"),
                 title: "New Ticket Created",
-                author: userID,
+                author: auth?.id,
                 detail: "A new ticket was added.",
               },
             ],

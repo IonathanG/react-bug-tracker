@@ -9,6 +9,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../utils/firebase.config";
 import { useNavigate } from "react-router-dom";
 import moment from "moment/moment";
+import useAuth from "../../../hooks/useAuth";
 
 const Form = styled.form`
   display: flex;
@@ -45,7 +46,8 @@ const Label = styled.label`
 `;
 
 const AssignDevSelectCard = ({ projectID, ticketID }) => {
-  const userID = "user_02";
+  const { auth } = useAuth();
+
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
@@ -88,7 +90,7 @@ const AssignDevSelectCard = ({ projectID, ticketID }) => {
               title: `${
                 users[data.assignedTo]?.user_name
               } was assigned to ticket: ${ticket.ticket_name}`,
-              author: userID,
+              author: auth?.id,
               detail: "The ticket was assigned to a developer.",
             },
           ],

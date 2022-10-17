@@ -6,7 +6,6 @@ import useAuth from "../../hooks/useAuth";
 import { useSelector } from "react-redux";
 
 const Header = styled.div`
-  // background-color: #e3f5dcb4;
   display: flex;
   align-items: flex-start;
   gap: 10px;

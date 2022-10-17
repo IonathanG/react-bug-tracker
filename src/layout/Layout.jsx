@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { SectionPage, SectionMain, SectionContent } from "../shared/Section";
+import { SectionPage, SectionMain, SectionContent } from "../shared/Styles";
 import Navbar from "../components/Navbar/Navbar";
 import Header from "../components/Header/Header";
 import useAuth from "../hooks/useAuth";

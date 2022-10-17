@@ -15,27 +15,29 @@ const ManageTeamContainer = styled.div`
 `;
 
 const AssignMembers = () => {
-  const { id } = useParams();
-  // console.log("project ID: ", id);
+  const { projectID } = useParams();
 
   // Retrieving State
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
-  const [projectMembers, setProjectMembers] = useState({});
+  const [projectMembers, setProjectMembers] = useState(null);
 
   useEffect(() => {
-    setProjectMembers(projectUsers[id]);
-  }, [projectUsers, id]);
+    setProjectMembers(projectUsers[projectID]);
+  }, [projectUsers, projectID]);
 
   return (
     <>
       <Navigation headerText={"Manage Team"} />
 
       <ManageTeamContainer>
-        <ProjectTeamCard projectMembers={projectMembers} projectID={id} />
+        <ProjectTeamCard
+          projectMembers={projectMembers}
+          projectID={projectID}
+        />
         <ManageDevCard
           teamMembers={projectMembers?.project_team_id}
-          projectID={id}
+          projectID={projectID}
         />
       </ManageTeamContainer>
     </>

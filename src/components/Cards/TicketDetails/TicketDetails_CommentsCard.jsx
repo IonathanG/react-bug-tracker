@@ -8,6 +8,7 @@ import { db } from "../../../utils/firebase.config";
 import moment from "moment/moment";
 import { useSelector } from "react-redux";
 import SingleAvatar from "../../Avatar/SingleAvatar";
+import useAuth from "../../../hooks/useAuth";
 
 const CardContainer = styled.div`
   display: flex;
@@ -72,7 +73,7 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
   const users = useSelector((state) => state.users.Users);
 
   const { control, handleSubmit, reset } = useForm();
-  const userID = "user_02";
+  const { auth } = useAuth();
 
   const onSubmit = (data) => {
     // DB Collection References to update comments array
@@ -83,7 +84,7 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
         ...ticket.comments,
         {
           id: ticket?.comments.length,
-          author: userID,
+          author: auth?.id,
           created_at: moment().format("LLL"),
           comment: data.ticketComment,
         },
@@ -97,7 +98,7 @@ const TicketDetailsCommentsCard = ({ ticket = null }) => {
             {
               date: moment().format("DD/MM/yyyy"),
               title: `New comment added to ticket: ${ticket.ticket_name}`,
-              author: userID,
+              author: auth?.id,
               detail: "The ticket comment was added.",
             },
           ],
