@@ -1,12 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { useTheme } from "./context/ThemeContext";
 import { lightTheme, darkTheme } from "./shared/Theme";
 import { GlobalStyles } from "./shared/globalStyles";
-import useProjectsListener from "./hooks/useProjectsListener";
-import useUsersListener from "./hooks/useUsersListener";
-import useProjectUsersListener from "./hooks/useProjectUsersListener";
 import RequireAuth from "./utils/RequireAuth";
 import { ROLES } from "./data/Roles";
 
@@ -44,6 +41,7 @@ import AssignDeveloper from "./pages/Tickets/AssignDeveloper";
 // Admin
 import Invite from "./pages/Admin/Invite";
 import ManageRoles from "./pages/Admin/ManageRoles";
+import useDBListeners from "./hooks/useDBListeners";
 
 const AppContainer = styled.div`
   background-color: ${({ theme }) => theme.main_Background};
@@ -59,9 +57,14 @@ function App() {
   // ----- -----
 
   // ----- Initialise DataBase Listeners -----
-  useProjectsListener();
-  useUsersListener();
-  useProjectUsersListener();
+  const [projectsListener, projectUsersListener, usersListener] =
+    useDBListeners();
+
+  useEffect(() => {
+    projectsListener();
+    projectUsersListener();
+    usersListener();
+  }, [projectsListener, projectUsersListener, usersListener]);
 
   return (
     <ThemeProvider theme={themeMode}>

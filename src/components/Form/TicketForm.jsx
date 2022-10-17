@@ -59,6 +59,7 @@ const TicketForm = ({
   // Custom Hook to keep up to date the List of Projects
   const ProjectList = useProjectList();
 
+  // Calling in the custom hook to submit the ticket form
   const onFormSubmit = (data) => {
     onSubmit(data, editMode, projectID, ticketID);
   };

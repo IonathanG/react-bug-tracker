@@ -86,7 +86,7 @@ const MemberProfile = () => {
         users[projectUsers[project.project_id]?.project_manager_id]?.user_avatar
       );
       projectUsers[project.project_id]?.project_team_id.map((user) =>
-        team.push(users[user].user_avatar)
+        team.push(users[user]?.user_avatar)
       );
       return team;
     };
