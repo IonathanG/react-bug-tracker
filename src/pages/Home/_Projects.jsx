@@ -20,7 +20,7 @@ const ProjectsDashboard = () => {
   const defaultSortBy = useMemo(
     () => [
       {
-        id: "project_name",
+        id: "project_info",
         desc: false,
       },
     ],

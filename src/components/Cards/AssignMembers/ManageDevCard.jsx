@@ -75,12 +75,12 @@ const ManageDevCard = ({ teamMembers, projectID }) => {
     setProjectDevList(teamMembers);
   }, [teamMembers]);
 
-  // Filter Users who are not Developers and not already on the current Project
+  // Filter Users who are not Developers or Submitter and not already on the current Project
   const companyDevList = useMemo(() => {
     return Object.values(users)
       .filter(
         (user) =>
-          user.user_role === "Developer" &&
+          (user.user_role === "Developer" || user.user_role === "Submitter") &&
           !projectDevList?.includes(user.user_id)
       )
       .map((user) => user.user_id);

@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import DataCards from "../../components/Cards/Dashboard/DataCards";
 import Navigation from "../../components/Navigation/Navigation";
 import MembersDashboard from "./_Members";
 import ProjectsDashboard from "./_Projects";
 import TicketsDashboard from "./_Tickets";
 
 const Container = styled.div``;
+
+const ChartsContainer = styled.div`
+  margin: 30px 0px 40px 0px;
+`;
 
 const TablesContainer = styled.div`
   display: flex;
@@ -24,6 +29,9 @@ const HomeDashboard = () => {
     <Container>
       {" "}
       <Navigation headerText={"Dashboard"} />
+      <ChartsContainer>
+        <DataCards />
+      </ChartsContainer>
       <TablesContainer>
         <TopTablesContainer>
           <MembersDashboard />
