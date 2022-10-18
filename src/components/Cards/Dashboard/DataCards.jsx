@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import useChartsData from "../../../hooks/useChartsData";
 
 const CardsContainer = styled.div`
   width: 100%;
@@ -20,31 +21,38 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 
   span:nth-child(1) {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 23px;
+  }
+  span:nth-child(2) {
+    font-size: 16px;
+    letter-spacing: 0.3px;
   }
 `;
 
 const DataCards = () => {
+  const [projectCount, ticketCount, unassignedTickerCount, assignTicketCount] =
+    useChartsData();
+
   return (
     <CardsContainer>
       <Card style={{ backgroundColor: "rgba(22,162,184,255)" }}>
-        <span>{5}</span>
+        <span>{projectCount}</span>
         <span>Active Projects</span>
       </Card>
       <Card style={{ backgroundColor: "rgba(109,117,125,255)" }}>
-        <span>{25}</span>
+        <span>{ticketCount}</span>
         <span>Total Tickets</span>
       </Card>
       <Card style={{ backgroundColor: "rgba(254,192,9,255)" }}>
-        <span>{15}</span>
+        <span>{unassignedTickerCount}</span>
         <span>Unassigned Tickets</span>
       </Card>
       <Card style={{ backgroundColor: "rgba(52,58,64,255)" }}>
-        <span>{10}</span>
+        <span>{assignTicketCount}</span>
         <span>Assigned Tickets</span>
       </Card>
     </CardsContainer>
