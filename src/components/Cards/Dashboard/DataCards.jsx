@@ -11,7 +11,7 @@ const CardsContainer = styled.div`
 `;
 
 const Card = styled.div`
-  height: 130px;
+  height: 120px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.background_Block};
   box-shadow: ${({ theme }) => theme.boxShadow_Block};

@@ -2,8 +2,6 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 const useChartsData = () => {
-  //   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
-  // const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
 
   const projectCount = useMemo(() => {
