@@ -33,7 +33,7 @@ const TagInfo = ({ tagText, tagColor = null }) => {
           return "";
       }
     } else {
-      switch (tagText.toUpperCase()) {
+      switch (tagText?.toUpperCase()) {
         case "Cyan":
           return "rgb(73,197,182)";
         case "LOW":

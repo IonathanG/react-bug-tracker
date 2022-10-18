@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import ButtonBasic from "../../Buttons/Button_Basic";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../utils/firebase.config";
-import moment from "moment/moment";
 import { useSelector } from "react-redux";
 import SingleAvatar from "../../Avatar/SingleAvatar";
-import useAuth from "../../../hooks/useAuth";
+import useTicketComment from "../../../hooks/useTicketComment";
 
 const CardContainer = styled.div`
   display: flex;
@@ -71,41 +68,19 @@ const CommentText = styled.div`
 
 const TicketDetailsCommentsCard = ({ ticket = null }) => {
   const users = useSelector((state) => state.users.Users);
-
   const { control, handleSubmit, reset } = useForm();
-  const { auth } = useAuth();
+  const [EditComment, status] = useTicketComment();
+
+  // Reset the input field once the comment is updated in DB
+  useEffect(() => {
+    if (status === "success") {
+      reset();
+    }
+  }, [status, reset]);
 
   const onSubmit = (data) => {
-    // DB Collection References to update comments array
-    const projectRef = doc(db, "projects", ticket.project_id);
-    updateDoc(projectRef, {
-      // Update the comment list by adding the new comment to the array
-      [`tickets.${ticket.ticket_id}.comments`]: [
-        ...ticket.comments,
-        {
-          id: ticket?.comments.length,
-          author: auth?.id,
-          created_at: moment().format("LLL"),
-          comment: data.ticketComment,
-        },
-      ],
-    })
-      // Update History => "New Comment Added"
-      .then(() => {
-        updateDoc(projectRef, {
-          [`tickets.${ticket.ticket_id}.history`]: [
-            ...ticket.history,
-            {
-              date: moment().format("DD/MM/yyyy"),
-              title: `New comment added to ticket: ${ticket.ticket_name}`,
-              author: auth?.id,
-              detail: "The ticket comment was added.",
-            },
-          ],
-        });
-      })
-      .then(() => reset())
-      .catch((error) => console.log(error));
+    // Call in custom hook to add comment and update ticket history
+    EditComment(ticket, data);
   };
 
   return (
