@@ -96,16 +96,6 @@ const ManageDevCard = ({ teamMembers, projectID }) => {
     setProjectDevList((list) => list.filter((dev) => dev !== user));
   };
 
-  // const assignMembers = async (list) => {
-  //   const projectUsersRef = doc(db, "projectUsers", projectID);
-
-  //   await updateDoc(projectUsersRef, {
-  //     project_team_id: list,
-  //   })
-  //     .then(() => console.log("Team Updated!"))
-  //     .catch((error) => console.log(error));
-  // };
-
   return (
     <CardContainer>
       <Title>Manage Developers</Title>

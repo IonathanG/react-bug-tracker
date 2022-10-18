@@ -5,16 +5,18 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase.config";
 import useAuth from "./useAuth";
+import useTicketHistory from "./useTicketHistory";
 
 const useSubmitTicketForm = () => {
   const { auth } = useAuth();
-
   const [status, setStatus] = useState("idle");
-
   const projects = useSelector((state) => state.projects.Projects);
 
   // Redirect once confirmed the form is submitted
   const navigate = useNavigate();
+
+  // Custom Hook to update history of ticket
+  const [EditHistory] = useTicketHistory();
 
   // On Submit the Form => Create new Ticket or Edit existing Ticket
   const onSubmit = async (data, editMode, projectID, ticketID) => {
@@ -37,22 +39,15 @@ const useSubmitTicketForm = () => {
       })
         // Update History => "Ticket Edited"
         .then(() => {
-          updateDoc(projectRef, {
-            [`tickets.ticketID-${data.ticketTitle}.history`]: [
-              ...ticket.history,
-              {
-                date: moment().format("DD/MM/yyyy"),
-                title: `Ticket ${data.ticketTitle} was Edited`,
-                author: auth?.id,
-                detail: "The ticket was edited",
-              },
-            ],
-          });
+          const dataHistory = {
+            title: `Ticket ${data.ticketTitle} was Edited`,
+            detail: "The ticket was edited.",
+          };
+          EditHistory(ticket, dataHistory);
         })
         .then(() => {
-          console.log("ticket updated");
           setStatus("fetched");
-          navigate("/Tickets/AllTickets");
+          navigate(`/Tickets/TicketDetails/${projectID}/${ticketID}`);
         })
         .catch((error) => {
           console.log(error);
@@ -74,26 +69,19 @@ const useSubmitTicketForm = () => {
           status: "New",
           priority: data.priority,
           created_date: moment().format("DD/MM/yyyy"),
-          history: [],
+          history: [
+            {
+              date: moment().format("DD/MM/yyyy"),
+              title: "New Ticket Created",
+              author: auth?.id,
+              detail: "A new ticket was added.",
+            },
+          ],
           comments: [],
           attachments: [],
         },
       })
-        // Update History => "New Ticket Created"
         .then(() => {
-          updateDoc(projectRef, {
-            [`tickets.ticketID-${data.ticketTitle}.history`]: [
-              {
-                date: moment().format("DD/MM/yyyy"),
-                title: "New Ticket Created",
-                author: auth?.id,
-                detail: "A new ticket was added.",
-              },
-            ],
-          });
-        })
-        .then(() => {
-          console.log("ticket created");
           setStatus("fetched");
           navigate("/Tickets/AllTickets");
         })

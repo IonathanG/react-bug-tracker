@@ -9,10 +9,11 @@ const useTicketHistory = () => {
   const { auth } = useAuth();
 
   const EditHistory = async (ticket, data) => {
-    const projectRef = doc(db, "projects", ticket.project_id);
+    // console.log(ticket);
+    const projectRef = doc(db, "projects", ticket?.project_id);
 
     await updateDoc(projectRef, {
-      [`tickets.${ticket.ticket_id}.history`]: [
+      [`tickets.${ticket?.ticket_id}.history`]: [
         ...ticket.history,
         {
           date: moment().format("DD/MM/yyyy"),
