@@ -52,7 +52,7 @@ const ProjectRoleCard = ({ projectCount }) => {
         position: "top",
         labels: {
           font: {
-            size: 10,
+            size: 9,
           },
         },
       },

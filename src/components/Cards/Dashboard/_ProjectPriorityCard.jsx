@@ -1,5 +1,9 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Card = styled.div`
   height: 350px;
@@ -28,14 +32,13 @@ const Title = styled.div`
   }
 `;
 
-const PieChart = styled.div``;
-
 const StatsChart = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 
+  margin-top: 10px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 13px;
 
   div {
     display: flex;
@@ -59,6 +62,45 @@ const ProjectPriorityCard = ({ projectCount, projectPriorities }) => {
     };
   }, [projectPriorities, projectCount]);
 
+  const options = {
+    maintainAspectRatio: false,
+    responsive: false,
+
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          font: {
+            size: 11,
+          },
+        },
+      },
+    },
+  };
+
+  const data = {
+    labels: ["Urgent", "High", "Medium", "Low"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [12, 19, 3, 5],
+        backgroundColor: [
+          "rgba(220, 52, 69, 0.7)",
+          "rgba(244, 173, 2, 0.7)",
+          "rgba(92, 142, 212, 0.7)",
+          "rgba(156, 156, 156, 0.7)",
+        ],
+        borderColor: [
+          "rgb(220,52,68)",
+          "rgb(244,173,2)",
+          "rgb(92,142,212)",
+          "rgb(156,156,156)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <Card>
       <Title>
@@ -66,7 +108,11 @@ const ProjectPriorityCard = ({ projectCount, projectPriorities }) => {
         <span>Project Priorities</span>
       </Title>
 
-      <PieChart>Pie Chart</PieChart>
+      <Pie
+        data={data}
+        style={{ width: "100%", height: "80%", margin: "0 auto" }}
+        options={options}
+      />
 
       <StatsChart>
         <div>
