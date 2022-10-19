@@ -4,7 +4,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
 import CodeIcon from "@mui/icons-material/Code";
-import { useSelector } from "react-redux";
 
 const Card = styled.div`
   height: 350px;
@@ -45,6 +44,7 @@ const InfoWrap = styled.div`
   span:nth-child(2) {
     font-weight: 700;
     font-size: 20px;
+    color: ${({ theme }) => theme.color_SubNavItem};
   }
 `;
 
@@ -55,35 +55,7 @@ const Divider = styled.div`
   background-color: ${({ theme }) => theme.background_Modal};
 `;
 
-const GeneralInfoCard = () => {
-  const users = useSelector((state) => state.users.Users);
-  const projects = useSelector((state) => state.projects.Projects);
-
-  // total count of users
-  const userCount = useMemo(() => {
-    return Object.values(users).length;
-  }, [users]);
-
-  // total count of dev
-  const devCount = useMemo(() => {
-    let count = 0;
-    Object.values(users).forEach((user) => {
-      if (user.role === "Developer") count++;
-    });
-    return count;
-  }, [users]);
-
-  // total count of tickets in development status
-  const ticketDevelopment = useMemo(() => {
-    let count = 0;
-    Object.values(projects).forEach((project) => {
-      Object.values(project.tickets).forEach((ticket) => {
-        if (ticket.status === "Development") count++;
-      });
-    });
-    return count;
-  }, [projects]);
-
+const GeneralInfoCard = ({ userCount, ticketDevelopment, devCount }) => {
   const CardItems = useMemo(() => {
     return [
       {
