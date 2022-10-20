@@ -70,7 +70,7 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
 
   // Calling in the custom hook to submit the project form
   const onFormSubmit = (data) => {
-    onSubmit(data, editMode);
+    onSubmit(data, editMode, projectID);
   };
 
   return (

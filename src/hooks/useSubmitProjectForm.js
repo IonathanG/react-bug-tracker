@@ -13,20 +13,16 @@ const useSubmitProjectForm = () => {
   const navigate = useNavigate();
 
   // On Submit the Form => Create new Project or Edit existing Project
-  const onSubmit = async (data, editMode) => {
+  const onSubmit = async (data, editMode, projectID) => {
     console.log(data);
     setStatus("fetching");
 
-    // DB Collection References to set up and update
-    const projectsRef = doc(db, "projects", `projectID-${data.projectName}`);
-    const projectUsersRef = doc(
-      db,
-      "projectUsers",
-      `projectID-${data.projectName}`
-    );
-
     // Editing Mode Updates Firestore
     if (editMode) {
+      // DB Collection References to update project
+      const projectsRef = doc(db, "projects", projectID);
+      const projectUsersRef = doc(db, "projectUsers", projectID);
+
       await updateDoc(projectsRef, {
         project_name: data.projectName,
         description: data.projectDescription,
@@ -43,7 +39,7 @@ const useSubmitProjectForm = () => {
             .then(() => {
               console.log("ProjectUsers Updated");
               setStatus("fetched");
-              navigate("/Projects/AllProjects");
+              navigate(`/Projects/ProjectDetails/${projectID}`);
             })
             .catch((error) => {
               console.log(error);
@@ -58,6 +54,14 @@ const useSubmitProjectForm = () => {
 
     // If not editing => Creates new project
     else if (!editMode) {
+      // DB Collection References to set up a new project
+      const projectsRef = doc(db, "projects", `projectID-${data.projectName}`);
+      const projectUsersRef = doc(
+        db,
+        "projectUsers",
+        `projectID-${data.projectName}`
+      );
+
       // Checking if Project Name is already taken in the database before creating it
       const docSnap = await getDoc(projectsRef);
 
@@ -82,7 +86,7 @@ const useSubmitProjectForm = () => {
         })
           .then(() => {
             console.log("Project added");
-            setDoc(doc(db, "projectUsers", `projectID-${data.projectName}`), {
+            setDoc(projectUsersRef, {
               project_id: `projectID-${data.projectName}`,
               project_manager_id: data.projectManager,
               project_team_id: [],

@@ -137,10 +137,10 @@ const ProjectDetailsTeamCard = ({ projectMembers, projectID }) => {
       <TeamContainer>
         {projectMembers?.project_team_id?.map((member) => (
           <TeamMember key={member}>
-            <SingleAvatar avatar={users[member].user_avatar} size={"40px"} />
+            <SingleAvatar avatar={users[member]?.user_avatar} size={"40px"} />
             <MemberInfo>
-              {users[member].user_name}
-              <span>{users[member].user_role}</span>
+              {users[member]?.user_name}
+              <span>{users[member]?.user_role}</span>
             </MemberInfo>
           </TeamMember>
         ))}

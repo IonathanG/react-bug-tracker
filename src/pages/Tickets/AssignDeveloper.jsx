@@ -27,8 +27,6 @@ const RightPannel = styled(LeftPannel)`
 
 const AssignDeveloper = () => {
   const { ProjectID, TicketID } = useParams();
-  console.log(ProjectID);
-  console.log(TicketID);
 
   // Retrieving State
   const projects = useSelector((state) => state.projects.Projects);

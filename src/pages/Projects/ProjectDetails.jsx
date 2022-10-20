@@ -37,8 +37,6 @@ const ProjectDetails = () => {
   const projects = useSelector((state) => state.projects.Projects);
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
-  console.log(projectUsers[id]);
-
   const defaultSortBy = useMemo(
     () => [
       {

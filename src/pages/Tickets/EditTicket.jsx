@@ -5,7 +5,6 @@ import Navigation from "../../components/Navigation/Navigation";
 
 const EditTicket = () => {
   const { ProjectID, TicketID } = useParams();
-  console.log(ProjectID, TicketID);
 
   return (
     <>

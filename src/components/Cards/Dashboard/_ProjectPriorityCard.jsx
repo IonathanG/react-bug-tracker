@@ -108,12 +108,6 @@ const ProjectPriorityCard = ({ projectCount, projectPriorities }) => {
         <span>Project Priorities</span>
       </Title>
 
-      <Pie
-        data={data}
-        style={{ width: "300px", height: "auto", margin: "0 auto" }}
-        options={options}
-      />
-
       <StatsChart>
         <div>
           <span>Urgent</span>
@@ -132,6 +126,12 @@ const ProjectPriorityCard = ({ projectCount, projectPriorities }) => {
           <span>{priorityStats.low}%</span>
         </div>
       </StatsChart>
+
+      <Pie
+        data={data}
+        style={{ width: "200px", height: "auto", margin: "0 auto" }}
+        options={options}
+      />
     </Card>
   );
 };

@@ -39,7 +39,6 @@ const AssignManager = () => {
 
   // Retrieving project ID to allocate the Manager to the correct Project
   const { projectID } = useParams();
-  console.log(projectID);
 
   const { control, handleSubmit } = useForm();
 

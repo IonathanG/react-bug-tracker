@@ -5,7 +5,6 @@ import Navigation from "../../components/Navigation/Navigation";
 
 const EditProject = () => {
   const { id } = useParams();
-  console.log(id);
 
   return (
     <>
