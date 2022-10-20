@@ -53,6 +53,7 @@ const ChartCards = () => {
     ticketDevelopment,
     devCount,
     projectPriorities,
+    roleDataCount,
   ] = useChartsData();
 
   return (
@@ -91,7 +92,10 @@ const ChartCards = () => {
           projectCount={projectCount}
           projectPriorities={projectPriorities}
         />
-        <ProjectRoleCard projectCount={projectCount} />
+        <ProjectRoleCard
+          projectCount={projectCount}
+          roleDataCount={roleDataCount}
+        />
       </CardsContainer>
     </Container>
   );

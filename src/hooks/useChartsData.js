@@ -4,11 +4,14 @@ import { useSelector } from "react-redux";
 const useChartsData = () => {
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
+  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
+  // total project number
   const projectCount = useMemo(() => {
     return Object.values(projects).length;
   }, [projects]);
 
+  // total ticket number
   const ticketCount = useMemo(() => {
     let count = 0;
     Object.values(projects).forEach((project) => {
@@ -17,6 +20,7 @@ const useChartsData = () => {
     return count;
   }, [projects]);
 
+  // unassigned ticket number
   const unassignedTicketCount = useMemo(() => {
     let count = 0;
     Object.values(projects).forEach((project) => {
@@ -27,6 +31,7 @@ const useChartsData = () => {
     return count;
   }, [projects]);
 
+  // assigned ticket number
   const assignedTicketCount = useMemo(() => {
     let count = 0;
     Object.values(projects).forEach((project) => {
@@ -91,6 +96,45 @@ const useChartsData = () => {
     return prioritiesCount;
   }, [projects]);
 
+  // Sorting out each role count for every single project
+  // => How many Submitter, Developer and Manager per project
+  const roleDataCount = useMemo(() => {
+    const roleCount = {
+      Submitter: [],
+      Developer: [],
+      Manager: [],
+    };
+
+    Object.values(projectUsers).forEach((project, index) => {
+      roleCount.Submitter[index] = 0;
+      roleCount.Developer[index] = 0;
+      roleCount.Manager[index] = 0;
+
+      let projectMembers = [];
+      projectMembers.push(project.project_manager_id);
+      project.project_team_id.map((user) => projectMembers.push(user));
+
+      projectMembers.forEach((member) => {
+        switch (users[member]?.user_role) {
+          case "Submitter":
+            roleCount.Submitter[index] += 1;
+            break;
+          case "Developer":
+            roleCount.Developer[index] += 1;
+            break;
+          case "Project Manager":
+            roleCount.Manager[index] += 1;
+            break;
+          default:
+            return null;
+        }
+      });
+    });
+    return {
+      roleCount,
+    };
+  }, [projectUsers, users]);
+
   return [
     projectCount,
     ticketCount,
@@ -100,6 +144,7 @@ const useChartsData = () => {
     ticketDevelopment,
     devCount,
     projectPriority,
+    roleDataCount,
   ];
 };
 

@@ -63,8 +63,8 @@ const ProjectPriorityCard = ({ projectCount, projectPriorities }) => {
   }, [projectPriorities, projectCount]);
 
   const options = {
-    maintainAspectRatio: false,
-    responsive: false,
+    maintainAspectRatio: true,
+    responsive: true,
 
     plugins: {
       legend: {
@@ -110,7 +110,7 @@ const ProjectPriorityCard = ({ projectCount, projectPriorities }) => {
 
       <Pie
         data={data}
-        style={{ width: "100%", height: "80%", margin: "0 auto" }}
+        style={{ width: "300px", height: "auto", margin: "0 auto" }}
         options={options}
       />
 

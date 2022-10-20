@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -39,11 +38,7 @@ const Header = styled.div`
   margin-bottom: 15px;
 `;
 
-const ProjectRoleCard = ({ projectCount }) => {
-  // Retrieving State
-  const users = useSelector((state) => state.users.Users);
-  const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
-
+const ProjectRoleCard = ({ projectCount, roleDataCount }) => {
   const options = {
     maintainAspectRatio: false,
     responsive: false,
@@ -94,63 +89,24 @@ const ProjectRoleCard = ({ projectCount }) => {
     return array;
   }, [projectCount]);
 
-  // Sorting out each role count for every single project
-  // => How many Submitter, Developer and Manager per project
-  const roleData = useMemo(() => {
-    let Submitter = [];
-    let Developer = [];
-    let Manager = [];
-
-    Object.values(projectUsers).forEach((project, index) => {
-      Submitter[index] = 0;
-      Developer[index] = 0;
-      Manager[index] = 0;
-
-      let projectMembers = [];
-      projectMembers.push(project.project_manager_id);
-      project.project_team_id.map((user) => projectMembers.push(user));
-
-      projectMembers.forEach((member) => {
-        switch (users[member]?.user_role) {
-          case "Submitter":
-            Submitter[index] += 1;
-            break;
-          case "Developer":
-            Developer[index] += 1;
-            break;
-          case "Project Manager":
-            Manager[index] += 1;
-            break;
-          default:
-            return null;
-        }
-      });
-    });
-    return {
-      Submitter,
-      Developer,
-      Manager,
-    };
-  }, [projectUsers, users]);
-
   const data = {
     labels,
     datasets: [
       {
         label: "Submitters",
-        data: roleData.Submitter,
+        data: roleDataCount.roleCount.Submitter,
         backgroundColor: "rgba(22,162,184,255)",
         barThickness: 22,
       },
       {
         label: "Developers",
-        data: roleData.Developer,
+        data: roleDataCount.roleCount.Developer,
         backgroundColor: "rgba(249,171,108,255)",
         barThickness: 22,
       },
       {
         label: "PMs",
-        data: roleData.Manager,
+        data: roleDataCount.roleCount.Manager,
         backgroundColor: "rgba(176,201,121,255)",
         barThickness: 22,
       },
