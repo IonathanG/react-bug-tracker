@@ -5,6 +5,7 @@ import { ROLES } from "../../data/Roles";
 import ButtonBasic from "../Buttons/Button_Basic";
 
 const AssignDev = ({ original }) => {
+  console.log("original: ", original);
   const { auth } = useAuth();
 
   return (
