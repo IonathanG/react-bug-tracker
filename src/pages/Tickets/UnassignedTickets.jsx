@@ -33,22 +33,25 @@ const UnassignedTickets = () => {
     const formattedData = [];
 
     projectsArray.map((project) =>
-      Object.values(project.tickets).map((ticket) =>
-        formattedData.push({
-          ticket_id: ticket.ticket_id,
-          title: ticket.ticket_name,
-          assigned_by: ticket.assigned_by,
-          assigned_to: ticket.assigned_to,
-          status: ticket.status,
-          priority: ticket.priority,
-          date: ticket.created_date,
-          links: {
-            view: `/Tickets/TicketDetails/${project.project_id}/${ticket.ticket_id}`,
-            edit: `/Tickets/EditTicket/${project.project_id}/${ticket.ticket_id}`,
-            archive: `/`,
-          },
-        })
-      )
+      Object.values(project.tickets)
+        .filter((ticket) => ticket.assigned_to === "")
+        .map((ticket) =>
+          formattedData.push({
+            project_id: project.project_id,
+            ticket_id: ticket.ticket_id,
+            title: ticket.ticket_name,
+            assigned_by: users[ticket.assigned_by]?.user_name,
+            assigned_to: users[ticket.assigned_to]?.user_name,
+            status: ticket.status,
+            priority: ticket.priority,
+            date: ticket.created_date,
+            links: {
+              view: `/Tickets/TicketDetails/${project.project_id}/${ticket.ticket_id}`,
+              edit: `/Tickets/EditTicket/${project.project_id}/${ticket.ticket_id}`,
+              archive: `/`,
+            },
+          })
+        )
     );
 
     console.log(formattedData);
@@ -60,7 +63,7 @@ const UnassignedTickets = () => {
       <Navigation headerText={"Unassigned Tickets"} />
       <BasicTable
         COLUMNS={Tickets_Columns}
-        DATA={[]}
+        DATA={tableData}
         defaultSortBy={defaultSortBy}
       />
     </Container>
