@@ -40,7 +40,7 @@ const ManageRoles = () => {
 
   return (
     <Container>
-      <Navigation headerText={" Manage Roles"} />
+      <Navigation headerText={"Manage Roles"} />
       <BasicTable
         COLUMNS={Manage_Roles}
         DATA={tableData}

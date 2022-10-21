@@ -10,7 +10,6 @@ import Navigation from "../../components/Navigation/Navigation";
 //import { device } from "../../shared/breakpoints";
 
 const Container = styled.div`
-  /* margin-top: 80px; */
   width: 100%;
   min-height: 100px;
   border-radius: 5px;
