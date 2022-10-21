@@ -55,12 +55,14 @@ const AssignDevSelectCard = ({ projectID, ticketID }) => {
   const DeveloperList = useMemo(() => {
     let list = [];
     if (projectUsers[projectID]) {
-      projectUsers[projectID].project_team_id.map((dev) =>
-        list.push({
-          developer_id: dev,
-          developer_name: users[dev]?.user_name,
-        })
-      );
+      projectUsers[projectID].project_team_id
+        .filter((user) => users[user].user_role === "Developer")
+        .map((dev) =>
+          list.push({
+            developer_id: dev,
+            developer_name: users[dev]?.user_name,
+          })
+        );
     }
     return list;
   }, [projectUsers, projectID, users]);
