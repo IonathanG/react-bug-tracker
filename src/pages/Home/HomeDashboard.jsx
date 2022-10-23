@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ChartCards from "../../components/Cards/Dashboard/ChartCards";
 import Navigation from "../../components/Navigation/Navigation";
+import { device } from "../../shared/breakpoints";
 import MembersDashboard from "./_Members";
 import ProjectsDashboard from "./_Projects";
 import TicketsDashboard from "./_Tickets";
@@ -21,7 +22,11 @@ const TablesContainer = styled.div`
 const TopTablesContainer = styled.div`
   display: flex;
   gap: 25px;
-  //overflow-x: hidden;
+  transition: 0.3s ease;
+
+  @media ${device.tablet} {
+    flex-direction: column;
+  }
 `;
 
 const HomeDashboard = () => {

@@ -7,6 +7,7 @@ import ButtonBasic from "../../components/Buttons/Button_Basic";
 import { useSelector } from "react-redux";
 import useSubmitTicketForm from "../../hooks/useSubmitTicketForm";
 import useProjectList from "../../hooks/useProjectList";
+import { device } from "../../shared/breakpoints";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -17,6 +18,11 @@ const Form = styled.form`
   box-shadow: ${({ theme }) => theme.boxShadow_Block};
   font-weight: 400;
   font-size: 14px;
+  transition: 0.3s ease;
+
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 const InputContainer = styled.div`

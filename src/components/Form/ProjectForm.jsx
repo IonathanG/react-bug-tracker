@@ -13,6 +13,7 @@ import useManagerList from "../../hooks/useManagerList";
 import useSubmitProjectForm from "../../hooks/useSubmitProjectForm";
 import useAuth from "../../hooks/useAuth";
 import { ROLES } from "../../data/Roles";
+import { device } from "../../shared/breakpoints";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -23,6 +24,11 @@ const Form = styled.form`
   box-shadow: ${({ theme }) => theme.boxShadow_Block};
   font-weight: 400;
   font-size: 14px;
+  transition: 0.3s ease;
+
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 const InputContainer = styled.div`

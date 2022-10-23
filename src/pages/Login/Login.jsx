@@ -5,6 +5,7 @@ import LoginForm from "../../components/Form/LoginForm";
 import DemoLoginForm from "../../components/Form/DemoLoginForm";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { device } from "../../shared/breakpoints";
 
 const Container = styled.div`
   width: 100vw;
@@ -27,6 +28,11 @@ const Left = styled.div`
 const Logo = styled.img`
   width: 130px;
   height: auto;
+  transition: 0.3s ease;
+
+  @media ${device.phone} {
+    margin-left: 20px;
+  }
 `;
 
 const FormContainer = styled.div`
@@ -38,6 +44,13 @@ const FormContainer = styled.div`
   background-color: ${({ theme }) => theme.background_Block};
   box-shadow: ${({ theme }) => theme.boxShadow_Block};
   color: ${({ theme }) => theme.color_NavItem};
+
+  transition: 0.3s ease;
+
+  @media ${device.phone} {
+    width: 300px;
+    margin-left: 20px;
+  }
 `;
 
 const ButtonContainer = styled.div`

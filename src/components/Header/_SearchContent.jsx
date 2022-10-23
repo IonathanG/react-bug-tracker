@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import Input from "../Input/InputSearch";
+import { device } from "../../shared/breakpoints";
 
 const SearchContainer = styled.form`
   position: relative;
@@ -9,6 +10,10 @@ const SearchContainer = styled.form`
 
   display: flex;
   align-items: center;
+
+  @media ${device.phone} {
+    display: none;
+  }
 `;
 
 const SearchIconContainer = styled.button`

@@ -68,7 +68,6 @@ const PageButton = styled.button`
 const Pagination = ({
   pageIndex,
   pageSize,
-  //pageSizeOptions,
   page,
   previousPage,
   nextPage,
@@ -77,11 +76,6 @@ const Pagination = ({
   canNextPage,
   canPreviousPage,
 }) => {
-  // const pageNumber = useMemo(
-  //   () => Math.ceil(data.length / pageSizeOptions),
-  //   [data, pageSizeOptions]
-  // );
-
   return (
     <PaginationContainer>
       <span>
@@ -99,7 +93,8 @@ const Pagination = ({
 
         {data.length > 0 && (
           <div>
-            {canPreviousPage && (
+            {/* Only Showing the next and previous pages on larger screens */}
+            {window.innerWidth >= 860 && canPreviousPage && (
               <PageButton onClick={() => gotoPage(pageIndex - 1)}>
                 {pageIndex}
               </PageButton>
@@ -107,7 +102,7 @@ const Pagination = ({
 
             <PageButton currentPage={true}>{pageIndex + 1}</PageButton>
 
-            {canNextPage && (
+            {window.innerWidth >= 860 && canNextPage && (
               <PageButton onClick={() => gotoPage(pageIndex + 1)}>
                 {pageIndex + 2}
               </PageButton>
