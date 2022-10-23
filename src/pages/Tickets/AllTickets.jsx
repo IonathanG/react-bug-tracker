@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import TicketStats from "../../components/Cards/TicketStats/TicketStats";
 import Navigation from "../../components/Navigation/Navigation";
 import BasicTable from "../../components/Tables/BasicTable";
 import { Tickets_Columns } from "../../data/TableColumns";
@@ -53,6 +54,7 @@ const AllTickets = () => {
   return (
     <Container>
       <Navigation headerText={"All Tickets"} />
+      <TicketStats />
       <BasicTable
         COLUMNS={Tickets_Columns}
         DATA={tableData}
