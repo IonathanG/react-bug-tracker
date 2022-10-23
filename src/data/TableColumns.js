@@ -65,7 +65,7 @@ export const Tickets_Columns = [
     accessor: "title",
   },
   {
-    Header: "Assigned by",
+    Header: "Created by",
     accessor: "assigned_by",
   },
   {

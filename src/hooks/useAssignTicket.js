@@ -4,6 +4,7 @@ import { db } from "../utils/firebase.config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useTicketHistory from "./useTicketHistory";
+import useSetInbox from "./useSetInbox";
 
 // Custom Hook to assign the ticket to the developer
 const useAssignTicket = () => {
@@ -13,6 +14,7 @@ const useAssignTicket = () => {
 
   const navigate = useNavigate();
   const [EditHistory] = useTicketHistory();
+  const [sendMessage] = useSetInbox();
 
   const [status, setStatus] = useState("idle");
 
@@ -33,6 +35,15 @@ const useAssignTicket = () => {
         };
         EditHistory(ticket, dataHistory);
       })
+
+      // Send a Notification to the user that he/she was assigned a ticket
+      .then(() => sendMessage("assignTicket", data.assignedTo))
+      .catch((error) => {
+        console.log(error);
+        setStatus("failed");
+      })
+
+      // Navigate back to the ticket once success update
       .then(() => {
         setStatus("success");
         navigate(`/Tickets/TicketDetails/${projectID}/${ticketID}`);

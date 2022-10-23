@@ -3,8 +3,8 @@ import styled from "styled-components";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import TagInfo from "../../components/Tags/Tag_Info";
-import { useState } from "react";
 import Navigation from "../../components/Navigation/Navigation";
+import useInbox from "../../hooks/useInbox";
 // import { useSelector } from "react-redux";
 // import { useEffect } from "react";
 //import { device } from "../../shared/breakpoints";
@@ -111,36 +111,14 @@ const DeleteIcon = styled(HighlightOffIcon)`
   }
 `;
 
+const NoMessage = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  padding: 30px 20px;
+`;
+
 const Inbox = () => {
-  const notifications = [
-    {
-      title: "Ticket Assigned",
-      content: "A new ticket has been assigned to you",
-      type: "ticket",
-      date: "30/08/22",
-      id: 1,
-    },
-    {
-      title: "Ticket Assigned",
-      content: "A new ticket has been assigned to you",
-      type: "ticket",
-      date: "30/08/22",
-      id: 2,
-    },
-  ];
-
-  // const users = useSelector((state) => state.users.Users);
-  const [messages, setMessage] = useState(notifications);
-
-  // useEffect(() => {
-  //   setMessage(Object.values(users)?.map((user) => user.notifications));
-  // }, [users]);
-
-  const deleteMessage = (id) => {
-    setMessage((prevMessages) =>
-      prevMessages.filter((message) => message.id !== id)
-    );
-  };
+  const [messages, deleteMessage] = useInbox();
 
   return (
     <>
@@ -159,6 +137,9 @@ const Inbox = () => {
         <RightPannel>
           <InboxHeader>Inbox</InboxHeader>
 
+          {messages.length === 0 && (
+            <NoMessage>No Messages to display</NoMessage>
+          )}
           {messages.map((message) => (
             <MessageContainer key={message.id}>
               <MessageLeft>

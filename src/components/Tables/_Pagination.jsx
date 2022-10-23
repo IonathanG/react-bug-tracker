@@ -94,7 +94,7 @@ const Pagination = ({
         {data.length > 0 && (
           <div>
             {/* Only Showing the next and previous pages on larger screens */}
-            {window.innerWidth >= 860 && canPreviousPage && (
+            {window.innerWidth >= 1010 && canPreviousPage && (
               <PageButton onClick={() => gotoPage(pageIndex - 1)}>
                 {pageIndex}
               </PageButton>
@@ -102,7 +102,7 @@ const Pagination = ({
 
             <PageButton currentPage={true}>{pageIndex + 1}</PageButton>
 
-            {window.innerWidth >= 860 && canNextPage && (
+            {window.innerWidth >= 1010 && canNextPage && (
               <PageButton onClick={() => gotoPage(pageIndex + 1)}>
                 {pageIndex + 2}
               </PageButton>

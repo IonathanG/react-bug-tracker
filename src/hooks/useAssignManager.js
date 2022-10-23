@@ -1,10 +1,15 @@
 import { doc, updateDoc } from "firebase/firestore";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase.config";
+import useSetInbox from "./useSetInbox";
 
 const useEditProject = () => {
   // Redirect once confirmed that new Manager is assigned
   const navigate = useNavigate();
+
+  const [sendMessage] = useSetInbox();
+  const [status, setStatus] = useState("idle");
 
   // Update the manager of the project
   const AssignManager = async (data, projectID) => {
@@ -14,12 +19,24 @@ const useEditProject = () => {
     await updateDoc(projectUsersRef, {
       project_manager_id: data.projectManager,
     })
-      .then(() => console.log("Manager Updated!"))
-      .then(() => navigate(`../AssignMembers/${projectID}`))
-      .catch((error) => console.log(error));
+      // Send a Notification to the user that he/she was assigned a project
+      .then(() => sendMessage("assignProject", data.projectManager))
+      .catch((error) => {
+        console.log(error);
+        setStatus("failed");
+      })
+
+      .then(() => {
+        setStatus("success");
+        navigate(`../AssignMembers/${projectID}`);
+      })
+      .catch((error) => {
+        console.log(error);
+        setStatus("failed");
+      });
   };
 
-  return [AssignManager];
+  return [AssignManager, status];
 };
 
 export default useEditProject;

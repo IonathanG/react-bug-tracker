@@ -1,9 +1,13 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../utils/firebase.config";
+import useSetInbox from "./useSetInbox";
 
 const useAssignRole = () => {
   const [buttonText, setButtonText] = useState("Assign Role");
+  const [sendMessage] = useSetInbox();
+
+  const [status, setStatus] = useState("idle");
 
   const AssignRole = async (userID, roleSelected) => {
     // DB Collection References to set up and update
@@ -13,12 +17,21 @@ const useAssignRole = () => {
       user_role: roleSelected,
     })
       .then(() => {
-        console.log("User Assigned!");
         setButtonText("User Assigned");
+        setStatus("success");
       })
-      .catch((error) => console.log(error));
+      // Send a Notification to the user that he/she was assigned a project
+      .then(() => sendMessage("assignRole", userID))
+      .catch((error) => {
+        console.log(error);
+        setStatus("failed");
+      })
+      .catch((error) => {
+        console.log(error);
+        setStatus("failed");
+      });
   };
-  return [AssignRole, buttonText];
+  return [AssignRole, buttonText, status];
 };
 
 export default useAssignRole;
