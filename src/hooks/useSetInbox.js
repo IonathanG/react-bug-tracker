@@ -20,18 +20,21 @@ const useSetInbox = () => {
         messageDetails = Object.assign({
           title: "Ticket Assigned",
           content: "A new ticket has been assigned to you",
+          type: "ticket",
         });
         break;
       case "assignProject":
         messageDetails = Object.assign({
           title: "Project Assigned",
           content: "A new project has been assigned to you",
+          type: "project",
         });
         break;
       case "assignRole":
         messageDetails = Object.assign({
           title: "Role Assigned",
           content: "Update: A new role has been assigned to you",
+          type: "role",
         });
         break;
       default:
@@ -44,9 +47,9 @@ const useSetInbox = () => {
         {
           title: messageDetails.title,
           content: messageDetails.content,
-          type: "ticket",
+          type: messageDetails.type,
           date: moment().format("DD/MM/yyyy"),
-          id: messages.length - 1,
+          id: messages.length,
         },
       ],
     })
