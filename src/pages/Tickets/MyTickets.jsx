@@ -5,6 +5,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import BasicTable from "../../components/Tables/BasicTable";
 import { Tickets_Columns } from "../../data/TableColumns";
 import useAuth from "../../hooks/useAuth";
+import MyTicketStats from "../../components/Cards/TicketStats/MyTicketStats";
 
 const Container = styled.div``;
 
@@ -39,7 +40,7 @@ const MyTickets = () => {
 
     // Filter the Projects where Project Manager and Developer are assigned to
     const myProjects = projectUsersArray.filter((project) => {
-      switch (users[auth?.id].user_role) {
+      switch (users[auth?.id]?.user_role) {
         case "Project Manager":
           return project.project_manager_id === auth?.id;
 
@@ -55,7 +56,7 @@ const MyTickets = () => {
       Object.values(projects[project.project_id].tickets)
         // Filter Tickets where Developer is not assigned to
         .filter((ticket) => {
-          if (users[auth?.id].user_role === "Developer") {
+          if (users[auth?.id]?.user_role === "Developer") {
             return ticket.assigned_to === auth?.id;
           } else return ticket;
         })
@@ -82,6 +83,7 @@ const MyTickets = () => {
   return (
     <Container>
       <Navigation headerText={"My Tickets"} />
+      <MyTicketStats />
       <BasicTable
         COLUMNS={Tickets_Columns}
         DATA={tableData}

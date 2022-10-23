@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import useAllTicketsStats from "../../../hooks/useAllTicketsStats";
+import useMyTicketsStats from "../../../hooks/useMyTicketsStats";
 
 const Container = styled.div`
   margin: 30px 0px 35px 0px;
@@ -24,6 +24,12 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
+
+  p {
+    padding: 27px 0px;
+    font-weight: 500;
+    font-size: 56px;
+  }
 `;
 
 const Header = styled.div`
@@ -31,44 +37,46 @@ const Header = styled.div`
   font-size: 20px;
 `;
 
-const TicketStats = () => {
+const MyTicketStats = () => {
   const [
-    openTicketCount,
-    resolvedTicketCount,
+    submittedTicketCount,
+    assignedTicketCount,
     developmentTicketCount,
     urgentTicketCount,
-  ] = useAllTicketsStats();
+  ] = useMyTicketsStats();
 
   const StatsData = useMemo(() => {
     return [
       {
         id: 0,
-        title: "Open Tickets",
-        value: openTicketCount / 100,
-        color: "rgb(217,83,80)",
+        title: "Submitted Tickets",
+        value: submittedTicketCount,
+        useGraph: false,
       },
       {
         id: 1,
-        title: "Resolved Tickets",
-        value: resolvedTicketCount / 100,
-        color: "rgb(92,184,91)",
+        title: "Assigned Tickets",
+        value: assignedTicketCount,
+        useGraph: false,
       },
       {
         id: 2,
-        title: "Development Tickets",
+        title: "Pending Tickets %",
         value: developmentTicketCount / 100,
+        useGraph: true,
         color: "rgb(90,192,222)",
       },
       {
         id: 3,
-        title: "Urgent Tickets",
+        title: "Resolved Tickets %",
         value: urgentTicketCount / 100,
+        useGraph: true,
         color: "rgb(139,195,254)",
       },
     ];
   }, [
-    openTicketCount,
-    resolvedTicketCount,
+    submittedTicketCount,
+    assignedTicketCount,
     developmentTicketCount,
     urgentTicketCount,
   ]);
@@ -78,25 +86,29 @@ const TicketStats = () => {
       {StatsData.map((item) => (
         <Card key={item.id}>
           <Header>{item.title}</Header>
-          <div style={{ width: 120, height: 120 }}>
-            <CircularProgressbar
-              value={item.value}
-              maxValue={1}
-              text={`${item.value * 100}`}
-              strokeWidth={6}
-              styles={buildStyles({
-                strokeLinecap: "butt",
-                textSize: "26px",
-                trailColor: "rgb(214, 214, 214)",
-                pathColor: item.color,
-                textColor: item.color,
-              })}
-            />
-          </div>
+          {item.useGraph ? (
+            <div style={{ width: 120, height: 120 }}>
+              <CircularProgressbar
+                value={item.value}
+                maxValue={1}
+                text={`${item.value * 100}`}
+                strokeWidth={6}
+                styles={buildStyles({
+                  strokeLinecap: "butt",
+                  textSize: "26px",
+                  trailColor: "rgb(214, 214, 214)",
+                  pathColor: item.color,
+                  textColor: item.color,
+                })}
+              />
+            </div>
+          ) : (
+            <p>{item.value}</p>
+          )}
         </Card>
       ))}
     </Container>
   );
 };
 
-export default TicketStats;
+export default MyTicketStats;
