@@ -15,6 +15,7 @@ html {
 body {
   min-height: 100vh;  
   font-family: 'Ubuntu', 'sans-serif';
+  background-color: ${({ theme }) => theme.background_MainSection};
 }
 
 body,

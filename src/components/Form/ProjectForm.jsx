@@ -11,6 +11,8 @@ import { useSelector } from "react-redux";
 import FormatDate from "../../utils/FormatDate";
 import useManagerList from "../../hooks/useManagerList";
 import useSubmitProjectForm from "../../hooks/useSubmitProjectForm";
+import useAuth from "../../hooks/useAuth";
+import { ROLES } from "../../data/Roles";
 
 const Form = styled.form`
   margin-top: 30px;
@@ -42,6 +44,8 @@ const Label = styled.label`
 `;
 
 const ProjectForm = ({ projectID = null, editMode = false }) => {
+  const { auth } = useAuth();
+
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
   const projects = useSelector((state) => state.projects.Projects);
   const users = useSelector((state) => state.users.Users);
@@ -204,31 +208,34 @@ const ProjectForm = ({ projectID = null, editMode = false }) => {
       </InputContainer>
 
       {/* Project Manager Select */}
-      <InputContainer>
-        <Label htmlFor="projectManager">Project Manager</Label>
-        <Controller
-          name="projectManager"
-          control={control}
-          rules={{ required: "This field is required" }}
-          render={({ field: { onChange, value, ref }, fieldState }) => (
-            <TextField
-              select
-              size="small"
-              value={value ? value : ""}
-              onChange={onChange}
-              ref={ref}
-              error={Boolean(fieldState.error)}
-              helperText={fieldState?.error?.message}
-            >
-              {ManagerList.map((manager) => (
-                <MenuItem key={manager.manager_id} value={manager.manager_id}>
-                  {manager.manager_name}
-                </MenuItem>
-              ))}
-            </TextField>
-          )}
-        />
-      </InputContainer>
+      {/* This select is only available for Admin role */}
+      {auth?.roles?.includes(ROLES.Admin) && (
+        <InputContainer>
+          <Label htmlFor="projectManager">Project Manager</Label>
+          <Controller
+            name="projectManager"
+            control={control}
+            rules={{ required: "This field is required" }}
+            render={({ field: { onChange, value, ref }, fieldState }) => (
+              <TextField
+                select
+                size="small"
+                value={value ? value : ""}
+                onChange={onChange}
+                ref={ref}
+                error={Boolean(fieldState.error)}
+                helperText={fieldState?.error?.message}
+              >
+                {ManagerList.map((manager) => (
+                  <MenuItem key={manager.manager_id} value={manager.manager_id}>
+                    {manager.manager_name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          />
+        </InputContainer>
+      )}
 
       <ButtonBasic text={editMode ? "Edit" : "Create"} />
     </Form>
