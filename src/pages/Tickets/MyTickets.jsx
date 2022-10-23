@@ -37,6 +37,7 @@ const MyTickets = () => {
     // => Admin can see all Tickets
     // => Project Manager can see all Tickets from his Projects
     // => Developer can see all Tickets he/she is assigned to
+    // => Submitter cannot see Tickets
 
     // Filter the Projects where Project Manager and Developer are assigned to
     const myProjects = projectUsersArray.filter((project) => {
@@ -46,6 +47,9 @@ const MyTickets = () => {
 
         case "Developer":
           return project.project_team_id.some((user) => user === auth?.id);
+
+        case "Submitter":
+          return null;
 
         default:
           return project;

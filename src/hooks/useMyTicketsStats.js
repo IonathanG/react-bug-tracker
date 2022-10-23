@@ -39,33 +39,57 @@ const useMyTicketsStats = () => {
     return count;
   }, [projects, auth, projectUsers]);
 
-  // development ticket count
-  const developmentTicketCount = useMemo(() => {
+  // pending tickets from the assignedTickets
+  const pendingTicket = useMemo(() => {
     let count = 0;
-    Object.values(projects).forEach((project) => {
-      Object.values(project.tickets).forEach((ticket) => {
-        if (ticket.status === "Development") count++;
-      });
-    });
-    return count;
-  }, [projects]);
 
-  // urgent ticket count
-  const urgentTicketCount = useMemo(() => {
-    let count = 0;
     Object.values(projects).forEach((project) => {
       Object.values(project.tickets).forEach((ticket) => {
-        if (ticket.priority === "Urgent") count++;
+        if (ticket.status !== "Resolved") {
+          if (auth?.roles?.includes(ROLES.Admin)) {
+            count++;
+          } else if (auth?.roles?.includes(ROLES.Manager)) {
+            if (
+              projectUsers[ticket.project_id]?.project_manager_id === auth?.id
+            )
+              count++;
+          } else {
+            if (ticket.assigned_to === auth?.id) count++;
+          }
+        }
       });
     });
-    return count;
-  }, [projects]);
+    return count > 0 ? Math.round((count / assignedTicketCount) * 100) : 0;
+  }, [projects, auth, projectUsers, assignedTicketCount]);
+
+  // resolved tickets from the assignedTickets
+  const resolvedTicket = useMemo(() => {
+    let count = 0;
+
+    Object.values(projects).forEach((project) => {
+      Object.values(project.tickets).forEach((ticket) => {
+        if (ticket.status === "Resolved") {
+          if (auth?.roles?.includes(ROLES.Admin)) {
+            count++;
+          } else if (auth?.roles?.includes(ROLES.Manager)) {
+            if (
+              projectUsers[ticket.project_id]?.project_manager_id === auth?.id
+            )
+              count++;
+          } else {
+            if (ticket.assigned_to === auth?.id) count++;
+          }
+        }
+      });
+    });
+    return count > 0 ? Math.round((count / assignedTicketCount) * 100) : 0;
+  }, [projects, auth, projectUsers, assignedTicketCount]);
 
   return [
     submittedTicketCount,
     assignedTicketCount,
-    developmentTicketCount,
-    urgentTicketCount,
+    pendingTicket,
+    resolvedTicket,
   ];
 };
 

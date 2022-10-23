@@ -41,8 +41,8 @@ const MyTicketStats = () => {
   const [
     submittedTicketCount,
     assignedTicketCount,
-    developmentTicketCount,
-    urgentTicketCount,
+    pendingTicket,
+    resolvedTicket,
   ] = useMyTicketsStats();
 
   const StatsData = useMemo(() => {
@@ -62,14 +62,14 @@ const MyTicketStats = () => {
       {
         id: 2,
         title: "Pending Tickets %",
-        value: developmentTicketCount / 100,
+        value: pendingTicket / 100,
         useGraph: true,
         color: "rgb(90,192,222)",
       },
       {
         id: 3,
         title: "Resolved Tickets %",
-        value: urgentTicketCount / 100,
+        value: resolvedTicket / 100,
         useGraph: true,
         color: "rgb(139,195,254)",
       },
@@ -77,8 +77,8 @@ const MyTicketStats = () => {
   }, [
     submittedTicketCount,
     assignedTicketCount,
-    developmentTicketCount,
-    urgentTicketCount,
+    pendingTicket,
+    resolvedTicket,
   ]);
 
   return (
