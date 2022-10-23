@@ -5,9 +5,6 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import TagInfo from "../../components/Tags/Tag_Info";
 import Navigation from "../../components/Navigation/Navigation";
 import useInbox from "../../hooks/useInbox";
-// import { useSelector } from "react-redux";
-// import { useEffect } from "react";
-//import { device } from "../../shared/breakpoints";
 
 const Container = styled.div`
   width: 100%;
@@ -130,17 +127,17 @@ const Inbox = () => {
               <MailIcon />
               New
             </div>
-            <TagInfo tagColor={"Cyan"} tagText={messages.length} />
+            <TagInfo tagColor={"Cyan"} tagText={messages?.length} />
           </Wrap>
         </LeftPannel>
 
         <RightPannel>
           <InboxHeader>Inbox</InboxHeader>
 
-          {messages.length === 0 && (
+          {messages?.length === 0 && (
             <NoMessage>No Messages to display</NoMessage>
           )}
-          {messages.map((message) => (
+          {messages?.map((message) => (
             <MessageContainer key={message.id}>
               <MessageLeft>
                 <MessageHeader>
