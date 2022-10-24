@@ -10,6 +10,7 @@ import useArchiveTicket from "../../hooks/useArchiveTicket";
 import useDeleteRetrieveTicket from "../../hooks/useDeleteRetrieveTicket";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
+import useArchiveProject from "../../hooks/useArchiveProject";
 
 const Container = styled.div`
   display: flex;
@@ -96,28 +97,28 @@ const RetrieveIcon = styled(ReplyOutlinedIcon)`
 const ActionIcons = ({ links, typeProject }) => {
   const { auth } = useAuth();
   const [ArchiveTicket] = useArchiveTicket();
+  const [ArchiveProject] = useArchiveProject();
+
   const [RetrieveTicket, DeleteTicket] = useDeleteRetrieveTicket();
 
   // Handle click on archive button => ticket or project to archive
   const handleArchive = (data) => {
-    console.log(data);
-
     if (data.type === "ticket") {
       ArchiveTicket(data.projectID, data.ticketID);
+    } else if (data.type === "project") {
+      ArchiveProject(data.projectID);
     }
   };
 
+  // Handle click on archive button => ticket or project to delete
   const handleDelete = (data) => {
-    console.log(data);
-
     if (data.type === "ticket") {
       DeleteTicket(data.projectID, data.ticketID);
     }
   };
 
+  // Handle click on archive button => ticket or project to retrieve
   const handleRetrieve = (data) => {
-    console.log(data);
-
     if (data.type === "ticket") {
       RetrieveTicket(data.projectID, data.ticketID);
     }

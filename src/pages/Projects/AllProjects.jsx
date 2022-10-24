@@ -49,7 +49,11 @@ const AllProjects = () => {
       links: {
         view: `/Projects/ProjectDetails/${project.project_id}`,
         edit: `/Projects/EditProject/${project.project_id}`,
-        archive: `/`,
+        archive: {
+          isArchived: false,
+          type: "project",
+          projectID: project.project_id,
+        },
       },
     }));
     return formattedData;
