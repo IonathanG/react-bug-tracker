@@ -44,7 +44,7 @@ const AllProjects = () => {
             ?.user_avatar,
       },
       team: projectUsers[project.project_id]?.project_team_id.map(
-        (user) => users[user].user_avatar
+        (user) => users[user]?.user_avatar
       ),
       links: {
         view: `/Projects/ProjectDetails/${project.project_id}`,

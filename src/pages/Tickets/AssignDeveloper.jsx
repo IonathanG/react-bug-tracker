@@ -32,6 +32,7 @@ const AssignDeveloper = () => {
   const projects = useSelector((state) => state.projects.Projects);
 
   const ticket = useMemo(() => {
+    // Check if ticket is archived or not
     return projects[ProjectID]?.tickets[TicketID];
   }, [projects, ProjectID, TicketID]);
 

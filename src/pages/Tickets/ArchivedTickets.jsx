@@ -14,7 +14,6 @@ const ArchivedTickets = () => {
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
-  console.log(tableData);
 
   const defaultSortBy = useMemo(
     () => [
@@ -33,7 +32,7 @@ const ArchivedTickets = () => {
     const formattedData = [];
 
     projectsArray.map((project) =>
-      Object.values(project.tickets).map((ticket) =>
+      Object.values(project.archived_ticket).map((ticket) =>
         formattedData.push({
           ticket_id: ticket.ticket_id,
           title: ticket.ticket_name,
@@ -45,13 +44,17 @@ const ArchivedTickets = () => {
           links: {
             view: `/Tickets/TicketDetails/${project.project_id}/${ticket.ticket_id}`,
             edit: `/Tickets/EditTicket/${project.project_id}/${ticket.ticket_id}`,
-            archive: `/`,
+            archive: {
+              isArchived: true,
+              type: "ticket",
+              projectID: project.project_id,
+              ticketID: ticket.ticket_id,
+            },
           },
         })
       )
     );
 
-    console.log(formattedData);
     setTableData(formattedData);
   }, [users, projects, projectUsers]);
 
@@ -60,7 +63,7 @@ const ArchivedTickets = () => {
       <Navigation headerText={"Archived Tickets"} />
       <BasicTable
         COLUMNS={Tickets_Columns}
-        DATA={[]}
+        DATA={tableData}
         defaultSortBy={defaultSortBy}
       />
     </Container>

@@ -36,7 +36,7 @@ const MyProjects = () => {
     // Admin can see all Projects
     formattedData = projectUsersArray
       .filter((project) => {
-        if (users[auth?.id].user_role !== "Admin") {
+        if (users[auth?.id]?.user_role !== "Admin") {
           return (
             project.project_manager_id === auth?.id ||
             project.project_team_id.some((user) => user === auth?.id)

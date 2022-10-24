@@ -6,6 +6,7 @@ import { ROLES } from "../../../data/Roles";
 import useAuth from "../../../hooks/useAuth";
 import SingleAvatar from "../../Avatar/SingleAvatar";
 import ButtonActions from "../../Buttons/Button_Actions";
+import useDeleteRetrieveTicket from "../../../hooks/useDeleteRetrieveTicket";
 
 const CardContainer = styled.div`
   display: flex;
@@ -53,9 +54,15 @@ const ButtonContainer = styled.div`
   gap: 10px;
 `;
 
-const TicketDetailsInfoCard = ({ project = null, ticket }) => {
+const TicketDetailsInfoCard = ({
+  project = null,
+  ticket = null,
+  isArchived,
+}) => {
   const users = useSelector((state) => state.users.Users);
   const { auth } = useAuth();
+
+  const [RetrieveTicket, DeleteTicket] = useDeleteRetrieveTicket();
 
   const AssignButtonStyle = {
     theme: "rgb(0,123,254)",
@@ -105,20 +112,24 @@ const TicketDetailsInfoCard = ({ project = null, ticket }) => {
 
       {/* Only showing Assign Dev, Edit and Archive to Admin and Manager */}
       {/* Only showing Edit to Developer */}
+      {/* Assign Dev, Edit and Archive are not available for archived tickets */}
       <ButtonContainer>
-        {(auth?.roles?.includes(ROLES.Admin) ||
-          auth?.roles?.includes(ROLES.Manager)) && (
-          <Link
-            to={`/Tickets/AssignDeveloper/${ticket?.project_id}/${ticket?.ticket_id}`}
-          >
-            <ButtonActions
-              buttonStyle={AssignButtonStyle}
-              text={"Assign Developer"}
-            />
-          </Link>
-        )}
+        {/* ASSIGN BUTTON */}
+        {!isArchived &&
+          (auth?.roles?.includes(ROLES.Admin) ||
+            auth?.roles?.includes(ROLES.Manager)) && (
+            <Link
+              to={`/Tickets/AssignDeveloper/${ticket?.project_id}/${ticket?.ticket_id}`}
+            >
+              <ButtonActions
+                buttonStyle={AssignButtonStyle}
+                text={"Assign Developer"}
+              />
+            </Link>
+          )}
 
-        {!auth?.roles?.includes(ROLES.Submitter) && (
+        {/* EDIT BUTTON */}
+        {!isArchived && !auth?.roles?.includes(ROLES.Submitter) && (
           <Link
             to={`/Tickets/EditTicket/${ticket?.project_id}/${ticket?.ticket_id}`}
           >
@@ -126,15 +137,45 @@ const TicketDetailsInfoCard = ({ project = null, ticket }) => {
           </Link>
         )}
 
-        {(auth?.roles?.includes(ROLES.Admin) ||
-          auth?.roles?.includes(ROLES.Manager)) && (
-          <Link to={`/`}>
-            <ButtonActions
-              buttonStyle={ArchiveButtonStyle}
-              text={"Archive Ticket"}
-            />
-          </Link>
-        )}
+        {/* ARCHIVE BUTTON */}
+        {!isArchived &&
+          (auth?.roles?.includes(ROLES.Admin) ||
+            auth?.roles?.includes(ROLES.Manager)) && (
+            <Link to={`/`}>
+              <ButtonActions
+                buttonStyle={ArchiveButtonStyle}
+                text={"Archive Ticket"}
+              />
+            </Link>
+          )}
+
+        {/* RETRIEVE TICKET + DELETE TICKET BUTTONS */}
+        {isArchived &&
+          (auth?.roles?.includes(ROLES.Admin) ||
+            auth?.roles?.includes(ROLES.Manager)) && (
+            <>
+              <div
+                onClick={() =>
+                  RetrieveTicket(project.project_id, ticket.ticket_id)
+                }
+              >
+                <ButtonActions
+                  buttonStyle={AssignButtonStyle}
+                  text={"Retrieve Ticket"}
+                />
+              </div>
+              <div
+                onClick={() =>
+                  DeleteTicket(project.project_id, ticket.ticket_id)
+                }
+              >
+                <ButtonActions
+                  buttonStyle={ArchiveButtonStyle}
+                  text={"Delete Ticket"}
+                />
+              </div>
+            </>
+          )}
       </ButtonContainer>
     </CardContainer>
   );

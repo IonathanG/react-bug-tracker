@@ -32,9 +32,16 @@ const TicketDetails = () => {
   // Retrieving State
   const projects = useSelector((state) => state.projects.Projects);
 
-  const ticket = useMemo(() => {
-    return projects[ProjectID]?.tickets[TicketID];
+  const isArchived = useMemo(() => {
+    return projects[ProjectID]?.archived_ticket[TicketID];
   }, [projects, ProjectID, TicketID]);
+
+  const ticket = useMemo(() => {
+    // Check if ticket is archived or not
+    return !isArchived
+      ? projects[ProjectID]?.tickets[TicketID]
+      : projects[ProjectID]?.archived_ticket[TicketID];
+  }, [projects, ProjectID, TicketID, isArchived]);
 
   return (
     <Container>
@@ -45,6 +52,7 @@ const TicketDetails = () => {
           <TicketDetailsInfoCard
             project={projects[ProjectID]}
             ticket={ticket}
+            isArchived={isArchived}
           />
           <TicketDetailsTagCard project={projects[ProjectID]} ticket={ticket} />
         </LeftPannel>

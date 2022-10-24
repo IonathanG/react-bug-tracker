@@ -6,6 +6,10 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import ClassOutlinedIcon from "@mui/icons-material/ClassOutlined";
 import useAuth from "../../hooks/useAuth";
 import { ROLES } from "../../data/Roles";
+import useArchiveTicket from "../../hooks/useArchiveTicket";
+import useDeleteRetrieveTicket from "../../hooks/useDeleteRetrieveTicket";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 
 const Container = styled.div`
   display: flex;
@@ -42,6 +46,7 @@ const EditIcon = styled(ModeEditOutlineOutlinedIcon)`
 `;
 
 const ArchiveIcon = styled(ClassOutlinedIcon)`
+  cursor: pointer;
   transform: scale(1.25);
   color: ${({ theme }) => theme.color_Red};
   border: 1px solid ${({ theme }) => theme.color_Red};
@@ -56,8 +61,67 @@ const ArchiveIcon = styled(ClassOutlinedIcon)`
   }
 `;
 
+const DeleteIcon = styled(DeleteOutlineOutlinedIcon)`
+  cursor: pointer;
+  transform: scale(1.25);
+  color: ${({ theme }) => theme.color_Red};
+  border: 1px solid ${({ theme }) => theme.color_Red};
+  border-radius: 3px;
+  padding: 4px;
+
+  transition: 0.15s ease !important;
+
+  &:hover {
+    color: white;
+    background-color: ${({ theme }) => theme.color_Red};
+  }
+`;
+
+const RetrieveIcon = styled(ReplyOutlinedIcon)`
+  cursor: pointer;
+  transform: scale(1.25);
+  color: ${({ theme }) => theme.pale_Blue};
+  border: 1px solid ${({ theme }) => theme.pale_Blue};
+  border-radius: 3px;
+  padding: 4px;
+
+  transition: 0.15s ease !important;
+
+  &:hover {
+    color: white;
+    background-color: ${({ theme }) => theme.pale_Blue};
+  }
+`;
+
 const ActionIcons = ({ links, typeProject }) => {
   const { auth } = useAuth();
+  const [ArchiveTicket] = useArchiveTicket();
+  const [RetrieveTicket, DeleteTicket] = useDeleteRetrieveTicket();
+
+  // Handle click on archive button => ticket or project to archive
+  const handleArchive = (data) => {
+    console.log(data);
+
+    if (data.type === "ticket") {
+      ArchiveTicket(data.projectID, data.ticketID);
+    }
+  };
+
+  const handleDelete = (data) => {
+    console.log(data);
+
+    if (data.type === "ticket") {
+      DeleteTicket(data.projectID, data.ticketID);
+    }
+  };
+
+  const handleRetrieve = (data) => {
+    console.log(data);
+
+    if (data.type === "ticket") {
+      RetrieveTicket(data.projectID, data.ticketID);
+    }
+  };
 
   return (
     <Container>
@@ -67,22 +131,33 @@ const ActionIcons = ({ links, typeProject }) => {
 
       {/* Only showing Edit and Archive Options to Admin and Manager */}
       {/* Only showing Edit Option to Developer ONLY for TICKETS */}
-      {(auth?.roles?.includes(ROLES.Admin) ||
-        auth?.roles?.includes(ROLES.Manager) ||
-        (auth?.roles?.includes(ROLES.Developer) && !typeProject)) && (
-        <>
-          <Link to={links.edit}>
-            <EditIcon />
-          </Link>
-
-          {(auth?.roles?.includes(ROLES.Admin) ||
-            auth?.roles?.includes(ROLES.Manager)) && (
-            <Link to={links.archive}>
-              <ArchiveIcon />
+      {/* Not showing Edit and Archive for already Archived Tickets and Projects */}
+      {!links.archive.isArchived &&
+        (auth?.roles?.includes(ROLES.Admin) ||
+          auth?.roles?.includes(ROLES.Manager) ||
+          (auth?.roles?.includes(ROLES.Developer) && !typeProject)) && (
+          <>
+            <Link to={links.edit}>
+              <EditIcon />
             </Link>
-          )}
-        </>
-      )}
+
+            {!links.archive.isArchived &&
+              (auth?.roles?.includes(ROLES.Admin) ||
+                auth?.roles?.includes(ROLES.Manager)) && (
+                <ArchiveIcon onClick={() => handleArchive(links.archive)} />
+              )}
+          </>
+        )}
+
+      {/* For Archived Tickets and Projects Only Showing Retrieve and Delete to Admin and Manager */}
+      {links.archive.isArchived &&
+        (auth?.roles?.includes(ROLES.Admin) ||
+          auth?.roles?.includes(ROLES.Manager)) && (
+          <>
+            <RetrieveIcon onClick={() => handleRetrieve(links.archive)} />
+            <DeleteIcon onClick={() => handleDelete(links.archive)} />
+          </>
+        )}
     </Container>
   );
 };

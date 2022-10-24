@@ -30,7 +30,7 @@ const MyTickets = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   const tableData = useMemo(() => {
-    const projectUsersArray = projectUsers ? Object.values(projectUsers) : [];
+    const projectUsersArray = Object.values(projectUsers);
     let formattedData = [];
 
     // Filter and map all Tickets:
@@ -42,22 +42,22 @@ const MyTickets = () => {
     // Filter the Projects where Project Manager and Developer are assigned to
     const myProjects = projectUsersArray.filter((project) => {
       switch (users[auth?.id]?.user_role) {
+        case "Admin":
+          return project;
+
         case "Project Manager":
           return project.project_manager_id === auth?.id;
 
         case "Developer":
           return project.project_team_id.some((user) => user === auth?.id);
 
-        case "Submitter":
-          return null;
-
         default:
-          return project;
+          return [];
       }
     });
 
     myProjects.map((project) =>
-      Object.values(projects[project.project_id].tickets)
+      Object.values(projects[project.project_id]?.tickets)
         // Filter Tickets where Developer is not assigned to
         .filter((ticket) => {
           if (users[auth?.id]?.user_role === "Developer") {

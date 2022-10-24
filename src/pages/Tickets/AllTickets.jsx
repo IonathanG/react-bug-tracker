@@ -43,7 +43,12 @@ const AllTickets = () => {
           links: {
             view: `/Tickets/TicketDetails/${project.project_id}/${ticket.ticket_id}`,
             edit: `/Tickets/EditTicket/${project.project_id}/${ticket.ticket_id}`,
-            archive: `/`,
+            archive: {
+              isArchived: false,
+              type: "ticket",
+              projectID: project.project_id,
+              ticketID: ticket.ticket_id,
+            },
           },
         })
       )
