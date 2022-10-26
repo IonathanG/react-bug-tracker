@@ -29,33 +29,36 @@ const AllProjects = () => {
     const projectsArray = projects ? Object.values(projects) : [];
     let formattedData = [];
 
-    formattedData = projectsArray.map((project) => ({
-      project_id: project.project_id,
-      project_name: project.project_name,
-      end_date: project.end_date,
-      progress: project.progress,
-      status: project.status,
-      project_manager: {
-        project_manager_name:
-          users[projectUsers[project.project_id]?.project_manager_id]
-            ?.user_name,
-        project_manager_avatar:
-          users[projectUsers[project.project_id]?.project_manager_id]
-            ?.user_avatar,
-      },
-      team: projectUsers[project.project_id]?.project_team_id.map(
-        (user) => users[user]?.user_avatar
-      ),
-      links: {
-        view: `/Projects/ProjectDetails/${project.project_id}`,
-        edit: `/Projects/EditProject/${project.project_id}`,
-        archive: {
-          isArchived: false,
-          type: "project",
-          projectID: project.project_id,
+    formattedData = projectsArray
+      // Filter archived projects
+      .filter((project) => project.isArchived !== true)
+      .map((project) => ({
+        project_id: project.project_id,
+        project_name: project.project_name,
+        end_date: project.end_date,
+        progress: project.progress,
+        status: project.status,
+        project_manager: {
+          project_manager_name:
+            users[projectUsers[project.project_id]?.project_manager_id]
+              ?.user_name,
+          project_manager_avatar:
+            users[projectUsers[project.project_id]?.project_manager_id]
+              ?.user_avatar,
         },
-      },
-    }));
+        team: projectUsers[project.project_id]?.project_team_id.map(
+          (user) => users[user]?.user_avatar
+        ),
+        links: {
+          view: `/Projects/ProjectDetails/${project.project_id}`,
+          edit: `/Projects/EditProject/${project.project_id}`,
+          archive: {
+            isArchived: false,
+            type: "project",
+            projectID: project.project_id,
+          },
+        },
+      }));
     return formattedData;
   }, [users, projects, projectUsers]);
 

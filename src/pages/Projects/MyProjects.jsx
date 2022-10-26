@@ -43,6 +43,8 @@ const MyProjects = () => {
           );
         } else return project;
       })
+      // Filter archived projects
+      .filter((project) => project.isArchived !== true)
       .map((project) => ({
         project_id: project.project_id,
         project_name: projects[project.project_id]?.project_name,

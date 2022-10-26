@@ -84,6 +84,7 @@ const useSubmitProjectForm = () => {
           attachment: {},
           tickets: {},
           archived_ticket: {},
+          isArchived: false,
         })
           .then(() => {
             console.log("Project added");

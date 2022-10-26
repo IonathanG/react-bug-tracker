@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase.config";
 
-const useRetrieveTicket = () => {
+const useDeleteRetrieveTicket = () => {
   const projects = useSelector((state) => state.projects.Projects);
   const [status, setStatus] = useState("idle");
   const navigate = useNavigate();
@@ -52,4 +52,4 @@ const useRetrieveTicket = () => {
   return [RetrieveTicket, DeleteTicket, status];
 };
 
-export default useRetrieveTicket;
+export default useDeleteRetrieveTicket;

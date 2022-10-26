@@ -14,7 +14,6 @@ const ArchivedProjects = () => {
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
-  console.log(tableData);
 
   const defaultSortBy = useMemo(
     () => [
@@ -32,37 +31,39 @@ const ArchivedProjects = () => {
     const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
-    projectsArray.map((project) =>
-      formattedData.push({
-        project_id: project.project_id,
-        project_name: project.project_name,
-        end_date: project.end_date,
-        progress: project.progress,
-        status: project.status,
-        project_manager: {
-          project_manager_name:
-            users[projectUsers[project.project_id]?.project_manager_id]
-              ?.user_name,
-          project_manager_avatar:
-            users[projectUsers[project.project_id]?.project_manager_id]
-              ?.user_avatar,
-        },
-        team: projectUsers[project.project_id]?.project_team_id.map(
-          (user) => users[user]?.user_avatar
-        ),
-        links: {
-          view: `/Projects/ProjectDetails/${project.project_id}`,
-          edit: `/Projects/EditProject/${project.project_id}`,
-          archive: {
-            isArchived: true,
-            type: "project",
-            projectID: project.project_id,
+    projectsArray
+      // Filter archived projects
+      .filter((project) => project.isArchived === true)
+      .map((project) =>
+        formattedData.push({
+          project_id: project.project_id,
+          project_name: project.project_name,
+          end_date: project.end_date,
+          progress: project.progress,
+          status: project.status,
+          project_manager: {
+            project_manager_name:
+              users[projectUsers[project.project_id]?.project_manager_id]
+                ?.user_name,
+            project_manager_avatar:
+              users[projectUsers[project.project_id]?.project_manager_id]
+                ?.user_avatar,
           },
-        },
-      })
-    );
+          team: projectUsers[project.project_id]?.project_team_id.map(
+            (user) => users[user]?.user_avatar
+          ),
+          links: {
+            view: `/Projects/ProjectDetails/${project.project_id}`,
+            edit: `/Projects/EditProject/${project.project_id}`,
+            archive: {
+              isArchived: true,
+              type: "project",
+              projectID: project.project_id,
+            },
+          },
+        })
+      );
 
-    console.log(formattedData);
     setTableData(formattedData);
   }, [users, projects, projectUsers]);
 
