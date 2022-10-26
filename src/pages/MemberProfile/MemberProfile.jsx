@@ -76,9 +76,6 @@ const MemberProfile = () => {
   const users = useSelector((state) => state.users.Users);
   const projects = useSelector((state) => state.projects.Projects);
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
-  const archivedProjects = useSelector(
-    (state) => state.archivedProjects.ArchivedProjects
-  );
 
   // Retrieves and memoize all current projects the user is part of
   const userProjects = useMemo(() => {
@@ -104,29 +101,15 @@ const MemberProfile = () => {
       })
       .map((project) => ({
         project_id: project.project_id,
-        project_name: projects[project.project_id]
-          ? projects[project.project_id]?.project_name
-          : archivedProjects[project.project_id]?.project_name,
-
-        project_priority: projects[project.project_id]
-          ? projects[project.project_id]?.priority
-          : archivedProjects[project.project_id]?.priority,
-
-        project_description: projects[project.project_id]
-          ? projects[project.project_id]?.description
-          : archivedProjects[project.project_id]?.description,
-
-        project_progress: projects[project.project_id]
-          ? projects[project.project_id]?.progress
-          : archivedProjects[project.project_id]?.progress,
-
-        project_ticketCount: projects[project.project_id]
-          ? Object.keys(projects[project.project_id]?.tickets).length
-          : Object.keys(archivedProjects[project.project_id]?.tickets).length,
-
+        project_name: projects[project.project_id]?.project_name,
+        project_priority: projects[project.project_id]?.priority,
+        project_description: projects[project.project_id]?.description,
+        project_progress: projects[project.project_id]?.progress,
+        project_ticketCount: Object.keys(projects[project.project_id]?.tickets)
+          .length,
         project_team: getTeam(project.project_id),
       }));
-  }, [users, projects, projectUsers, archivedProjects, userID]);
+  }, [users, projects, projectUsers, userID]);
 
   return (
     <>

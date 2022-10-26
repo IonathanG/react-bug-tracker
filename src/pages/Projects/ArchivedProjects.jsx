@@ -10,9 +10,7 @@ const Container = styled.div``;
 const ArchivedProjects = () => {
   // Retrieving State
   const users = useSelector((state) => state.users.Users);
-  const archivedProjects = useSelector(
-    (state) => state.archivedProjects.ArchivedProjects
-  );
+  const projects = useSelector((state) => state.projects.Projects);
   const projectUsers = useSelector((state) => state.projectUsers.ProjectUsers);
 
   const [tableData, setTableData] = useState([]);
@@ -31,11 +29,10 @@ const ArchivedProjects = () => {
   // Pushing Specific Formatted Data from all State into an Array
   // Array to be displayed into the BasicTable component
   useEffect(() => {
-    console.log("archivedProjects: ", archivedProjects);
-    const archivedProjectsArray = Object.values(archivedProjects);
+    const projectsArray = projects ? Object.values(projects) : [];
     const formattedData = [];
 
-    archivedProjectsArray.map((project) =>
+    projectsArray.map((project) =>
       formattedData.push({
         project_id: project.project_id,
         project_name: project.project_name,
@@ -67,7 +64,7 @@ const ArchivedProjects = () => {
 
     console.log(formattedData);
     setTableData(formattedData);
-  }, [users, archivedProjects, projectUsers]);
+  }, [users, projects, projectUsers]);
 
   return (
     <Container>

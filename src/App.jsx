@@ -57,24 +57,14 @@ function App() {
   // ----- -----
 
   // ----- Initialise DataBase Listeners -----
-  const [
-    projectsListener,
-    projectUsersListener,
-    usersListener,
-    archivedProjectsListener,
-  ] = useDBListeners();
+  const [projectsListener, projectUsersListener, usersListener] =
+    useDBListeners();
 
   useEffect(() => {
     projectsListener();
     projectUsersListener();
     usersListener();
-    archivedProjectsListener();
-  }, [
-    projectsListener,
-    projectUsersListener,
-    usersListener,
-    archivedProjectsListener,
-  ]);
+  }, [projectsListener, projectUsersListener, usersListener]);
 
   return (
     <ThemeProvider theme={themeMode}>

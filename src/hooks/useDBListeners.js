@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { dbUpdateProjects } from "../features/projectsSlice";
 import { dbUpdateProjectUsers } from "../features/projectUsersSlice";
 import { dbUpdateUsers } from "../features/usersSlice";
-import { dbUpdateArchivedProjects } from "../features/archivedProjectsSlice";
 
 // ----- Initialise DataBase Listeners => Projects, ProjectUsers and Users -----
 const useDBListeners = () => {
@@ -49,24 +48,6 @@ const useDBListeners = () => {
     return unsub;
   };
 
-  // Initialise Archived Projects DB
-  const archivedProjectsListener = () => {
-    const unsub = onSnapshot(collection(db, "archivedProjects"), (snapshot) => {
-      let dataObj = {};
-      snapshot.docs.forEach((doc) => {
-        dataObj[doc.data().project_id] = doc.data();
-      });
-      dispatch(dbUpdateArchivedProjects(dataObj));
-    });
-
-    return unsub;
-  };
-
-  return [
-    projectsListener,
-    projectUsersListener,
-    usersListener,
-    archivedProjectsListener,
-  ];
+  return [projectsListener, projectUsersListener, usersListener];
 };
 export default useDBListeners;
