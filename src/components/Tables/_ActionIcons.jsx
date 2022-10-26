@@ -156,13 +156,18 @@ const ActionIcons = ({ links, typeProject }) => {
           </>
         )}
 
-      {/* For Archived Tickets and Projects Only Showing Retrieve and Delete to Admin and Manager */}
+      {/* For Archived Tickets Only Showing Retrieve and Delete to Admin and Manager */}
+      {/* For Archived Projects Only Showing Retrieve to Manager and Admin */}
+      {/* Delete Projects to Admin Only */}
       {links.archive.isArchived &&
         (auth?.roles?.includes(ROLES.Admin) ||
           auth?.roles?.includes(ROLES.Manager)) && (
           <>
             <RetrieveIcon onClick={() => handleRetrieve(links.archive)} />
-            <DeleteIcon onClick={() => handleDelete(links.archive)} />
+            {(links.archive.type === "ticket" ||
+              auth?.roles?.includes(ROLES.Admin)) && (
+              <DeleteIcon onClick={() => handleDelete(links.archive)} />
+            )}
           </>
         )}
     </Container>
