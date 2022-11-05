@@ -38,7 +38,7 @@ The app contains the following features:
 
 ## Scenario of Data Flow and User Roles
 
-<img src="public/images/Role Authorizations_Schema.png" width="550" height="700">
+<img src="public/images/Role Authorizations_Schema.png" width="500" height="700">
 
 ## Tech/framework used
 
