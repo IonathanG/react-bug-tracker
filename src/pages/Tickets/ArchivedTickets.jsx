@@ -34,6 +34,7 @@ const ArchivedTickets = () => {
     projectsArray.map((project) =>
       Object.values(project.archived_ticket).map((ticket) =>
         formattedData.push({
+          project_id: project.project_id,
           ticket_id: ticket.ticket_id,
           title: ticket.ticket_name,
           assigned_by: users[ticket.assigned_by]?.user_name,

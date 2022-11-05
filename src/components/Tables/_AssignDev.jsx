@@ -10,13 +10,15 @@ const AssignDev = ({ original }) => {
   return (
     <>
       {(auth?.roles?.includes(ROLES.Admin) ||
-        auth?.roles?.includes(ROLES.Manager)) && (
-        <Link
-          to={`/Tickets/AssignDeveloper/${original.project_id}/${original.ticket_id}`}
-        >
-          <ButtonBasic text={"Assign Dev"} />
-        </Link>
-      )}
+        auth?.roles?.includes(ROLES.Manager)) &&
+        !original.links.archive.isArchived && (
+          // Only showing Assign Dev to Admin and Manager IF ticket is not Archived
+          <Link
+            to={`/Tickets/AssignDeveloper/${original.project_id}/${original.ticket_id}`}
+          >
+            <ButtonBasic text={"Assign Dev"} />
+          </Link>
+        )}
     </>
   );
 };

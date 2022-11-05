@@ -37,7 +37,7 @@ const AssignDeveloper = () => {
   }, [projects, ProjectID, TicketID]);
 
   const currentDev = useMemo(() => {
-    return projects[ProjectID]?.tickets[TicketID].assigned_to;
+    return projects[ProjectID]?.tickets[TicketID]?.assigned_to;
   }, [projects, ProjectID, TicketID]);
 
   return (

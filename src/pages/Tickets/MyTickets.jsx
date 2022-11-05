@@ -37,7 +37,7 @@ const MyTickets = () => {
     // => Admin can see all Tickets
     // => Project Manager can see all Tickets from his Projects
     // => Developer can see all Tickets he/she is assigned to
-    // => Submitter cannot see Tickets
+    // => Submitter cannot see My Tickets
 
     // Filter the Projects where Project Manager and Developer are assigned to
     const myProjects = projectUsersArray.filter((project) => {
@@ -66,6 +66,7 @@ const MyTickets = () => {
         })
         .map((ticket) =>
           formattedData.push({
+            project_id: project.project_id,
             ticket_id: ticket.ticket_id,
             title: ticket.ticket_name,
             assigned_by: users[ticket.assigned_by]?.user_name,

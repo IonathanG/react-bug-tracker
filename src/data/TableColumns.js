@@ -73,7 +73,8 @@ export const Tickets_Columns = [
     accessor: "assigned_to",
     Cell: ({ row: { original } }) => {
       if (!original.assigned_to) {
-        return <AssignDev original={original} />; // If ticket is not assigned, shows Assign Dev Option to Admin and Manager
+        // If ticket is not assigned, shows Assign Dev Option to Admin and Manager
+        return <AssignDev original={original} />;
       } else {
         return original.assigned_to;
       }
