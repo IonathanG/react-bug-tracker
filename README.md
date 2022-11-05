@@ -1,70 +1,145 @@
-# Getting Started with Create React App
+## React Bug Tracker Full Stack App with Redux Toolkit and Firestore
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This react project is part of a series of individual apps built to showcase some of my personal Front End Development Skills.
 
-## Available Scripts
+The app Records bugs occurring in software development and tracks the issues.
+Fully secured with authentication method and a Role Management System.
+Professional UI / easy access to data / realtime data syncing Firestore.
 
-In the project directory, you can run:
+Other projects can be found within the following Portolio website as well as on this GitHub Repositories.
 
-### `npm start`
+<p float='left'>
+<img src="/public/images/bug_tracker_screenshot.png" width="250" display='inline-block'>
+<img src="/public/images/bug_tracker_screenshot_2.png" width="250" display='inline-block'>
+<img src="/public/images/bug_tracker_screenshot_3.png" width="250" display='inline-block'>
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Overview & Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+A Bug Tracker App created with reactJS, recording bugs and tracking the issues.
 
-### `npm test`
+The app contains the following features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Fully secured navigation with authentication method for any roles: Admin/Manager/Developer/Submitter
+- Depending on your current role, an access to extra functionalities and informations on the app
+- A Register/Login option for the user to create a personalised account (Firebase and Context API)
+- A Login option for Demo User allowing a quick demonstration using one of the 4 Roles
+- A synchronised data flow on all project/ticket
+- Create a new Project and Assign or Remove a Project Manager from it
+- Edit the Project details and add/remove members from it
+- Archive, Retrieve and Delete a Project
+- Create a new Ticket, edit the Ticket and Assign a developer to it
+- Archive, Retrieve and Delete a Ticket
+- Receive Live Notifications when assigned a Project and a Ticket
+- Check out Profiles and Informations of all Members
+- Assign a new Role to a member and change its security clearance (Admin only)
+- Live Search in all Tables for the informations
+- Change the Theme of the App Light/Dark options
 
-### `npm run build`
+## Scenario of Data Flow and User Roles
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="public/images/Role Authorizations_Schema.png" width="400" height="400">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tech/framework used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<b>Built with</b>
 
-### `npm run eject`
+- [reactJS](https://reactjs.org/)
+- [Styled Components](https://styled-components.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Context API](https://reactjs.org/docs/context.html)
+- [React-Hook-Form](https://react-hook-form.com/)
+- [React-Tables](https://www.npmjs.com/package/react-data-table-component)
+- [Firebase & Firestore](https://firebase.google.com/)
+- [Material UI](https://mui.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Code Feature
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Load Firestore into Redux Toolkit with AsyncThunk and extraReducers (user not logged in):
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```javascript
+export const getUserData = createAsyncThunk(
+  "data/getUserData",
+  async (userID) => {
+    const docRef = doc(db, "users", `${userID}`);
+    const docSnap = await getDoc(docRef);
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      const storedData = window.localStorage.state
+        ? JSON.parse(localStorage.getItem("state"))
+        : undefined;
 
-## Learn More
+      localStorage.removeItem("state");
+      return { dataDB: docSnap.data(), storedData };
+    } else {
+      console.log("No such document");
+    }
+  }
+);
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+extraReducers: {
+ [getGuestData.pending]: (state) => {
+      state.initUser = false;
+    },
+    [getGuestData.fulfilled]: (state, { payload }) => {
+      if (payload) {
+        state.listItems = payload.listItems;
+        state.totalQuantity = payload.totalQuantity;
+        state.wishList = payload.wishList;
+      }
+      state.initUser = true;
+    },
+    [getGuestData.rejected]: (state) => {
+      state.initUser = false;
+    },
+  }
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Installation
 
-### Code Splitting
+Use the package manager npm to install the app once project is downloaded.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+For dependencies
 
-### Analyzing the Bundle Size
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Launch the App
 
-### Making a Progressive Web App
+```javascript
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
 
-### Advanced Configuration
+## How to use?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+For an easy start, click on the following link to access the live website:
+https://react-ecommerce-ionyshop.netlify.app/
 
-### Deployment
+- Start by browing the website items, add a few products to the shopping cart and some others to the wishList.
+- Each product of different color and size will be shown as a different item in your cart.
+- The cart will persist if the page is reloaded or closed.
+- Now register a new account or log in on an account.
+- The items added while being signed out will be added to any pre existing cart.
+- Proceed to checkout. Retrieve your purchase history.
+- Subscribe to the Newsletter by adding your email to the form
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Contribute
 
-### `npm run build` fails to minify
+Any contributions is welcome! Please suggest any new feature, suggestion or improvement and they will be implemented.
+Thank you for the support.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Credits
+
+I would like to thank:
+
+- Lama Dev for the UI inspiration
+- The Net Ninja for the practical use of Firestore V9
+
+## Created by
+
+() => © [Ionathan](https://github.com/IonathanG)
