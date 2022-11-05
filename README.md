@@ -30,6 +30,7 @@ The app contains the following features:
 - Archive, Retrieve and Delete a Project
 - Create a new Ticket, edit the Ticket and Assign a developer to it
 - Archive, Retrieve and Delete a Ticket
+- Add a comment to a ticket and check its history
 - Receive Live Notifications when assigned a Project and a Ticket
 - Check out Profiles and Informations of all Members
 - Assign a new Role to a member and change its security clearance (Admin only)
@@ -116,6 +117,7 @@ https://bugtracker-ig.netlify.app/
 - Start by Login on Demo User and see the different access/authorizations given to you depending on your role.
 - Create a new ticket, a new project.
 - Edit, Archive, Retrieve and Delete Tickets and Projects.
+- Add a comment to a ticket and check its history.
 - Assign and edit Roles to users.
 - Assign a project to a Manager and a ticket to a Developer.
 - Check the inbox for a new project or ticket recently assigned.
