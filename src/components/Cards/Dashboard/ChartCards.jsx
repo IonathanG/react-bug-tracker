@@ -25,7 +25,7 @@ const CardData = styled.div`
   border-radius: 8px;
   background-color: ${({ theme }) => theme.background_Block};
   box-shadow: ${({ theme }) => theme.boxShadow_Block};
-  color: ${({ theme }) => theme.background_Block};
+  color: ${({ theme }) => theme.color_Charts};
 
   display: flex;
   flex-direction: column;

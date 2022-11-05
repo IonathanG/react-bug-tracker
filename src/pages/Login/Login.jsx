@@ -41,9 +41,11 @@ const FormContainer = styled.div`
   height: 450px;
   padding: 40px 35px;
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.background_Block};
+  /* background-color: ${({ theme }) => theme.background_Block}; */
+  background-color: rgb(255, 255, 255);
   box-shadow: ${({ theme }) => theme.boxShadow_Block};
-  color: ${({ theme }) => theme.color_NavItem};
+  /* color: ${({ theme }) => theme.color_NavItem}; */
+  color: rgb(23, 25, 28);
 
   transition: 0.3s ease;
 
