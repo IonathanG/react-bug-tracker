@@ -6,6 +6,7 @@ import TagInfo from "../components/Tags/Tag_Info";
 import AssignRole from "../components/Tables/_AssignRole";
 import { Link } from "react-router-dom";
 import AssignDev from "../components/Tables/_AssignDev";
+import LinearWithValueLabel from "../components/ProgressBar/ProgressBar";
 
 // DATA for Column Display of all Tables in react-tables
 export const Projects_Columns = [
@@ -20,6 +21,14 @@ export const Projects_Columns = [
   {
     Header: "Progress",
     accessor: "progress",
+    Cell: ({ value }) => {
+      // progress bar
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+          <LinearWithValueLabel data={value} />;
+        </div>
+      );
+    },
   },
   {
     Header: "Project Manager",
