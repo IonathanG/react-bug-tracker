@@ -10,8 +10,8 @@ Other projects can be found within the following Portolio website as well as on 
 
 <p float='left'>
 <img src="/public/images/bug_tracker_screenshot.png" width="250" display='inline-block'>
+<img src="/public/images/bug_tracker_screenshot_3.png" width="200" display='inline-block'>
 <img src="/public/images/bug_tracker_screenshot_2.png" width="250" display='inline-block'>
-<img src="/public/images/bug_tracker_screenshot_3.png" width="250" display='inline-block'>
 </p>
 
 ## Project Overview & Features
