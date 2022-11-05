@@ -51,6 +51,9 @@ const MyTickets = () => {
         case "Developer":
           return project.project_team_id.some((user) => user === auth?.id);
 
+        case "Submitter":
+          return null;
+
         default:
           return [];
       }
