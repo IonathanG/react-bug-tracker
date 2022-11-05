@@ -36,7 +36,7 @@ The app contains the following features:
 - Live Search in all Tables for the informations
 - Change the Theme of the App Light/Dark options
 
-## Scenario of Data Flow and User Roles
+## Scenario: Authorizations and User Roles
 
 <img src="public/images/Role Authorizations_Schema.png" width="500" height="700">
 
