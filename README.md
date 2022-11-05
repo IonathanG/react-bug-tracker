@@ -55,47 +55,40 @@ The app contains the following features:
 
 ## Code Feature
 
-Load Firestore into Redux Toolkit with AsyncThunk and extraReducers (user not logged in):
+User Role Navigation => Redirect the User for unauthorized routes depending on its role
 
 ```javascript
-export const getUserData = createAsyncThunk(
-  "data/getUserData",
-  async (userID) => {
-    const docRef = doc(db, "users", `${userID}`);
-    const docSnap = await getDoc(docRef);
+const RequireAuth = ({ allowedRoles }) => {
+  const { auth } = useAuth();
+  const location = useLocation();
 
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      const storedData = window.localStorage.state
-        ? JSON.parse(localStorage.getItem("state"))
-        : undefined;
+  return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
+    <Outlet />
+  ) : auth?.user ? (
+    <Navigate to="/Unauthorized" state={{ from: location }} replace />
+  ) : (
+    <Navigate to="/Login" state={{ from: location }} replace />
+  );
+};
 
-      localStorage.removeItem("state");
-      return { dataDB: docSnap.data(), storedData };
-    } else {
-      console.log("No such document");
-    }
-  }
-);
+export default RequireAuth;
 ```
 
+Protected Routes for different users roles => Admin, Project Manager, Developer and Submitter
+
 ```javascript
-extraReducers: {
- [getGuestData.pending]: (state) => {
-      state.initUser = false;
-    },
-    [getGuestData.fulfilled]: (state, { payload }) => {
-      if (payload) {
-        state.listItems = payload.listItems;
-        state.totalQuantity = payload.totalQuantity;
-        state.wishList = payload.wishList;
-      }
-      state.initUser = true;
-    },
-    [getGuestData.rejected]: (state) => {
-      state.initUser = false;
-    },
-  }
+{
+  /* ----- PROTECTED ROUTES -  LOGGED IN USERS ONLY ----- */
+}
+<Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+  {/* All logged in Users can access these routes */}
+  <Route path="/" element={<HomeDashboard />} />
+
+  <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Manager]} />}>
+    {/* Only ADMIN and PROJECT MANAGER can access these routes */}
+    <Route path="/Projects/EditProject/:id" element={<EditProject />} />
+  </Route>
+</Route>;
 ```
 
 ## Installation
@@ -118,15 +111,16 @@ npm start
 ## How to use?
 
 For an easy start, click on the following link to access the live website:
-https://react-ecommerce-ionyshop.netlify.app/
+https://bugtracker-ig.netlify.app/
 
-- Start by browing the website items, add a few products to the shopping cart and some others to the wishList.
-- Each product of different color and size will be shown as a different item in your cart.
-- The cart will persist if the page is reloaded or closed.
-- Now register a new account or log in on an account.
-- The items added while being signed out will be added to any pre existing cart.
-- Proceed to checkout. Retrieve your purchase history.
-- Subscribe to the Newsletter by adding your email to the form
+- Start by Login on Demo User and see the different access/authorizations given to you depending on your role.
+- Create a new ticket, a new project.
+- Edit, Archive, Retrieve and Delete Tickets and Projects.
+- Assign and edit Roles to users.
+- Assign a project to a Manager and a ticket to a Developer.
+- Check the inbox for a new project or ticket recently assigned.
+- Check out any user profile and their current projects.
+- Search for your own Project/Ticket.
 
 ## Contribute
 
@@ -137,8 +131,8 @@ Thank you for the support.
 
 I would like to thank:
 
-- Lama Dev for the UI inspiration
-- The Net Ninja for the practical use of Firestore V9
+- Coder Foundry for the project inspiration
+- Bootstrap for the UI design ideas
 
 ## Created by
 
