@@ -7,6 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 import SingleAvatar from "../../Avatar/SingleAvatar";
 import ButtonActions from "../../Buttons/Button_Actions";
 import useDeleteRetrieveTicket from "../../../hooks/useDeleteRetrieveTicket";
+import useArchiveTicket from "../../../hooks/useArchiveTicket";
 
 const CardContainer = styled.div`
   display: flex;
@@ -62,6 +63,7 @@ const TicketDetailsInfoCard = ({
   const users = useSelector((state) => state.users.Users);
   const { auth } = useAuth();
 
+  const [ArchiveTicket] = useArchiveTicket();
   const [RetrieveTicket, DeleteTicket] = useDeleteRetrieveTicket();
 
   const AssignButtonStyle = {
@@ -141,12 +143,16 @@ const TicketDetailsInfoCard = ({
         {!isArchived &&
           (auth?.roles?.includes(ROLES.Admin) ||
             auth?.roles?.includes(ROLES.Manager)) && (
-            <Link to={`/`}>
+            <div
+              onClick={() =>
+                ArchiveTicket(project?.project_id, ticket?.ticket_id)
+              }
+            >
               <ButtonActions
                 buttonStyle={ArchiveButtonStyle}
                 text={"Archive Ticket"}
               />
-            </Link>
+            </div>
           )}
 
         {/* RETRIEVE TICKET + DELETE TICKET BUTTONS */}

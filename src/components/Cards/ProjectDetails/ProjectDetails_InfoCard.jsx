@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ROLES } from "../../../data/Roles";
+import useArchiveProject from "../../../hooks/useArchiveProject";
 import useAuth from "../../../hooks/useAuth";
 import useDeleteRetrieveProject from "../../../hooks/useDeleteRetrieveProject";
 import ButtonActions from "../../Buttons/Button_Actions";
@@ -40,6 +41,7 @@ const ButtonContainer = styled.div`
 
 const ProjectDetailsInfoCard = ({ project = null }) => {
   const { auth } = useAuth();
+  const [ArchiveProject] = useArchiveProject();
   const [RetrieveProject, DeleteProject] = useDeleteRetrieveProject();
 
   const EditButtonStyle = {
@@ -77,26 +79,28 @@ const ProjectDetailsInfoCard = ({ project = null }) => {
       {/* Edit and Archive Project are not available for archived projects */}
       {/* Retrieve Project only for Admin and Manager */}
       {/* Delete Project only for Admin */}
-      {!project.isArchived &&
+      {!project?.isArchived &&
         (auth?.roles?.includes(ROLES.Admin) ||
           auth?.roles?.includes(ROLES.Manager)) && (
           <ButtonContainer>
-            <ButtonActions
-              buttonStyle={EditButtonStyle}
-              text={"Edit Project"}
-            />
-            <Link to={`/`}>
+            <Link to={`/Projects/EditProject/${project?.project_id}`}>
+              <ButtonActions
+                buttonStyle={EditButtonStyle}
+                text={"Edit Project"}
+              />
+            </Link>
+            <div onClick={() => ArchiveProject(project?.project_id)}>
               <ButtonActions
                 buttonStyle={ArchiveButtonStyle}
                 text={"Archive Project"}
               />
-            </Link>
+            </div>
           </ButtonContainer>
         )}
 
       {/* Retrieve project only for Admin and Manager */}
       <ButtonContainer>
-        {project.isArchived &&
+        {project?.isArchived &&
           (auth?.roles?.includes(ROLES.Admin) ||
             auth?.roles?.includes(ROLES.Manager)) && (
             <div onClick={() => RetrieveProject(project?.project_id)}>
@@ -108,7 +112,7 @@ const ProjectDetailsInfoCard = ({ project = null }) => {
           )}
 
         {/* Delete project only for Admin */}
-        {project.isArchived && auth?.roles?.includes(ROLES.Admin) && (
+        {project?.isArchived && auth?.roles?.includes(ROLES.Admin) && (
           <div onClick={() => DeleteProject(project?.project_id)}>
             <ButtonActions
               buttonStyle={ArchiveButtonStyle}
